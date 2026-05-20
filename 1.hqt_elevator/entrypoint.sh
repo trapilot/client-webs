@@ -4,13 +4,18 @@ set -e
 
 echo "Waiting for database..."
 
-# ⏳ Wait for MySQL to be ready
-while ! nc -z db 3306; do
-  echo "DB not ready yet, waiting..."
-  sleep 2
-done
+# ⏳ Wait for MySQL to be ready (only if nc exists)
+if command -v nc >/dev/null 2>&1; then
+  echo "nc found, waiting for DB..."
 
-echo "Database is up!"
+  while ! nc -z db 3306; do
+    echo "DB not ready yet, waiting..."
+    sleep 2
+  done
+
+else
+  echo "nc not found, skipping DB wait..."
+fi
 
 # 🔥 Run migrations only if enabled
 if [ "$DB_MIGRATE" = "true" ] || [ "$DB_MIGRATE" = "1" ]; then
