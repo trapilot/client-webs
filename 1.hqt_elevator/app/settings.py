@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 
 from django.utils.translation  import gettext_lazy as _
+from urllib.parse import urlparse
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent
@@ -26,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent
 SECRET_KEY = 'django-insecure-j)w)+b=001(jtrzc5v@iotv*bt0ifszt)!9c7d85pasikx2iol'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(os.getenv('DEBUG', 'False'))
+DEBUG = os.getenv("DEBUG", "False").lower() == "true"
 TEMPLATE_DEBUG = DEBUG
 THUMBNAIL_DEBUG = DEBUG
 
@@ -36,12 +37,16 @@ SITE_URL = os.getenv('SITE_URL', 'https://thangmayhqt.com')
 SITE_DEV = os.getenv('SITE_DEV', 'http://localhost')
 SITE_CODE = os.getenv('SITE_CODE', 'HQT_ELEVATOR')
 
-# AUTH_USER_MODEL = 'ecommerce_engine.Account'
 USE_X_FORWARDED_HOST = True
 USE_X_FORWARDED_PORT = True
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+
 CSRF_TRUSTED_ORIGINS = [SITE_URL, SITE_DEV]
-ALLOWED_HOSTS = [SITE_URL, SITE_DEV]
+ALLOWED_HOSTS = [
+    urlparse(SITE_URL).hostname,
+    urlparse(SITE_DEV).hostname,
+    "127.0.0.1",
+]
 
 
 INSTALLED_APPS = [

@@ -21,7 +21,7 @@ def create_default_apps(sender, **kwargs):
     NAME=os.getenv('DJANGO_PROJECT_NAME', settings.SITE_CODE)
     DOMAIN=os.getenv('DJANGO_PROJECT_HOST', settings.SITE_URL)
 
-    if not settings.DEBUG or is_exists(CODE):
+    if is_exists(CODE):
         return
 
     # sleep to wait another project

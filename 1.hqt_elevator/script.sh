@@ -4,12 +4,12 @@ ACTION=$1
 
 case "$ACTION" in
   zip)
-    zip -r libs.zip libs
-    echo "Zipped libs → libs.zip"
+    cd app && zip -r ../libs.zip libs
+    echo "Zipped app/libs → libs.zip"
     ;;
   unzip)
-    unzip libs.zip -d .
-    echo "Unzipped libs.zip"
+    unzip -o libs.zip -d app
+    echo "Unzipped libs.zip → app/"
     ;;
   *)
     echo "Usage: ./script.sh [zip|unzip]"

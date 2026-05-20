@@ -18,7 +18,7 @@ else
 fi
 
 # 🔥 Run migrations only if enabled
-if [ "$DB_MIGRATE" = "true" ] || [ "$DB_MIGRATE" = "1" ]; then
+if [ "$DB_MIGRATE" = "True" ] || [ "$DB_MIGRATE" = "true" ] || [ "$DB_MIGRATE" = "1" ]; then
   echo "DB_MIGRATE is enabled. Running migrations..."
 
   python manage.py flush --no-input
