@@ -1,0 +1,272 @@
+{% extends "default/layouts/base.html" %}
+{% load url_cms trad thumbnail cache seo_meta repeat static %}
+
+{% block extracss %}
+<style>
+.process-step {
+    position: relative;
+    padding-left: 50px;
+}
+.process-step::before {
+    content: attr(data-step);
+    position: absolute;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    background: #c41e3a;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+.cost-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+.cost-item:last-child {
+    border-bottom: none;
+}
+</style>
+{% endblock %}
+
+{% block extrajs %}
+{% endblock %}
+
+
+{% block content %}
+<!-- ===== REPAIR PROCESS ===== -->
+<section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold section-title text-center mb-12">Quy Trình Sửa Chữa</h2>
+
+        <div class="max-w-4xl mx-auto space-y-6">
+            <div class="process-step bg-gray-50 rounded-lg" data-step="1">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">Báo Cáo Sự Cố</h3>
+                <p class="text-gray-700">Gọi hotline <span class="text-red-elevator">{{ project.phone }}</span> hoặc email <span class="text-red-elevator">{{ project.email }}</span> để báo cáo sự cố. Cung cấp mô tả chi tiết về vấn đề</p>
+            </div>
+
+            <div class="process-step bg-gray-50 rounded-lg" data-step="2">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">Nhân Viên Kỹ Thuật Tiếp Nhận</h3>
+                <p class="text-gray-700">Chuyên viên bảo dưỡng sẽ được gửi đến ngay</p>
+            </div>
+
+            <div class="process-step bg-gray-50 rounded-lg" data-step="3">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">Kiểm Tra Và Chẩn Đoán</h3>
+                <p class="text-gray-700">Kỹ sư sẽ kiểm tra kỹ lưỡng, xác định nguyên nhân của sự cố và lập danh sách linh kiện cần thay</p>
+            </div>
+
+            <div class="process-step bg-gray-50 rounded-lg" data-step="4">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">Báo Giá Chi Tiết</h3>
+                <p class="text-gray-700">Cung cấp báo giá rõ ràng cho khách hàng, bao gồm chi phí sửa chữa, linh kiện, và lao động</p>
+            </div>
+
+            <div class="process-step bg-gray-50 rounded-lg" data-step="5">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">Thực Hiện Sửa Chữa</h3>
+                <p class="text-gray-700">Sau khi được phê duyệt, kỹ sư sẽ bắt đầu sửa chữa ngay lập tức</p>
+            </div>
+
+            <div class="process-step bg-gray-50 rounded-lg" data-step="6">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">Kiểm Tra Chất Lượng</h3>
+                <p class="text-gray-700">Thang máy sẽ được kiểm tra kỹ lưỡng để đảm bảo hoạt động bình thường và an toàn</p>
+            </div>
+
+            <div class="process-step bg-gray-50 rounded-lg" data-step="7">
+                <h3 class="font-bold text-lg text-gray-900 mb-2">Hoàn Thành Và Bảo Hành</h3>
+                <p class="text-gray-700">Cung cấp biên bản hoàn thành công việc và chứng chỉ bảo hành 12 tháng</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== REPAIR TIME ===== -->
+<section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold section-title text-center mb-12">Thời Gian Sửa Chữa Trung Bình</h2>
+
+        <div class="grid grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                <div class="text-4xl font-bold text-red-elevator mb-2">2-4</div>
+                <p class="font-bold text-gray-900 mb-2">Giờ</p>
+                <p class="text-sm text-gray-700">Sự cố nhỏ (nút bị hỏng, cáp lỏng)</p>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                <div class="text-4xl font-bold text-red-elevator mb-2">1-2</div>
+                <p class="font-bold text-gray-900 mb-2">Ngày</p>
+                <p class="text-sm text-gray-700">Sự cố trung bình (cần thay linh kiện)</p>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6 text-center">
+                <div class="text-4xl font-bold text-red-elevator mb-2">3-7</div>
+                <p class="font-bold text-gray-900 mb-2">Ngày</p>
+                <p class="text-sm text-gray-700">Sự cố lớn (sửa hệ thống chính)</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== COST BREAKDOWN ===== -->
+<section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold section-title text-center mb-12">Chi Phí Sửa Chữa</h2>
+
+        <div class="grid grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div class="bg-gray-50 rounded-lg p-6">
+                <h3 class="font-bold text-lg text-red-elevator mb-4">Dịch Vụ</h3>
+                <div class="space-y-3">
+                    <div class="cost-item">
+                        <span class="text-gray-700">Kiểm tra + chẩn đoán</span>
+                        <span class="font-bold text-gray-900">Miễn phí</span>
+                    </div>
+                    <div class="cost-item">
+                        <span class="text-gray-700">Lao động (giờ)</span>
+                        <span class="font-bold text-red-elevator">200K-300K/giờ</span>
+                    </div>
+                    <div class="cost-item">
+                        <span class="text-gray-700">Thay nút điều khiển</span>
+                        <span class="font-bold text-gray-900">200K-500K</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-50 rounded-lg p-6">
+                <h3 class="font-bold text-lg text-red-elevator mb-4">Linh Kiện</h3>
+                <div class="space-y-3">
+                    <div class="cost-item">
+                        <span class="text-gray-700">Sửa cáp/dây xích</span>
+                        <span class="font-bold text-gray-900">500K-2M</span>
+                    </div>
+                    <div class="cost-item">
+                        <span class="text-gray-700">Thay động cơ</span>
+                        <span class="font-bold text-gray-900">2M-5M</span>
+                    </div>
+                    <div class="cost-item">
+                        <span class="text-gray-700">Khác (tùy độ phức tạp)</span>
+                        <span class="font-bold text-red-elevator">Báo giá</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-blue-50 rounded-lg p-6 max-w-4xl mx-auto mt-8 border-l-4 border-blue-500">
+            <p class="text-gray-700 text-sm">
+                <strong>Ưu đãi:</strong> Khách hàng có hợp đồng bảo dưỡng sẽ được giảm 10% chi phí sửa chữa
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- ===== WARRANTY ===== -->
+<section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold section-title text-center mb-12">Bảo Hành Sửa Chữa</h2>
+
+        <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-8">
+            <div class="space-y-6">
+                <div class="flex gap-4">
+                    <i class="fas fa-calendar-check text-red-elevator text-3xl flex-shrink-0"></i>
+                    <div>
+                        <h3 class="font-bold text-lg text-gray-900 mb-2">Thời Gian Bảo Hành</h3>
+                        <p class="text-gray-700">Tất cả các sửa chữa đều có bảo hành 12 tháng kể từ ngày hoàn thành</p>
+                    </div>
+                </div>
+
+                <hr class="border-gray-200">
+
+                <div class="flex gap-4">
+                    <i class="fas fa-tools text-red-elevator text-3xl flex-shrink-0"></i>
+                    <div>
+                        <h3 class="font-bold text-lg text-gray-900 mb-2">Nếu Có Vấn Đề</h3>
+                        <p class="text-gray-700">Nếu cùng sự cố xảy ra lại trong thời gian bảo hành, sửa chữa sẽ được thực hiện hoàn toàn miễn phí</p>
+                    </div>
+                </div>
+
+                <hr class="border-gray-200">
+
+                <div class="flex gap-4">
+                    <i class="fas fa-check-circle text-red-elevator text-3xl flex-shrink-0"></i>
+                    <div>
+                        <h3 class="font-bold text-lg text-gray-900 mb-2">Phạm Vi Bảo Hành</h3>
+                        <p class="text-gray-700">Bảo hành chỉ áp dụng cho linh kiện được thay thế. Không bao gồm thiệt hại do sử dụng không đúng cách hoặc tai nạn</p>
+                    </div>
+                </div>
+
+                <hr class="border-gray-200">
+
+                <div class="flex gap-4">
+                    <i class="fas fa-phone-alt text-red-elevator text-3xl flex-shrink-0"></i>
+                    <div>
+                        <h3 class="font-bold text-lg text-gray-900 mb-2">Liên Hệ Hỗ Trợ</h3>
+                        <p class="text-gray-700">Nếu có vấn đề, gọi 1800 966 966 hoặc email support@nippon-elevator.vn. Chúng tôi sẽ xử lý ngay lập tức</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== TROUBLESHOOTING ===== -->
+<section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold section-title text-center mb-12">Hướng Dẫn Khắc Phục Sự Cố</h2>
+
+        <div class="max-w-4xl mx-auto space-y-6">
+            <div class="bg-gray-50 rounded-lg p-6">
+                <h3 class="font-bold text-lg text-red-elevator mb-3">
+                    <i class="fas fa-door-open mr-2"></i>Cửa Không Mở / Đóng
+                </h3>
+                <p class="text-gray-700 mb-3">Giải pháp:</p>
+                <ul class="space-y-2 text-sm text-gray-700">
+                    <li>• Kiểm tra xem có vật chắn cửa không</li>
+                    <li>• Nhấn nút mở/đóng lại</li>
+                    <li>• Nếu vẫn không được, gọi kỹ sư ngay</li>
+                </ul>
+            </div>
+
+            <div class="bg-gray-50 rounded-lg p-6">
+                <h3 class="font-bold text-lg text-red-elevator mb-3">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>Thang Máy Không Di Chuyển
+                </h3>
+                <p class="text-gray-700 mb-3">Giải pháp:</p>
+                <ul class="space-y-2 text-sm text-gray-700">
+                    <li>• Kiểm tra xem cửa có đóng hẳn không</li>
+                    <li>• Nhấn nút gọi lại</li>
+                    <li>• Đợi một chút rồi thử lại</li>
+                    <li>• Nếu vẫn không được, báo ngay cho kỹ sư</li>
+                </ul>
+            </div>
+
+            <div class="bg-gray-50 rounded-lg p-6">
+                <h3 class="font-bold text-lg text-red-elevator mb-3">
+                    <i class="fas fa-sound mr-2"></i>Âm Thanh Bất Thường
+                </h3>
+                <p class="text-gray-700 mb-3">Giải pháp:</p>
+                <ul class="space-y-2 text-sm text-gray-700">
+                    <li>• Đừng sử dụng thang máy nếu âm thanh quá lạ</li>
+                    <li>• Báo cáo cho kỹ sư bảo dưỡng</li>
+                    <li>• Sử dụng cầu thang trong khi đợi sửa chữa</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CTA SECTION ===== -->
+<section class="gradient-red text-white py-12">
+    <div class="container mx-auto px-4">
+        <div class="max-w-2xl mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-2">Cần Sửa Chữa Khẩn Cấp?</h2>
+            <p class="mb-6 opacity-90">Gọi {{ project.phone }} - Chúng tôi sẵn sàng 24/7</p>
+            <a href="tel:{{ project.phone|cut:' ' }}">
+                <button class="bg-white text-red-elevator px-8 py-3 rounded font-bold hover:shadow-lg transition flex items-center justify-center gap-2 mx-auto">
+                    <i class="fas fa-phone"></i> Gọi Ngay
+                </button>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,451 @@
+{% extends "default/layouts/base.html" %}
+{% load i18n url_cms trad thumbnail seo_meta repeat currency %}
+
+
+{% block extracss %}
+<style>
+.image-gallery {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+.thumbnail-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+.thumbnail {
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+.thumbnail.active {
+    border-color: #c41e3a;
+}
+.thumbnail:hover {
+    border-color: #c41e3a;
+}
+.spec-item {
+    border-bottom: 1px solid #e5e7eb;
+    padding: 15px 0;
+}
+.spec-item:last-child {
+    border-bottom: none;
+}
+.feature-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #c41e3a 0%, #8b1429 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+}
+.rating-star {
+    color: #FFB81C;
+    font-size: 14px;
+}
+</style>
+{% endblock %}
+
+{% block extrajs %}
+<script>
+    function changeImage(src) {
+        // Change main image
+        document.getElementById('mainImage').src = src.replace('w=150&h=150', 'w=600&h=600');
+        
+        // Update active thumbnail
+        document.querySelectorAll('.thumbnail').forEach(thumb => {
+            thumb.classList.remove('border-red-elevator');
+            thumb.classList.add('border-transparent');
+        });
+        event.target.classList.remove('border-transparent');
+        event.target.classList.add('border-red-elevator');
+    }
+</script>
+{% endblock %}
+
+
+{% block content %}
+<!-- ===== PRODUCT DETAIL SECTION ===== -->
+<section class="py-12 bg-white">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-2 gap-12">
+            
+            <!-- LEFT: Product Images -->
+            <div>
+                <!-- Main Image -->
+                <div class="mb-4">
+                    <img id="mainImage" src="{{ product.featured_image_url }}" alt="{{ product.name }}" class="w-full rounded-lg shadow-md">
+                </div>
+                
+                <!-- Thumbnail Gallery -->
+                <div class="thumbnail-gallery">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="thumbnail active rounded-lg cursor-pointer border-2 border-red-elevator" onclick="changeImage(this.src)">
+                    {% endif %}
+                    {% for gallery in product.gallery_set.all %}
+                    <img src="{{ gallery.image.url }}" alt="{{ product.name }}" class="thumbnail active rounded-lg cursor-pointer border-2 border-red-elevator" onclick="changeImage(this.src)">
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- RIGHT: Product Info -->
+            <div>
+                <!-- Title & Code -->
+                <h1 class="text-3xl font-bold mb-2">{{ product.name }}</h1>
+                <p class="text-sm text-gray-600 mb-4">Mã sản phẩm: <span class="font-bold">{{ product.code|upper }}</span></p>
+                
+                <!-- Rating -->
+                {% comment %}
+                <div class="flex items-center gap-2 mb-6">
+                    <div class="flex gap-1">
+                        <span class="rating-star">★★★★★</span>
+                    </div>
+                    <span class="text-sm text-gray-600">(45 đánh giá)</span>
+                    <span class="text-sm text-green-600 font-bold">Hết hàng/span>
+                </div>
+                {% endcomment %}
+
+                <!-- Price -->
+                <div class="mb-6">
+                    <div class="flex items-end gap-3 mb-2">
+                        <span class="text-4xl font-bold text-red-elevator">{{ product.sale_price|currency:".,đ" }}</span>
+                        {% if product.discount_percent %}
+                        <span class="text-xl text-gray-500 line-through">{{ product.base_price|currency:".,đ" }}</span>
+                        <span class="bg-red-elevator text-white px-3 py-1 rounded text-sm font-bold">-{{ product.discount_percent }}%</span>
+                        {% endif %}
+                    </div>
+                    {% if product.warranty > 0 %}
+                    <p class="text-sm text-gray-600">Bảo hành: <span class="font-bold">{{ product.warranty }} năm</span></p>
+                    {% endif %}
+                </div>
+
+                <!-- Description -->
+                <p class="text-gray-700 mb-6 leading-relaxed">{{ product.description }}</p>
+
+                <!-- Features Quick List -->
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    {% if product.capacity > 0 %}
+                    <div class="flex items-center gap-3">
+                        <div class="feature-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm">Công Suất</p>
+                            <p class="text-sm text-gray-600">{{ product.capacity }}kg</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if product.speed > 0 %}
+                    <div class="flex items-center gap-3">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm">Tốc Độ</p>
+                            <p class="text-sm text-gray-600">{{ product.speed }}m/s</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if product.height > 0 %}
+                    <div class="flex items-center gap-3">
+                        <div class="feature-icon">
+                            <i class="fas fa-ruler-vertical"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm">Chiều Cao</p>
+                            <p class="text-sm text-gray-600">{{ product.height }}m</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if product.power_consumption > 0 %}
+                    <div class="flex items-center gap-3">
+                        <div class="feature-icon">
+                            <i class="fas fa-plug-circle-bolt"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm">Mức tiêu thụ</p>
+                            <p class="text-sm text-gray-600">{{ product.power_consumption }}kWh/tháng</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if product.energy_saving > 0 %}
+                    <div class="flex items-center gap-3">
+                        <div class="feature-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm">Tiết Kiệm</p>
+                            <p class="text-sm text-gray-600">{{ product.energy_saving }}%</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- CTA Buttons -->
+                {% comment %}
+                <div class="flex gap-4 mb-6">
+                    <button class="flex-1 gradient-red text-white py-3 rounded font-bold hover:shadow-lg transition flex items-center justify-center gap-2">
+                        <i class="fas fa-shopping-cart"></i> Thêm Vào Giỏ
+                    </button>
+                    <button class="flex-1 border-2 border-red-elevator text-red-elevator py-3 rounded font-bold hover:bg-red-elevator hover:text-white transition flex items-center justify-center gap-2">
+                        <i class="fas fa-heart"></i> Yêu Thích
+                    </button>
+                </div>
+                {% endcomment %}
+
+                <!-- Contact Info -->
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <p class="text-sm text-gray-700 mb-3">
+                        <strong>Cần tư vấn?</strong> Liên hệ với chuyên viên của chúng tôi để nhận báo giá chính xác và giải pháp phù hợp nhất.
+                    </p>
+                    <a href="{% url_cms 'contact' %}">
+                        <button class="w-full border-2 border-red-elevator text-red-elevator py-2 rounded font-bold hover:bg-red-elevator hover:text-white transition">
+                            Yêu Cầu Tư Vấn
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SPECIFICATIONS SECTION ===== -->
+<section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold section-title mb-8">Thông Số Kỹ Thuật</h2>
+
+        <div class="grid grid-cols-2 gap-12">
+            <!-- Left Column -->
+            <div class="bg-white rounded-lg shadow-md p-8">
+                <div class="spec-item">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Công Suất</span>
+                        {% if product.capacity > 0 %}
+                        <span class="font-bold">{{ product.capacity }}kg</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="spec-item">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Tốc Độ</span>
+                        {% if product.speed > 0 %}
+                        <span class="font-bold">{{ product.speed }}m/s</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="spec-item">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Chiều Cao Tối Đa</span>
+                        {% if product.height > 0 %}
+                        <span class="font-bold">{{ product.height }}m</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="spec-item">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Tiêu Thụ Điện</span>
+                        {% if product.power_consumption > 0 %}
+                        <span class="font-bold">{{ product.power_consumption }}kWh/tháng</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="spec-item">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Tiết Kiệm Điện</span>
+                        {% if product.energy_saving > 0 %}
+                        <span class="font-bold text-green-600">{{ product.energy_saving }}%</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="bg-white rounded-lg shadow-md p-8">
+                <div class="spec-item">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Bảo Hành</span>
+                        {% if product.warranty > 0 %}
+                        <span class="font-bold">{{ product.warranty }} năm</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="spec-item">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Số Người</span>
+                        <span class="font-bold">{{ product.passenger_text }}</span>
+                    </div>
+                </div>
+                <div class="spec-item">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Số Dừng</span>
+                        <span class="font-bold">{{ product.number_stops_text }}</span>
+                    </div>
+                </div>
+                <div class="spec-item">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Cửa</span>
+                        <span class="font-bold">{{ product.door_type_text }}</span>
+                    </div>
+                </div>
+                <div class="spec-item">
+                    <div class="flex justify-between">
+                        <span class="text-gray-600">Chất Liệu</span>
+                        {% if product.material|length %}
+                        <span class="font-bold">{{ product.material }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FEATURES SECTION ===== -->
+ {% if product.feature_set.count %}
+<section class="py-12 bg-white">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold section-title mb-8">Tính Năng Featured</h2>
+
+        <div class="grid grid-cols-3 gap-8">
+            {% for feature in product.feature_set.all %}
+            <div class="text-center">
+                <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center">
+                    {% if feature.icon|length %}
+                    <i class="{{ feature.icon }} text-4xl text-red-elevator"></i>
+                    {% else %}
+                    <i class="fas fa-circle-info text-4xl text-red-elevator"></i>
+                    {% endif %}                    
+                </div>
+                <h4 class="font-bold mb-2 text-red-elevator">{{ feature.name }}</h4>
+                {% if feature.value|length %}
+                <p class="text-sm text-gray-600">{{ feature.value }}</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% comment %}
+<!-- ===== REVIEWS SECTION ===== -->
+<section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold section-title mb-8">Đánh Giá Từ Khách Hàng</h2>
+
+        <div class="grid grid-cols-2 gap-8 mb-8">
+            <!-- Review 1 -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex items-center gap-4 mb-4">
+                    <img src="https://i.pravatar.cc/48?img=10" alt="Avatar" class="w-12 h-12 rounded-full">
+                    <div>
+                        <p class="font-bold">Anh Minh Tuấn</p>
+                        <div class="flex gap-1">
+                            <span class="rating-star">★★★★★</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-gray-700 text-sm mb-3">
+                    "Sản phẩm rất tốt, an toàn, tiết kiệm điện. Giá hơi cao nhưng chất lượng đáng giá. Đội hỗ trợ nhiệt tình."
+                </p>
+                <p class="text-xs text-gray-500">2 tháng trước</p>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex items-center gap-4 mb-4">
+                    <img src="https://i.pravatar.cc/48?img=15" alt="Avatar" class="w-12 h-12 rounded-full">
+                    <div>
+                        <p class="font-bold">Chị Hoa Anh</p>
+                        <div class="flex gap-1">
+                            <span class="rating-star">★★★★☆</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-gray-700 text-sm mb-3">
+                    "Lắp đặt rất chuyên nghiệp, thi công không gây ảnh hưởng. Hài lòng với chất lượng sản phẩm."
+                </p>
+                <p class="text-xs text-gray-500">1 tháng trước</p>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex items-center gap-4 mb-4">
+                    <img src="https://i.pravatar.cc/48?img=20" alt="Avatar" class="w-12 h-12 rounded-full">
+                    <div>
+                        <p class="font-bold">Ông Phúc Đạt</p>
+                        <div class="flex gap-1">
+                            <span class="rating-star">★★★★★</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-gray-700 text-sm mb-3">
+                    "Sử dụng được 1 năm, hoạt động hoàn hảo. Lặng im, an toàn, tiết kiệm điện. Xin cảm ơn HQT!"
+                </p>
+                <p class="text-xs text-gray-500">3 tuần trước</p>
+            </div>
+
+            <!-- Review 4 -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="flex items-center gap-4 mb-4">
+                    <img src="https://i.pravatar.cc/48?img=25" alt="Avatar" class="w-12 h-12 rounded-full">
+                    <div>
+                        <p class="font-bold">Bà Linh Nhi</p>
+                        <div class="flex gap-1">
+                            <span class="rating-star">★★★★★</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-gray-700 text-sm mb-3">
+                    "Tuyệt vời! Gia đình tôi rất hài lòng. Nhân viên hỗ trợ rất nhiệt tình và chuyên nghiệp."
+                </p>
+                <p class="text-xs text-gray-500">2 tuần trước</p>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <button class="border-2 border-red-elevator text-red-elevator px-8 py-3 rounded font-bold hover:bg-red-elevator hover:text-white transition">
+                Xem Thêm Đánh Giá
+            </button>
+        </div>
+    </div>
+</section>
+{% endcomment %}
+
+<!-- ===== RELATED PRODUCTS SECTION ===== -->
+{% if related_products|length %}
+<section class="py-12 bg-white">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold section-title mb-8">Sản Phẩm Liên Quan</h2>
+
+        <div class="grid grid-cols-4 gap-8">
+            {% for product in related_products %}
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover-scale">
+                <div class="h-48 bg-gray-300 overflow-hidden">
+                    <img src="{{ product.featured_image_url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+                </div>
+                <div class="p-4">
+                    <h4 class="font-bold mb-2">{{ product.name }}</h4>
+                    <p class="text-red-elevator font-bold text-lg mb-3">{{ product.sale_price|currency:".,đ" }}</p>
+                    <a href="{% url_cms page.code product.slug %}">
+                        <button class="w-full gradient-red text-white py-2 rounded font-bold text-sm hover:shadow-lg transition">
+                            Chi Tiết
+                        </button>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- ===== CTA SECTION ===== -->
+{% include "default/sections/cta.html" with button_text="YÊU CẦU TƯ VẤN" title="QUAN TÂM SẢN PHẨM NÀY?" description="Liên hệ với chuyên viên của chúng tôi để nhận báo giá và tư vấn miễn phí." %}
+
+{% endblock content %}

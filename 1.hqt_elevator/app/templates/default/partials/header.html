@@ -1,0 +1,36 @@
+{% load url_cms thumbnail %}
+
+<!-- ===== HEADER ===== -->
+<header class="sticky top-0 z-50 bg-white shadow-md">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <!-- Logo -->
+        <div class="flex items-center gap-2">
+            {% if project.imageLogo|length %}
+            <div class="text-2xl font-bold text-red-elevator">
+                {% thumbnail project.imageLogo "120x50" crop="center" as im %}
+                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ project.name }}" class="shadow-lg">
+                {% endthumbnail %}
+            </div>
+            {% else %}
+            <div class="text-2xl font-bold text-red-elevator">
+                <i class="fas fa-building"></i> HQT
+            </div>
+            <span class="text-xs text-gray-600">ELEVATOR</span>
+            {% endif %}
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="hidden md:flex gap-8 text-sm font-medium">
+          {% for p in project.navigation_primary %}
+            <a href="{% url_cms p.code %}" class="text-gray-800 hover:text-red-elevator transition{% if page.code == p.code %} active{% endif %}">{{ p.name }}</a>
+          {% endfor %}
+        </nav>
+
+        <!-- CTA Button -->
+        <a href="tel:{{ project.phone|cut:' ' }}">
+            <button class="gradient-red text-white px-4 py-2 rounded text-sm font-bold hover:shadow-lg transition flex items-center gap-2">
+                <i class="fas fa-phone"></i> {{ project.phone }}
+            </button>
+        </a>
+    </div>
+</header>

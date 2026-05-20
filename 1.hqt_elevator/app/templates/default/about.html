@@ -1,0 +1,430 @@
+{% extends "default/layouts/base.html" %}
+{% load i18n url_cms trad thumbnail cache seo_meta repeat %}
+
+{% block extracss %}
+<style>
+.value-card {
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent;
+}
+.value-card:hover {
+    border-left-color: #c41e3a;
+    transform: translateX(10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+.team-member {
+    transition: all 0.3s ease;
+}
+.team-member:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(196, 30, 58, 0.2);
+}
+.timeline {
+    position: relative;
+    padding: 20px 0;
+}
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background: #e5e7eb;
+}
+.timeline-item {
+    margin-bottom: 50px;
+    width: 45%;
+}
+.timeline-item:nth-child(odd) {
+    margin-left: 0;
+    text-align: right;
+}
+.timeline-item:nth-child(even) {
+    margin-left: auto;
+    text-align: left;
+}
+.timeline-dot {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    background: #c41e3a;
+    border: 4px solid white;
+    border-radius: 50%;
+    top: 30px;
+    z-index: 1;
+}
+.stat-box {
+    text-align: center;
+    padding: 30px;
+}
+.stat-number {
+    font-size: 48px;
+    font-weight: bold;
+    color: #c41e3a;
+    mb-2;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- ===== COMPANY STORY ===== -->
+<section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold section-title text-center mb-12">Câu Chuyện Của Chúng Tôi</h2>
+
+            <div class="grid grid-cols-2 gap-8 items-center">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop" 
+                            alt="Công ty HQT" class="rounded-lg shadow-lg">
+                </div>
+                <div>
+                    <p class="text-gray-700 mb-4 leading-relaxed">
+                        HQT Elevator được thành lập vào năm 2004 với lý tưởng cung cấp những thang máy chất lượng cao, an toàn và tiết kiệm điện cho thị trường Việt Nam. Bắt đầu từ một công ty nhỏ, chúng tôi đã phát triển thành một trong những doanh nghiệp hàng đầu trong lĩnh vực thang máy.
+                    </p>
+                    <p class="text-gray-700 mb-4 leading-relaxed">
+                        Với hơn 20 năm kinh nghiệm, chúng tôi đã lắp đặt hơn 2000 thang máy tại các tòa nhà dân cư, bệnh viện, khách sạn, trung tâm thương mại và các công trình công nghiệp trên khắp Việt Nam.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        Hôm nay, HQT Elevator không chỉ là một nhà cung cấp sản phẩm mà còn là một đối tác đáng tin cậy của hàng nghìn khách hàng, luôn sẵn sàng phục vụ 24/7.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== STATISTICS ===== -->
+<section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-4 gap-8">
+            <div class="stat-box bg-white rounded-lg shadow-md">
+                <div class="stat-number">20+</div>
+                <p class="text-gray-600 font-bold">Năm Kinh Nghiệm</p>
+                <p class="text-sm text-gray-500">Phục vụ khách hàng</p>
+            </div>
+            <div class="stat-box bg-white rounded-lg shadow-md">
+                <div class="stat-number">2000+</div>
+                <p class="text-gray-600 font-bold">Thang Máy</p>
+                <p class="text-sm text-gray-500">Đã lắp đặt</p>
+            </div>
+            <div class="stat-box bg-white rounded-lg shadow-md">
+                <div class="stat-number">5000+</div>
+                <p class="text-gray-600 font-bold">Khách Hàng</p>
+                <p class="text-sm text-gray-500">Hài lòng</p>
+            </div>
+            <div class="stat-box bg-white rounded-lg shadow-md">
+                <div class="stat-number">98%</div>
+                <p class="text-gray-600 font-bold">Độ Hài Lòng</p>
+                <p class="text-sm text-gray-500">Khách hàng</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== VISION & MISSION ===== -->
+<section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold section-title text-center mb-12">Tầm Nhìn & Sứ Mệnh</h2>
+
+        <div class="grid grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <!-- Vision -->
+            <div class="bg-gradient-to-br from-red-50 to-white rounded-lg p-8 border-l-4 border-red-elevator">
+                <h3 class="text-2xl font-bold text-red-elevator mb-4">
+                    <i class="fas fa-eye mr-2"></i>Tầm Nhìn
+                </h3>
+                <p class="text-gray-700 leading-relaxed">
+                    Trở thành công ty hàng đầu trong lĩnh vực thang máy tại Đông Nam Á, cung cấp những sản phẩm và dịch vụ chất lượng cao, bền vững và thân thiện với môi trường.
+                </p>
+            </div>
+
+            <!-- Mission -->
+            <div class="bg-gradient-to-br from-blue-50 to-white rounded-lg p-8 border-l-4 border-blue-500">
+                <h3 class="text-2xl font-bold text-blue-600 mb-4">
+                    <i class="fas fa-bullseye mr-2"></i>Sứ Mệnh
+                </h3>
+                <p class="text-gray-700 leading-relaxed">
+                    Nâng cao chất lượng cuộc sống của khách hàng thông qua cung cấp những thang máy an toàn, tiết kiệm năng lượng và có thiết kế hiện đại, cùng với dịch vụ bảo dưỡng chuyên nghiệp.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CORE VALUES ===== -->
+<section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold section-title text-center mb-12">Giá Trị Cốt Lõi</h2>
+
+        <div class="grid grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div class="value-card bg-white rounded-lg p-6 shadow-md">
+                <div class="text-4xl text-red-elevator mb-4">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">An Toàn</h3>
+                <p class="text-gray-600">Độc lập: Tính an toàn của khách hàng là ưu tiên hàng đầu của chúng tôi</p>
+            </div>
+
+            <div class="value-card bg-white rounded-lg p-6 shadow-md">
+                <div class="text-4xl text-red-elevator mb-4">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Bền Vững</h3>
+                <p class="text-gray-600">Chúng tôi cam kết phát triển bền vững và bảo vệ môi trường</p>
+            </div>
+
+            <div class="value-card bg-white rounded-lg p-6 shadow-md">
+                <div class="text-4xl text-red-elevator mb-4">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Tin Cậy</h3>
+                <p class="text-gray-600">Chúng tôi luôn thực hiện những lời hứa và giữ gìn mối quan hệ lâu dài</p>
+            </div>
+
+            <div class="value-card bg-white rounded-lg p-6 shadow-md">
+                <div class="text-4xl text-red-elevator mb-4">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-2">Chất Lượng</h3>
+                <p class="text-gray-600">Mỗi sản phẩm được kiểm tra kỹ lưỡng để đảm bảo chất lượng cao nhất</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== TEAM ===== -->
+<section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold section-title text-center mb-12">Đội Ngũ Chuyên Gia</h2>
+
+        <div class="grid grid-cols-4 gap-8">
+            <!-- Team Member 1 -->
+            <div class="team-member bg-gray-50 rounded-lg overflow-hidden shadow-md">
+                <img src="https://i.pravatar.cc/200?img=30" alt="CEO" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <h3 class="text-lg font-bold text-gray-900 mb-1">Nguyễn Quốc Hùng</h3>
+                    <p class="text-red-elevator font-bold text-sm mb-3">Tổng Giám Đốc</p>
+                    <p class="text-gray-600 text-sm mb-4">
+                        20 năm kinh nghiệm trong lĩnh vực thang máy, lãnh đạo công ty từ năm 2004
+                    </p>
+                    <div class="flex gap-2">
+                        <a href="#" class="text-gray-600 hover:text-red-elevator"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-600 hover:text-red-elevator"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Member 2 -->
+            <div class="team-member bg-gray-50 rounded-lg overflow-hidden shadow-md">
+                <img src="https://i.pravatar.cc/200?img=35" alt="Deputy CEO" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <h3 class="text-lg font-bold text-gray-900 mb-1">Trần Minh Tuấn</h3>
+                    <p class="text-red-elevator font-bold text-sm mb-3">Phó Giám Đốc</p>
+                    <p class="text-gray-600 text-sm mb-4">
+                        15 năm kinh nghiệm, quản lý các dự án lắp đặt lớn tại Việt Nam
+                    </p>
+                    <div class="flex gap-2">
+                        <a href="#" class="text-gray-600 hover:text-red-elevator"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-600 hover:text-red-elevator"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Member 3 -->
+            <div class="team-member bg-gray-50 rounded-lg overflow-hidden shadow-md">
+                <img src="https://i.pravatar.cc/200?img=40" alt="Technical Director" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <h3 class="text-lg font-bold text-gray-900 mb-1">Lê Văn Sỹ</h3>
+                    <p class="text-red-elevator font-bold text-sm mb-3">Giám Đốc Kỹ Thuật</p>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Chuyên gia kỹ thuật với 12 năm kinh nghiệm, đảm bảo chất lượng sản phẩm
+                    </p>
+                    <div class="flex gap-2">
+                        <a href="#" class="text-gray-600 hover:text-red-elevator"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-600 hover:text-red-elevator"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Member 4 -->
+            <div class="team-member bg-gray-50 rounded-lg overflow-hidden shadow-md">
+                <img src="https://i.pravatar.cc/200?img=45" alt="Sales Manager" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <h3 class="text-lg font-bold text-gray-900 mb-1">Phạm Thu Hà</h3>
+                    <p class="text-red-elevator font-bold text-sm mb-3">Giám Đốc Bán Hàng</p>
+                    <p class="text-gray-600 text-sm mb-4">
+                        8 năm kinh nghiệm bán hàng, quản lý mối quan hệ khách hàng
+                    </p>
+                    <div class="flex gap-2">
+                        <a href="#" class="text-gray-600 hover:text-red-elevator"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-600 hover:text-red-elevator"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Member 5 -->
+            <div class="team-member bg-gray-50 rounded-lg overflow-hidden shadow-md">
+                <img src="https://i.pravatar.cc/200?img=50" alt="Support Manager" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <h3 class="text-lg font-bold text-gray-900 mb-1">Võ Đức Tân</h3>
+                    <p class="text-red-elevator font-bold text-sm mb-3">Giám Đốc Hỗ Trợ</p>
+                    <p class="text-gray-600 text-sm mb-4">
+                        10 năm kinh nghiệm, lãnh đạo đội hỗ trợ 24/7
+                    </p>
+                    <div class="flex gap-2">
+                        <a href="#" class="text-gray-600 hover:text-red-elevator"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-600 hover:text-red-elevator"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Member 6 -->
+            <div class="team-member bg-gray-50 rounded-lg overflow-hidden shadow-md">
+                <img src="https://i.pravatar.cc/200?img=55" alt="HR Manager" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <h3 class="text-lg font-bold text-gray-900 mb-1">Dương Minh Tâm</h3>
+                    <p class="text-red-elevator font-bold text-sm mb-3">Giám Đốc Nhân Sự</p>
+                    <p class="text-gray-600 text-sm mb-4">
+                        7 năm kinh nghiệm, quản lý đội ngũ hơn 100 nhân viên
+                    </p>
+                    <div class="flex gap-2">
+                        <a href="#" class="text-gray-600 hover:text-red-elevator"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-600 hover:text-red-elevator"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Member 7 -->
+            <div class="team-member bg-gray-50 rounded-lg overflow-hidden shadow-md">
+                <img src="https://i.pravatar.cc/200?img=60" alt="Finance Manager" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <h3 class="text-lg font-bold text-gray-900 mb-1">Nguyễn Hữu Phương</h3>
+                    <p class="text-red-elevator font-bold text-sm mb-3">Giám Đốc Tài Chính</p>
+                    <p class="text-gray-600 text-sm mb-4">
+                        12 năm kinh nghiệm tài chính, quản lý ngân sách công ty
+                    </p>
+                    <div class="flex gap-2">
+                        <a href="#" class="text-gray-600 hover:text-red-elevator"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-600 hover:text-red-elevator"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Member 8 -->
+            <div class="team-member bg-gray-50 rounded-lg overflow-hidden shadow-md">
+                <img src="https://i.pravatar.cc/200?img=65" alt="Quality Manager" class="w-full h-64 object-cover">
+                <div class="p-6">
+                    <h3 class="text-lg font-bold text-gray-900 mb-1">Trương Văn Đạo</h3>
+                    <p class="text-red-elevator font-bold text-sm mb-3">Giám Đốc Chất Lượng</p>
+                    <p class="text-gray-600 text-sm mb-4">
+                        9 năm kinh nghiệm, đảm bảo chuẩn ISO cho tất cả sản phẩm
+                    </p>
+                    <div class="flex gap-2">
+                        <a href="#" class="text-gray-600 hover:text-red-elevator"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-600 hover:text-red-elevator"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% comment %}
+<!-- ===== TIMELINE ===== -->
+<section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold section-title text-center mb-12">Lịch Sử Phát Triển</h2>
+
+        <div class="max-w-4xl mx-auto">
+            <div class="timeline">
+                <div class="timeline-item relative">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="font-bold text-red-elevator mb-2">2004 - Thành Lập</h3>
+                        <p class="text-gray-600">HQT Elevator được thành lập với lý tưởng cung cấp thang máy chất lượng cao</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item relative">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="font-bold text-red-elevator mb-2">2008 - Mở Rộng</h3>
+                        <p class="text-gray-600">Mở rộng hoạt động sang các tỉnh, lắp đặt thang máy đầu tiên tại Đà Nẵng</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item relative">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="font-bold text-red-elevator mb-2">2012 - Chứng Chỉ ISO</h3>
+                        <p class="text-gray-600">Đạt chứng chỉ ISO 9001 về hệ thống quản lý chất lượng</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item relative">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="font-bold text-red-elevator mb-2">2016 - Công Nghệ Mới</h3>
+                        <p class="text-gray-600">Giới thiệu công nghệ tiết kiệm điện regenerative braking</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item relative">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="font-bold text-red-elevator mb-2">2020 - Kỷ Lục</h3>
+                        <p class="text-gray-600">Lắp đặt thang máy thứ 2000, phục vụ hơn 5000 khách hàng</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item relative">
+                    <div class="timeline-dot"></div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="font-bold text-red-elevator mb-2">2024 - Hiện Tại</h3>
+                        <p class="text-gray-600">Tiếp tục phát triển với sản phẩm mới, dịch vụ hỗ trợ 24/7</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endcomment %}
+
+{% comment %}
+<!-- ===== CERTIFICATIONS ===== -->
+<section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold section-title text-center mb-12">Chứng Chỉ & Giải Thưởng</h2>
+
+        <div class="grid grid-cols-4 gap-8 max-w-4xl mx-auto">
+            <div class="text-center">
+                <img src="https://via.placeholder.com/100?text=ISO+9001" alt="ISO 9001" class="w-24 h-24 mx-auto mb-4">
+                <p class="font-bold text-gray-900">ISO 9001</p>
+                <p class="text-sm text-gray-600">Chất Lượng</p>
+            </div>
+            <div class="text-center">
+                <img src="https://via.placeholder.com/100?text=CE+Mark" alt="CE Mark" class="w-24 h-24 mx-auto mb-4">
+                <p class="font-bold text-gray-900">CE Mark</p>
+                <p class="text-sm text-gray-600">Châu Âu</p>
+            </div>
+            <div class="text-center">
+                <img src="https://via.placeholder.com/100?text=Safety" alt="Safety" class="w-24 h-24 mx-auto mb-4">
+                <p class="font-bold text-gray-900">An Toàn</p>
+                <p class="text-sm text-gray-600">Tiêu Chuẩn Quốc Tế</p>
+            </div>
+            <div class="text-center">
+                <img src="https://via.placeholder.com/100?text=Award" alt="Award" class="w-24 h-24 mx-auto mb-4">
+                <p class="font-bold text-gray-900">Giải Thưởng</p>
+                <p class="text-sm text-gray-600">Công Ty Tốt Nhất</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endcomment %}
+
+{% include "default/sections/cta.html" with button_text="LIÊN HỆ TUYỂN DỤNG" title="Làm Việc Với HQT Elevator" description="Trở thành một phần của đội ngũ chuyên gia chúng tôi." %}
+
+{% endblock %}

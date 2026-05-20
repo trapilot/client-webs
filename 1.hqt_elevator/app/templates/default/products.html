@@ -1,0 +1,454 @@
+{% extends "default/layouts/base.html" %}
+{% load i18n url_cms trad thumbnail seo_meta repeat %}
+
+
+{% block extracss %}
+<style>
+.filter-btn {
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+}
+.filter-btn.active {
+    border-bottom-color: #c41e3a;
+    color: #c41e3a;
+}
+</style>
+{% endblock %}
+
+{% block extrajs %}
+<script>
+// Filter functionality
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const category = this.getAttribute('data-filter');
+        
+        // Update active button
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Filter products
+        document.querySelectorAll('.product-card').forEach(card => {
+            if (category === 'all' || card.getAttribute('data-category') === category) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+});
+</script>
+{% endblock %}
+
+
+{% block content %}
+<!-- ===== FILTER SECTION ===== -->
+<section class="bg-white py-8 border-b sticky top-16 z-40">
+    <div class="container mx-auto px-4">
+        <div class="flex items-center gap-8 overflow-x-auto pb-4">
+            <span class="text-sm font-bold text-gray-600 whitespace-nowrap">LỌC THEO:</span>
+            <button class="filter-btn active text-gray-700 font-medium whitespace-nowrap pb-2" data-filter="all">
+                Tất Cả Sản Phẩm
+            </button>
+            <button class="filter-btn text-gray-700 font-medium whitespace-nowrap pb-2" data-filter="TMGD">
+                Thang Máy Gia Đình
+            </button>
+            <button class="filter-btn text-gray-700 font-medium whitespace-nowrap pb-2" data-filter="TMCC">
+                Thang Máy Công Cộng
+            </button>
+            <button class="filter-btn text-gray-700 font-medium whitespace-nowrap pb-2" data-filter="TMTH">
+                Thang Máy Tải Hàng
+            </button>
+            <button class="filter-btn text-gray-700 font-medium whitespace-nowrap pb-2" data-filter="TMTL">
+                Thang Máy Thủy Lực
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- ===== PRODUCTS GRID ===== -->
+<section class="py-16">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-3 gap-8">
+            {% for product in products %}
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover-scale product-card" data-category="{{ product.category.code }}">
+                <div class="h-64 bg-gray-300 overflow-hidden relative group">
+                    <img src="{{ product.featured_image_url }}" alt="{{ product.name }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
+                    <div class="absolute top-4 right-4 flex flex-col gap-1">
+                        {% if product.is_popular %}
+                        <span class="bg-red-elevator text-white px-2 py-1 text-xs rounded">Phổ Biến</span>
+                        {% endif %}
+                        {% if product.is_new %}
+                        <span class="bg-blue-500 text-white px-2 py-1 text-xs rounded">Mới</span>
+                        {% endif %}
+                        {% if product.is_bestseller %}
+                        <span class="bg-yellow-500 text-white px-2 py-1 text-xs rounded">Bán Chạy</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">{{ product.name }}</h3>
+                    <p class="text-sm text-gray-600 mb-4">{{ product.description }}</p>
+                    
+                    <div class="space-y-2 mb-6 text-sm">
+                        {% if product.capacity > 0 %}
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check text-red-elevator"></i>
+                            <span>Công suất: {{ product.capacity }}kg</span>
+                        </div>
+                        {% endif %}
+                        {% if product.speed > 0 %}
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check text-red-elevator"></i>
+                            <span>Tốc độ: {{ product.speed }}m/s</span>
+                        </div>
+                        {% endif %}
+                        {% if product.height > 0 %}
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check text-red-elevator"></i>
+                            <span>Chiều cao: {{ product.height }}m</span>
+                        </div>
+                        {% endif %}
+                        {% if product.energy_saving > 0 %}
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check text-red-elevator"></i>
+                            <span>Tiết kiệm điện: {{ product.energy_saving }}%</span>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="flex gap-3">
+                        <a href="{% url_cms 'product' product.slug %}" class="flex-1 text-center gradient-red text-white py-2 rounded font-bold hover:shadow-lg transition text-sm">
+                            Chi Tiết
+                        </a>
+                        <a href="{% url_cms 'contact' %}" class="flex-1 text-center border-2 border-red-elevator text-red-elevator py-2 rounded font-bold hover:bg-red-elevator hover:text-white transition text-sm">
+                            Tư Vấn
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            <!-- PRODUCT 1: Thang máy kính tròn -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover-scale product-card" data-category="TMGD">
+                <div class="h-64 bg-gray-300 overflow-hidden relative group">
+                    <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&h=400&fit=crop" alt="Product" class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
+                    <div class="absolute top-4 right-4 bg-red-elevator text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Phổ Biến
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Thang Máy Kính Tròn</h3>
+                    <p class="text-sm text-gray-600 mb-4">Thiết kế kính tròn sang trọng, tạo không gian sống toàn cảnh mở rộng.</p>
+                    
+                    <div class="space-y-2 mb-6 text-sm">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check text-red-elevator"></i>
+                            <span>Công suất: 1000-1500kg</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check text-red-elevator"></i>
+                            <span>Tốc độ: 1.0 m/s</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check text-red-elevator"></i>
+                            <span>Chiều cao: 3-15m</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check text-red-elevator"></i>
+                            <span>Tiết kiệm điện: 30%</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <button class="flex-1 gradient-red text-white py-2 rounded font-bold hover:shadow-lg transition text-sm">
+                            Chi Tiết
+                        </button>
+                        <button class="flex-1 border-2 border-red-elevator text-red-elevator py-2 rounded font-bold hover:bg-red-elevator hover:text-white transition text-sm">
+                            Tư Vấn
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PRODUCT 2: Thang máy khí vuông -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover-scale product-card" data-category="TMGD">
+                <div class="h-64 bg-gray-300 overflow-hidden relative group">
+                    <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&h=400&fit=crop" alt="Product" class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
+                    <div class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Mới
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Thang Máy Khí Vuông</h3>
+                    <p class="text-sm text-gray-600 mb-4">Tối ưu hóa không gian với thiết kế vuông tiêu chuẩn, an toàn tuyệt đối.</p>
+                    
+                    <div class="space-y-2 mb-6 text-sm">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check text-red-elevator"></i>
+                            <span>Công suất: 1000-2000kg</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check text-red-elevator"></i>
+                            <span>Tốc độ: 1.0-1.6 m/s</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check text-red-elevator"></i>
+                            <span>Chiều cao: 3-20m</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check text-red-elevator"></i>
+                            <span>Tiết kiệm điện: 35%</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <button class="flex-1 gradient-red text-white py-2 rounded font-bold hover:shadow-lg transition text-sm">
+                            Chi Tiết
+                        </button>
+                        <button class="flex-1 border-2 border-red-elevator text-red-elevator py-2 rounded font-bold hover:bg-red-elevator hover:text-white transition text-sm">
+                            Tư Vấn
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PRODUCT 3: Thang máy không phòng máy -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover-scale product-card" data-category="TMCC">
+                <div class="h-64 bg-gray-300 overflow-hidden relative group">
+                    <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=600&h=400&fit=crop" alt="Product" class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
+                    <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Bestseller
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Thang Máy Không Phòng Máy</h3>
+                    <p class="text-sm text-gray-600 mb-4">Công nghệ tiên tiến, không cần phòng máy, tiết kiệm chi phí xây dựng.</p>
+                    
+                    <div class="space-y-2 mb-6 text-sm">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check text-red-elevator"></i>
+                            <span>Công suất: 1000-2500kg</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check text-red-elevator"></i>
+                            <span>Tốc độ: 1.0-4.0 m/s</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check text-red-elevator"></i>
+                            <span>Chiều cao: 3-30m</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check text-red-elevator"></i>
+                            <span>Tiết kiệm điện: 40%</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <button class="flex-1 gradient-red text-white py-2 rounded font-bold hover:shadow-lg transition text-sm">
+                            Chi Tiết
+                        </button>
+                        <button class="flex-1 border-2 border-red-elevator text-red-elevator py-2 rounded font-bold hover:bg-red-elevator hover:text-white transition text-sm">
+                            Tư Vấn
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PRODUCT 4: Thang máy thủy lực -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover-scale product-card" data-category="TMTL">
+                <div class="h-64 bg-gray-300 overflow-hidden relative group">
+                    <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&h=400&fit=crop" alt="Product" class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Thang Máy Thủy Lực</h3>
+                    <p class="text-sm text-gray-600 mb-4">Giải pháp tối ưu cho không gian hẹp, cải tạo nhà cũ, tải trọng lớn.</p>
+                    
+                    <div class="space-y-2 mb-6 text-sm">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check text-red-elevator"></i>
+                            <span>Công suất: 1000-3000kg</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check text-red-elevator"></i>
+                            <span>Tốc độ: 0.6-1.0 m/s</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check text-red-elevator"></i>
+                            <span>Chiều cao: 2-8m</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check text-red-elevator"></i>
+                            <span>Hoàn toàn lặng</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <button class="flex-1 gradient-red text-white py-2 rounded font-bold hover:shadow-lg transition text-sm">
+                            Chi Tiết
+                        </button>
+                        <button class="flex-1 border-2 border-red-elevator text-red-elevator py-2 rounded font-bold hover:bg-red-elevator hover:text-white transition text-sm">
+                            Tư Vấn
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PRODUCT 5: Thang máy tải hàng -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover-scale product-card" data-category="TMTH">
+                <div class="h-64 bg-gray-300 overflow-hidden relative group">
+                    <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&h=400&fit=crop" alt="Product" class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Thang Máy Tải Hàng</h3>
+                    <p class="text-sm text-gray-600 mb-4">Chuyên dụng cho tải hàng nặng, dùng trong kho, nhà xưởng, cơ sở sản xuất.</p>
+                    
+                    <div class="space-y-2 mb-6 text-sm">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check text-red-elevator"></i>
+                            <span>Công suất: 2500-5000kg</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check text-red-elevator"></i>
+                            <span>Tốc độ: 0.6-1.6 m/s</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check text-red-elevator"></i>
+                            <span>Chiều cao: 3-30m</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check text-red-elevator"></i>
+                            <span>Bền vững, chịu lực tốt</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <button class="flex-1 gradient-red text-white py-2 rounded font-bold hover:shadow-lg transition text-sm">
+                            Chi Tiết
+                        </button>
+                        <button class="flex-1 border-2 border-red-elevator text-red-elevator py-2 rounded font-bold hover:bg-red-elevator hover:text-white transition text-sm">
+                            Tư Vấn
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PRODUCT 6: Thang máy công cộng -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden hover-scale product-card" data-category="TMCC">
+                <div class="h-64 bg-gray-300 overflow-hidden relative group">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop" alt="Product" class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold mb-2">Thang Máy Công Cộng</h3>
+                    <p class="text-sm text-gray-600 mb-4">Dùng cho tòa nhà cao tầng, trung tâm thương mại, bệnh viện, trường học.</p>
+                    
+                    <div class="space-y-2 mb-6 text-sm">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check text-red-elevator"></i>
+                            <span>Công suất: 1000-2500kg</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check text-red-elevator"></i>
+                            <span>Tốc độ: 1.0-4.0 m/s</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check text-red-elevator"></i>
+                            <span>Chiều cao: 3-50m</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-check text-red-elevator"></i>
+                            <span>Tiêu chuẩn quốc tế</span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <button class="flex-1 gradient-red text-white py-2 rounded font-bold hover:shadow-lg transition text-sm">
+                            Chi Tiết
+                        </button>
+                        <button class="flex-1 border-2 border-red-elevator text-red-elevator py-2 rounded font-bold hover:bg-red-elevator hover:text-white transition text-sm">
+                            Tư Vấn
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ===== COMPARISON TABLE ===== -->
+<section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold section-title text-center mb-12">
+            So Sánh Các Loại Sản Phẩm
+        </h2>
+
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="gradient-red text-white">
+                        <th class="px-4 py-3 text-left">Loại Sản Phẩm</th>
+                        <th class="px-4 py-3 text-center">Công Suất</th>
+                        <th class="px-4 py-3 text-center">Tốc Độ</th>
+                        <th class="px-4 py-3 text-center">Chiều Cao Tối Đa</th>
+                        <th class="px-4 py-3 text-center">Tiết Kiệm Điện</th>
+                        <th class="px-4 py-3 text-center">Giá</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="px-4 py-3 font-bold">Thang Máy Kính Tròn</td>
+                        <td class="px-4 py-3 text-center">1000-1500kg</td>
+                        <td class="px-4 py-3 text-center">1.0 m/s</td>
+                        <td class="px-4 py-3 text-center">15m</td>
+                        <td class="px-4 py-3 text-center text-red-elevator font-bold">30%</td>
+                        <td class="px-4 py-3 text-center"><span class="px-3 py-1 bg-red-elevator text-white rounded text-xs font-bold">Cao</span></td>
+                    </tr>
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="px-4 py-3 font-bold">Thang Máy Khí Vuông</td>
+                        <td class="px-4 py-3 text-center">1000-2000kg</td>
+                        <td class="px-4 py-3 text-center">1.0-1.6 m/s</td>
+                        <td class="px-4 py-3 text-center">20m</td>
+                        <td class="px-4 py-3 text-center text-red-elevator font-bold">35%</td>
+                        <td class="px-4 py-3 text-center"><span class="px-3 py-1 bg-gray-600 text-white rounded text-xs font-bold">Trung</span></td>
+                    </tr>
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="px-4 py-3 font-bold">Thang Máy Không Phòng Máy</td>
+                        <td class="px-4 py-3 text-center">1000-2500kg</td>
+                        <td class="px-4 py-3 text-center">1.0-4.0 m/s</td>
+                        <td class="px-4 py-3 text-center">30m</td>
+                        <td class="px-4 py-3 text-center text-red-elevator font-bold">40%</td>
+                        <td class="px-4 py-3 text-center"><span class="px-3 py-1 bg-gray-600 text-white rounded text-xs font-bold">Trung</span></td>
+                    </tr>
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="px-4 py-3 font-bold">Thang Máy Thủy Lực</td>
+                        <td class="px-4 py-3 text-center">1000-3000kg</td>
+                        <td class="px-4 py-3 text-center">0.6-1.0 m/s</td>
+                        <td class="px-4 py-3 text-center">8m</td>
+                        <td class="px-4 py-3 text-center text-red-elevator font-bold">20%</td>
+                        <td class="px-4 py-3 text-center"><span class="px-3 py-1 bg-green-600 text-white rounded text-xs font-bold">Thấp</span></td>
+                    </tr>
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="px-4 py-3 font-bold">Thang Máy Tải Hàng</td>
+                        <td class="px-4 py-3 text-center">2500-5000kg</td>
+                        <td class="px-4 py-3 text-center">0.6-1.6 m/s</td>
+                        <td class="px-4 py-3 text-center">30m</td>
+                        <td class="px-4 py-3 text-center text-red-elevator font-bold">25%</td>
+                        <td class="px-4 py-3 text-center"><span class="px-3 py-1 bg-red-elevator text-white rounded text-xs font-bold">Cao</span></td>
+                    </tr>
+                    <tr class="hover:bg-gray-50">
+                        <td class="px-4 py-3 font-bold">Thang Máy Công Cộng</td>
+                        <td class="px-4 py-3 text-center">1000-2500kg</td>
+                        <td class="px-4 py-3 text-center">1.0-4.0 m/s</td>
+                        <td class="px-4 py-3 text-center">50m</td>
+                        <td class="px-4 py-3 text-center text-red-elevator font-bold">35%</td>
+                        <td class="px-4 py-3 text-center"><span class="px-3 py-1 bg-red-elevator text-white rounded text-xs font-bold">Cao</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+{% include "default/sections/cta.html" with title="CẦN TƯ VẤN VỀ SẢN PHẨM?" description="Đội ngũ chuyên gia của chúng tôi sẵn sàng giúp bạn lựa chọn giải pháp tốt nhất." %}
+
+{% endblock content %}

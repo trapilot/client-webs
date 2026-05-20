@@ -1,0 +1,99 @@
+{% load url_cms url_link thumbnail copy_rights %}
+
+<!-- ===== FOOTER ===== -->
+<footer class="bg-gray-900 text-gray-300 py-12">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-5 gap-8 mb-8">
+            <!-- Column 1 -->
+            <div>
+                {% if project.imageLogo|length %}
+                    {% thumbnail project.imageLogo "120x50" crop="center" as im %}
+                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ project.name }}" class="shadow-lg">
+                    {% endthumbnail %}
+                {% else %}
+                <h4 class="text-white font-bold mb-4 flex items-center gap-2">
+                    <i class="fas fa-building"></i> HQT ELEVATOR
+                </h4>
+                {% endif %}
+                <p class="text-sm mb-4">Thang máy gia đình chất lượng cao, chuẩn Nhật Bản, an toàn và tiết kiệm điện.</p>
+                <div class="flex gap-3">
+                  {% for network in project.social_networks %}
+                    <a href="{{ network.url|url_link }}" _target="blank" class="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-red-elevator transition">
+                        <i class="{{ network.code }}"></i>
+                    </a>
+                  {% endfor %}
+                </div>
+            </div>
+
+            <!-- Column 2: SẢN PHẨM -->
+            <div>
+                <h4 class="text-white font-bold mb-4">SẢN PHẨM</h4>
+                <ul class="space-y-2 text-sm">
+                    {% for category in categories %}
+                    <li><a href="{% url_cms 'category' category.slug %}" class="hover:text-red-elevator transition">{{ category.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Column 3: HỖ TRỢ -->
+            <div>
+                <h4 class="text-white font-bold mb-4">HỖ TRỢ</h4>
+                <ul class="space-y-2 text-sm">
+                  {% for p in project.navigation_second %}
+                    {% if p.menu_layer_second == 2 %}
+                    <li><a href="{% url_cms p.code %}" class="hover:text-red-elevator transition">{{ p.name|lower|capfirst }}</a></li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Column 4: VỀ CHÚNG TÔI -->
+            <div>
+                <h4 class="text-white font-bold mb-4">VỀ CHÚNG TÔI</h4>
+                <ul class="space-y-2 text-sm">
+                  {% for p in project.navigation_second %}
+                    {% if p.menu_layer_second == 3 %}
+                    <li><a href="{% url_cms p.code %}" class="hover:text-red-elevator transition">{{ p.name|lower|capfirst }}</a></li>
+                    {% endif %}
+                  {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Column 5: LIÊN HỆ -->
+            <div>
+                <h4 class="text-white font-bold mb-4">LIÊN HỆ</h4>
+                <ul class="space-y-3 text-sm">
+                    <li class="flex items-start gap-2">
+                        <i class="fas fa-map-marker-alt mt-1 text-red-elevator"></i>
+                        <span>{{ project.address }}</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <i class="fas fa-phone text-red-elevator"></i>
+                        <span>{{ project.phone }}</span>
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <i class="fas fa-envelope text-red-elevator"></i>
+                        <span>{{ project.email }}</span>
+                    </li>
+                    <!-- <li class="flex items-center gap-2">
+                        <i class="fas fa-globe text-red-elevator"></i>
+                        <span>{{ project.domain }}</span>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+
+        <hr class="border-gray-700 my-8">
+
+        <div class="flex justify-between items-center text-sm">
+            <p>{% copy_rights 2026 %} HQT Elevator. All rights reserved.</p>
+            <div class="flex gap-6">
+              {% for p in project.navigation_second %}
+                {% if p.menu_layer_second == 4 %}
+                <a href="{% url_cms p.code %}" class="hover:text-red-elevator transition">{{ p.name|lower|capfirst }}</a>
+                {% endif %}
+              {% endfor %}
+            </div>
+        </div>
+    </div>
+</footer>

@@ -14,6 +14,7 @@ env/
 *.log
 db.sqlite3
 staticfiles/
+libs/
 backup/
 uploads/
 *.sqlite3

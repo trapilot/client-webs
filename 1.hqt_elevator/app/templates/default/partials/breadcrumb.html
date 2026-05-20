@@ -1,0 +1,23 @@
+{% load url_cms %}
+
+{% if not page.is_home %}
+<section class="bg-white border-b">
+    <div class="container mx-auto px-4 py-4">
+        <div class="flex items-center gap-2 text-sm">
+            <a class="text-red-elevator hover:underline" href="{% url_cms project.home_page.code %}">{{ project.home_page.name }}</a>
+            <i class="fas fa-chevron-right text-gray-400"></i>
+            {% if page.parent and page.is_internal %}
+                <a class="text-red-elevator hover:underline" href="{% url_cms page.parent.code %}">{{ page.parent.name }}</a>
+                <i class="fas fa-chevron-right text-gray-400"></i>
+                {% if product %}
+                <span class="text-gray-600">{{ product.title }}</span>
+                {% elif portfolio %}
+                <span class="text-gray-600">{{ portfolio.name }}</span>
+                {% endif %}
+            {% else %}
+            <span class="text-gray-600">{{ page.name }}</span>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endif %}

@@ -1,0 +1,37 @@
+{% extends "default/layouts/base.html" %}
+{% load cache trad url_cms %}
+
+{% block extracss %}
+    {{block.super}}
+    <link rel="stylesheet" href="{{http_host}}/static/css/404.css" />
+{% endblock extracss %}
+
+{% block breadcrumb %}
+{% endblock breadcrumb %}
+
+{% block content %}
+{% cache 86400 project.code LANGUAGE_CODE %}
+<div class="container-fluid">
+    <div id="pag404" class="row px-xl-5 error-400">
+        <div class="col-12 mb-5">
+            <p>{% tradg "We're sorry..." %}</p>
+            <strong>{% tradg "The page you are looking for is not available or does not exist." %}</strong>
+        </div>
+
+        <div class="col-12 mb-5">
+            <p class="title">{% tradg "Here are the possible causes" %}:</p>
+            <ul>
+                <li>{% tradg "Having typed an incorrect URL directly into the browser" %}</li>
+                <li>{% tradg "If you have clicked on a link, there may be a problem with it. Through the tabs and links on this page you can access all the content of our website" %}</li>
+            </ul>
+        </div>
+        <br/>
+        <div class="col-12 mb-5">
+            <p class="title">{% tradg "If you are not clear..." %}</p>
+            {% tradg "You can always go to" %}
+            <a href="{% url_cms project.home_page.code %}" title="{% tradg project.home_page.name %}">{{ project.home_page.name }}</a>
+        </div>
+    </div>
+</div>
+{% endcache %}
+{% endblock content %}

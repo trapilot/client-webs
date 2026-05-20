@@ -1,0 +1,196 @@
+import random
+
+from django.shortcuts import get_object_or_404
+from django.core.paginator import Paginator
+from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Count, F, Q
+
+from cms_app.models import (
+    Category,
+    Article,
+    Testimonial,
+    Partner,
+    FAQ,
+)
+from app.apps.models import (
+    Portfolio,
+    Product,
+    ProductCategory,
+)
+
+
+## ============= GLOBAL SITE SETTINGS ====================================
+def site_settings(request, kwargs=None):    
+    categories = ProductCategory.objects.filter(
+        is_active=True,
+    ).order_by('sorted_as')
+
+    featured_category = random.choice(categories)
+
+    return dict({
+        "categories": categories,
+        "featured_category": featured_category,
+    })
+## ============= GLOBAL SETTINGS ====================================
+
+
+def home(request, kwargs=None):
+    ids = list(
+        Testimonial.objects.filter(
+            is_active=True,
+            is_featured=True,
+            # rating__gte=3
+        ).values_list('id', flat=True)
+    )
+    random_id = random.choice(ids) if ids else None
+    testimonial = Testimonial.objects.filter(id=random_id).first()
+
+    partners = Partner.objects.filter(
+        is_active=True,
+        is_featured=True,
+    ).order_by('sorted_as')[:8]
+
+    portfolios = Portfolio.objects.filter(
+        is_active=True,
+        is_featured=True,
+    ).order_by('sorted_as')[:8]
+
+    return dict({
+        "testimonial": testimonial,
+        "partners": partners,
+        "portfolios": portfolios,
+    })
+
+def support(request, kwargs=None):
+    faqs = FAQ.objects.prefetch_related('answer_set').filter(
+        is_active=True
+    ).order_by('sorted_as')[:10]
+
+    return dict({
+        "faqs": faqs,
+    })
+
+def category(request, kwargs=None):
+    products = []
+    try:
+        category = get_object_or_404(ProductCategory, slug=kwargs.get('slug'))
+        paginator = Paginator(
+            Product.objects.prefetch_related('feature_set').filter(
+                is_active=True,
+                category=category,
+            ).order_by('sorted_as', 'created_at'),
+            6
+        )
+        products = paginator.get_page(request.GET.get("page"))
+    except ObjectDoesNotExist:
+        category = None 
+
+    return dict({
+        "category": category,
+        "products": products,
+    })
+
+def products(request, kwargs=None):
+    products = Product.objects.filter(
+        is_active=True,
+    ).order_by('sorted_as', 'created_at')[:100]
+
+    return dict({
+        "products": products,
+    })
+
+def product(request, kwargs=None):
+    related_portfolios = []
+    try:
+        product = get_object_or_404(
+            Product.objects.prefetch_related(
+                'feature_set',
+                'gallery_set'
+            ),
+            slug=kwargs.get('slug')
+        )
+
+        related_products = Product.objects.filter(
+            is_active=True,
+            category=product.category,
+        ).exclude(id=product.id).order_by('sorted_as', 'created_at',)[:4]
+    except ObjectDoesNotExist:
+        product = None
+    
+    return dict({
+        "product": product,
+        "related_products": related_products,
+    })
+
+
+def portfolios(request, kwargs=None):
+    portfolios = Portfolio.objects.filter(
+        is_active=True,
+    ).order_by('sorted_as', 'created_at',)[:100]
+
+    return dict({
+        "portfolios": portfolios,
+    })
+
+def portfolio(request, kwargs):
+    related_portfolios = []
+    try:
+        portfolio = get_object_or_404(Portfolio, slug=kwargs.get('slug'))
+        related_portfolios = Portfolio.objects.filter(
+            is_active=True,
+            type=portfolio.type,
+        ).exclude(id=portfolio.id).order_by('sorted_as', 'created_at',)[:5]
+    except ObjectDoesNotExist:
+        portfolio = None
+
+    return dict({
+        "portfolio": portfolio,
+        "related_portfolios": related_portfolios,
+    })
+
+
+def articles(request, kwargs=None):
+    paginator = Paginator(
+        Article.objects.filter(
+            is_active=True,
+        ).order_by('sorted_as', 'visited_as', 'created_at'),
+        9
+    )
+    articles = paginator.get_page(request.GET.get("page"))
+
+    return dict({
+        "articles": articles,
+    })
+
+def article(request, kwargs):
+    related_articles = []
+    related_categories = []
+
+    try:
+        article = get_object_or_404(Article, slug_vi=kwargs.get('slug'))
+        related_articles = Article.objects.filter(
+            is_active=True,
+            tags__in=article.tags.all(),
+        ).exclude(id=article.id).distinct().order_by('sorted_as', 'visited_as', '-published_at', 'created_at')[:3]
+        related_categories = (
+            Category.objects
+            .filter(is_active=True)
+            .annotate(
+                article_count=Count(
+                    'category_set',
+                    filter=Q(category_set__is_active=True),
+                    distinct=True
+                ),
+                name=F('name_vi'),
+            )
+            .filter(article_count__gt=0)
+            .values('id', 'name', 'article_count')
+        )
+    except ObjectDoesNotExist:
+        article = None
+
+    return dict({
+        "article": article,
+        "related_articles": related_articles,
+        "related_categories": related_categories,
+    })

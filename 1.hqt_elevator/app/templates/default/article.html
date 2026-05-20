@@ -1,0 +1,315 @@
+{% extends "default/layouts/base.html" %}
+{% load i18n url_cms trad thumbnail seo_meta repeat %}
+
+
+{% block extracss %}
+<style>
+.article-content {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #374151;
+}
+.article-content h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 30px 0 15px 0;
+    color: #1f2937;
+}
+.article-content p {
+    margin-bottom: 16px;
+}
+.article-content ul {
+    margin-left: 20px;
+    margin-bottom: 16px;
+}
+.article-content li {
+    margin-bottom: 8px;
+}
+.article-content blockquote {
+    border-left: 4px solid #c41e3a;
+    padding-left: 16px;
+    margin: 20px 0;
+    font-style: italic;
+    color: #6b7280;
+}
+.author-card {
+    background: #f9fafb;
+    padding: 16px;
+    border-radius: 8px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+.author-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.related-article {
+    transition: all 0.3s;
+    border-top: 3px solid transparent;
+}
+.related-article:hover {
+    border-top-color: #c41e3a;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+.comment-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+</style>
+{% endblock %}
+
+{% block extrajs %}
+{% endblock %}
+
+{% block content %}
+
+<!-- ===== ARTICLE HEADER ===== -->
+<section class="bg-white border-b">
+    <div class="container mx-auto px-4 py-12">
+        <div class="max-w-3xl mx-auto">
+            <!-- Category & Date -->
+             {% if article.categories.exists %}
+            <div class="flex items-center gap-3 mb-4">
+                {% for category in article.categories.all %}
+                <span class="bg-red-elevator text-white px-3 py-1 rounded-full text-sm font-bold">{{ category.name }}</span>
+                {% endfor %}
+                <span class="text-gray-500">{{ article.created_at|date:"d/m/Y" }}</span>
+                <span class="text-gray-500">•</span>
+                <span class="text-gray-500">5 phút đọc</span>
+            </div>
+            {% endif %}
+
+            <!-- Title -->
+            <h1 class="text-4xl font-bold text-gray-900 mb-6">{{ article.title }}</h1>
+
+            <!-- Featured Image -->
+            {% if article.image|length %}
+            <img src="{{ article.image.url }}" class="w-full rounded-lg mb-8 shadow-lg" alt="{{ article.title }}">
+            {% endif %}
+
+            {% comment %}
+            <!-- Meta Info -->
+            <div class="flex items-center justify-between py-6 border-t border-b border-gray-200">
+                <div class="flex items-center gap-4">
+                    <img src="https://i.pravatar.cc/100?img=30" alt="Author" class="w-12 h-12 rounded-full">
+                    <div>
+                        <p class="font-bold text-gray-900">Nguyễn Văn An</p>
+                        <p class="text-sm text-gray-500">Chuyên gia Thang Máy</p>
+                    </div>
+                </div>
+                <div class="flex gap-3">
+                    <button class="border border-gray-300 px-4 py-2 rounded hover:border-red-elevator transition flex items-center gap-2">
+                        <i class="fas fa-share"></i> Chia sẻ
+                    </button>
+                    <button class="border border-gray-300 px-4 py-2 rounded hover:border-red-elevator transition flex items-center gap-2">
+                        <i class="fas fa-bookmark"></i> Lưu
+                    </button>
+                </div>
+            </div>
+            {% endcomment %}
+        </div>
+    </div>
+</section>
+
+<!-- ===== MAIN CONTENT ===== -->
+<section class="py-12">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-3 gap-8">
+            <!-- LEFT: Article Content -->
+            <div class="col-span-2">
+                <div class="bg-white rounded-lg shadow-md p-8">
+                    <div class="article-content">{{ article.content|safe }}</div>
+
+                    <!-- Share & Tags -->
+                    {% if article.tags.exists %}
+                    <div class="mt-8 pt-8 border-t border-gray-200">
+                        {% comment %}
+                        <div class="flex items-center gap-4 mb-6">
+                            <span class="font-bold">Chia sẻ:</span>
+                            <div class="flex gap-3">
+                                <button class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center hover:shadow-lg transition">
+                                    <i class="fab fa-facebook-f"></i>
+                                </button>
+                                <button class="w-10 h-10 bg-blue-400 text-white rounded-full flex items-center justify-center hover:shadow-lg transition">
+                                    <i class="fab fa-twitter"></i>
+                                </button>
+                                <button class="w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center hover:shadow-lg transition">
+                                    <i class="fab fa-pinterest"></i>
+                                </button>
+                                <button class="w-10 h-10 bg-green-600 text-white rounded-full flex items-center justify-center hover:shadow-lg transition">
+                                    <i class="fab fa-whatsapp"></i>
+                                </button>
+                            </div>
+                        </div>
+                        {% endcomment %}
+                        
+                        {% if article.tags.exists %}
+                        <div class="flex flex-wrap gap-2">
+                            {% for tag in article.tags.all %}
+                            <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">#{{ tag.name }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+
+                    {% comment %}
+                    <!-- Author Box -->
+                    <div class="mt-8 pt-8 border-t border-gray-200">
+                        <h3 class="font-bold mb-4">Về Tác Giả</h3>
+                        <div class="author-card">
+                            <div class="author-avatar">
+                                <img src="https://i.pravatar.cc/100?img=30" alt="Nguyễn Văn An">
+                            </div>
+                            <div>
+                                <p class="font-bold text-gray-900">Nguyễn Văn An</p>
+                                <p class="text-sm text-gray-600 mb-2">Chuyên gia Thang Máy tại HQT Elevator với 10 năm kinh nghiệm trong ngành</p>
+                                <a href="#" class="text-red-elevator font-bold text-sm hover:underline">Xem hồ sơ →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comments Section -->
+                    <div class="mt-12 pt-8 border-t border-gray-200">
+                        <h3 class="text-2xl font-bold mb-6">Bình Luận (3)</h3>
+
+                        <!-- Comment 1 -->
+                        <div class="mb-6 pb-6 border-b border-gray-200">
+                            <div class="flex gap-4 mb-4">
+                                <img src="https://i.pravatar.cc/100?img=10" alt="Avatar" class="w-10 h-10 rounded-full">
+                                <div>
+                                    <p class="font-bold">Anh Minh Tuấn</p>
+                                    <p class="text-sm text-gray-500">2 ngày trước</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700">
+                                Bài viết rất hữu ích! Tôi đang cân nhắc lắp đặt thang máy HQT và bài này đã giúp tôi hiểu rõ hơn về sản phẩm. Tiết kiệm điện 30% quả là ấn tượng!
+                            </p>
+                            <button class="text-red-elevator text-sm font-bold mt-2 hover:underline">Trả lời</button>
+                        </div>
+
+                        <!-- Comment 2 -->
+                        <div class="mb-6 pb-6 border-b border-gray-200">
+                            <div class="flex gap-4 mb-4">
+                                <img src="https://i.pravatar.cc/100?img=15" alt="Avatar" class="w-10 h-10 rounded-full">
+                                <div>
+                                    <p class="font-bold">Chị Hoa Anh</p>
+                                    <p class="text-sm text-gray-500">1 ngày trước</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700">
+                                Lắp đặt thang máy này tại tòa nhà của tôi, thực sự rất hài lòng. Khách hàng khen về thiết kế và an toàn.
+                            </p>
+                            <button class="text-red-elevator text-sm font-bold mt-2 hover:underline">Trả lời</button>
+                        </div>
+
+                        <!-- Comment 3 -->
+                        <div class="mb-6">
+                            <div class="flex gap-4 mb-4">
+                                <img src="https://i.pravatar.cc/100?img=20" alt="Avatar" class="w-10 h-10 rounded-full">
+                                <div>
+                                    <p class="font-bold">Ông Phúc Đạt</p>
+                                    <p class="text-sm text-gray-500">12 giờ trước</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700">
+                                Cảm ơn tác giả vì bài viết chi tiết. Tôi muốn hỏi giá của sản phẩm này bao nhiêu? Có thể liên hệ để tư vấn?
+                            </p>
+                            <button class="text-red-elevator text-sm font-bold mt-2 hover:underline">Trả lời</button>
+                        </div>
+
+                        <!-- Comment Form -->
+                        <div class="mt-8">
+                            <h4 class="font-bold mb-4">Viết Bình Luận</h4>
+                            <div class="bg-gray-50 p-6 rounded-lg">
+                                <div class="mb-4">
+                                    <label class="block font-bold mb-2">Tên</label>
+                                    <input type="text" placeholder="Tên của bạn" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-red-elevator">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="block font-bold mb-2">Email</label>
+                                    <input type="email" placeholder="Email của bạn" class="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-red-elevator">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="block font-bold mb-2">Bình Luận</label>
+                                    <textarea placeholder="Viết bình luận của bạn..." class="comment-form w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:border-red-elevator"></textarea>
+                                </div>
+                                <button class="gradient-red text-white px-6 py-2 rounded font-bold hover:shadow-lg transition">
+                                    Gửi Bình Luận
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endcomment %}
+                </div>
+            </div>
+
+            <!-- RIGHT: Sidebar -->
+            <div>
+                <!-- Related Articles -->
+                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                    <h3 class="text-lg font-bold mb-4">Bài Viết Liên Quan</h3>
+                    {% for article in related_articles %}
+                    <a href="{% url_cms page.code article.slug %}" class="related-article bg-gray-50 rounded-lg p-4 block mb-4 hover:bg-gray-100">
+                        <h4 class="font-bold text-sm mb-2 line-clamp-2">{{ article.title }}</h4>
+                        <p class="text-xs text-gray-500">{{ article.created_at|date:"d/m/Y" }}</p>
+                    </a>
+                    {% endfor %}
+                </div>
+
+                <!-- Categories -->
+                <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+                    <h3 class="text-lg font-bold mb-4">Danh Mục</h3>
+                    <ul class="space-y-2">
+                        {% for category in related_categories %}
+                        {% comment %}
+                        <li>
+                            <a href="articles.html" class="text-gray-700 hover:text-red-elevator transition flex justify-between">
+                                <span>Sản phẩm</span>
+                                <span class="text-gray-500">(12)</span>
+                            </a>
+                        </li>
+                        {% endcomment %}
+                        <li><p class="text-gray-700 hover:text-red-elevator transition flex justify-between">
+                            <span>{{ category.name }}</span>
+                            <span class="text-gray-500">({{ category.article_count }})</span>
+                        </p></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="gradient-red text-white rounded-lg p-6">
+                    <h3 class="text-lg font-bold mb-2">Đăng Ký Tin Tức</h3>
+                    <p class="text-sm mb-4 opacity-90">Nhận cập nhật tin tức mới trực tiếp vào email</p>
+                    <input type="email" placeholder="Email của bạn" 
+                            class="w-full px-3 py-2 rounded mb-3 text-gray-900 focus:outline-none text-sm">
+                    <button class="w-full bg-white text-red-elevator font-bold py-2 rounded hover:shadow-lg transition text-sm">
+                        Đăng Ký
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CTA SECTION ===== -->
+<section class="gradient-red text-white py-12">
+    <div class="container mx-auto px-4">
+        <div class="max-w-2xl mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-2">Quan Tâm Đến "{{ article.title }}"?</h2>
+            <p class="mb-6 opacity-90">Liên hệ với chúng tôi để nhận tư vấn miễn phí</p>
+            <a href="{% url_cms 'contact' %}">
+                <button class="border-2 border-white text-white px-8 py-3 rounded font-bold hover:bg-white hover:text-black hover:text-red-elevator transition">
+                    {{ button_text|default:"LIÊN HỆ NGAY" }}
+                </button>
+            </a>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

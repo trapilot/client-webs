@@ -1,0 +1,315 @@
+{% extends "default/layouts/base.html" %}
+{% load url_cms trad thumbnail cache seo_meta repeat static %}
+
+{% block extracss %}
+<style>
+.step-box {
+    border-left: 4px solid #c41e3a;
+    transition: all 0.3s;
+}
+.step-box:hover {
+    box-shadow: 0 10px 30px rgba(196, 30, 58, 0.2);
+    transform: translateX(10px);
+}
+.safety-alert {
+    background: #fef2f2;
+    border-left: 4px solid #c41e3a;
+}
+.instruction-step {
+    counter-increment: step-counter;
+    margin-bottom: 20px;
+    padding: 20px;
+    background: #f9fafb;
+    border-radius: 8px;
+}
+.instruction-step::before {
+    content: counter(step-counter);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: #c41e3a;
+    color: white;
+    border-radius: 50%;
+    font-weight: bold;
+    margin-right: 15px;
+    float: left;
+}
+</style>
+{% endblock %}
+
+{% block extrajs %}
+{% endblock %}
+
+{% block content %}
+<!-- ===== QUICK TIPS ===== -->
+<section class="py-12 bg-white">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold section-title text-center mb-12">Những Điều Cần Biết</h2>
+
+        <div class="grid grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div class="step-box bg-gray-50 rounded-lg p-6">
+                <div class="text-4xl text-red-elevator mb-4"><i class="fas fa-check-circle"></i></div>
+                <h3 class="font-bold text-lg mb-2">Đứng Đúng Tư Thế</h3>
+                <p class="text-gray-700 text-sm">Đứng vào giữa thang máy, tránh dựa vào tường hoặc cửa</p>
+            </div>
+
+            <div class="step-box bg-gray-50 rounded-lg p-6">
+                <div class="text-4xl text-red-elevator mb-4"><i class="fas fa-hand-holding-heart"></i></div>
+                <h3 class="font-bold text-lg mb-2">Giữ Thăng Bằng</h3>
+                <p class="text-gray-700 text-sm">Không chuyển động đột ngột, không nhảy trong thang máy</p>
+            </div>
+
+            <div class="step-box bg-gray-50 rounded-lg p-6">
+                <div class="text-4xl text-red-elevator mb-4"><i class="fas fa-phone-alt"></i></div>
+                <h3 class="font-bold text-lg mb-2">Cảnh Báo Khẩn Cấp</h3>
+                <p class="text-gray-700 text-sm">Nhấn nút SOS nếu gặp sự cố hoặc cảm thấy không an toàn</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SAFETY ALERTS ===== -->
+<section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold section-title text-center mb-8">Lưu Ý An Toàn</h2>
+
+        <div class="max-w-4xl mx-auto space-y-4">
+            <div class="safety-alert rounded-lg p-6">
+                <div class="flex gap-4">
+                    <i class="fas fa-exclamation-triangle text-red-elevator text-2xl flex-shrink-0 mt-1"></i>
+                    <div>
+                        <h3 class="font-bold text-red-elevator mb-2">Không Nhảy Hoặc Giẫm Chân Mạnh</h3>
+                        <p class="text-gray-700 text-sm">Điều này có thể kích hoạt cảm biến an toàn và gây dừng đột ngột</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="safety-alert rounded-lg p-6">
+                <div class="flex gap-4">
+                    <i class="fas fa-exclamation-triangle text-red-elevator text-2xl flex-shrink-0 mt-1"></i>
+                    <div>
+                        <h3 class="font-bold text-red-elevator mb-2">Không Cầm Vật Nặng Quá 50kg</h3>
+                        <p class="text-gray-700 text-sm">Vượt quá trọng lượng cho phép có thể gây hư hỏng và nguy hiểm</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="safety-alert rounded-lg p-6">
+                <div class="flex gap-4">
+                    <i class="fas fa-exclamation-triangle text-red-elevator text-2xl flex-shrink-0 mt-1"></i>
+                    <div>
+                        <h3 class="font-bold text-red-elevator mb-2">Không Chặn Cửa Thang Máy</h3>
+                        <p class="text-gray-700 text-sm">Chặn cửa bằng tay hoặc vật có thể gây chấn thương</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="safety-alert rounded-lg p-6">
+                <div class="flex gap-4">
+                    <i class="fas fa-exclamation-triangle text-red-elevator text-2xl flex-shrink-0 mt-1"></i>
+                    <div>
+                        <h3 class="font-bold text-red-elevator mb-2">Không Để Trẻ Em Một Mình</h3>
+                        <p class="text-gray-700 text-sm">Luôn giám sát trẻ em khi sử dụng thang máy</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== STEP BY STEP GUIDE ===== -->
+<section class="py-12 bg-white">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold section-title text-center mb-8">Hướng Dẫn Từng Bước</h2>
+
+        <div class="max-w-4xl mx-auto" style="counter-reset: step-counter;">
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">Cách Gọi Và Vào Thang Máy</h3>
+            
+            <div class="instruction-step">
+                <h4 class="font-bold text-gray-900 mb-2">Tìm Nút Gọi Thang Máy</h4>
+                <p class="text-gray-700">Tìm nút gọi thang máy trên bệ điểm dừng. Nó thường được đặt ở độ cao tầm 1.2-1.5 mét từ mặt đất</p>
+            </div>
+
+            <div class="instruction-step">
+                <h4 class="font-bold text-gray-900 mb-2">Nhấn Nút Tương Ứng</h4>
+                <p class="text-gray-700">Nhấn nút <span class="text-red-elevator font-bold">↓ (xuống)</span> để gọi thang máy đi xuống hoặc <span class="text-blue-600 font-bold">↑ (lên)</span> để gọi thang máy đi lên</p>
+            </div>
+
+            <div class="instruction-step">
+                <h4 class="font-bold text-gray-900 mb-2">Đợi Thang Máy Đến</h4>
+                <p class="text-gray-700">Đèn LED sáng lên cho biết thang máy đang đến. Đợi cửa mở hoàn toàn trước khi bước vào</p>
+            </div>
+
+            <div class="instruction-step">
+                <h4 class="font-bold text-gray-900 mb-2">Bước Vào Thang Máy</h4>
+                <p class="text-gray-700">Bước vào thang máy từ từ, tránh đụng vào cửa. Cửa sẽ đóng tự động sau khi vào xong</p>
+            </div>
+
+            <div class="instruction-step">
+                <h4 class="font-bold text-gray-900 mb-2">Chọn Tầng</h4>
+                <p class="text-gray-700">Nhấn nút tương ứng với số tầng bạn muốn đi. Đèn sáng cho biết tầng đã được chọn</p>
+            </div>
+
+            <div class="instruction-step">
+                <h4 class="font-bold text-gray-900 mb-2">Chờ Thang Máy Di Chuyển</h4>
+                <p class="text-gray-700">Thang máy sẽ di chuyển đến tầng bạn chọn. Hãy yên tĩnh và an toàn trong khoảng thời gian này</p>
+            </div>
+
+            <div class="instruction-step">
+                <h4 class="font-bold text-gray-900 mb-2">Ra Khỏi Thang Máy</h4>
+                <p class="text-gray-700">Khi cửa mở, bước ra từ từ. Chú ý đến độ cao của sàn ngoài so với thang máy</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== EMERGENCY GUIDE ===== -->
+<section class="py-12 bg-gradient-to-r from-red-50 to-orange-50">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold section-title text-center mb-8">Trong Trường Hợp Khẩn Cấp</h2>
+
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-lg shadow-md p-8 mb-6">
+                <h3 class="text-2xl font-bold text-red-elevator mb-6">Nếu Thang Máy Bị Mắc Kẹt</h3>
+                
+                <ol class="space-y-4">
+                    <li class="flex gap-4">
+                        <span class="flex-shrink-0 w-8 h-8 bg-red-elevator text-white rounded-full flex items-center justify-center font-bold">1</span>
+                        <div>
+                            <h4 class="font-bold text-gray-900">Giữ Bình Tĩnh</h4>
+                            <p class="text-gray-700">Không hoảng loạn. Thang máy được thiết kế an toàn ngay cả khi dừng đột ngột</p>
+                        </div>
+                    </li>
+                    <li class="flex gap-4">
+                        <span class="flex-shrink-0 w-8 h-8 bg-red-elevator text-white rounded-full flex items-center justify-center font-bold">2</span>
+                        <div>
+                            <h4 class="font-bold text-gray-900">Nhấn Nút SOS Hoặc Chuông</h4>
+                            <p class="text-gray-700">Nhấn nút SOS (thường có biểu tượng chuông) để báo hiệu. Chuyên viên bảo dưỡng sẽ được thông báo ngay lập tức</p>
+                        </div>
+                    </li>
+                    <li class="flex gap-4">
+                        <span class="flex-shrink-0 w-8 h-8 bg-red-elevator text-white rounded-full flex items-center justify-center font-bold">3</span>
+                        <div>
+                            <h4 class="font-bold text-gray-900">Chờ Đợi Hỗ Trợ</h4>
+                            <p class="text-gray-700">Chuyên viên sẽ đến sớm nhất có thể. Hãy chờ yên tĩnh và nghe theo hướng dẫn</p>
+                        </div>
+                    </li>
+                    <li class="flex gap-4">
+                        <span class="flex-shrink-0 w-8 h-8 bg-red-elevator text-white rounded-full flex items-center justify-center font-bold">4</span>
+                        <div>
+                            <h4 class="font-bold text-gray-900">Không Cố Thoát Ra</h4>
+                            <p class="text-gray-700">Không cố thoát ra từ cửa trên hay dưới. Điều này rất nguy hiểm</p>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+
+            {% if project.EMERGENCY_TEL %}
+            <div class="bg-white rounded-lg shadow-md p-8">
+                <h3 class="text-2xl font-bold text-red-elevator mb-6">Số Điện Thoại Khẩn Cấp</h3>
+                <p class="text-gray-700 mb-4">Nếu nút SOS không hoạt động, hãy gọi:</p>
+                <p class="text-4xl font-bold text-red-elevator mb-2">{{ project.EMERGENCY_TEL }}</p>                
+                <p class="text-gray-600 text-sm">Đội hỗ trợ 24/7 sẽ đến giúp bạn ngay lập tức</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+<!-- ===== CHILDREN SAFETY ===== -->
+<section class="py-12 bg-white">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold section-title text-center mb-8">Hướng Dẫn An Toàn Cho Trẻ Em</h2>
+
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-blue-50 rounded-lg p-8 border-l-4 border-blue-600">
+                <h3 class="text-xl font-bold text-blue-900 mb-4">Phụ Huynh Cần Lưu Ý</h3>
+                <ul class="space-y-3 text-gray-700">
+                    <li class="flex gap-3">
+                        <i class="fas fa-check text-blue-600 font-bold mt-1"></i>
+                        <span><strong>Không Để Trẻ Một Mình:</strong> Luôn giám sát trẻ em khi sử dụng thang máy</span>
+                    </li>
+                    <li class="flex gap-3">
+                        <i class="fas fa-check text-blue-600 font-bold mt-1"></i>
+                        <span><strong>Giữ Tay Trẻ:</strong> Nắm tay trẻ khi vào và ra khỏi thang máy</span>
+                    </li>
+                    <li class="flex gap-3">
+                        <i class="fas fa-check text-blue-600 font-bold mt-1"></i>
+                        <span><strong>Không Chơi Với Nút:</strong> Dạy trẻ không được chơi với các nút điều khiển</span>
+                    </li>
+                    <li class="flex gap-3">
+                        <i class="fas fa-check text-blue-600 font-bold mt-1"></i>
+                        <span><strong>Tránh Chạy:</strong> Dạy trẻ không được chạy hoặc nhảy trong thang máy</span>
+                    </li>
+                    <li class="flex gap-3">
+                        <i class="fas fa-check text-blue-600 font-bold mt-1"></i>
+                        <span><strong>Giải Thích Quy Tắc:</strong> Giải thích các quy tắc an toàn cho trẻ trước khi sử dụng</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SPECIAL SITUATIONS ===== -->
+<section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold section-title text-center mb-8">Những Tình Huống Đặc Biệt</h2>
+
+        <div class="grid grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-lg font-bold text-red-elevator mb-3">
+                    <i class="fas fa-wheelchair mr-2"></i>Người Khuyết Tật
+                </h3>
+                <ul class="space-y-2 text-sm text-gray-700">
+                    <li>✓ Thang máy có chiều rộng phù hợp cho xe lăn</li>
+                    <li>✓ Nút gọi ở độ cao dễ tiếp cận</li>
+                    <li>✓ Sẵn sàng hỗ trợ nếu cần thiết</li>
+                    <li>✓ Gọi 1800 966 966 để được hỗ trợ</li>
+                </ul>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-lg font-bold text-red-elevator mb-3">
+                    <i class="fas fa-box mr-2"></i>Mang Đồ Đạc Lớn
+                </h3>
+                <ul class="space-y-2 text-sm text-gray-700">
+                    <li>✓ Đảm bảo không quá 50kg</li>
+                    <li>✓ Chỉnh lại vị trí để không chặn cửa</li>
+                    <li>✓ Nếu quá nặng, liên hệ dịch vụ hỗ trợ</li>
+                    <li>✓ Tránh cạo xước nội thất</li>
+                </ul>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-lg font-bold text-red-elevator mb-3">
+                    <i class="fas fa-dog mr-2"></i>Mang Thú Cưng
+                </h3>
+                <ul class="space-y-2 text-sm text-gray-700">
+                    <li>✓ Thú cưng phải được giữ chặt</li>
+                    <li>✓ Không để thú cưng chạy trong thang máy</li>
+                    <li>✓ Vệ sinh sau khi sử dụng</li>
+                    <li>✓ Tuân theo quy định tòa nhà</li>
+                </ul>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-lg font-bold text-red-elevator mb-3">
+                    <i class="fas fa-person-cane mr-2"></i>Người Cao Tuổi
+                </h3>
+                <ul class="space-y-2 text-sm text-gray-700">
+                    <li>✓ Di chuyển từ từ và cẩn thận</li>
+                    <li>✓ Giữ thăng bằng bằng tay cung cấp</li>
+                    <li>✓ Mang điện thoại để liên hệ nếu cần</li>
+                    <li>✓ Yêu cầu hỗ trợ từ hàng xóm</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include "default/sections/cta.html" with title="Cần Hỗ Trợ Ngay?" description="Liên hệ với đội hỗ trợ 24/7 của HQT Elevator." %}
+
+{% endblock %}

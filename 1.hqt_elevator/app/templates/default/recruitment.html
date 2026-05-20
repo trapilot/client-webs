@@ -1,0 +1,129 @@
+{% extends "default/layouts/base.html" %}
+{% load i18n url_cms trad thumbnail cache seo_meta repeat %}
+
+{% block extracss %}
+<style>
+.job-card {
+    transition: all .3s ease;
+}
+.job-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 40px rgba(196, 30, 58, 0.15);
+}
+</style>
+{% endblock %}
+
+{% block extrajs %}
+{% endblock %}
+
+{% block content %}
+<!-- WHY JOIN US -->
+<section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold section-title text-center mb-12">Vì Sao Chọn Chúng Tôi</h2>
+
+        <div class="grid grid-cols-3 gap-8">
+            <div class="text-center p-6 bg-gray-50 rounded-lg">
+                <i class="fas fa-briefcase text-4xl text-red-elevator mb-4"></i>
+                <h3 class="font-bold mb-2">Môi Trường Chuyên Nghiệp</h3>
+                <p class="text-sm text-gray-600">Làm việc với đội ngũ kỹ sư giàu kinh nghiệm</p>
+            </div>
+
+            <div class="text-center p-6 bg-gray-50 rounded-lg">
+                <i class="fas fa-chart-line text-4xl text-red-elevator mb-4"></i>
+                <h3 class="font-bold mb-2">Phát Triển Sự Nghiệp</h3>
+                <p class="text-sm text-gray-600">Cơ hội thăng tiến rõ ràng theo năng lực</p>
+            </div>
+
+            <div class="text-center p-6 bg-gray-50 rounded-lg">
+                <i class="fas fa-wallet text-4xl text-red-elevator mb-4"></i>
+                <h3 class="font-bold mb-2">Thu Nhập Cạnh Tranh</h3>
+                <p class="text-sm text-gray-600">Lương + thưởng theo dự án hấp dẫn</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- JOB LIST -->
+<section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold section-title text-center mb-12">Vị Trí Tuyển Dụng</h2>
+
+        <div class="grid grid-cols-2 gap-8">
+
+            <!-- Job 1 -->
+            <div class="job-card bg-white p-6 rounded-lg border">
+                <h3 class="text-xl font-bold text-red-elevator mb-2">Kỹ Sư Thang Máy</h3>
+                <p class="text-gray-600 text-sm mb-3">
+                    Thiết kế, lắp đặt và bảo trì hệ thống thang máy
+                </p>
+
+                <div class="text-sm text-gray-700 space-y-1 mb-4">
+                    <p><i class="fas fa-map-marker-alt text-red-elevator mr-2"></i>Hà Nội / TP.HCM</p>
+                    <p><i class="fas fa-clock text-red-elevator mr-2"></i>Full-time</p>
+                    <p><i class="fas fa-coins text-red-elevator mr-2"></i>15 - 30 triệu</p>
+                </div>
+
+                <button class="bg-red-elevator text-white px-4 py-2 rounded hover:opacity-90">
+                    Ứng tuyển
+                </button>
+            </div>
+
+            <!-- Job 2 -->
+            <div class="job-card bg-white p-6 rounded-lg border">
+                <h3 class="text-xl font-bold text-red-elevator mb-2">Kỹ Thuật Viên Bảo Trì</h3>
+                <p class="text-gray-600 text-sm mb-3">
+                    Bảo trì, kiểm tra và xử lý sự cố thang máy
+                </p>
+
+                <div class="text-sm text-gray-700 space-y-1 mb-4">
+                    <p><i class="fas fa-map-marker-alt text-red-elevator mr-2"></i>Toàn quốc</p>
+                    <p><i class="fas fa-clock text-red-elevator mr-2"></i>Full-time</p>
+                    <p><i class="fas fa-coins text-red-elevator mr-2"></i>10 - 18 triệu</p>
+                </div>
+
+                <button class="bg-red-elevator text-white px-4 py-2 rounded hover:opacity-90">
+                    Ứng tuyển
+                </button>
+            </div>
+
+            <!-- Job 3 -->
+            <div class="job-card bg-white p-6 rounded-lg border">
+                <h3 class="text-xl font-bold text-red-elevator mb-2">Nhân Viên Kinh Doanh</h3>
+                <p class="text-gray-600 text-sm mb-3">
+                    Tư vấn và phát triển khách hàng dự án thang máy
+                </p>
+
+                <div class="text-sm text-gray-700 space-y-1 mb-4">
+                    <p><i class="fas fa-map-marker-alt text-red-elevator mr-2"></i>Hà Nội</p>
+                    <p><i class="fas fa-clock text-red-elevator mr-2"></i>Full-time</p>
+                    <p><i class="fas fa-coins text-red-elevator mr-2"></i>12 - 40 triệu</p>
+                </div>
+
+                <button class="bg-red-elevator text-white px-4 py-2 rounded hover:opacity-90">
+                    Ứng tuyển
+                </button>
+            </div>
+
+            <!-- Job 4 -->
+            <div class="job-card bg-white p-6 rounded-lg border">
+                <h3 class="text-xl font-bold text-red-elevator mb-2">Kỹ Sư Thiết Kế</h3>
+                <p class="text-gray-600 text-sm mb-3">
+                    Thiết kế bản vẽ kỹ thuật thang máy & hệ thống cơ khí
+                </p>
+
+                <div class="text-sm text-gray-700 space-y-1 mb-4">
+                    <p><i class="fas fa-map-marker-alt text-red-elevator mr-2"></i>Hà Nội</p>
+                    <p><i class="fas fa-clock text-red-elevator mr-2"></i>Full-time</p>
+                    <p><i class="fas fa-coins text-red-elevator mr-2"></i>18 - 35 triệu</p>
+                </div>
+
+                <button class="bg-red-elevator text-white px-4 py-2 rounded hover:opacity-90">
+                    Ứng tuyển
+                </button>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}

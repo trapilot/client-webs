@@ -1,0 +1,189 @@
+{% extends "default/layouts/base.html" %}
+{% load i18n url_cms trad thumbnail seo_meta repeat %}
+
+
+{% block extracss %}
+<style>
+.image-gallery {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+.thumbnail-gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+.thumbnail {
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+.thumbnail.active {
+    border-color: #c41e3a;
+}
+.thumbnail:hover {
+    border-color: #c41e3a;
+}
+.spec-item {
+    border-bottom: 1px solid #e5e7eb;
+    padding: 15px 0;
+}
+.spec-item:last-child {
+    border-bottom: none;
+}
+.feature-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #c41e3a 0%, #8b1429 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+}
+.rating-star {
+    color: #FFB81C;
+    font-size: 14px;
+}
+</style>
+{% endblock %}
+
+{% block extrajs %}
+{% endblock %}
+
+{% block content %}
+
+<!-- ===== HERO IMAGE ===== -->
+<section class="bg-white">
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-3 gap-6">
+            <!-- MAIN IMAGE -->
+            <div class="col-span-2">
+                <img src="{{ portfolio.featured_image_url }}"
+                    class="w-full h-[420px] object-cover rounded-lg shadow-md"
+                    onerror="this.src='https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800'"
+                >
+            </div>
+
+            <!-- INFO BOX -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h1 class="text-2xl font-bold mb-2">{{ portfolio.name }}</h1>
+                <p class="text-gray-600 mb-4">{{ portfolio.location }}</p>
+                <div class="space-y-3 text-sm border-t pt-4">
+                    <div class="flex justify-between">
+                        <span class="text-gray-500">Phân loại</span>
+                        <span class="font-bold text-red-elevator">
+                            {{ portfolio.type_text }}
+                        </span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-500">Trạng thái</span>
+                        <span class="font-bold text-red-elevator">
+                            {{ portfolio.get_status_display }}
+                        </span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-500">Khu vực</span>
+                        <span class="font-bold text-red-elevator">
+                            {{ portfolio.city }}
+                        </span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-500">Địa chỉ</span>
+                        <span class="font-bold">
+                            {{ portfolio.address }}
+                        </span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-500">Tổng thang máy</span>
+                        <span class="font-bold">
+                            {{ portfolio.total_elevators }}
+                        </span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-500">Số tầng thi công</span>
+                        <span class="font-bold">
+                            {{ portfolio.building_floors }}
+                        </span>
+                    </div>
+                    {% comment %}
+                    <div class="flex justify-between">
+                        <span class="text-gray-500">Loại thang</span>
+                        <span class="font-bold">
+                            {{ portfolio.elevator_type }}
+                        </span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-gray-500">Tải trọng</span>
+                        <span class="font-bold">
+                            {{ portfolio.capacity }}
+                        </span>
+                    </div>
+                    {% endcomment %}
+                    <div class="flex justify-between">
+                        <span class="text-gray-500">Thời gian</span>
+                        <span class="font-bold">{% if portfolio.duration_months > 2 %} {{ portfolio.duration_months }} tháng {% else %} {{ portfolio.duration_days }} ngày{% endif %}</span>
+                    </div>
+                </div>
+                <a href="{% url_cms 'contact' %}">
+                    <button class="w-full gradient-red text-white py-3 rounded mt-6 font-bold">
+                        Liên hệ tư vấn
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== DESCRIPTION ===== -->
+<section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <h2 class="text-2xl font-bold mb-6">Chi tiết dự án</h2>
+        <div class="bg-white p-6 rounded-lg shadow-md leading-relaxed text-gray-700">
+            {{ portfolio.content|safe }}
+        </div>
+    </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+{% if portfolio.gallery_set.count %}
+<section class="py-12 bg-white">
+    <div class="container mx-auto px-4">
+        <h2 class="text-2xl font-bold mb-6">Hình ảnh công trình</h2>
+        <div class="grid grid-cols-4 gap-4">
+            {% for gallery in portfolio.gallery_set.all %}
+            <img src="{{ gallery.image.url }}" class="w-full h-48 object-cover rounded-lg hover-scale">
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- ===== RELATED PROJECTS ===== -->
+{% if related_portfolios|length %}
+<section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <h2 class="text-2xl font-bold mb-6">Dự án liên quan</h2>
+        <div class="grid grid-cols-3 gap-6">
+            {% for item in related_portfolios %}
+            <a href="{% url_cms page.code item.slug %}"
+               class="bg-white rounded-lg shadow-md overflow-hidden hover-scale">
+                <img src="{{ item.featured_image_url }}" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="font-bold">{{ item.name }}</h3>
+                    <p class="text-sm text-gray-600">{{ item.location }}</p>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- ===== CTA SECTION ===== -->
+{% include "default/sections/cta.html" with button_text="YÊU CẦU TƯ VẤN" title="QUAN TÂM SẢN PHẨM NÀY?" description="Liên hệ với chuyên viên của chúng tôi để nhận báo giá và tư vấn miễn phí." %}
+
+{% endblock content %}
