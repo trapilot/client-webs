@@ -18,9 +18,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 
 # copy entrypoint.sh
-COPY ./entrypoint.sh .
-RUN chmod +x entrypoint.sh
+COPY entrypoint.sh .
+RUN chmod +x /app/entrypoint.sh
 
 COPY . .
 
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["/app/entrypoint.sh"]
