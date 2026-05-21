@@ -1,0 +1,82 @@
+{% load url_cms url_link thumbnail copy_rights %}
+
+
+
+  <footer class="bg-[#1a1a1a] text-gray-400 pt-16 pb-6 text-[13px]">
+    <div class="max-w-[1200px] mx-auto px-4 grid grid-cols-1 md:grid-cols-12 gap-8 border-b border-gray-800 pb-12">
+      
+      <div class="md:col-span-4">
+        <a href="{% url_cms 'home' %}" class="flex items-center gap-2 mb-4">
+          <svg class="w-6 h-6 text-red-600" fill="currentColor" viewBox="0 0 24 24"><path d="M4 4h4v16H4V4zm6 0h4v16h-4V4zm6 0h4v16h-4V4z"/></svg>
+          <div class="leading-tight">
+            <div class="text-lg font-black text-white tracking-tighter">HQT</div>
+            <div class="text-[9px] font-bold text-gray-500 tracking-widest">ELEVATOR</div>
+          </div>
+        </a>
+        <p class="mb-4 leading-relaxed pr-4">
+          {% if project.SLOGON %}
+          {{ project.SLOGON|safe }}
+          {% else %}
+          HQT Elevator - Thương hiệu thang máy gia đình chuẩn Nhật Bản, nâng tầm an toàn, tiện nghi và đẳng cấp cho mọi không gian.
+          {% endif %}
+        </p>
+        <div class="flex space-x-3">
+          {% for network in project.social_networks %}
+          <a href="{{ network.url|url_link }}" class="w-8 h-8 rounded bg-gray-800 flex items-center justify-center text-white hover:bg-red-600 transition">
+            <i class="{{ network.code }}"></i>
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+      
+      <div class="md:col-span-2">
+        <h4 class="text-white font-bold mb-4 uppercase text-[12px] tracking-wider">SẢN PHẨM</h4>
+        <ul class="space-y-2">
+          {% for category in categories %}
+          <li><a href="{% url_cms 'category' category.slug %}" class="hover:text-red-500 transition">{{ category.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="md:col-span-2">
+        <h4 class="text-white font-bold mb-4 uppercase text-[12px] tracking-wider">HỖ TRỢ</h4>
+        <ul class="space-y-2">
+          {% for p in project.navigation_second %}
+            {% if p.menu_layer_second == 2 %}
+            <li><a href="{% url_cms p.code %}" class="hover:text-red-500 transition">{{ p.name|lower|capfirst }}</a></li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="md:col-span-2">
+        <h4 class="text-white font-bold mb-4 uppercase text-[12px] tracking-wider">VỀ CHÚNG TÔI</h4>
+        <ul class="space-y-2">
+          {% for p in project.navigation_second %}
+            {% if p.menu_layer_second == 3 %}
+            <li><a href="{% url_cms p.code %}" class="hover:text-red-500 transition">{{ p.name|lower|capfirst }}</a></li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="md:col-span-2">
+        <h4 class="text-white font-bold mb-4 uppercase text-[12px] tracking-wider">LIÊN HỆ</h4>
+        <ul class="space-y-3">
+          <li class="flex items-start"><span class="mr-2 text-white">📍</span> <div>{{ project.address }}</div></li>
+          <li class="flex items-center"><span class="mr-2 text-white">📞</span> {{ project.phone }}</li>
+          <li class="flex items-center"><span class="mr-2 text-white">✉️</span> {{ project.email }}</li>
+          <!-- <li class="flex items-center"><span class="mr-2 text-white">🌐</span> {{ project.domain }}</li> -->
+        </ul>
+      </div>
+    </div>
+    
+    <div class="max-w-[1200px] mx-auto px-4 mt-6 flex flex-col md:flex-row justify-between items-center text-[11px] text-gray-500">
+      <p>{% copy_rights 2026 %} HQT Elevator. All rights reserved.</p>
+      <div class="space-x-4 mt-4 md:mt-0 flex items-center">
+        <a href="#" class="hover:text-white transition">Chính sách bảo mật</a>
+        <span class="w-px h-3 bg-gray-700 block"></span>
+        <a href="#" class="hover:text-white transition">Điều khoản sử dụng</a>
+      </div>
+    </div>
+  </footer>

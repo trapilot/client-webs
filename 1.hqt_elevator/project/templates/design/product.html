@@ -1,0 +1,108 @@
+{% extends "design/layouts/base.html" %}
+{% load i18n url_cms trad thumbnail seo_meta repeat currency %}
+
+
+{% block extracss %}
+<style></style>
+{% endblock %}
+
+{% block extrajs %}
+<script></script>
+{% endblock %}
+
+
+{% block content %}
+<main class="font-sans text-gray-900 antialiased bg-gray-50 pb-16">
+  <section class="py-12 bg-white border-b border-gray-200">
+    <div class="max-w-[1200px] mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16">
+      
+      <div class="space-y-4">
+        <div class="relative h-[400px] md:h-[500px] rounded-lg overflow-hidden border border-gray-100 shadow-sm bg-gray-50">
+          <div class="absolute top-4 left-4 z-10 flex flex-col gap-2">
+            {% if product.is_popular %}
+            <div class="bg-red-700 text-white text-[11px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider w-fit">Phổ Biến</div>
+            {% endif %}
+            {% if product.is_new %}
+            <div class="bg-blue-700 text-white text-[11px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider w-fit">Mới</div>
+            {% endif %}
+            {% if product.is_best_seller %}
+            <div class="bg-green-700 text-white text-[11px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider w-fit">Bán Chạy</div>
+            {% endif %}
+          </div>
+          <img src="{{ product.featured_image_url }}" alt="Thang máy kính tròn" class="w-full h-full object-cover">
+        </div>
+        <div class="grid grid-cols-4 gap-4">
+          <div class="h-20 md:h-24 rounded border-2 border-red-700 overflow-hidden cursor-pointer">
+            <img src="{{ product.featured_image_url }}" class="w-full h-full object-cover">
+          </div>
+          {% for gallery in product.gallery_set.all|slice:":2" %}
+          <div class="h-20 md:h-24 rounded border border-gray-200 overflow-hidden cursor-pointer hover:border-red-400 transition">
+            <img src="{{ gallery.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover opacity-60 hover:opacity-100">
+          </div>
+          {% endfor %}
+          {% if product.gallery_set.count > 2 %}
+          <div class="h-20 md:h-24 rounded border border-gray-200 overflow-hidden flex items-center justify-center bg-gray-100 text-gray-500 text-sm font-bold cursor-pointer hover:bg-gray-200 transition">+3</div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="flex flex-col justify-center">
+        <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">{{ product.name }}</h1>
+        <p class="text-gray-500 text-[14px] mb-6">Mã SP: <span class="font-bold text-gray-700">{{ product.code }}</span></p>
+        
+        <p class="text-[15px] text-gray-600 leading-relaxed mb-6">
+          {{ product.description }}
+        </p>
+
+        <div class="bg-gray-50 p-5 rounded border border-gray-100 mb-8">
+          <ul class="space-y-3">
+            <li class="flex justify-between border-b border-gray-200 pb-2"><span class="text-[14px] text-gray-500">Tải trọng</span><span class="text-[14px] font-bold text-gray-900">{{ product.capacity }}kg ({{ product.passenger_text }})</span></li>
+            <li class="flex justify-between border-b border-gray-200 pb-2"><span class="text-[14px] text-gray-500">Tốc độ</span><span class="text-[14px] font-bold text-gray-900">{{ product.speed }} m/s</span></li>
+            <li class="flex justify-between border-b border-gray-200 pb-2"><span class="text-[14px] text-gray-500">Kích thước hố tối thiểu</span><span class="text-[14px] font-bold text-gray-900">1400mm x 1400mm</span></li>
+            <li class="flex justify-between pt-1"><span class="text-[14px] text-gray-500">Hố Pit (Min)</span><span class="text-[14px] font-bold text-gray-900">300mm</span></li>
+          </ul>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="{% url_cms 'contact' %}" class="bg-red-700 text-white text-center px-8 py-3.5 rounded text-[14px] font-bold hover:bg-red-800 transition shadow-md flex-1">NHẬN BÁO GIÁ CHI TIẾT</a>
+          <a href="tel:{{ project.phone|cut:' ' }}" class="border-2 border-gray-900 text-gray-900 text-center px-8 py-3.5 rounded text-[14px] font-bold hover:bg-gray-900 hover:text-white transition flex-1 flex items-center justify-center">
+             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+             {{ project.phone }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-[1200px] mx-auto px-4 py-12">
+    <div class="flex overflow-x-auto border-b border-gray-200 mb-8 hide-scrollbar">
+      <button class="px-6 py-4 text-[15px] font-bold text-red-700 border-b-2 border-red-700 whitespace-nowrap">Đặc điểm nổi bật</button>
+      <button class="px-6 py-4 text-[15px] font-bold text-gray-500 hover:text-red-700 whitespace-nowrap transition">Thông số chi tiết</button>
+      <button class="px-6 py-4 text-[15px] font-bold text-gray-500 hover:text-red-700 whitespace-nowrap transition">Bản vẽ & Tài liệu</button>
+    </div>
+    
+    <div class="prose prose-sm md:prose-base max-w-none text-gray-600">
+      <h3 class="text-xl font-bold text-gray-900 mb-4">Thiết kế đột phá, nâng tầm kiến trúc</h3>
+      <p>Thang máy lồng kính tròn là giải pháp hoàn hảo cho các công trình có thiết kế không gian mở như giếng trời trung tâm, biệt thự cao cấp. Toàn bộ cấu trúc được thiết kế tinh giản, khung nhôm hợp kim nguyên khối kết hợp kính cường lực an toàn 2 lớp dày 10.38mm.</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 my-8">
+        <div>
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" alt="Chi tiết" class="rounded shadow-sm">
+        </div>
+        <div class="flex flex-col justify-center">
+          <ul class="space-y-4 list-none pl-0">
+            <li class="flex items-start">
+              <span class="w-6 h-6 rounded-full bg-red-100 text-red-700 flex items-center justify-center font-bold text-xs mr-3 mt-1 shrink-0">1</span>
+              <div><strong class="text-gray-900 block">Động cơ Gearless siêu êm:</strong> Không sử dụng hộp số, giúp thang vận hành êm ái, tiết kiệm 40% điện năng và không cần châm dầu mỡ.</div>
+            </li>
+            <li class="flex items-start">
+              <span class="w-6 h-6 rounded-full bg-red-100 text-red-700 flex items-center justify-center font-bold text-xs mr-3 mt-1 shrink-0">2</span>
+              <div><strong class="text-gray-900 block">Hệ thống an toàn đa lớp:</strong> Cảm biến mành hồng ngoại (Photocell) toàn cửa, phanh cơ khí tự động (Safety gear), tự động cứu hộ khi mất điện (ARD).</div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock content %}

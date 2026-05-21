@@ -1,0 +1,106 @@
+{% extends "design/layouts/base.html" %}
+{% load i18n url_cms trad thumbnail seo_meta repeat %}
+
+
+{% block extracss %}
+<style></style>
+{% endblock %}
+
+{% block extrajs %}
+{% endblock %}
+
+{% block content %}
+<main class="font-sans text-gray-900 antialiased bg-white">
+  
+  <header class="pt-16 pb-8 max-w-[800px] mx-auto px-4 text-center">
+    <div class="flex items-center justify-center gap-2 text-[12px] font-bold mb-4 uppercase tracking-wider">
+      <!-- <a href="/tin-tuc" class="text-red-700 hover:underline">Kiến Thức</a> -->
+      {% for category in article.categories.all %}
+      <span class="text-red-700 hover:underline">{{ category.name }}</span>
+      {% endfor %}
+      <span class="text-gray-300">•</span>
+      <span class="text-gray-500">{{ article.created_at|date:"d/m/Y" }}</span>
+    </div>
+    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+      {{ article.title }}
+    </h1>
+    <div class="flex items-center justify-center gap-3 text-[14px] text-gray-500">
+      <!-- <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="Author" class="w-8 h-8 rounded-full border border-gray-200"> -->
+      <div class="w-12 h-12 rounded-full mr-4 border-2 border-gray-100 bg-gray-200 flex items-center justify-center font-semibold text-gray-700">
+        {{ article.author|first|upper }}
+      </div>
+      <span>Đăng bởi <strong>{{ article.author }}</strong></span>
+    </div>
+  </header>
+
+  <div class="max-w-[1000px] mx-auto px-4 mb-12">
+    <img src="{{ article.image.url }}" alt="{{ article.title }}" class="w-full h-[400px] md:h-[500px] object-cover rounded-lg shadow-sm">
+  </div>
+
+  <article class="max-w-[800px] mx-auto px-4 prose prose-lg prose-red text-gray-600 mb-16">
+    {{ article.content|safe }}
+    <!-- Share & Tags -->
+    {% if article.tags.exists %}
+    <div class="mt-8 pt-8 border-t border-gray-200">        
+      {% if article.tags.exists %}
+      <div class="flex flex-wrap gap-2">
+          {% for tag in article.tags.all %}
+          <span class="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm">#{{ tag.name }}</span>
+          {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+    {% endif %}
+
+   {% comment %}
+    <p class="lead text-xl text-gray-800 font-medium mb-8">
+      Lắp thang máy cho nhà mới xây đã khó, đưa thang máy vào ngôi nhà đang sử dụng (nhà cải tạo) lại càng phức tạp hơn. Làm sao để chọn được loại thang vừa vặn, không phá vỡ cấu trúc nhà mà vẫn đảm bảo tính thẩm mỹ?
+    </p>
+
+    <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">1. Lựa chọn vị trí lắp đặt phù hợp</h2>
+    <p>Đối với nhà cải tạo, không gian thường rất hạn chế. Theo kinh nghiệm của đội ngũ HQT Elevator, có 3 vị trí tối ưu nhất để tận dụng:</p>
+    <ul>
+      <li><strong>Giữa lòng thang bộ:</strong> Tận dụng khoảng không (giếng trời) giữa các vế thang bộ. Đây là vị trí phổ biến nhất vì không tốn thêm diện tích sinh hoạt.</li>
+      <li><strong>Cải tạo nhà vệ sinh cũ:</strong> Thường các tầng sẽ có cấu trúc vệ sinh xếp chồng lên nhau, có thể đập bỏ để làm hố thang.</li>
+      <li><strong>Góc nhà hoặc ngoài trời:</strong> Nếu không gian bên trong quá chật, có thể xem xét phương án dựng hố thép kính ngoài trời, áp sát tường nhà.</li>
+    </ul>
+
+    <blockquote class="border-l-4 border-red-700 pl-4 py-1 bg-red-50 italic text-gray-700 my-8">
+      "Sai lầm lớn nhất của khách hàng là tự ý đập phá móng nhà để đào hố pit trước khi được kỹ sư thang máy tư vấn, dẫn đến nguy cơ nứt gãy móng hoặc thấm nước."
+    </blockquote>
+
+    <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">2. Ưu tiên công nghệ thang máy không hố pit (Pit nông)</h2>
+    <p>Để giải quyết bài toán đào móng, bạn nên tìm hiểu dòng thang máy cáp dẹt hoặc thang thủy lực. Những dòng này chỉ yêu cầu hố pit từ 200mm - 300mm. Kỹ thuật viên chỉ cần bóc lớp gạch men nền là đủ không gian lắp đặt.</p>
+    
+    <div class="mt-12 pt-8 border-t border-gray-200 flex justify-between items-center">
+      <div class="text-[14px] font-bold text-gray-900">CHIA SẺ BÀI VIẾT:</div>
+      <div class="flex gap-2">
+        <button class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-blue-600 hover:text-white transition">F</button>
+        <button class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-blue-400 hover:text-white transition">T</button>
+        <button class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-red-600 hover:text-white transition">G</button>
+      </div>
+    </div>
+    {% endcomment %}
+  </article>
+
+  {% if related_articles|length %}
+  <section class="bg-gray-50 py-12 border-t border-gray-200">
+    <div class="max-w-[1200px] mx-auto px-4">
+      <h3 class="text-2xl font-bold text-gray-900 mb-8 text-center">Bài Viết Liên Quan</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        {% for article in related_articles %}
+        <a href="{% url_cms page.code article.slug %}" class="group bg-white border border-gray-200 rounded overflow-hidden hover:shadow-xl transition-all duration-300 block">
+          <div class="h-48 overflow-hidden"><img src="{{ article.image.url }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700"></div>
+          <div class="p-5">
+            <h4 class="font-bold text-[16px] text-gray-900 mb-2 group-hover:text-red-700 transition line-clamp-2">{{ article.title }}</h4>
+            <span class="text-[12px] text-gray-400">{{ article.created_at|date:"d/m/Y" }}</span>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  {% endif %}
+</main>
+{% endblock content %}

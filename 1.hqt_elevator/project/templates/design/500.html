@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Error</title>
+        <style>
+            body {font-family:"Arial"; font-size:12px;}
+        </style>
+        <script>
+            function go_back() { try{history.back();}catch(ex){history.go(-1);} }
+        </script>
+    </head>
+
+        <div class="error-500">
+            <h1>Oops, looks like something went wrong.</h1>
+
+            <ul>
+                <li><strong>Well, it seems that something has failed.</strong> There has been an internal server error. You can <a href="javascript:go_back()">go back</a></li>
+            </ul>
+        </div>
+
+    </body>
+</html>

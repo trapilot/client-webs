@@ -1,0 +1,10 @@
+{% if not page.is_home and page.h1|length %}
+<section class="bg-gray-900 py-12 md:py-20 relative">
+<div class="max-w-[1200px] mx-auto px-4 relative z-10 text-center">
+    <h1 class="text-3xl md:text-5xl font-bold text-white mb-4 uppercase">{{ page.h1 }}</h1>
+    {% if page.h2|length %}
+    <p class="text-gray-400 text-[14px] max-w-2xl mx-auto mb-4">{{ page.h2 }}</p>
+    {% endif %}
+</div>
+</section>
+{% endif %}

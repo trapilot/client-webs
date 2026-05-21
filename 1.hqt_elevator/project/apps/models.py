@@ -146,7 +146,7 @@ class Product(models.Model):
     @property
     def passenger_text(self):
         if self.passenger > 0:
-            return self.passenger
+            return f"{self.passenger} người"
         return 'Tùy Chỉnh'
     
     @property

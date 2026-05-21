@@ -74,8 +74,8 @@ INSTALLED_APPS = [
     # 'xxx_engine',
     
     # App Engine
-    'app.apps',
-    'app.apps.create_default_apps', ## --> FOR FIRST INSTALL
+    'project.apps',
+    'project.apps.create_default_apps', ## --> FOR FIRST INSTALL
 ]
 
 MIDDLEWARE = [
@@ -91,7 +91,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'app.urls'
+ROOT_URLCONF = 'project.urls'
 
 TEMPLATES = [
     {
@@ -108,13 +108,13 @@ TEMPLATES = [
 
                 'cms_engine.context_processors.project',
                 'cms_engine.context_processors.backoffice',
-                'app.context_processors.site_settings',
+                'project.context_processors.site_settings',
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'app.wsgi.application'
+WSGI_APPLICATION = 'project.wsgi.application'
 
 # Database
 DATABASES = {
@@ -215,7 +215,7 @@ LOGGING = {
         'file': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, '../logs/debug.log'),
+            'filename': os.path.join(BASE_DIR, './logs/debug.log'),
         },
     },
     'root': {
@@ -232,7 +232,7 @@ LOGGING = {
 }
 
 # We added new administration (grappelli)
-GRAPPELLI_INDEX_DASHBOARD = 'app.dashboard.CustomIndexDashboard'
+GRAPPELLI_INDEX_DASHBOARD = 'project.dashboard.CustomIndexDashboard'
 GRAPPELLI_ADMIN_TITLE = "Administrator"
 # GRAPPELLI_SWITCH_USER = True
 

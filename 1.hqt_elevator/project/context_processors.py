@@ -1,4 +1,5 @@
 import random
+import os
 
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
@@ -12,7 +13,7 @@ from cms_app.models import (
     Partner,
     FAQ,
 )
-from app.apps.models import (
+from project.apps.models import (
     Portfolio,
     Product,
     ProductCategory,
@@ -35,13 +36,12 @@ def site_settings(request, kwargs=None):
 
 
 def home(request, kwargs=None):
-    ids = list(
-        Testimonial.objects.filter(
-            is_active=True,
-            is_featured=True,
-            # rating__gte=3
-        ).values_list('id', flat=True)
-    )
+    testimonials = Testimonial.objects.filter(
+        is_active=True,
+        is_featured=True,
+        # rating__gte=3
+    )[:3]
+    ids = list(testimonials.values_list('id', flat=True))
     random_id = random.choice(ids) if ids else None
     testimonial = Testimonial.objects.filter(id=random_id).first()
 
@@ -57,6 +57,7 @@ def home(request, kwargs=None):
 
     return dict({
         "testimonial": testimonial,
+        "testimonials": testimonials,
         "partners": partners,
         "portfolios": portfolios,
     })
@@ -91,9 +92,22 @@ def category(request, kwargs=None):
     })
 
 def products(request, kwargs=None):
-    products = Product.objects.filter(
-        is_active=True,
-    ).order_by('sorted_as', 'created_at')[:100]
+    paginator = Paginator(
+        Product.objects.filter(
+            is_active=True,
+        ).order_by('sorted_as', 'created_at'),
+        6
+    )
+    products = paginator.get_page(request.GET.get("page"))
+
+    if os.getenv("APP_DEMO", "False").lower() == "true":
+        qs = list(
+            Product.objects.filter(
+                is_active=True,
+            ).order_by('sorted_as', 'created_at')
+        ) * 20
+        paginator = Paginator(qs, 6)
+        products = paginator.get_page(request.GET.get("page"))
 
     return dict({
         "products": products,
@@ -154,9 +168,18 @@ def articles(request, kwargs=None):
         Article.objects.filter(
             is_active=True,
         ).order_by('sorted_as', 'visited_as', 'created_at'),
-        9
+        4
     )
     articles = paginator.get_page(request.GET.get("page"))
+
+    if os.getenv("APP_DEMO", "False").lower() == "true":
+        qs = list(
+            Article.objects.filter(
+                is_active=True,
+            ).order_by('sorted_as', 'created_at')
+        ) * 20
+        paginator = Paginator(qs, 4)
+        articles = paginator.get_page(request.GET.get("page"))
 
     return dict({
         "articles": articles,

@@ -1,0 +1,65 @@
+{% extends "design/layouts/base.html" %}
+{% load i18n url_cms trad thumbnail seo_meta repeat %}
+
+
+{% block extracss %}
+<style></style>
+{% endblock %}
+
+{% block extrajs %}
+{% endblock %}
+
+{% block content %}
+<main class="font-sans text-gray-900 antialiased bg-gray-50">
+  
+  <section class="bg-gray-900 py-16 relative">
+    <div class="max-w-[1000px] mx-auto px-4 relative z-10 text-center">
+      <span class="text-red-500 font-bold text-[12px] tracking-[0.2em] uppercase mb-4 block">Giải pháp kiến trúc</span>
+      <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">Giải Pháp Thang Máy <br/> Cho Nhà Cải Tạo, Nhà Có Diện Tích Hẹp</h1>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-20 bg-white">
+    <div class="max-w-[900px] mx-auto px-4 prose prose-sm md:prose-base prose-red max-w-none text-gray-600">
+      
+      <p class="text-xl md:text-2xl text-gray-800 font-medium leading-relaxed mb-10 text-center">
+        Lắp đặt thang máy cho nhà đang ở (nhà cải tạo) luôn là bài toán khó với các gia đình: Làm sao để không phá vỡ kết cấu móng? Không ảnh hưởng đến sinh hoạt? Thang máy HQT Elevator mang đến giải pháp hoàn hảo không cần hố Pit sâu.
+      </p>
+
+      <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd64bd19?w=1000&q=80" alt="Thi công" class="w-full rounded-lg shadow-md my-10">
+
+      <h3 class="text-2xl font-bold text-gray-900 mb-4">Nhược điểm của thang máy truyền thống khi lắp cho nhà cũ</h3>
+      <ul class="list-disc pl-5 space-y-3 mb-10">
+        <li><strong>Phải đào hố Pit sâu (1.5m - 2m):</strong> Dễ chạm phải bể phốt, bể nước ngầm, móng bè hoặc làm nứt tường nhà bên cạnh.</li>
+        <li><strong>Chiều cao tầng trên cùng (OH) không đủ:</strong> Nhiều công trình bị giới hạn chiều cao do quy hoạch, không thể xây phòng máy.</li>
+        <li><strong>Thi công phức tạp, bụi bặm:</strong> Thời gian kéo dài, ảnh hưởng nghiêm trọng đến sinh hoạt của gia đình.</li>
+      </ul>
+
+      <h3 class="text-2xl font-bold text-gray-900 mb-4">Giải pháp đột phá từ HQT Elevator</h3>
+      <p>Sử dụng công nghệ thang máy Cáp dẹt (Belt) hoặc Trục vít tiên tiến, chúng tôi cung cấp giải pháp may đo riêng biệt:</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8 not-prose">
+        <div class="bg-gray-50 p-6 rounded border border-gray-100">
+          <div class="w-10 h-10 bg-red-100 text-red-700 rounded flex items-center justify-center mb-4"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg></div>
+          <h4 class="font-bold text-[16px] text-gray-900 mb-2">Hố Pit siêu nông (Từ 30cm)</h4>
+          <p class="text-[13px] text-gray-600">Chỉ cần đập bỏ 1-2 hàng gạch nền, hoàn toàn không chạm đến kết cấu móng nhà.</p>
+        </div>
+        <div class="bg-gray-50 p-6 rounded border border-gray-100">
+          <div class="w-10 h-10 bg-red-100 text-red-700 rounded flex items-center justify-center mb-4"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg></div>
+          <h4 class="font-bold text-[16px] text-gray-900 mb-2">Chiều cao OH thấp (Từ 2.6m)</h4>
+          <p class="text-[13px] text-gray-600">Công nghệ không phòng máy, đặt động cơ ngay trong hố thang, giải quyết triệt để quy định chiều cao.</p>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+
+  <section class="bg-red-700 py-12">
+    <div class="max-w-[900px] mx-auto px-4 text-center">
+      <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">Khảo sát & Lên phương án tại nhà Miễn Phí</h2>
+      <p class="text-red-100 text-[15px] mb-8">Kỹ sư HQT sẽ đến trực tiếp đo đạc và tư vấn vị trí lắp đặt tối ưu nhất (giếng trời, giữa thang bộ, góc nhà...).</p>
+      <a href="/lien-he" class="inline-block bg-white text-red-700 font-bold px-8 py-3.5 rounded text-[14px] hover:bg-gray-100 transition shadow-lg">ĐẶT LỊCH KHẢO SÁT NGAY</a>
+    </div>
+  </section>
+</main>
+{% endblock content %}

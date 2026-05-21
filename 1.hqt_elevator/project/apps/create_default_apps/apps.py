@@ -8,7 +8,7 @@ from django.dispatch import receiver
 
 class CreateDefaultAppsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'app'
+    name = 'project'
 
     def ready(self):
         if settings.DEBUG:
@@ -60,4 +60,4 @@ def create_access_group(sender, **kwargs):
 
 
 if settings.DEBUG:
-    from app.apps.create_default_apps.sites.project import *
+    from project.apps.create_default_apps.sites.project import *
