@@ -3,11 +3,15 @@
 import os
 import sys
 
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 if os.path.exists('.env'):
     from dotenv import load_dotenv
     load_dotenv()
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    sys.path.append(os.path.join(BASE_DIR, '../../', 'libs'))
+    sys.path.append(os.path.join(BASE_DIR, '../../', 'libs', 'app_engine'))
 
 def main():
     """Run administrative tasks."""
