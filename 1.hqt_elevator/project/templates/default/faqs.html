@@ -52,12 +52,12 @@
         
         // Update active tab
         document.querySelectorAll('.category-tab').forEach(tab => {
-            tab.classList.remove('active', 'text-red-elevator', 'border-b-4', 'border-red-elevator');
-            tab.classList.add('text-gray-600', 'hover:text-red-elevator');
+            tab.classList.remove('active', 'text-red-500', 'border-b-4', 'border-red-elevator');
+            tab.classList.add('text-gray-600', 'hover:text-red-500');
         });
         
-        event.target.classList.add('active', 'text-red-elevator');
-        event.target.classList.remove('text-gray-600', 'hover:text-red-elevator');
+        event.target.classList.add('active', 'text-red-500');
+        event.target.classList.remove('text-gray-600', 'hover:text-red-500');
         
         // Filter items
         items.forEach(item => {
@@ -89,22 +89,22 @@
 <section class="bg-white py-6 border-b sticky top-16 z-40">
     <div class="container mx-auto px-4">
         <div class="flex gap-8 justify-center flex-wrap">
-            <button class="category-tab active text-red-elevator font-bold" onclick="filterCategory('all')">
+            <button class="category-tab active text-red-500 font-bold" onclick="filterCategory('all')">
                 Tất cả
             </button>
-            <button class="category-tab text-gray-600 hover:text-red-elevator font-bold" onclick="filterCategory('product')">
+            <button class="category-tab text-gray-600 hover:text-red-500 font-bold" onclick="filterCategory('product')">
                 Sản phẩm
             </button>
-            <button class="category-tab text-gray-600 hover:text-red-elevator font-bold" onclick="filterCategory('service')">
+            <button class="category-tab text-gray-600 hover:text-red-500 font-bold" onclick="filterCategory('service')">
                 Dịch vụ
             </button>
-            <button class="category-tab text-gray-600 hover:text-red-elevator font-bold" onclick="filterCategory('maintenance')">
+            <button class="category-tab text-gray-600 hover:text-red-500 font-bold" onclick="filterCategory('maintenance')">
                 Bảo dưỡng
             </button>
-            <button class="category-tab text-gray-600 hover:text-red-elevator font-bold" onclick="filterCategory('safety')">
+            <button class="category-tab text-gray-600 hover:text-red-500 font-bold" onclick="filterCategory('safety')">
                 An toàn
             </button>
-            <button class="category-tab text-gray-600 hover:text-red-elevator font-bold" onclick="filterCategory('price')">
+            <button class="category-tab text-gray-600 hover:text-red-500 font-bold" onclick="filterCategory('price')">
                 Giá cả
             </button>
         </div>
@@ -121,7 +121,7 @@
                 <div class="p-6 cursor-pointer hover:bg-gray-50">
                     <div class="flex justify-between items-center">
                         <h3 class="font-bold text-lg text-gray-900">Thang máy HQT có những loại nào?</h3>
-                        <i class="fas fa-chevron-down text-red-elevator"></i>
+                        <i class="fas fa-chevron-down text-red-500"></i>
                     </div>
                 </div>
                 <div class="content-faq bg-gray-50 px-6 pb-6">
@@ -141,7 +141,7 @@
                 <div class="p-6 cursor-pointer hover:bg-gray-50">
                     <div class="flex justify-between items-center">
                         <h3 class="font-bold text-lg text-gray-900">Thang máy HQT có tiết kiệm điện không?</h3>
-                        <i class="fas fa-chevron-down text-red-elevator"></i>
+                        <i class="fas fa-chevron-down text-red-500"></i>
                     </div>
                 </div>
                 <div class="content-faq bg-gray-50 px-6 pb-6">
@@ -154,7 +154,7 @@
                 <div class="p-6 cursor-pointer hover:bg-gray-50">
                     <div class="flex justify-between items-center">
                         <h3 class="font-bold text-lg text-gray-900">Dịch vụ lắp đặt mất bao lâu?</h3>
-                        <i class="fas fa-chevron-down text-red-elevator"></i>
+                        <i class="fas fa-chevron-down text-red-500"></i>
                     </div>
                 </div>
                 <div class="content-faq bg-gray-50 px-6 pb-6">
@@ -172,7 +172,7 @@
                 <div class="p-6 cursor-pointer hover:bg-gray-50">
                     <div class="flex justify-between items-center">
                         <h3 class="font-bold text-lg text-gray-900">HQT có cung cấp dịch vụ bảo dưỡng không?</h3>
-                        <i class="fas fa-chevron-down text-red-elevator"></i>
+                        <i class="fas fa-chevron-down text-red-500"></i>
                     </div>
                 </div>
                 <div class="content-faq bg-gray-50 px-6 pb-6">
@@ -190,7 +190,7 @@
                 <div class="p-6 cursor-pointer hover:bg-gray-50">
                     <div class="flex justify-between items-center">
                         <h3 class="font-bold text-lg text-gray-900">Thang máy cần bảo dưỡng bao lâu một lần?</h3>
-                        <i class="fas fa-chevron-down text-red-elevator"></i>
+                        <i class="fas fa-chevron-down text-red-500"></i>
                     </div>
                 </div>
                 <div class="content-faq bg-gray-50 px-6 pb-6">
@@ -208,7 +208,7 @@
                 <div class="p-6 cursor-pointer hover:bg-gray-50">
                     <div class="flex justify-between items-center">
                         <h3 class="font-bold text-lg text-gray-900">Chi phí bảo dưỡng hàng năm khoảng bao nhiêu?</h3>
-                        <i class="fas fa-chevron-down text-red-elevator"></i>
+                        <i class="fas fa-chevron-down text-red-500"></i>
                     </div>
                 </div>
                 <div class="content-faq bg-gray-50 px-6 pb-6">
@@ -227,7 +227,7 @@
                 <div class="p-6 cursor-pointer hover:bg-gray-50">
                     <div class="flex justify-between items-center">
                         <h3 class="font-bold text-lg text-gray-900">Thang máy HQT có an toàn không?</h3>
-                        <i class="fas fa-chevron-down text-red-elevator"></i>
+                        <i class="fas fa-chevron-down text-red-500"></i>
                     </div>
                 </div>
                 <div class="content-faq bg-gray-50 px-6 pb-6">
@@ -247,7 +247,7 @@
                 <div class="p-6 cursor-pointer hover:bg-gray-50">
                     <div class="flex justify-between items-center">
                         <h3 class="font-bold text-lg text-gray-900">Nên bảo hành thang máy mới trong bao lâu?</h3>
-                        <i class="fas fa-chevron-down text-red-elevator"></i>
+                        <i class="fas fa-chevron-down text-red-500"></i>
                     </div>
                 </div>
                 <div class="content-faq bg-gray-50 px-6 pb-6">
@@ -260,7 +260,7 @@
                 <div class="p-6 cursor-pointer hover:bg-gray-50">
                     <div class="flex justify-between items-center">
                         <h3 class="font-bold text-lg text-gray-900">Giá thang máy HQT bao nhiêu?</h3>
-                        <i class="fas fa-chevron-down text-red-elevator"></i>
+                        <i class="fas fa-chevron-down text-red-500"></i>
                     </div>
                 </div>
                 <div class="content-faq bg-gray-50 px-6 pb-6">
@@ -279,7 +279,7 @@
                 <div class="p-6 cursor-pointer hover:bg-gray-50">
                     <div class="flex justify-between items-center">
                         <h3 class="font-bold text-lg text-gray-900">Có được giảm giá khi mua nhiều chiếc không?</h3>
-                        <i class="fas fa-chevron-down text-red-elevator"></i>
+                        <i class="fas fa-chevron-down text-red-500"></i>
                     </div>
                 </div>
                 <div class="content-faq bg-gray-50 px-6 pb-6">
@@ -292,7 +292,7 @@
                 <div class="p-6 cursor-pointer hover:bg-gray-50">
                     <div class="flex justify-between items-center">
                         <h3 class="font-bold text-lg text-gray-900">Làm sao để liên hệ với HQT Elevator?</h3>
-                        <i class="fas fa-chevron-down text-red-elevator"></i>
+                        <i class="fas fa-chevron-down text-red-500"></i>
                     </div>
                 </div>
                 <div class="content-faq bg-gray-50 px-6 pb-6">
@@ -311,7 +311,7 @@
                 <div class="p-6 cursor-pointer hover:bg-gray-50">
                     <div class="flex justify-between items-center">
                         <h3 class="font-bold text-lg text-gray-900">HQT có cung cấp tư vấn miễn phí không?</h3>
-                        <i class="fas fa-chevron-down text-red-elevator"></i>
+                        <i class="fas fa-chevron-down text-red-500"></i>
                     </div>
                 </div>
                 <div class="content-faq bg-gray-50 px-6 pb-6">
@@ -330,7 +330,7 @@
             <h2 class="text-3xl font-bold mb-2">Không Tìm Thấy Câu Trả Lời?</h2>
             <p class="mb-6 opacity-90">Liên hệ với đội hỗ trợ của chúng tôi ngay</p>
             <a href="tel:{{ project.phone|cut:' ' }}">
-                <button class="bg-white text-red-elevator px-8 py-3 rounded font-bold hover:shadow-lg transition flex items-center justify-center gap-2 mx-auto">
+                <button class="bg-white text-red-500 px-8 py-3 rounded font-bold hover:shadow-lg transition flex items-center justify-center gap-2 mx-auto">
                     <i class="fas fa-phone"></i> {{ project.phone }}
                 </button>
             </a>
