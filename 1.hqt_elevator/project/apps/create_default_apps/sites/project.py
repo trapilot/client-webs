@@ -1093,7 +1093,7 @@ def create_default_apps(sender, **kwargs):
     ProductFeature.objects.bulk_create([
         ProductFeature(
             product=product,
-            name='An Toàn Tuyệt Đối',
+            name='An Toàn Chuẩn Mực',
             value='Hệ thống phanh khẩn cấp 3 lớp, cảm biến an toàn toàn diện',
             icon='fa-solid fa-shield-halved',
             sorted_as=1,
