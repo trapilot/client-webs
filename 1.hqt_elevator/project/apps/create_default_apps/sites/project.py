@@ -7,11 +7,13 @@ from decimal import Decimal
 from django.conf import settings
 from django.db.models.signals import post_migrate
 from django.dispatch import receiver
+from django.utils.text import slugify
 
 @receiver(post_migrate)
 def create_default_apps(sender, **kwargs):
-    from cms_engine.models import Project, Page, Contact, Constant, SocialNetwork, OperatingHour
-    from cms_app.models import Category, Tag, Testimonial, Partner, FAQ, FAQAnswer
+    from cms_engine.models import Project, Page, Branch, Constant, SocialNetwork, OperatingHour
+    from cms_app.models import Category, Tag, Article, Testimonial, Partner, FAQ, FAQAnswer
+    from recruitment_engine.models import Department, Job
     from project.apps.models import ProductCategory, Portfolio, Product, ProductFeature
 
     def is_exists(project):
@@ -35,30 +37,23 @@ def create_default_apps(sender, **kwargs):
         language_text='vi',
         language_type=0,
         domain_vi='%s' % (DOMAIN),
-        slogan_vi='No dolore ipsum accusam no lorem. Invidunt sed clita kasd clita et et dolor sed dolor. Rebum tempor no vero est magna amet no',
+        slogan_vi='HQT Elevator - Thương hiệu thang máy gia đình chuẩn Nhật Bản, nâng tầm an toàn, tiện nghi và đẳng cấp cho mọi không gian.',
     )
 
-    Contact.objects.bulk_create([
-        Contact(
+    Branch.objects.bulk_create([
+        Branch(
             project=project,
-            type='TEL',
-            value='+84 93 4369133',
+            name_vi='Vinhomes Ocean Park 3, Xã Nghĩa Trụ, Hưng Yên',
+            address_vi='Vịnh Thiên Đường 7 căn 67 Vinhomes Ocean Park 3, Xã Nghĩa Trụ, Hưng Yên',
+            description_vi='',
+            phone='+84 93 4369133',
+            email='thangmayhqt@gmail.com',
+            geolat='20.9538792',
+            geolng='105.978242',
+            geozm='17',
+            is_active=True,
+            is_default=True,
         ),
-        Contact(
-            project=project,
-            type='EMAIL',
-            value='thangmayhqt@gmail.com',
-        ),
-        Contact(
-            project=project,
-            type='ADDRESS',
-            value='Vịnh Thiên Đường 7 căn 67 Vinhomes Ocean Park 3, Xã Nghĩa Trụ, Hưng Yên',
-        ),
-        Contact(
-            project=project,
-            type='LOCATION',
-            value='20.9538792|105.978242|17',
-        )
     ])
 
     SocialNetwork.objects.bulk_create([
@@ -114,9 +109,27 @@ def create_default_apps(sender, **kwargs):
         ),
         Constant(
             project=project,
-            name='EMERGENCY_TEL',
+            name='TEAM_TECH_EMAIL',
             type='STR',
-            type_value='114',
+            type_value='thangmayhqt@gmail.com',
+        ),
+        Constant(
+            project=project,
+            name='TEAM_TECH_PHONE',
+            type='STR',
+            type_value='+84 93 4369133',
+        ),
+        Constant(
+            project=project,
+            name='TEAM_HR_EMAIL',
+            type='STR',
+            type_value='thangmayhqt@gmail.com',
+        ),
+        Constant(
+            project=project,
+            name='TEAM_HR_PHONE',
+            type='STR',
+            type_value='+84 93 4369133',
         )
     ])
     
@@ -205,7 +218,7 @@ def create_default_apps(sender, **kwargs):
             project=project,
             code='services',
             is_active=True,
-            is_menu=True,
+            is_menu=False,
             is_home=False,
             is_internal=False,
             menu_main_primary=True,
@@ -381,9 +394,9 @@ def create_default_apps(sender, **kwargs):
             is_menu=True,
             is_home=False,
             is_internal=False,
-            menu_main_primary=False,
+            menu_main_primary=True,
             menu_main_second=True,
-            menu_layer_primary=0,
+            menu_layer_primary=20,
             menu_layer_second=3,
             sorted_as=20,
             view='CmsEngineView.as_view(template_name="default/articles.html")',
@@ -398,7 +411,7 @@ def create_default_apps(sender, **kwargs):
             project=project,
             code='recruitment',
             is_active=True,
-            is_menu=False,
+            is_menu=True,
             is_home=False,
             is_internal=False,
             menu_main_primary=False,
@@ -407,6 +420,7 @@ def create_default_apps(sender, **kwargs):
             menu_layer_second=3,
             sorted_as=30,
             view='CmsEngineView.as_view(template_name="default/recruitment.html")',
+            context='project.context_processors.recruitment',
             url_vi='tuyen-dung',
             name_vi='Tuyển Dụng',
             meta_title_vi='Tuyển Dụng',
@@ -1120,3 +1134,117 @@ def create_default_apps(sender, **kwargs):
             sorted_as=6,
         ),
     ])
+
+    branch = Branch.objects.get(
+        project=project,
+        is_default=True,
+    )
+    Department.objects.bulk_create([
+        Department(
+            project=project,
+            branch=branch,
+            code='engineering_installation',
+            title_vi='Kỹ thuật - Lắp đặt',
+            is_active=True,
+        ),
+        Department(
+            project=project,
+            branch=branch,
+            code='business_sales',
+            title_vi='Kinh doanh - Bán hàng',
+            is_active=True,
+        ),
+        Department(
+            project=project,
+            branch=branch,
+            code='support_warranty',
+            title_vi='CSKH - Bảo hành',
+            is_active=True,
+        ),
+    ])
+    departments = {
+        d.code: d for d in Department.objects.filter(
+            project=project,
+            branch=branch
+        )
+    }
+    jobs_data = [
+        {
+            "department": "engineering_installation",
+            "title": "Kỹ Sư Lắp Đặt Thang Máy",
+            'salary': '15 - 25 Triệu',
+            "summary": "Thi công, lắp đặt hệ thống thang máy tại công trình",
+            "type": Job.EmploymentType.FULL_TIME,
+            "mode": Job.WorkMode.ONSITE,
+            "published_to": "2026-06-30",
+        },
+        {
+            "department": "business_sales",
+            "title": "Chuyên Viên Tư Vấn Dự Án (Sales B2B)",
+            'salary': 'Lương cơ bản + % Hoa hồng',
+            "summary": "Tư vấn giải pháp thang máy cho khách hàng doanh nghiệp",
+            "type": Job.EmploymentType.FULL_TIME,
+            "mode": Job.WorkMode.ONSITE,
+            "published_to": "2026-06-15",
+        },
+        {
+            "department": "support_warranty",
+            "title": "Kỹ Thuật Viên Bảo Trì Thang Máy",
+            'salary': 'Thỏa thuận',
+            "summary": "Bảo trì, xử lý sự cố thang máy theo ca/lưu động",
+            "type": Job.EmploymentType.FULL_TIME,
+            "mode": Job.WorkMode.ONSITE,
+            "published_to": "2026-06-15",
+        },
+    ]
+    jobs = []
+    for item in jobs_data:
+        jobs.append(
+            Job(
+                branch=branch,
+                department=departments[item["department"]],
+                title_vi=item["title"],
+                summary_vi=item["summary"],
+                type=item["type"],
+                published_to=item["published_to"],
+                is_active=False,
+            )
+        )
+    Job.objects.bulk_create(jobs)
+
+    categories = list(Category.objects.filter(project=project))
+    tags = list(Tag.objects.filter(project=project))
+    articles_data = [
+        {
+            "title": "Giải pháp thang máy an toàn cho công trình hiện đại",
+            "summary": "Tổng quan các giải pháp an toàn trong hệ thống thang máy.",
+            "content": "Nội dung chi tiết về giải pháp kỹ thuật và an toàn...",
+            "author": "Admin",
+        },
+        {
+            "title": "Xu hướng công nghệ thang máy 2026",
+            "summary": "Các xu hướng mới trong ngành thang máy.",
+            "content": "AI, IoT và hệ thống điều khiển thông minh...",
+            "author": "Admin",
+        },
+        {
+            "title": "Bảo trì thang máy đúng chuẩn kỹ thuật",
+            "summary": "Quy trình bảo trì giúp tăng tuổi thọ thiết bị.",
+            "content": "Các bước bảo trì định kỳ và kiểm tra an toàn...",
+            "author": "Admin",
+        },
+    ]
+    articles = []
+    for item in articles_data:
+        article = Article.objects.create(
+            project=project,
+            title_vi=item["title"],
+            summary_vi=item["summary"],
+            content_vi=item["content"],
+            slug_vi=slugify(item["title"]),
+            author=item["author"],
+            is_active=True,
+        )
+        article.categories.set(random.sample(categories, k=min(len(categories), random.randint(1, 3))))
+        article.tags.set(random.sample(tags, k=min(len(tags), random.randint(2, 4))))
+        articles.append(article)

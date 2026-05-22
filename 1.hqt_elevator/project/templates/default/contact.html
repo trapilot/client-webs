@@ -3,256 +3,134 @@
 
 
 {% block extracss %}
-<style>
-.contact-card {
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-}
-.contact-card:hover {
-    border-color: #c41e3a;
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(196, 30, 58, 0.2);
-}
-</style>
+<style></style>
 {% endblock %}
 
 {% block extrajs %}
 {% endblock %}
 
 {% block content %}
-<!-- ===== QUICK CONTACT ===== -->
-<section class="py-12 bg-white border-b">
-    <div class="container mx-auto px-4">
-        <div class="grid grid-cols-4 gap-6">
-            <div class="contact-card bg-gray-50 rounded-lg p-6">
-                <div class="text-red-elevator text-4xl mb-4">
-                    <i class="fas fa-phone"></i>
-                </div>
-                <h4 class="font-bold mb-2">Điện Thoại</h4>
-                <p class="text-sm text-gray-600 mb-2">Gọi cho chúng tôi bất kỳ lúc nào</p>
-                <a href="tel:{{ project.phone|cut:' ' }}" class="text-red-elevator font-bold text-lg hover:underline">{{ project.phone }}</a>
+<main class="font-sans text-gray-900 antialiased bg-white">
+  <section class="py-16 md:py-24">
+    <div class="max-w-[1200px] mx-auto px-4 flex flex-col lg:flex-row gap-12 lg:gap-20">
+      
+      <div class="w-full lg:w-5/12">
+        <h2 class="text-xs font-bold text-red-700 uppercase tracking-[0.15em] mb-3">Thông Tin Liên Hệ</h2>
+        <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8">Trụ Sở HQT Elevator</h3>
+        
+        <div class="space-y-6">
+          <div class="flex items-start">
+            <div class="w-12 h-12 bg-red-50 rounded-full flex items-center justify-center text-red-700 shrink-0 mr-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
             </div>
-
-            <div class="contact-card bg-gray-50 rounded-lg p-6">
-                <div class="text-red-elevator text-4xl mb-4">
-                    <i class="fas fa-envelope"></i>
-                </div>
-                <h4 class="font-bold mb-2">Email</h4>
-                <p class="text-sm text-gray-600 mb-2">Gửi email cho chúng tôi</p>
-                <a href="mailto:{{ project.email }}" class="text-red-elevator font-bold text-sm hover:underline break-all">{{ project.email }}</a>
-            </div>
-
-            <div class="contact-card bg-gray-50 rounded-lg p-6">
-                <div class="text-red-elevator text-4xl mb-4">
-                    <i class="fas fa-map-marker-alt"></i>
-                </div>
-                <h4 class="font-bold mb-2">Địa Chỉ</h4>
-                <p class="text-sm text-gray-600 mb-2">Văn phòng chính</p>
-                <p class="text-red-elevator font-bold text-sm">{{ project.address }}</p>
-            </div>
-
-            <div class="contact-card bg-gray-50 rounded-lg p-6">
-                <div class="text-red-elevator text-4xl mb-4">
-                    <i class="fas fa-clock"></i>
-                </div>
-                <h4 class="font-bold mb-2">Giờ Làm Việc</h4>
-                {% for day in project.operating_days %}
-                <p class="text-sm text-gray-600">{{ day.label }}: <span class="text-red-elevator font-bold text-sm">{{ day.hour_text }}</span></p>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== CONTACT FORM & MAP ===== -->
-<section class="py-16">
-    <div class="container mx-auto px-4">
-        <div class="grid grid-cols-2 gap-12">
-            <!-- Contact Form -->
             <div>
-                <h2 class="text-3xl font-bold mb-8 section-title">Gửi Tin Nhắn</h2>
-                <form class="space-y-6">
-                    <div>
-                        <label class="block text-sm font-bold mb-2">Họ và Tên *</label>
-                        <input type="text" placeholder="Nhập họ và tên" required class="w-full border-b-2 border-gray-300 pb-3 focus:outline-none focus:border-red-elevator transition">
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-bold mb-2">Email *</label>
-                            <input type="email" placeholder="Nhập email" required class="w-full border-b-2 border-gray-300 pb-3 focus:outline-none focus:border-red-elevator transition">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-bold mb-2">Điện Thoại *</label>
-                            <input type="tel" placeholder="Nhập số điện thoại" required class="w-full border-b-2 border-gray-300 pb-3 focus:outline-none focus:border-red-elevator transition">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-bold mb-2">Nội Dung Tin Nhắn *</label>
-                        <textarea placeholder="Nhập nội dung tin nhắn của bạn..." required rows="6" class="w-full border-b-2 border-gray-300 pb-3 focus:outline-none focus:border-red-elevator transition resize-none"></textarea>
-                    </div>
-
-                    <div class="flex items-center gap-2">
-                        <input type="checkbox" id="agree" class="w-4 h-4">
-                        <label for="agree" class="text-xs text-gray-600">Tôi đồng ý với chính sách bảo mật và điều khoản sử dụng</label>
-                    </div>
-
-                    <button type="submit" class="w-full gradient-red text-white py-3 rounded font-bold hover:shadow-lg transition">
-                        Gửi Tin Nhắn
-                    </button>
-                </form>
+              <h4 class="font-bold text-gray-900 text-[15px] mb-1">Địa chỉ</h4>
+              <p class="text-[14px] text-gray-600 leading-relaxed">{{ project.address }}</p>
             </div>
+          </div>
 
-            <!-- Info & Map -->
+          <div class="flex items-start">
+            <div class="w-12 h-12 bg-red-50 rounded-full flex items-center justify-center text-red-700 shrink-0 mr-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+            </div>
             <div>
-                <h2 class="text-3xl font-bold mb-8 section-title">Thông Tin</h2>
-                
-                <!-- Info Boxes -->
-                <div class="space-y-6 mb-8">
-                    <div class="bg-white rounded-lg p-6 shadow-md">
-                        <h4 class="font-bold mb-3 text-red-elevator flex items-center gap-2">
-                            <i class="fas fa-building"></i> Văn Phòng Chính
-                        </h4>
-                        <p class="text-sm text-gray-700 mb-2">{{ project.address }}</p>
-                        {% for day in project.operating_days %}
-                            {% if not day.closed %}
-                            <p class="text-xs text-gray-600">{{ day.hour_text }} ({{ day.label }})</p>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-
-                    {% for branch in project.branches %}
-                        {% if branch.is_active %}
-                        <div class="bg-white rounded-lg p-6 shadow-md">
-                            <h4 class="font-bold mb-3 text-red-elevator flex items-center gap-2">
-                                <i class="fas fa-city"></i> {{ branch.name }}
-                            </h4>
-                            {% if branch.address %}
-                            <p class="text-sm text-gray-700 mb-2">{{ branch.address }}</p>
-                            {% endif %}
-                            {% if branch.phone %}
-                            <p class="text-xs text-gray-600">Điện thoại: {{ branch.phone }}</p>
-                            {% endif %}
-                        </div>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-
-                <!-- Map Placeholder -->
-                {% if project.location %}
-                <div class="rounded-lg overflow-hidden h-64">
-                    <iframe
-                        width="100%"
-                        height="100%"
-                        frameborder="0"
-                        style="border:0"
-                        loading="lazy"
-                        allowfullscreen
-                        referrerpolicy="no-referrer-when-downgrade"
-                        src="https://www.google.com/maps?q={{ project.location.lat }},{{ project.location.lng }}&hl=vi&z={{project.location.zoom}}&output=embed">
-                    </iframe>
-                </div>
+              <h4 class="font-bold text-gray-900 text-[15px] mb-1">Hotline (24/7)</h4>
+              <p class="text-[14px] text-gray-600 leading-relaxed">
+                <a href="tel:{{ project.phone|cut:' ' }}" class="font-bold hover:text-red-700 transition">{{ project.phone }}</a>
+                {% if project.TEAM_TECH_PHONE %}
+                <br>Kỹ thuật: {{ project.TEAM_TECH_PHONE }}
                 {% endif %}
+              </p>
             </div>
+          </div>
+
+          <div class="flex items-start">
+            <div class="w-12 h-12 bg-red-50 rounded-full flex items-center justify-center text-red-700 shrink-0 mr-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            </div>
+            <div>
+              <h4 class="font-bold text-gray-900 text-[15px] mb-1">Email</h4>
+              <p class="text-[14px] text-gray-600 leading-relaxed">
+                <a href="mailto:{{ project.email }}" class="hover:text-red-700 transition">{{ project.email }}</a>
+                {% if project.TEAM_TECH_EMAIL %}
+                <br>{{ project.TEAM_TECH_EMAIL }}
+                {% endif %}
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start">
+            <div class="w-12 h-12 bg-red-50 rounded-full flex items-center justify-center text-red-700 shrink-0 mr-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z"></path></svg>
+            </div>
+            <div>
+              <h4 class="font-bold text-gray-900 text-[15px] mb-1">Giờ Làm Việc</h4>
+              {% for day in project.operating_days %}
+              <p class="text-[14px] text-gray-600 leading-relaxed">{{ day.label }}: <span class="text-red-elevator font-bold text-sm">{{ day.hour_text }}</span></p>
+              {% endfor %}
+            </div>
+          </div>
         </div>
-    </div>
-</section>
+      </div>
 
-{% comment %}
-<!-- ===== TEAM SECTION ===== -->
-<section class="py-16 bg-white">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold section-title text-center mb-12">
-            Đội Ngũ Nhân Viên
-        </h2>
-
-        <div class="grid grid-cols-4 gap-8">
-            <!-- Team Member 1 -->
-            <div class="text-center">
-                <div class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-red-elevator to-red-900 flex items-center justify-center text-white text-6xl">
-                    <i class="fas fa-user"></i>
-                </div>
-                <h4 class="text-lg font-bold mb-1">Nguyễn Văn A</h4>
-                <p class="text-sm text-red-elevator font-bold mb-2">Giám Đốc Điều Hành</p>
-                <p class="text-xs text-gray-600">20+ năm kinh nghiệm</p>
-            </div>
-
-            <!-- Team Member 2 -->
-            <div class="text-center">
-                <div class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center text-white text-6xl">
-                    <i class="fas fa-user"></i>
-                </div>
-                <h4 class="text-lg font-bold mb-1">Trần Thị B</h4>
-                <p class="text-sm text-blue-600 font-bold mb-2">Trưởng Phòng Bán Hàng</p>
-                <p class="text-xs text-gray-600">15+ năm kinh nghiệm</p>
-            </div>
-
-            <!-- Team Member 3 -->
-            <div class="text-center">
-                <div class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-green-600 to-green-800 flex items-center justify-center text-white text-6xl">
-                    <i class="fas fa-user"></i>
-                </div>
-                <h4 class="text-lg font-bold mb-1">Lê Văn C</h4>
-                <p class="text-sm text-green-600 font-bold mb-2">Kỹ Sư Chính</p>
-                <p class="text-xs text-gray-600">18+ năm kinh nghiệm</p>
-            </div>
-
-            <!-- Team Member 4 -->
-            <div class="text-center">
-                <div class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center text-white text-6xl">
-                    <i class="fas fa-user"></i>
-                </div>
-                <h4 class="text-lg font-bold mb-1">Phạm Thị D</h4>
-                <p class="text-sm text-purple-600 font-bold mb-2">Nhân Viên Tư Vấn</p>
-                <p class="text-xs text-gray-600">10+ năm kinh nghiệm</p>
-            </div>
+      <div class="w-full lg:w-7/12">
+        {% if request.GET.msg == 'ok' %}
+        <div class="mb-5 p-4 bg-green-50 text-green-700 rounded">
+            Gửi thông tin thành công. Chúng tôi sẽ liên hệ sớm nhất.
         </div>
-    </div>
-</section>
-{% endcomment %}
+        {% endif %}
+        <div class="bg-white border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.08)] rounded-lg p-6 md:p-10">
+          <h3 class="text-xl font-bold text-gray-900 mb-6 border-b border-gray-100 pb-4">Gửi Yêu Cầu Tư Vấn</h3>
+          <form method="post" action="{% url_cms 'submit_inquiry' %}" class="js-ajax-form space-y-5">
+            {% csrf_token %}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-[13px] font-bold text-gray-700 mb-1">Họ và tên *</label>
+                <input value="{{ form.name }}" name="name" type="text" placeholder="Nhập họ và tên" class="w-full px-4 py-3 text-[14px] bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-red-700 focus:bg-white transition" required>
+              </div>
+              <div>
+                <label class="block text-[13px] font-bold text-gray-700 mb-1">Số điện thoại *</label>
+                <input value="{{ form.phone }}" name="phone" type="tel" placeholder="Nhập số điện thoại" class="w-full px-4 py-3 text-[14px] bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-red-700 focus:bg-white transition" required>
+              </div>
+            </div>
+            
+            <div>
+              <label class="block text-[13px] font-bold text-gray-700 mb-1">Email</label>
+              <input value="{{ form.email }}" name="email" type="email" placeholder="Nhập địa chỉ email" class="w-full px-4 py-3 text-[14px] bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-red-700 focus:bg-white transition">
+            </div>
 
+            <div>
+              <label class="block text-[13px] font-bold text-gray-700 mb-1">Dịch vụ quan tâm</label>
+              <select value="{{ form.subject }}" name="subject" class="w-full px-4 py-3 text-[14px] text-gray-600 bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-red-700 focus:bg-white transition">
+                <option>Lắp đặt thang máy mới</option>
+                <option>Cải tạo thang máy</option>
+                <option>Bảo trì, bảo dưỡng</option>
+                <option>Khác</option>
+              </select>
+            </div>
 
-{% comment %}
-<!-- ===== FAQ MINI ===== -->
-<section class="py-16 bg-gray-50">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold section-title text-center mb-12">
-            Các Câu Hỏi Liên Hệ Thường Gặp
-        </h2>
+            <div>
+              <label class="block text-[13px] font-bold text-gray-700 mb-1">Nội dung chi tiết *</label>
+              <textarea value="{{ form.comment }}" name="comment" rows="4" placeholder="Vui lòng để lại lời nhắn hoặc thông tin về công trình..." class="w-full px-4 py-3 text-[14px] bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-red-700 focus:bg-white transition" required></textarea>
+            </div>
 
-        <div class="max-w-3xl mx-auto space-y-4">
-            <details class="bg-white rounded-lg shadow-md p-6">
-                <summary class="cursor-pointer font-bold flex items-center gap-3">
-                    <i class="fas fa-question-circle text-red-elevator"></i>
-                    Thời gian phản hồi của bạn là bao lâu?
-                </summary>
-                <p class="mt-4 text-gray-700 text-sm ml-6">
-                    Chúng tôi cam kết phản hồi tất cả các truy vấn trong vòng 2 giờ làm việc. Đối với các vấn đề khẩn cấp (24/7), chúng tôi sẽ phản hồi ngay lập tức.
-                </p>
-            </details>
-
-            <details class="bg-white rounded-lg shadow-md p-6">
-                <summary class="cursor-pointer font-bold flex items-center gap-3">
-                    <i class="fas fa-question-circle text-red-elevator"></i>
-                    Bạn có cung cấp dịch vụ tại ngoài TP. HCM không?
-                </summary>
-                <p class="mt-4 text-gray-700 text-sm ml-6">
-                    Có, chúng tôi cung cấp dịch vụ tại toàn quốc. Chúng tôi có chi nhánh tại Hà Nội, Bình Dương và các tỉnh lân cận. Liên hệ chúng tôi để biết thêm chi tiết.
-                </p>
-            </details>
-
-            <details class="bg-white rounded-lg shadow-md p-6">
-                <summary class="cursor-pointer font-bold flex items-center gap-3">
-                    <i class="fas fa-question-circle text-red-elevator"></i>
-                    Làm cách nào để nhận báo giá miễn phí?
-                </summary>
-                <p class="mt-4 text-gray-700 text-sm ml-6">
-                    Bạn có thể liên hệ chúng tôi qua điện thoại (1800 966 966), email (info@nippon-elevator.vn) hoặc điền mẫu liên hệ trên trang này. Chuyên viên của chúng tôi sẽ khảo sát miễn phí và cung cấp báo giá chi tiết.
-                </p>
-            </details>
+            <button type="submit" class="w-full bg-red-700 text-white font-bold text-[14px] py-3.5 rounded hover:bg-red-800 transition shadow-md">GỬI THÔNG TIN</button>
+          </form>
         </div>
+      </div>
     </div>
-</section>
-{% endcomment %}
+  </section>
+
+  <section class="h-[400px] w-full bg-gray-200">
+    <iframe 
+      src="https://www.google.com/maps?q={{ project.location.lat }},{{ project.location.lng }}&hl=vi&z={{project.location.zoom}}&output=embed" 
+      width="100%" 
+      height="100%" 
+      style="border:0;" 
+      allowfullscreen="" 
+      loading="lazy" 
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </section>
+</main>
 {% endblock content %}

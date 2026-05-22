@@ -2,462 +2,390 @@
 {% load i18n url_cms trad thumbnail cache seo_meta repeat rating_star %}
 
 {% block extracss %}
+{{ block.super }}
 <style>
 @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 .animate-marquee {
-    animation: marquee 25s linear infinite;
+  animation: marquee 25s linear infinite;
 }
 </style>
 {% endblock %}
 
 {% block extrajs %}
 {{ block.super }}
-<script>
-const carousel = document.getElementById('carousel');
-function moveCarousel(direction) {
-    const item = carousel.querySelector('div');
-    const itemWidth = item.offsetWidth + 16; // 16 = gap-4
-
-    carousel.scrollBy({
-        left: direction * itemWidth,
-        behavior: 'smooth'
-    });
-}
-</script>
+<script></script>
 {% endblock %}
 
-
 {% block content %}
-<!-- ===== BLOCK 1: HERO SECTION ===== -->
-<section class="relative h-screen bg-cover bg-center" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1200');">
-    <div class="container mx-auto px-4 h-full flex items-center">
-        <div class="grid grid-cols-2 gap-8 w-full">
-            <!-- Left Content -->
-            <div class="text-white">
-                <p class="text-sm mb-2 opacity-90">THANG MÁY GIA ĐÌNH</p>
-                <h1 class="text-5xl font-bold mb-4 leading-tight">
-                    {{ page.h1|safe }}
-                </h1>
-                <p class="text-lg mb-6 opacity-90">
-                    {{ page.h2|safe }}
-                </p>
-                <div class="flex gap-4">
-                    <button class="gradient-red text-white px-6 py-3 rounded font-bold hover:shadow-lg transition flex items-center gap-2">
-                        <i class="fas fa-arrow-right"></i> Khám phá ngay
-                    </button>
-                    <a href="{% url_cms 'products' %}">
-                        <button class="border-2 border-white text-white px-6 py-3 rounded font-bold hover:bg-white hover:text-gray-800 transition flex items-center gap-2">
-                            <i class="fas fa-info-circle"></i> Khám phá sản phẩm
-                        </button>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Right Form -->
-            <div class="flex justify-end">
-                <form class="bg-white rounded-lg shadow-2xl p-8 w-80">
-                    <h3 class="text-xl font-bold text-gray-800 mb-1">NHẬN TƯ VẤN MIỄN PHÍ</h3>
-                    <p class="text-xs text-gray-600 mb-4">Để chúng tôi tìm giải pháp phù hợp cho bạn</p>
-                    
-                    <div class="mb-4">
-                        <input type="text" placeholder="Họ và tên" class="w-full border-b-2 border-gray-300 pb-2 focus:outline-none focus:border-red-elevator">
-                    </div>
-                    <div class="mb-4">
-                        <input type="email" placeholder="Email" class="w-full border-b-2 border-gray-300 pb-2 focus:outline-none focus:border-red-elevator">
-                    </div>
-                    <div class="mb-4">
-                        <input type="tel" placeholder="Điện thoại" class="w-full border-b-2 border-gray-300 pb-2 focus:outline-none focus:border-red-elevator">
-                    </div>
-                    <div class="mb-6">
-                        <textarea placeholder="Nhu cầu của bạn" rows="3" class="w-full border-b-2 border-gray-300 pb-2 focus:outline-none focus:border-red-elevator resize-none"></textarea>
-                    </div>
-                    <button type="submit" class="w-full gradient-red text-white py-3 rounded font-bold hover:shadow-lg transition">
-                        GỬI YÊU CẦU
-                    </button>
-                </form>
-            </div>
-        </div>
+<main class="font-sans text-gray-900 antialiased">
+  <section class="relative bg-gray-900 min-h-[600px] flex flex-col justify-center">
+    <div class="absolute inset-0 z-0">
+      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Thang máy gia đình" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-r from-gray-900/90 via-gray-900/60 to-transparent"></div>
     </div>
-</section>
-
-<!-- ===== BLOCK 2: FEATURES (4 COLUMNS) ===== -->
-<section class="py-12 bg-gray-100">
-    <div class="container mx-auto px-4">
-        <div class="grid grid-cols-4 gap-6">
-            <div class="bg-white p-6 rounded text-center hover-scale">
-                <div class="text-4xl text-red-elevator mb-3">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
-                <h4 class="font-bold mb-2">CHỨNG CHỈ NHẬT BẢN</h4>
-                <p class="text-sm text-gray-600">Cấp phép từ Nhật Bản với tiêu chuẩn quốc tế</p>
-            </div>
-
-            <div class="bg-white p-6 rounded text-center hover-scale">
-                <div class="text-4xl text-red-elevator mb-3">
-                    <i class="fas fa-boxes"></i>
-                </div>
-                <h4 class="font-bold mb-2">THIẾT KỊ TẤT CẢ</h4>
-                <p class="text-sm text-gray-600">Trang bị đầy đủ thiết bị an toàn</p>
-            </div>
-
-            <div class="bg-white p-6 rounded text-center hover-scale">
-                <div class="text-4xl text-red-elevator mb-3">
-                    <i class="fas fa-bolt"></i>
-                </div>
-                <h4 class="font-bold mb-2">TIẾT KIỆM ĐIỆN NĂNG</h4>
-                <p class="text-sm text-gray-600">Công nghệ tiết kiệm điện hàng đầu</p>
-            </div>
-
-            <div class="bg-white p-6 rounded text-center hover-scale">
-                <div class="text-4xl text-red-elevator mb-3">
-                    <i class="fas fa-headset"></i>
-                </div>
-                <h4 class="font-bold mb-2">HỖ TRỢ 24/7</h4>
-                <p class="text-sm text-gray-600">Hỗ trợ kỹ thuật 24/7 liên tục</p>
-            </div>
+    
+    <div class="relative z-10 max-w-[1200px] mx-auto px-4 w-full pt-16 pb-28 flex flex-col lg:flex-row justify-between items-center">
+      
+      <div class="lg:w-[55%] text-white">
+        <p class="text-sm font-semibold tracking-[0.2em] uppercase mb-3">Thang Máy Gia Đình</p>
+        <h1 class="text-4xl md:text-[54px] font-bold leading-[1.1] mb-6">NÂNG TẦM <br /> KHÔNG GIAN SỐNG</h1>
+        <p class="text-[15px] text-gray-200 mb-8 max-w-[400px] leading-relaxed">
+          Giải pháp thang máy gia đình cao cấp chuẩn Nhật Bản - An toàn, êm ái, thẩm mỹ và bền vững.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="{% url_cms 'contact' %}" class="bg-red-700 text-white px-6 py-3 text-sm rounded font-bold hover:bg-red-800 transition shadow-lg">NHẬN TƯ VẤN MIỄN PHÍ <span class="ml-1">→</span></a>
+          <a href="{% url_cms 'products' %}" class="border border-white text-white px-6 py-3 text-sm rounded font-bold hover:bg-white hover:text-gray-900 transition">KHÁM PHÁ SẢN PHẨM <span class="ml-1">→</span></a>
         </div>
+      </div>
+
+      <div class="hidden lg:block lg:w-[380px] bg-white rounded-md shadow-2xl overflow-hidden mt-8 lg:mt-0">
+        <div class="bg-red-700 px-6 py-4 text-center">
+          <h3 class="text-white text-lg font-bold">NHẬN TƯ VẤN MIỄN PHÍ</h3>
+          <p class="text-red-100 text-[13px] mt-1">Để lại thông tin, chuyên viên của chúng tôi sẽ liên hệ tư vấn cho bạn.</p>
+        </div>
+        <form method="post" action="{% url_cms 'submit_inquiry' %}" class="js-ajax-form p-6 flex flex-col gap-4">
+          {% csrf_token %}
+          <input type="text" value="{{ form.name }}" name="name" placeholder="Họ và tên" class="w-full px-4 py-2.5 text-[14px] bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-red-700 focus:bg-white transition" required>
+          <input type="tel" value="{{ form.phone }}" name="phone" placeholder="Số điện thoại" class="w-full px-4 py-2.5 text-[14px] bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-red-700 focus:bg-white transition" required>
+          <input type="email" value="{{ form.email }}" name="email" placeholder="Email" class="w-full px-4 py-2.5 text-[14px] bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-red-700 focus:bg-white transition" required>
+          <input type="text" name="subject" placeholder="Subject" value="Lắp đặt thang máy mới" class="hidden w-full px-4 py-2.5 text-[14px] bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-red-700 focus:bg-white transition" required>
+          <input type="text" value="{{ form.comment }}" name="comment" placeholder="Địa chỉ công trình" class="w-full px-4 py-2.5 text-[14px] bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-red-700 focus:bg-white transition" required>
+          <button type="submit" class="w-full bg-red-700 text-white font-bold text-[14px] py-3 rounded mt-2 hover:bg-red-800 transition">GỬI YÊU CẦU</button>
+        </form>
+      </div>
     </div>
-</section>
 
-<!-- ===== BLOCK 3: WHY CHOOSE US (4 CARDS) ===== -->
-<section class="py-16 bg-white">
-    <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-            <p class="text-red-elevator font-bold mb-2">TẠI SAO CHỌN HQT ELEVATOR</p>
-            <h2 class="text-4xl font-bold section-title">
-                Sự lựa chọn tin cậy của hàng ngàn gia đình Việt
-            </h2>
+    <div class="absolute bottom-0 w-full bg-black/60 border-t border-gray-700 backdrop-blur-sm z-20 hidden md:block">
+      <div class="max-w-[1200px] mx-auto px-4 py-4">
+        <div class="grid grid-cols-4 gap-4 divide-x divide-gray-600 text-white">
+          <div class="flex items-center gap-3 pl-4">
+            <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <div class="text-[13px]"><strong class="block">Công nghệ Nhật Bản</strong> <span class="text-gray-400">An toàn tuyệt đối</span></div>
+          </div>
+          <div class="flex items-center gap-3 pl-8">
+            <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+            <div class="text-[13px]"><strong class="block">Thiết kế tinh tế</strong> <span class="text-gray-400">Hài hòa kiến trúc</span></div>
+          </div>
+          <div class="flex items-center gap-3 pl-8">
+            <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+            <div class="text-[13px]"><strong class="block">Bảo hành dài hạn</strong> <span class="text-gray-400">Bảo trì tận nơi 24/7</span></div>
+          </div>
+          <div class="flex items-center gap-3 pl-8">
+            <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            <div class="text-[13px]"><strong class="block">Tiết kiệm điện năng</strong> <span class="text-gray-400">Hiệu suất cao</span></div>
+          </div>
         </div>
-
-        <div class="grid grid-cols-4 gap-8">
-            <!-- Card 1 -->
-            <div class="text-center">
-                <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center">
-                    <i class="fas fa-lock text-4xl text-red-elevator"></i>
-                </div>
-                <h4 class="font-bold mb-2 text-red-elevator">AN TOÀN TUYỆT ĐỐI</h4>
-                <p class="text-sm text-gray-600">Hệ thống an toàn đa lớp với công nghệ phanh khẩn cấp tối ưu</p>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="text-center">
-                <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center">
-                    <i class="fas fa-home text-4xl text-red-elevator"></i>
-                </div>
-                <h4 class="font-bold mb-2 text-red-elevator">VĂN HÓA ĐẢM ĐỀ</h4>
-                <p class="text-sm text-gray-600">Thiết kế tối ưu cho không gian nhà ở hạn hẹp</p>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="text-center">
-                <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center">
-                    <i class="fas fa-plug text-4xl text-red-elevator"></i>
-                </div>
-                <h4 class="font-bold mb-2 text-red-elevator">TIẾT KIỆM ĐIỆN NĂNG</h4>
-                <p class="text-sm text-gray-600">Công nghệ tiết kiệm điện giảm chi phí hàng tháng</p>
-            </div>
-
-            <!-- Card 4 -->
-            <div class="text-center">
-                <div class="w-20 h-20 mx-auto mb-4 flex items-center justify-center">
-                    <i class="fas fa-user-shield text-4xl text-red-elevator"></i>
-                </div>
-                <h4 class="font-bold mb-2 text-red-elevator">BẢO HÀNH UY TÍN</h4>
-                <p class="text-sm text-gray-600">Bảo hành 5 năm với dịch vụ sửa chữa miễn phí</p>
-            </div>
-        </div>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- ===== BLOCK 4: PRODUCT SHOWCASE (4 IMAGE GRID) ===== -->
-{% if categories|length %}
-<section class="py-16 bg-gray-50">
-    <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-            <p class="text-red-elevator font-bold mb-2">HÌNH THỨC LỰA CHỌN ĐA DẠNG</p>
-            <h2 class="text-4xl font-bold section-title">
-                Phù hợp mọi không gian trong căn nhà của bạn
-            </h2>
+  <section class="py-16 bg-white">
+    <div class="max-w-[1200px] mx-auto px-4">
+      <div class="text-center mb-10">
+        <h2 class="text-xs font-bold text-red-700 uppercase tracking-[0.15em] mb-2">VÌ SAO CHỌN HQT ELEVATOR?</h2>
+        <h3 class="text-[28px] font-bold text-gray-900 relative inline-block">
+          Sự lựa chọn tin cậy của hàng ngàn gia đình Việt
+          <span class="absolute -bottom-3 left-1/2 -translate-x-1/2 w-12 h-0.5 bg-red-700"></span>
+        </h3>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center mt-12">
+        <div class="bg-white p-6 border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] rounded-md hover:shadow-lg transition">
+          <div class="w-14 h-14 mx-auto mb-4 text-red-600">
+             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+          </div>
+          <h4 class="font-bold text-[15px] text-gray-900 mb-2">AN TOÀN TUYỆT ĐỐI</h4>
+          <p class="text-[13px] text-gray-500 leading-relaxed">Hệ thống cảm biến và công nghệ bảo vệ đa lớp, đạt tiêu chuẩn an toàn quốc tế.</p>
         </div>
-
-        <div class="grid grid-cols-4 gap-6 mb-8">
-            {% for category in categories %}
-            <div class="bg-white rounded overflow-hidden shadow-md hover-scale group">
-                <div class="relative h-64 bg-gray-300 overflow-hidden">
-                    <img src="{{ category.featured_image_url }}" alt="{{ category.name }}" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 transition"></div>
-                </div>
-                <div class="p-6">
-                    <h4 class="font-bold mb-2">{{ category.name }}</h4>
-                    <p class="text-sm text-gray-600 mb-3">{{ category.description }}</p>
-                    <a href="{% url_cms 'category' category.slug %}" class="text-red-elevator font-bold text-sm flex items-center gap-2 hover:gap-3 transition">
-                        XEM CHI TIẾT <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-            {% endfor %}
+        <div class="bg-white p-6 border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] rounded-md hover:shadow-lg transition">
+          <div class="w-14 h-14 mx-auto mb-4 text-red-600">
+             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+          </div>
+          <h4 class="font-bold text-[15px] text-gray-900 mb-2">VẬN HÀNH ÊM ÁI</h4>
+          <p class="text-[13px] text-gray-500 leading-relaxed">Động cơ tiên tiến, giảm thiểu tiếng ồn và độ rung, mang lại trải nghiệm êm ái.</p>
         </div>
-
-        <div class="text-center">
-            <a href="{% url_cms 'products' %}">
-                <button class="gradient-red text-white px-8 py-3 rounded font-bold hover:shadow-lg transition">
-                    KHÁM PHÁ TẤT CẢ SẢN PHẨM
-                </button>
-            </a>
+        <div class="bg-white p-6 border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] rounded-md hover:shadow-lg transition">
+          <div class="w-14 h-14 mx-auto mb-4 text-red-600">
+             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+          </div>
+          <h4 class="font-bold text-[15px] text-gray-900 mb-2">TIẾT KIỆM ĐIỆN NĂNG</h4>
+          <p class="text-[13px] text-gray-500 leading-relaxed">Công nghệ tiết kiệm điện thông minh giúp giảm chi phí vận hành tối đa.</p>
         </div>
+        <div class="bg-white p-6 border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] rounded-md hover:shadow-lg transition">
+          <div class="w-14 h-14 mx-auto mb-4 text-red-600">
+             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+          </div>
+          <h4 class="font-bold text-[15px] text-gray-900 mb-2">BẢO HÀNH UY TÍN</h4>
+          <p class="text-[13px] text-gray-500 leading-relaxed">Bảo hành lên đến 5 năm, bảo trì tận nơi 24/7 trên toàn quốc.</p>
+        </div>
+      </div>
     </div>
-</section>
-{% endif %}
+  </section>
 
-<!-- ===== BLOCK 5: SOLUTIONS (TEXT + VIDEO) ===== -->
-<section class="py-16 bg-white">
-    <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-            <p class="text-red-elevator font-bold mb-2">GIẢI PHÁP TOÀN DIỆN</p>
-            <h2 class="text-4xl font-bold section-title">
-                Nâng tầm chất lượng sống cho mọi gia đình
-            </h2>
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-[1200px] mx-auto px-4">
+      <div class="text-center mb-10">
+        <h2 class="text-xs font-bold text-red-700 uppercase tracking-[0.15em] mb-2">SẢN PHẨM NỔI BẬT</h2>
+        <h3 class="text-[28px] font-bold text-gray-900 relative inline-block">
+          Đa dạng lựa chọn – Phù hợp mọi không gian
+          <span class="absolute -bottom-3 left-1/2 -translate-x-1/2 w-12 h-0.5 bg-red-700"></span>
+        </h3>
+      </div>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {% for category in categories %}
+        <div class="bg-white border border-gray-200 rounded overflow-hidden hover:shadow-xl transition-shadow group">
+          <div class="h-56 overflow-hidden">
+            <img src="{{ category.featured_image_url }}" alt="{{ category.name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+          </div>
+          <div class="p-5">
+            <h4 class="font-bold text-[16px] text-gray-900 mb-2">{{ category.name }}</h4>
+            <p class="text-[13px] text-gray-500 mb-4 h-10 overflow-hidden">{{ category.description }}</p>
+            <a href="{% url_cms 'category' category.slug %}" class="text-red-700 font-bold text-[13px] hover:text-red-800 flex items-center">XEM CHI TIẾT <span class="ml-1">→</span></a>
+          </div>
         </div>
-
-        <div class="grid grid-cols-2 gap-12 items-center">
-            <!-- Left: Features List -->
-            <div class="space-y-6">
-                <div class="flex gap-4">
-                    <div class="flex-shrink-0">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-md gradient-red text-white">
-                            <i class="fas fa-home"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <h4 class="font-bold mb-1">Nhà phố, biệt thự</h4>
-                        <p class="text-sm text-gray-600">Giải pháp thang máy tối ưu cho nhà phố, biệt thự và nhà liền kề</p>
-                    </div>
-                </div>
-
-                <div class="flex gap-4">
-                    <div class="flex-shrink-0">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-md gradient-red text-white">
-                            <i class="fas fa-building"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <h4 class="font-bold mb-1">Căn hộ, hàng cấp</h4>
-                        <p class="text-sm text-gray-600">Lắp đặt chính xác, thẩm định chất lượng bằng các tiêu chuẩn quốc tế</p>
-                    </div>
-                </div>
-
-                <div class="flex gap-4">
-                    <div class="flex-shrink-0">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-md gradient-red text-white">
-                            <i class="fas fa-users"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <h4 class="font-bold mb-1">Người cao tuổi</h4>
-                        <p class="text-sm text-gray-600">Chuyên biệt an toàn cho người cao tuổi và trẻ em</p>
-                    </div>
-                </div>
-
-                <div class="flex gap-4">
-                    <div class="flex-shrink-0">
-                        <div class="flex items-center justify-center h-12 w-12 rounded-md gradient-red text-white">
-                            <i class="fas fa-calendar-alt"></i>
-                        </div>
-                    </div>
-                    <div>
-                        <h4 class="font-bold mb-1">Bảo dưỡng & phòng chế</h4>
-                        <p class="text-sm text-gray-600">Thế là sẽ có 24/7 hỗ trợ kỹ thuật và bảo dưỡng định kỳ</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right: Video Section -->
-            <div class="relative h-96 bg-gray-300 rounded-lg overflow-hidden shadow-lg group">
-                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop" alt="Solution Video" class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-black opacity-30 group-hover:opacity-40 transition flex items-center justify-center">
-                    <button class="w-16 h-16 rounded-full bg-white text-red-elevator flex items-center justify-center hover:scale-110 transition text-2xl">
-                        <i class="fas fa-play ml-1"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
+      </div>
+      
+      <div class="text-center mt-10">
+        <a href="{% url_cms 'products' %}" class="inline-block bg-red-700 text-white px-8 py-3 rounded text-sm font-bold hover:bg-red-800 transition shadow-md">XEM TẤT CẢ SẢN PHẨM</a>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- ===== BLOCK 6: PROJECT SHOWCASE (CAROUSEL) ===== -->
-{% if portfolios|length %}
-<section class="py-16 bg-gray-50">
-    <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-            <p class="text-red-elevator font-bold mb-2">DỰ ÁN TIÊU BIỂU</p>
-            <h2 class="text-4xl font-bold section-title">
-                Hàng trăm công trình trên toàn quốc
-            </h2>
+  <section class="py-16 bg-[#212121] text-white">
+    <div class="max-w-[1200px] mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-xs font-bold text-red-500 uppercase tracking-[0.15em] mb-2">GIẢI PHÁP THANG MÁY TOÀN DIỆN</h2>
+        <h3 class="text-[28px] font-bold relative inline-block">
+          Nâng tầm chất lượng sống cho mọi gia đình
+          <span class="absolute -bottom-3 left-1/2 -translate-x-1/2 w-12 h-0.5 bg-red-500"></span>
+        </h3>
+      </div>
+      
+      <div class="flex flex-col lg:flex-row gap-12 items-center">
+        <div class="lg:w-5/12 space-y-6">
+          <div class="flex items-start bg-[#2a2a2a] p-4 rounded border-l-4 border-red-500">
+            <div class="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center mr-4 shrink-0">
+               <svg class="w-5 h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+            </div>
+            <div>
+              <h4 class="text-[16px] font-bold mb-1">Nhà phố, biệt thự</h4>
+              <p class="text-[13px] text-gray-400">Giải pháp thang máy tối ưu cho nhà phố, biệt thự sang trọng.</p>
+            </div>
+          </div>
+          <div class="flex items-start p-4 hover:bg-[#2a2a2a] rounded transition border-l-4 border-transparent hover:border-red-500">
+            <div class="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center mr-4 shrink-0">
+              <svg class="w-5 h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            </div>
+            <div>
+              <h4 class="text-[16px] font-bold mb-1">Cải tạo, nâng cấp</h4>
+              <p class="text-[13px] text-gray-400">Lắp đặt dễ dàng, không ảnh hưởng kết cấu công trình.</p>
+            </div>
+          </div>
+          <div class="flex items-start p-4 hover:bg-[#2a2a2a] rounded transition border-l-4 border-transparent hover:border-red-500">
+            <div class="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center mr-4 shrink-0">
+               <svg class="w-5 h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+            </div>
+            <div>
+              <h4 class="text-[16px] font-bold mb-1">Người cao tuổi</h4>
+              <p class="text-[13px] text-gray-400">Di chuyển an toàn, thuận tiện, chăm sóc người thân trọn vẹn.</p>
+            </div>
+          </div>
+          <div class="flex items-start p-4 hover:bg-[#2a2a2a] rounded transition border-l-4 border-transparent hover:border-red-500">
+            <div class="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center mr-4 shrink-0">
+               <svg class="w-5 h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+            </div>
+            <div>
+              <h4 class="text-[16px] font-bold mb-1">Thẩm mỹ & phong thủy</h4>
+              <p class="text-[13px] text-gray-400">Thiết kế tinh tế, hài hòa không gian và phong thủy ngôi nhà.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="lg:w-7/12 relative">
+          <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&q=80" alt="Video Giải pháp" class="w-full h-auto rounded-lg shadow-2xl">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <button class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-red-700 shadow-lg hover:scale-110 transition cursor-pointer">
+              <svg class="w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+            </button>
+            <span class="absolute mt-24 text-sm font-bold tracking-widest uppercase">XEM VIDEO GIẢI PHÁP</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% if portfolios|length %}
+  <section class="py-16 bg-white">
+    <div class="max-w-[1200px] mx-auto px-4">
+      <div class="text-center mb-10">
+        <h2 class="text-xs font-bold text-red-700 uppercase tracking-[0.15em] mb-2">DỰ ÁN TIÊU BIỂU</h2>
+        <h3 class="text-[28px] font-bold text-gray-900 relative inline-block">
+          Hàng trăm công trình trên toàn quốc
+          <span class="absolute -bottom-3 left-1/2 -translate-x-1/2 w-12 h-0.5 bg-red-700"></span>
+        </h3>
+      </div>
+
+      <div class="relative group mt-10">
+        {% if portfolios|length > 4 %}
+        <button class="absolute -left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-red-700 text-white rounded-full flex items-center justify-center z-10 shadow-lg hover:bg-red-800 hidden md:flex">
+           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        </button>
+        {% endif %}
+        
+        <div class="flex gap-4 overflow-hidden">
+          {% for portfolio in portfolios %}
+          <a href="{% url_cms 'portfolio' portfolio.slug %}" class="w-full md:w-[calc(25%-12px)]">
+            <img src="{{ portfolio.featured_image_url }}" title="{{ portfolio.name }}" alt="{{ portfolio.name }}" class="h-60 object-cover rounded shadow-sm">
+          </a>
+          {% endfor %}
         </div>
 
+        {% if portfolios|length > 4 %}
+        <button class="absolute -right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-red-700 text-white rounded-full flex items-center justify-center z-10 shadow-lg hover:bg-red-800 hidden md:flex">
+           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </button>
+        {% endif %}
+      </div>
+      
+      <div class="flex flex-col items-center mt-6">
         {% comment %}
-        <!-- Carousel Wrapper -->
-        <div class="relative w-full">
-
-            <div id="carousel"
-                class="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4">
-                {% for portfolio in portfolios %}
-                <div class="flex-none snap-start hover-scale">
-                    <img
-                        src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600"
-                        class="w-80 h-64 object-cover rounded-lg"
-                        alt="Project"
-                    >
-                </div>
-                {% endfor %}
-            </div>
-            <button onclick="moveCarousel(-1)" class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 bg-red-elevator text-white w-12 h-12 rounded-full hover:shadow-lg transition">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-            <button onclick="moveCarousel(1)" class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 bg-red-elevator text-white w-12 h-12 rounded-full hover:shadow-lg transition">
-                <i class="fas fa-chevron-right"></i>
-            </button>
+        <div class="flex space-x-2 mb-6">
+          <span class="w-2.5 h-2.5 rounded-full bg-red-700"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-gray-300"></span>
+          <span class="w-2.5 h-2.5 rounded-full bg-gray-300"></span>
         </div>
         {% endcomment %}
+        <a href="{% url_cms 'portfolios' %}" class="bg-red-700 text-white px-8 py-2.5 rounded text-[13px] font-bold hover:bg-red-800 transition shadow-md">XEM THÊM DỰ ÁN</a>
+      </div>
+    </div>
+  </section>
+  {% endif %}
 
-
-        <!-- Carousel -->
-        <div class="relative">
-            <div class="grid grid-cols-4 gap-4 overflow-x-auto pb-4">
-                {% for portfolio in portfolios %}
-                <a href="{% url_cms 'portfolio' portfolio.slug %}">
-                    <div class="min-w-max hover-scale">
-                        <img src="{{ portfolio.featured_image_url }}" alt="{{ portfolio.name }}" class="rounded-lg w-80 h-64 object-cover">
-                    </div>
-                </a>
-                {% endfor %}
+  <section class="py-16 bg-gray-50 border-t border-gray-200">
+    <div class="max-w-[1200px] mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8">
+      
+      <div class="bg-white p-8 rounded border border-gray-100 shadow-sm relative">
+        <h3 class="text-xs font-bold text-red-700 uppercase tracking-[0.1em] mb-6">KHÁCH HÀNG NÓI GÌ VỀ CHÚNG TÔI!</h3>
+        <div class="text-red-700 opacity-20 absolute top-16 left-8">
+          <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 32 32"><path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.896 3.456-8.352 9.12-8.352 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z"></path></svg>
+        </div>
+        {% if testimonial %}
+        <p class="text-gray-600 text-[15px] italic mb-8 relative z-10 pt-2 leading-relaxed h-20">
+          "{{ testimonial.content }}"
+        </p>
+        <div class="flex items-center">
+          {% if testimonial.customer_image %}
+            <img 
+              src="{{ testimonial.customer_image }}" 
+              alt="{{ testimonial.customer_name }}"
+              class="w-12 h-12 rounded-full mr-4 object-cover border-2 border-gray-100"
+            >
+          {% else %}
+            <div class="w-12 h-12 rounded-full mr-4 border-2 border-gray-100 bg-gray-200 flex items-center justify-center font-semibold text-gray-700">
+              {{ testimonial.customer_name|first|upper }}
             </div>
-            
-            {% if portfolios|length > 4 %}
-            <!-- Carousel Buttons -->
-            <button class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 bg-red-elevator text-white w-12 h-12 rounded-full hover:shadow-lg transition">
-                <i class="fas fa-chevron-left"></i>
+          {% endif %}
+          <div>
+            <h5 class="font-bold text-[14px] text-gray-900">{{ testimonial.customer_name }}</h5>
+            <span class="text-[12px] text-gray-500">{{ testimonial.customer_title }}</span>
+          </div>
+        </div>
+        {% endif %}
+        {% comment %}
+        <div class="flex justify-center space-x-1.5 mt-6">
+          <span class="w-1.5 h-1.5 rounded-full bg-red-700"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-gray-300"></span>
+        </div>
+        {% endcomment %}
+      </div>
+
+      <div class="bg-white p-8 rounded border border-gray-100 shadow-sm">
+        <h3 class="text-xs font-bold text-red-700 uppercase tracking-[0.1em] mb-8">HQT ELEVATOR TRONG CON SỐ</h3>
+        <div class="grid grid-cols-2 gap-y-8 gap-x-4">
+          <div class="flex items-start">
+            <div class="w-10 h-10 rounded-full border border-red-200 text-red-600 flex items-center justify-center mr-3 shrink-0"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+            <div>
+              <div class="text-[22px] font-black text-gray-900 leading-none mb-1">10+</div>
+              <div class="text-[13px] text-gray-500">Năm kinh nghiệm</div>
+            </div>
+          </div>
+          <div class="flex items-start">
+            <div class="w-10 h-10 rounded-full border border-red-200 text-red-600 flex items-center justify-center mr-3 shrink-0"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg></div>
+            <div>
+              <div class="text-[22px] font-black text-gray-900 leading-none mb-1">2000+</div>
+              <div class="text-[13px] text-gray-500">Công trình đã thực hiện</div>
+            </div>
+          </div>
+          <div class="flex items-start">
+            <div class="w-10 h-10 rounded-full border border-red-200 text-red-600 flex items-center justify-center mr-3 shrink-0"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.514"></path></svg></div>
+            <div>
+              <div class="text-[22px] font-black text-gray-900 leading-none mb-1">98%</div>
+              <div class="text-[13px] text-gray-500">Khách hàng hài lòng</div>
+            </div>
+          </div>
+          <div class="flex items-start">
+            <div class="w-10 h-10 rounded-full border border-red-200 text-red-600 flex items-center justify-center mr-3 shrink-0"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path></svg></div>
+            <div>
+              <div class="text-[22px] font-black text-gray-900 leading-none mb-1">24/7</div>
+              <div class="text-[13px] text-gray-500">Hỗ trợ kỹ thuật</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% if partners|length %}
+  <section class="py-10 bg-white border-b border-gray-200">
+    <div class="max-w-[1200px] mx-auto px-4">
+      <div class="text-center mb-6">
+        <h2 class="text-xs font-bold text-red-700 uppercase tracking-[0.1em]">ĐỐI TÁC - THƯƠNG HIỆU</h2>
+      </div>
+      <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition duration-300">
+        {% for partner in partners %}
+        <div class="flex-shrink-0 grayscale hover:grayscale-0 transition duration-300">
+            {% if partner.website %}<a href="{{ partner.website }}" _target=""blank>{% else %}<div>{% endif %}
+                {% if partner.logo %}
+                  <img src="{{ partner.logo }}" alt="{{ partner.name }}" class="h-14 object-contain">
+                {% else %}
+                  <div class="text-xl font-bold text-green-600">{{ partner.name }}</div>
+                {% endif %}
+            {% if partner.website %}</a>{% else %}</div>{% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  <section class="bg-[#b3191f] text-white relative flex items-center overflow-hidden h-[300px]">
+    <div class="max-w-[1200px] mx-auto px-4 w-full relative z-10 grid grid-cols-1 md:grid-cols-2">
+      <div class="py-12">
+        <h2 class="text-[28px] font-bold mb-2 leading-tight">SẴN SÀNG NÂNG TẦM <br /> KHÔNG GIAN SỐNG CỦA BẠN?</h2>
+        <p class="text-[14px] text-red-100 mb-6">Liên hệ ngay để nhận tư vấn miễn phí và giải pháp thang máy phù hợp nhất.</p>
+        <div class="flex gap-4">
+          <a href="{% url_cms 'contact' %}" class="h-full h-full">
+            <button class="bg-white text-red-700 px-6 py-2.5 rounded font-bold text-sm hover:bg-gray-100 transition shadow-md">NHẬN TƯ VẤN NGAY</button>
+          </a>
+          <a href="tel:{{ project.phone|cut:' ' }}" class="h-full h-full">
+            <button class="border border-white text-white px-6 py-2.5 rounded font-bold text-sm hover:bg-white/10 transition flex items-center">
+              <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+              {{ project.phone }}
             </button>
-            <button class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 bg-red-elevator text-white w-12 h-12 rounded-full hover:shadow-lg transition">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-            {% endif %}
+          </a>
         </div>
-
-        <div class="text-center mt-12">
-            <a href="{% url_cms 'portfolios' %}">
-                <button class="gradient-red text-white px-8 py-3 rounded font-bold hover:shadow-lg transition">
-                    XEM THÊM DỰ ÁN
-                </button>
-            </a>
-        </div>
+      </div>
     </div>
-</section>
-{% endif %}
-
-<!-- ===== BLOCK 7: TESTIMONIALS ===== -->
-{% if testimonial %}
-<section class="py-16 bg-white">
-    <div class="container mx-auto px-4">
-        <div class="grid grid-cols-2 gap-12">
-            <!-- Testimonial -->
-            <div class="border-l-4 border-red-elevator pl-6">
-                <div class="flex items-center gap-3 mb-4">
-                    <i class="fas fa-quote-left text-3xl text-red-elevator opacity-30"></i>
-                </div>
-                <h4 class="font-bold text-red-elevator mb-2">KHÁCH HÀNG NÓI GÌ VỀ CHÚNG TÔI</h4>
-                <p class="text-gray-700 mb-6">"{{ testimonial.content }}"</p>
-                <div class="flex items-center gap-4">
-                    
-                    {% thumbnail testimonial.customer_image "50x50" crop="center" as im %}
-                        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ testimonial.customer_name }}" class="w-12 h-12 rounded-full">
-                    {% endthumbnail %}
-                    <div>
-                        {% if testimonial.customer_name %}
-                        <p class="font-bold text-sm">{{ testimonial.customer_name }} <span class="text-red-elevator">{% rating_star testimonial.rating %}</span></p>
-                        {% endif %}
-                        {% if testimonial.customer_title %}
-                        <p class="text-xs text-gray-600">{{ testimonial.customer_title }}</p>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-
-            <!-- Stats -->
-            <div class="grid grid-cols-2 gap-6">
-                <div class="text-center p-6 bg-gray-50 rounded">
-                    <div class="text-4xl font-bold text-red-elevator mb-2">10+</div>
-                    <p class="text-sm text-gray-600">Năm kinh nghiệm</p>
-                </div>
-                <div class="text-center p-6 bg-gray-50 rounded">
-                    <div class="text-4xl font-bold text-red-elevator mb-2">2000+</div>
-                    <p class="text-sm text-gray-600">Công trình đã lắp</p>
-                </div>
-                <div class="text-center p-6 bg-gray-50 rounded">
-                    <div class="text-4xl font-bold text-red-elevator mb-2">98%</div>
-                    <p class="text-sm text-gray-600">Khách hàng hài lòng</p>
-                </div>
-                <div class="text-center p-6 bg-gray-50 rounded">
-                    <div class="text-4xl font-bold text-red-elevator mb-2">24/7</div>
-                    <p class="text-sm text-gray-600">Hỗ trợ kỹ thuật</p>
-                </div>
-            </div>
-        </div>
+    
+    <div class="hidden md:block absolute bottom-0 right-0 h-full w-[45%]">
+      <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80" alt="Consultant" class="absolute bottom-0 right-10 h-[120%] object-cover object-top mix-blend-luminosity opacity-80" style="-webkit-mask-image: linear-gradient(to top, black 50%, transparent 100%); mask-image: linear-gradient(to top, black 70%, transparent 100%);">
     </div>
-</section>
-{% endif %}
-
-<!-- ===== BLOCK 8: BRANDS / PARTNERS ===== -->
-{% if partners|length %}
-<section class="py-12 bg-gray-50 overflow-hidden">
-    <div class="container mx-auto px-4">
-        <div class="text-center mb-8">
-            <p class="text-red-elevator font-bold mb-2">
-                ĐỐI TÁC - THƯƠNG HIỆU
-            </p>
-        </div>
-
-        <!-- Slider Wrapper -->
-        <div class="relative w-full overflow-hidden">
-            
-            <!-- Track -->
-            <div class="flex w-max animate-marquee gap-16 items-center">
-
-                <!-- Loop 1 -->
-                {% for partner in partners %}
-                <div class="flex-shrink-0 grayscale hover:grayscale-0 transition duration-300">
-                    {% if partner.website %}<a href="{{ partner.website }}" _target=""blank>{% else %}<div>{% endif %}
-                        {% if partner.logo %}
-                            <img src="{{ partner.logo }}" alt="{{ partner.name }}" class="h-14 object-contain">
-                        {% else %}
-                            <div class="text-3xl font-bold text-gray-400">{{ partner.name }}</div>
-                        {% endif %}
-                    {% if partner.website %}</a>{% else %}</div>{% endif %}
-                </div>
-                {% endfor %}
-
-                <!-- Loop 2 (duplicate for infinite effect) -->
-                {% for partner in partners %}
-                <div class="flex-shrink-0 grayscale hover:grayscale-0 transition duration-300">
-                    {% if partner.website %}<a href="{{ partner.website }}" _target=""blank>{% else %}<div>{% endif %}
-                        {% if partner.logo %}
-                            <img src="{{ partner.logo }}" alt="{{ partner.name }}" class="h-14 object-contain">
-                        {% else %}
-                            <div class="text-3xl font-bold text-gray-400">{{ partner.name }}</div>
-                        {% endif %}
-                    {% if partner.website %}</a>{% else %}</div>{% endif %}
-                </div>
-                {% endfor %}
-
-            </div>
-        </div>
-    </div>
-</section>
-{% endif %}
-
-{% include "default/sections/cta.html" with title="SẴN SÀNG NÂNG TẦM KHÔNG GIAN SỐNG CỦA BẠN?" description="Liên hệ ngay để nhận tư vấn miễn phí và giải pháp thang máy phù hợp." %}
-
+  </section>
+</main>
 {% endblock content %}

@@ -71,7 +71,7 @@ INSTALLED_APPS = [
     'cms_app',
 
     # Lib Engine
-    # 'xxx_engine',
+    'recruitment_engine',
     
     # App Engine
     'project.apps',

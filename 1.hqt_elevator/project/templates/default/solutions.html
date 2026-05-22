@@ -2,355 +2,70 @@
 {% load url_cms trad thumbnail cache seo_meta repeat static %}
 
 {% block extracss %}
-<style>
-.solution-card {
-    transition: all 0.3s ease;
-    border-left: 4px solid transparent;
-}
-.solution-card:hover {
-    border-left-color: #c41e3a;
-    transform: translateX(5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-}
-.process-step {
-    position: relative;
-    padding-left: 50px;
-}
-.process-step::before {
-    content: attr(data-step);
-    position: absolute;
-    left: 0;
-    width: 40px;
-    height: 40px;
-    background: linear-gradient(135deg, #c41e3a 0%, #8b1429 100%);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-}
-</style>
+<style></style>
 {% endblock %}
 
 {% block extrajs %}
 {% endblock %}
 
 {% block content %}
-<!-- ===== SOLUTIONS GRID ===== -->
-<section class="py-16">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold section-title text-center mb-12">Giải Pháp Theo Loại Công Trình</h2>
-
-        <div class="grid grid-cols-2 gap-8">
-            
-            <!-- Solution 1: Nhà Phố & Biệt Thự -->
-            <div class="solution-card bg-white rounded-lg shadow-md overflow-hidden">
-                <div class="h-48 bg-gradient-to-br from-red-100 to-red-50 flex items-center justify-center">
-                    <i class="fas fa-home text-6xl text-red-elevator opacity-30"></i>
-                </div>
-                <div class="p-8">
-                    <h3 class="text-2xl font-bold mb-3 text-red-elevator">
-                        <i class="fas fa-home mr-2"></i> Nhà Phố & Biệt Thự
-                    </h3>
-                    <p class="text-gray-700 mb-4">
-                        Giải pháp thang máy tối ưu cho không gian hẹp, an toàn tuyệt đối cho gia đình, tiết kiệm điện lên đến 30%.
-                    </p>
-                    
-                    <h4 class="font-bold mb-3 text-gray-800">Sản phẩm phù hợp:</h4>
-                    <ul class="space-y-2 text-sm text-gray-700 mb-4">
-                        <li><i class="fas fa-check text-red-elevator mr-2"></i>Thang máy kính tròn</li>
-                        <li><i class="fas fa-check text-red-elevator mr-2"></i>Thang máy khí vuông</li>
-                        <li><i class="fas fa-check text-red-elevator mr-2"></i>Thang máy thủy lực</li>
-                    </ul>
-                    
-                    <h4 class="font-bold mb-3 text-gray-800">Đặc điểm:</h4>
-                    <ul class="space-y-2 text-sm text-gray-700">
-                        <li><i class="fas fa-arrow-right text-red-elevator mr-2"></i>Công suất: 1000-1500 kg</li>
-                        <li><i class="fas fa-arrow-right text-red-elevator mr-2"></i>Chiều cao: 3-15 m</li>
-                        <li><i class="fas fa-arrow-right text-red-elevator mr-2"></i>Bảo hành: 5 năm</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Solution 2: Căn Hộ & Tòa Nhà -->
-            <div class="solution-card bg-white rounded-lg shadow-md overflow-hidden">
-                <div class="h-48 bg-gradient-to-br from-blue-100 to-blue-50 flex items-center justify-center">
-                    <i class="fas fa-building text-6xl text-blue-600 opacity-30"></i>
-                </div>
-                <div class="p-8">
-                    <h3 class="text-2xl font-bold mb-3" style="color: #0066cc;">
-                        <i class="fas fa-building mr-2"></i> Căn Hộ & Tòa Nhà
-                    </h3>
-                    <p class="text-gray-700 mb-4">
-                        Thang máy công cộng tiêu chuẩn quốc tế, an toàn cao, tốc độ nhanh cho các tòa nhà đa tầng.
-                    </p>
-                    
-                    <h4 class="font-bold mb-3 text-gray-800">Sản phẩm phù hợp:</h4>
-                    <ul class="space-y-2 text-sm text-gray-700 mb-4">
-                        <li><i class="fas fa-check mr-2" style="color: #0066cc;"></i>Thang máy không phòng máy</li>
-                        <li><i class="fas fa-check mr-2" style="color: #0066cc;"></i>Thang máy công cộng</li>
-                        <li><i class="fas fa-check mr-2" style="color: #0066cc;"></i>Thang máy cao tốc</li>
-                    </ul>
-                    
-                    <h4 class="font-bold mb-3 text-gray-800">Đặc điểm:</h4>
-                    <ul class="space-y-2 text-sm text-gray-700">
-                        <li><i class="fas fa-arrow-right mr-2" style="color: #0066cc;"></i>Công suất: 1000-2500 kg</li>
-                        <li><i class="fas fa-arrow-right mr-2" style="color: #0066cc;"></i>Chiều cao: 3-50 m</li>
-                        <li><i class="fas fa-arrow-right mr-2" style="color: #0066cc;"></i>Tốc độ: Lên đến 4 m/s</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Solution 3: Bệnh Viện & Y Tế -->
-            <div class="solution-card bg-white rounded-lg shadow-md overflow-hidden">
-                <div class="h-48 bg-gradient-to-br from-green-100 to-green-50 flex items-center justify-center">
-                    <i class="fas fa-hospital text-6xl text-green-600 opacity-30"></i>
-                </div>
-                <div class="p-8">
-                    <h3 class="text-2xl font-bold mb-3" style="color: #22c55e;">
-                        <i class="fas fa-hospital mr-2"></i> Bệnh Viện & Y Tế
-                    </h3>
-                    <p class="text-gray-700 mb-4">
-                        Thang máy chuyên dụng hỗ trợ giường bệnh di động, cầu nâng lớn, an toàn cho bệnh nhân.
-                    </p>
-                    
-                    <h4 class="font-bold mb-3 text-gray-800">Sản phẩm phù hợp:</h4>
-                    <ul class="space-y-2 text-sm text-gray-700 mb-4">
-                        <li><i class="fas fa-check mr-2" style="color: #22c55e;"></i>Thang máy y tế</li>
-                        <li><i class="fas fa-check mr-2" style="color: #22c55e;"></i>Thang máy cầu nâng</li>
-                        <li><i class="fas fa-check mr-2" style="color: #22c55e;"></i>Thang máy công cộng lớn</li>
-                    </ul>
-                    
-                    <h4 class="font-bold mb-3 text-gray-800">Đặc điểm:</h4>
-                    <ul class="space-y-2 text-sm text-gray-700">
-                        <li><i class="fas fa-arrow-right mr-2" style="color: #22c55e;"></i>Công suất: 2000-3000 kg</li>
-                        <li><i class="fas fa-arrow-right mr-2" style="color: #22c55e;"></i>An toàn tuyệt đối</li>
-                        <li><i class="fas fa-arrow-right mr-2" style="color: #22c55e;"></i>Thiết kế vô trùng</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Solution 4: Công Nghiệp & Kho -->
-            <div class="solution-card bg-white rounded-lg shadow-md overflow-hidden">
-                <div class="h-48 bg-gradient-to-br from-orange-100 to-orange-50 flex items-center justify-center">
-                    <i class="fas fa-industry text-6xl text-orange-600 opacity-30"></i>
-                </div>
-                <div class="p-8">
-                    <h3 class="text-2xl font-bold mb-3" style="color: #ff6600;">
-                        <i class="fas fa-industry mr-2"></i> Công Nghiệp & Kho
-                    </h3>
-                    <p class="text-gray-700 mb-4">
-                        Thang máy tải hàng nặng, chịu lực cao, bền vững cho nhà máy, kho hàng, xưởng sản xuất.
-                    </p>
-                    
-                    <h4 class="font-bold mb-3 text-gray-800">Sản phẩm phù hợp:</h4>
-                    <ul class="space-y-2 text-sm text-gray-700 mb-4">
-                        <li><i class="fas fa-check mr-2" style="color: #ff6600;"></i>Thang máy tải hàng</li>
-                        <li><i class="fas fa-check mr-2" style="color: #ff6600;"></i>Thang máy công nghiệp</li>
-                        <li><i class="fas fa-check mr-2" style="color: #ff6600;"></i>Thang máy dẫn hàng</li>
-                    </ul>
-                    
-                    <h4 class="font-bold mb-3 text-gray-800">Đặc điểm:</h4>
-                    <ul class="space-y-2 text-sm text-gray-700">
-                        <li><i class="fas fa-arrow-right mr-2" style="color: #ff6600;"></i>Công suất: 2500-5000 kg</li>
-                        <li><i class="fas fa-arrow-right mr-2" style="color: #ff6600;"></i>Chịu tải cao</li>
-                        <li><i class="fas fa-arrow-right mr-2" style="color: #ff6600;"></i>Bền vững lâu dài</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Solution 5: Thương Mại & Trung Tâm -->
-            <div class="solution-card bg-white rounded-lg shadow-md overflow-hidden">
-                <div class="h-48 bg-gradient-to-br from-purple-100 to-purple-50 flex items-center justify-center">
-                    <i class="fas fa-store text-6xl text-purple-600 opacity-30"></i>
-                </div>
-                <div class="p-8">
-                    <h3 class="text-2xl font-bold mb-3" style="color: #9333ea;">
-                        <i class="fas fa-store mr-2"></i> Thương Mại & Trung Tâm
-                    </h3>
-                    <p class="text-gray-700 mb-4">
-                        Thang máy cho trung tâm thương mại, khách sạn, nhà hàng, với thiết kế sang trọng, lưu lượng cao.
-                    </p>
-                    
-                    <h4 class="font-bold mb-3 text-gray-800">Sản phẩm phù hợp:</h4>
-                    <ul class="space-y-2 text-sm text-gray-700 mb-4">
-                        <li><i class="fas fa-check mr-2" style="color: #9333ea;"></i>Thang máy công cộng</li>
-                        <li><i class="fas fa-check mr-2" style="color: #9333ea;"></i>Thang máy cao tốc</li>
-                        <li><i class="fas fa-check mr-2" style="color: #9333ea;"></i>Thang máy passenger</li>
-                    </ul>
-                    
-                    <h4 class="font-bold mb-3 text-gray-800">Đặc điểm:</h4>
-                    <ul class="space-y-2 text-sm text-gray-700">
-                        <li><i class="fas fa-arrow-right mr-2" style="color: #9333ea;"></i>Công suất: 1000-2000 kg</li>
-                        <li><i class="fas fa-arrow-right mr-2" style="color: #9333ea;"></i>Thiết kế sang trọng</li>
-                        <li><i class="fas fa-arrow-right mr-2" style="color: #9333ea;"></i>Lưu lượng cao</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Solution 6: Giáo Dục & Công Cộng -->
-            <div class="solution-card bg-white rounded-lg shadow-md overflow-hidden">
-                <div class="h-48 bg-gradient-to-br from-indigo-100 to-indigo-50 flex items-center justify-center">
-                    <i class="fas fa-graduation-cap text-6xl text-indigo-600 opacity-30"></i>
-                </div>
-                <div class="p-8">
-                    <h3 class="text-2xl font-bold mb-3" style="color: #4f46e5;">
-                        <i class="fas fa-graduation-cap mr-2"></i> Giáo Dục & Công Cộng
-                    </h3>
-                    <p class="text-gray-700 mb-4">
-                        Thang máy cho trường học, đại học, trung tâm công cộng với an toàn cao, dễ sử dụng cho học sinh.
-                    </p>
-                    
-                    <h4 class="font-bold mb-3 text-gray-800">Sản phẩm phù hợp:</h4>
-                    <ul class="space-y-2 text-sm text-gray-700 mb-4">
-                        <li><i class="fas fa-check mr-2" style="color: #4f46e5;"></i>Thang máy công cộng</li>
-                        <li><i class="fas fa-check mr-2" style="color: #4f46e5;"></i>Thang máy tiêu chuẩn</li>
-                        <li><i class="fas fa-check mr-2" style="color: #4f46e5;"></i>Thang máy an toàn</li>
-                    </ul>
-                    
-                    <h4 class="font-bold mb-3 text-gray-800">Đặc điểm:</h4>
-                    <ul class="space-y-2 text-sm text-gray-700">
-                        <li><i class="fas fa-arrow-right mr-2" style="color: #4f46e5;"></i>Công suất: 1000-1600 kg</li>
-                        <li><i class="fas fa-arrow-right mr-2" style="color: #4f46e5;"></i>An toàn tuyệt đối</li>
-                        <li><i class="fas fa-arrow-right mr-2" style="color: #4f46e5;"></i>Dễ sử dụng</li>
-                    </ul>
-                </div>
-            </div>
+  <section class="py-16 md:py-24 bg-white overflow-hidden">
+    <div class="max-w-[1200px] mx-auto px-4 space-y-20 md:space-y-32">
+      
+      <div class="flex flex-col lg:flex-row items-center gap-10 md:gap-16">
+        <div class="w-full lg:w-1/2">
+          <div class="relative rounded-lg overflow-hidden shadow-2xl">
+            <img src="{% static 'images/giai-phap-xay-dung-biet-thu-gpxd.jpg' %}" alt="Giải pháp biệt thự" class="w-full h-auto object-cover hover:scale-105 transition duration-700">
+            <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-red-700 rounded-lg -z-10 hidden md:block"></div>
+          </div>
         </div>
-    </div>
-</section>
-
-<!-- ===== PROCESS SECTION ===== -->
-<section class="py-16 bg-white">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold section-title text-center mb-12">Quy Trình Triển Khai Giải Pháp</h2>
-
-        <div class="max-w-3xl mx-auto space-y-8">
-            <!-- Step 1 -->
-            <div class="process-step" data-step="1">
-                <h4 class="font-bold text-lg mb-2">Đánh Giá Nhu Cầu</h4>
-                <p class="text-gray-700">
-                    Chuyên viên HQT sẽ khảo sát công trình, hiểu rõ nhu cầu, lưu lượng người, điều kiện kỹ thuật để đề xuất giải pháp tối ưu nhất.
-                </p>
-            </div>
-
-            <!-- Step 2 -->
-            <div class="process-step" data-step="2">
-                <h4 class="font-bold text-lg mb-2">Thiết Kế Giải Pháp</h4>
-                <p class="text-gray-700">
-                    Dựa trên đánh giá, HQT thiết kế giải pháp chi tiết với cấu hình tối ưu, bảo đảm tiết kiệm chi phí và hiệu suất cao nhất.
-                </p>
-            </div>
-
-            <!-- Step 3 -->
-            <div class="process-step" data-step="3">
-                <h4 class="font-bold text-lg mb-2">Báo Giá & Tư Vấn</h4>
-                <p class="text-gray-700">
-                    Cung cấp báo giá chi tiết, giải thích về sản phẩm, dịch vụ, bảo hành, bảo dưỡng. Trả lời mọi câu hỏi và lo lắng của khách hàng.
-                </p>
-            </div>
-
-            <!-- Step 4 -->
-            <div class="process-step" data-step="4">
-                <h4 class="font-bold text-lg mb-2">Ký Hợp Đồng</h4>
-                <p class="text-gray-700">
-                    Thỏa thuận hợp đồng rõ ràng, xác định tiến độ, điều kiện thanh toán, bảo hành, bảo dưỡng, hỗ trợ kỹ thuật.
-                </p>
-            </div>
-
-            <!-- Step 5 -->
-            <div class="process-step" data-step="5">
-                <h4 class="font-bold text-lg mb-2">Thi Công & Lắp Đặt</h4>
-                <p class="text-gray-700">
-                    Đội ngũ kỹ sư chuyên nghiệp thi công theo tiêu chuẩn quốc tế, kiểm tra chất lượng từng bước, đảm bảo tiến độ.
-                </p>
-            </div>
-
-            <!-- Step 6 -->
-            <div class="process-step" data-step="6">
-                <h4 class="font-bold text-lg mb-2">Bàn Giao & Hỗ Trợ</h4>
-                <p class="text-gray-700">
-                    Bàn giao chính thức, hướng dẫn sử dụng, hỗ trợ bảo dưỡng định kỳ, sửa chữa 24/7 suốt thời gian bảo hành và sau.
-                </p>
-            </div>
+        <div class="w-full lg:w-1/2">
+          <h2 class="text-xs font-bold text-red-700 uppercase tracking-[0.15em] mb-3">01. Xây Mới</h2>
+          <h3 class="text-[28px] md:text-4xl font-bold text-gray-900 mb-6 leading-tight">Giải pháp cho Biệt thự & Nhà phố xây mới</h3>
+          <p class="text-gray-600 text-[15px] leading-relaxed mb-6">
+            Đồng bộ thiết kế thang máy ngay từ bản vẽ kiến trúc ban đầu. Giúp tối ưu vị trí hố thang, hài hòa tuyệt đối với nội thất và phong thủy của ngôi nhà.
+          </p>
+          <ul class="space-y-4">
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-red-600 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              <span class="text-[14px] text-gray-800 font-medium">Linh hoạt kích thước, tải trọng từ 250kg đến 630kg.</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-red-600 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              <span class="text-[14px] text-gray-800 font-medium">Đa dạng vật liệu cabin: Inox hoa văn, vân gỗ, kính cường lực.</span>
+            </li>
+          </ul>
+          <a href="{% url_cms 'contact' %}" class="mt-8 inline-block text-red-700 font-bold text-[14px] hover:text-red-800 underline underline-offset-4">Nhận tư vấn bản vẽ &rarr;</a>
         </div>
-    </div>
-</section>
+      </div>
 
-<!-- ===== COMPARISON SECTION ===== -->
-<section class="py-16 bg-gray-50">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold section-title text-center mb-12">So Sánh Các Giải Pháp</h2>
-
-        <div class="overflow-x-auto">
-            <table class="w-full text-sm bg-white rounded-lg overflow-hidden shadow-md">
-                <thead>
-                    <tr class="gradient-red text-white">
-                        <th class="px-4 py-3 text-left">Loại Công Trình</th>
-                        <th class="px-4 py-3 text-center">Công Suất Tối Ưu</th>
-                        <th class="px-4 py-3 text-center">Tốc Độ</th>
-                        <th class="px-4 py-3 text-center">Chiều Cao</th>
-                        <th class="px-4 py-3 text-center">An Toàn</th>
-                        <th class="px-4 py-3 text-center">Giá Thành</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="border-b hover:bg-gray-50">
-                        <td class="px-4 py-3 font-bold">Nhà Phố & Biệt Thự</td>
-                        <td class="px-4 py-3 text-center">1000-1500 kg</td>
-                        <td class="px-4 py-3 text-center">1.0 m/s</td>
-                        <td class="px-4 py-3 text-center">3-15 m</td>
-                        <td class="px-4 py-3 text-center"><span class="text-green-600">★★★★★</span></td>
-                        <td class="px-4 py-3 text-center">Vừa</td>
-                    </tr>
-                    <tr class="border-b hover:bg-gray-50">
-                        <td class="px-4 py-3 font-bold">Căn Hộ & Tòa Nhà</td>
-                        <td class="px-4 py-3 text-center">1000-2500 kg</td>
-                        <td class="px-4 py-3 text-center">1.0-4.0 m/s</td>
-                        <td class="px-4 py-3 text-center">3-50 m</td>
-                        <td class="px-4 py-3 text-center"><span class="text-green-600">★★★★★</span></td>
-                        <td class="px-4 py-3 text-center">Cao</td>
-                    </tr>
-                    <tr class="border-b hover:bg-gray-50">
-                        <td class="px-4 py-3 font-bold">Bệnh Viện & Y Tế</td>
-                        <td class="px-4 py-3 text-center">2000-3000 kg</td>
-                        <td class="px-4 py-3 text-center">0.6-1.0 m/s</td>
-                        <td class="px-4 py-3 text-center">3-30 m</td>
-                        <td class="px-4 py-3 text-center"><span class="text-green-600">★★★★★</span></td>
-                        <td class="px-4 py-3 text-center">Cao</td>
-                    </tr>
-                    <tr class="border-b hover:bg-gray-50">
-                        <td class="px-4 py-3 font-bold">Công Nghiệp & Kho</td>
-                        <td class="px-4 py-3 text-center">2500-5000 kg</td>
-                        <td class="px-4 py-3 text-center">0.6-1.6 m/s</td>
-                        <td class="px-4 py-3 text-center">3-30 m</td>
-                        <td class="px-4 py-3 text-center"><span class="text-green-600">★★★★☆</span></td>
-                        <td class="px-4 py-3 text-center">Vừa-Cao</td>
-                    </tr>
-                    <tr class="border-b hover:bg-gray-50">
-                        <td class="px-4 py-3 font-bold">Thương Mại & Trung Tâm</td>
-                        <td class="px-4 py-3 text-center">1000-2000 kg</td>
-                        <td class="px-4 py-3 text-center">1.0-4.0 m/s</td>
-                        <td class="px-4 py-3 text-center">3-30 m</td>
-                        <td class="px-4 py-3 text-center"><span class="text-green-600">★★★★★</span></td>
-                        <td class="px-4 py-3 text-center">Cao</td>
-                    </tr>
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-4 py-3 font-bold">Giáo Dục & Công Cộng</td>
-                        <td class="px-4 py-3 text-center">1000-1600 kg</td>
-                        <td class="px-4 py-3 text-center">1.0-1.6 m/s</td>
-                        <td class="px-4 py-3 text-center">3-20 m</td>
-                        <td class="px-4 py-3 text-center"><span class="text-green-600">★★★★★</span></td>
-                        <td class="px-4 py-3 text-center">Vừa</td>
-                    </tr>
-                </tbody>
-            </table>
+      <div class="flex flex-col-reverse lg:flex-row items-center gap-10 md:gap-16">
+        <div class="w-full lg:w-1/2">
+          <h2 class="text-xs font-bold text-red-700 uppercase tracking-[0.15em] mb-3">02. Cải Tạo</h2>
+          <h3 class="text-[28px] md:text-4xl font-bold text-gray-900 mb-6 leading-tight">Lắp đặt thang máy cho nhà cải tạo</h3>
+          <p class="text-gray-600 text-[15px] leading-relaxed mb-6">
+            Giải quyết triệt để bài toán không gian hẹp, không cần đào sâu hố pít hay nâng cao tầng trên cùng (OH). Khung thép chịu lực độc lập không phá vỡ kết cấu hiện trạng.
+          </p>
+          <ul class="space-y-4">
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-red-600 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              <span class="text-[14px] text-gray-800 font-medium">Hố pit siêu nông, chỉ từ 300mm.</span>
+            </li>
+            <li class="flex items-start">
+              <svg class="w-6 h-6 text-red-600 mr-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              <span class="text-[14px] text-gray-800 font-medium">Thi công nhanh gọn trong 10 - 15 ngày, hạn chế tiếng ồn.</span>
+            </li>
+          </ul>
         </div>
+        <div class="w-full lg:w-1/2">
+          <div class="relative rounded-lg overflow-hidden shadow-2xl">
+            <img src="{% static 'images/elevator_renovation.jpg' %}" alt="Cải tạo thang máy" class="w-full h-auto object-cover hover:scale-105 transition duration-700">
+            <div class="absolute -top-4 -left-4 w-24 h-24 bg-gray-200 rounded-lg -z-10 hidden md:block"></div>
+          </div>
+        </div>
+      </div>
+
     </div>
-</section>
-
-<!-- ===== CTA SECTION ===== -->
-{% include "default/sections/cta.html" with button_text="YÊU CẦU TƯ VẤN" title="CẦN GIẢI PHÁP CHO CÔNG TRÌNH CỦA BẠN?" description="Liên hệ với HQT để nhận tư vấn miễn phí từ chuyên gia." %}
-
+  </section>
+</main>
 {% endblock %}

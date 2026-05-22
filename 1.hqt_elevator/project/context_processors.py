@@ -18,6 +18,10 @@ from project.apps.models import (
     Product,
     ProductCategory,
 )
+from recruitment_engine.models import (
+    Department,
+    Job,
+)
 
 
 ## ============= GLOBAL SITE SETTINGS ====================================
@@ -105,7 +109,7 @@ def products(request, kwargs=None):
             Product.objects.filter(
                 is_active=True,
             ).order_by('sorted_as', 'created_at')
-        ) * 20
+        ) * 10
         paginator = Paginator(qs, 6)
         products = paginator.get_page(request.GET.get("page"))
 
@@ -114,7 +118,7 @@ def products(request, kwargs=None):
     })
 
 def product(request, kwargs=None):
-    related_portfolios = []
+    related_products = []
     try:
         product = get_object_or_404(
             Product.objects.prefetch_related(
@@ -146,7 +150,7 @@ def portfolios(request, kwargs=None):
         "portfolios": portfolios,
     })
 
-def portfolio(request, kwargs):
+def portfolio(request, kwargs=None):
     related_portfolios = []
     try:
         portfolio = get_object_or_404(Portfolio, slug=kwargs.get('slug'))
@@ -177,7 +181,7 @@ def articles(request, kwargs=None):
             Article.objects.filter(
                 is_active=True,
             ).order_by('sorted_as', 'created_at')
-        ) * 20
+        ) * 10
         paginator = Paginator(qs, 4)
         articles = paginator.get_page(request.GET.get("page"))
 
@@ -185,7 +189,7 @@ def articles(request, kwargs=None):
         "articles": articles,
     })
 
-def article(request, kwargs):
+def article(request, kwargs=None):
     related_articles = []
     related_categories = []
 
@@ -216,4 +220,18 @@ def article(request, kwargs):
         "article": article,
         "related_articles": related_articles,
         "related_categories": related_categories,
+    })
+
+def recruitment(request, kwargs=None):
+    departments = Department.objects.filter(
+        is_active=True,
+    ).order_by('sorted_as')
+
+    jobs = Job.objects.filter(
+        is_active=True,
+    ).order_by('sorted_as')
+
+    return dict({
+        "departments": departments,
+        "jobs": jobs,
     })

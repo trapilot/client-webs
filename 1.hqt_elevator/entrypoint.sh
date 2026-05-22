@@ -2,6 +2,9 @@
 
 set -e
 
+echo "Waiting for collect static files..."
+python manage.py collectstatic --no-input --force
+
 echo "Waiting for database..."
 
 # ⏳ Wait for MySQL to be ready (only if nc exists)
@@ -24,7 +27,6 @@ if [ "$DB_MIGRATE" = "True" ] || [ "$DB_MIGRATE" = "true" ] || [ "$DB_MIGRATE" =
   python manage.py flush --no-input
   python manage.py makemigrations
   python manage.py migrate
-  python manage.py collectstatic --no-input --force
 
 else
   echo "DB_MIGRATE is disabled. Skipping migrations."

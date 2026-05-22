@@ -3,127 +3,255 @@
 
 {% block extracss %}
 <style>
-.job-card {
-    transition: all .3s ease;
-}
-.job-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 15px 40px rgba(196, 30, 58, 0.15);
-}
+  body.modal-open { overflow: hidden; }
 </style>
 {% endblock %}
 
 {% block extrajs %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const filterSelect = document.getElementById('department-filter');
+    const jobItems = document.querySelectorAll('.job-item');
+    const emptyFilterMsg = document.getElementById('empty-filter-msg');
+    
+    if (filterSelect) {
+      filterSelect.addEventListener('change', function() {
+        const selectedDeptId = this.value;
+        let visibleCount = 0;
+        
+        jobItems.forEach(item => {
+          const itemDeptId = item.getAttribute('data-department-id');
+          
+          if (selectedDeptId === 'all' || selectedDeptId === itemDeptId) {
+            item.style.display = 'flex';
+            visibleCount++;
+          } else {
+            item.style.display = 'none';
+          }
+        });        
+        
+        if (emptyFilterMsg) {
+          emptyFilterMsg.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+      });
+    }
+  });
+
+  function openApplyModal(jobId, jobTitle) {
+    const modal = document.getElementById('apply-modal');
+    document.getElementById('modal-job-id').value = jobId;
+    document.getElementById('modal-job-title').innerText = jobTitle;
+    
+    modal.classList.remove('hidden');
+    document.body.classList.add('modal-open');
+  }
+
+  function closeApplyModal() {
+    const modal = document.getElementById('apply-modal');
+    modal.classList.add('hidden');
+    document.body.classList.remove('modal-open');
+  }
+
+  document.getElementById('apply-modal')?.addEventListener('click', function(e) {
+    if (e.target === this) {
+      closeApplyModal();
+    }
+  });
+</script>
+{% endblock %}
+
+
+{% block innerhero %}
+<section class="bg-gray-900 py-16 md:py-24 relative overflow-hidden">
+  <div class="absolute inset-0 z-0 opacity-30">
+    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1920&q=80" alt="Tuyển dụng HQT Elevator" class="w-full h-full object-cover mix-blend-luminosity">
+  </div>
+  <div class="max-w-[1200px] mx-auto px-4 relative z-10 text-center">
+    <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6 uppercase tracking-tight">Gia Nhập Đội Ngũ <br/><span class="text-red-500">HQT Elevator</span></h1>
+    <p class="text-gray-300 text-[15px] md:text-[16px] max-w-2xl mx-auto mb-8 leading-relaxed">
+      Chúng tôi luôn tìm kiếm những con người đam mê, nhiệt huyết để cùng nhau kiến tạo những không gian sống đẳng cấp và an toàn cho hàng triệu gia đình Việt.
+    </p>
+    <a href="#vacancies" class="inline-block bg-red-700 text-white font-bold px-8 py-3.5 rounded text-[14px] hover:bg-red-800 transition shadow-lg">XEM VỊ TRÍ ĐANG TUYỂN ↓</a>
+  </div>
+</section>
 {% endblock %}
 
 {% block content %}
-<!-- WHY JOIN US -->
-<section class="py-16 bg-white">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold section-title text-center mb-12">Vì Sao Chọn Chúng Tôi</h2>
-
-        <div class="grid grid-cols-3 gap-8">
-            <div class="text-center p-6 bg-gray-50 rounded-lg">
-                <i class="fas fa-briefcase text-4xl text-red-elevator mb-4"></i>
-                <h3 class="font-bold mb-2">Môi Trường Chuyên Nghiệp</h3>
-                <p class="text-sm text-gray-600">Làm việc với đội ngũ kỹ sư giàu kinh nghiệm</p>
-            </div>
-
-            <div class="text-center p-6 bg-gray-50 rounded-lg">
-                <i class="fas fa-chart-line text-4xl text-red-elevator mb-4"></i>
-                <h3 class="font-bold mb-2">Phát Triển Sự Nghiệp</h3>
-                <p class="text-sm text-gray-600">Cơ hội thăng tiến rõ ràng theo năng lực</p>
-            </div>
-
-            <div class="text-center p-6 bg-gray-50 rounded-lg">
-                <i class="fas fa-wallet text-4xl text-red-elevator mb-4"></i>
-                <h3 class="font-bold mb-2">Thu Nhập Cạnh Tranh</h3>
-                <p class="text-sm text-gray-600">Lương + thưởng theo dự án hấp dẫn</p>
-            </div>
+<main class="font-sans text-gray-900 antialiased bg-gray-50">
+  {% if messages %}
+  <div class="fixed top-24 right-4 z-[110] flex flex-col gap-2">
+    {% for message in messages %}
+      <div class="p-4 rounded shadow-lg text-sm font-bold text-white transition-all 
+        {% if message.tags == 'success' %}bg-green-600{% elif message.tags == 'error' %}bg-red-600{% else %}bg-gray-800{% endif %}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+  
+  <script>
+    setTimeout(() => {
+      const msgs = document.querySelectorAll('.fixed.top-24.right-4 > div');
+      msgs.forEach(el => el.style.display = 'none');
+    }, 5000);
+  </script>
+  {% endif %}
+  <section class="py-16 md:py-20 bg-white border-b border-gray-200">
+    <div class="max-w-[1200px] mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-xs font-bold text-red-700 uppercase tracking-[0.15em] mb-2">MÔI TRƯỜNG LÀM VIỆC</h2>
+        <h3 class="text-2xl md:text-3xl font-bold text-gray-900">Tại sao nên chọn HQT Elevator?</h3>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="text-center p-6 rounded-lg bg-gray-50 border border-gray-100 hover:shadow-md transition">
+          <div class="w-14 h-14 mx-auto bg-red-100 text-red-700 rounded-full flex items-center justify-center mb-4"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+          <h4 class="font-bold text-[16px] text-gray-900 mb-2">Thu nhập hấp dẫn</h4>
+          <p class="text-[13px] text-gray-600 leading-relaxed">Lương thưởng cạnh tranh, xét tăng lương định kỳ và thưởng hiệu quả dự án cao.</p>
         </div>
-    </div>
-</section>
-
-<!-- JOB LIST -->
-<section class="py-16 bg-gray-50">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold section-title text-center mb-12">Vị Trí Tuyển Dụng</h2>
-
-        <div class="grid grid-cols-2 gap-8">
-
-            <!-- Job 1 -->
-            <div class="job-card bg-white p-6 rounded-lg border">
-                <h3 class="text-xl font-bold text-red-elevator mb-2">Kỹ Sư Thang Máy</h3>
-                <p class="text-gray-600 text-sm mb-3">
-                    Thiết kế, lắp đặt và bảo trì hệ thống thang máy
-                </p>
-
-                <div class="text-sm text-gray-700 space-y-1 mb-4">
-                    <p><i class="fas fa-map-marker-alt text-red-elevator mr-2"></i>Hà Nội / TP.HCM</p>
-                    <p><i class="fas fa-clock text-red-elevator mr-2"></i>Full-time</p>
-                    <p><i class="fas fa-coins text-red-elevator mr-2"></i>15 - 30 triệu</p>
-                </div>
-
-                <button class="bg-red-elevator text-white px-4 py-2 rounded hover:opacity-90">
-                    Ứng tuyển
-                </button>
-            </div>
-
-            <!-- Job 2 -->
-            <div class="job-card bg-white p-6 rounded-lg border">
-                <h3 class="text-xl font-bold text-red-elevator mb-2">Kỹ Thuật Viên Bảo Trì</h3>
-                <p class="text-gray-600 text-sm mb-3">
-                    Bảo trì, kiểm tra và xử lý sự cố thang máy
-                </p>
-
-                <div class="text-sm text-gray-700 space-y-1 mb-4">
-                    <p><i class="fas fa-map-marker-alt text-red-elevator mr-2"></i>Toàn quốc</p>
-                    <p><i class="fas fa-clock text-red-elevator mr-2"></i>Full-time</p>
-                    <p><i class="fas fa-coins text-red-elevator mr-2"></i>10 - 18 triệu</p>
-                </div>
-
-                <button class="bg-red-elevator text-white px-4 py-2 rounded hover:opacity-90">
-                    Ứng tuyển
-                </button>
-            </div>
-
-            <!-- Job 3 -->
-            <div class="job-card bg-white p-6 rounded-lg border">
-                <h3 class="text-xl font-bold text-red-elevator mb-2">Nhân Viên Kinh Doanh</h3>
-                <p class="text-gray-600 text-sm mb-3">
-                    Tư vấn và phát triển khách hàng dự án thang máy
-                </p>
-
-                <div class="text-sm text-gray-700 space-y-1 mb-4">
-                    <p><i class="fas fa-map-marker-alt text-red-elevator mr-2"></i>Hà Nội</p>
-                    <p><i class="fas fa-clock text-red-elevator mr-2"></i>Full-time</p>
-                    <p><i class="fas fa-coins text-red-elevator mr-2"></i>12 - 40 triệu</p>
-                </div>
-
-                <button class="bg-red-elevator text-white px-4 py-2 rounded hover:opacity-90">
-                    Ứng tuyển
-                </button>
-            </div>
-
-            <!-- Job 4 -->
-            <div class="job-card bg-white p-6 rounded-lg border">
-                <h3 class="text-xl font-bold text-red-elevator mb-2">Kỹ Sư Thiết Kế</h3>
-                <p class="text-gray-600 text-sm mb-3">
-                    Thiết kế bản vẽ kỹ thuật thang máy & hệ thống cơ khí
-                </p>
-
-                <div class="text-sm text-gray-700 space-y-1 mb-4">
-                    <p><i class="fas fa-map-marker-alt text-red-elevator mr-2"></i>Hà Nội</p>
-                    <p><i class="fas fa-clock text-red-elevator mr-2"></i>Full-time</p>
-                    <p><i class="fas fa-coins text-red-elevator mr-2"></i>18 - 35 triệu</p>
-                </div>
-
-                <button class="bg-red-elevator text-white px-4 py-2 rounded hover:opacity-90">
-                    Ứng tuyển
-                </button>
-            </div>
-
+        <div class="text-center p-6 rounded-lg bg-gray-50 border border-gray-100 hover:shadow-md transition">
+          <div class="w-14 h-14 mx-auto bg-red-100 text-red-700 rounded-full flex items-center justify-center mb-4"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg></div>
+          <h4 class="font-bold text-[16px] text-gray-900 mb-2">Đào tạo chuyên sâu</h4>
+          <p class="text-[13px] text-gray-600 leading-relaxed">Cơ hội làm việc trực tiếp với chuyên gia, đào tạo nâng cao tay nghề chuẩn Nhật Bản.</p>
         </div>
+        <div class="text-center p-6 rounded-lg bg-gray-50 border border-gray-100 hover:shadow-md transition">
+          <div class="w-14 h-14 mx-auto bg-red-100 text-red-700 rounded-full flex items-center justify-center mb-4"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg></div>
+          <h4 class="font-bold text-[16px] text-gray-900 mb-2">Phúc lợi toàn diện</h4>
+          <p class="text-[13px] text-gray-600 leading-relaxed">Bảo hiểm sức khỏe cao cấp, du lịch thường niên, khám sức khỏe định kỳ.</p>
+        </div>
+        <div class="text-center p-6 rounded-lg bg-gray-50 border border-gray-100 hover:shadow-md transition">
+          <div class="w-14 h-14 mx-auto bg-red-100 text-red-700 rounded-full flex items-center justify-center mb-4"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg></div>
+          <h4 class="font-bold text-[16px] text-gray-900 mb-2">Lộ trình thăng tiến</h4>
+          <p class="text-[13px] text-gray-600 leading-relaxed">Môi trường minh bạch, đánh giá năng lực công bằng và cơ hội phát triển rõ ràng.</p>
+        </div>
+      </div>
     </div>
-</section>
+  </section>
+
+  <section id="vacancies" class="py-16 md:py-24 relative">
+    <div class="max-w-[1000px] mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-end mb-8">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Vị trí đang tuyển dụng</h2>
+          <p class="text-[14px] text-gray-500">Khám phá các cơ hội nghề nghiệp hiện tại và ứng tuyển ngay.</p>
+        </div>
+        
+        <div class="mt-4 md:mt-0 w-full md:w-auto">
+          <select id="department-filter" class="w-full md:w-56 px-4 py-2.5 text-[14px] font-medium bg-white border border-gray-300 rounded focus:outline-none focus:border-red-700 shadow-sm cursor-pointer">
+            <option value="all">Tất cả phòng ban</option>
+            {% for dept in departments %}
+            <option value="{{ dept.id }}">{{ dept.title }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="space-y-4 relative min-h-[200px]">
+        {% if jobs|length %}
+          {% for job in jobs %}
+          <div class="job-item group bg-white border border-gray-200 rounded-lg p-6 flex flex-col md:flex-row justify-between items-start md:items-center hover:shadow-lg transition duration-300 hover:border-red-200" data-department-id="{{ job.department.id }}">
+            <div class="mb-4 md:mb-0">
+              <div class="flex items-center gap-3 mb-2">
+                <h3 class="text-xl font-bold text-gray-900 group-hover:text-red-700 transition">{{ job.title }}</h3>
+              </div>
+              <div class="flex flex-wrap items-center text-[13px] text-gray-500 gap-4 mt-2">
+                {% if job.address|length %}
+                <span class="flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>{{ job.address }}</span>
+                {% endif %}
+                <span class="flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>{{ job.type_display }}</span>
+                {% if job.salary|length %}
+                <span class="flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>{{ job.salary }}</span>
+                {% endif %}
+              </div>
+            </div>
+            <div class="w-full md:w-auto text-right">
+              <p class="text-[12px] text-gray-400 mb-2">Hạn nộp: {{ job.published_to|date:"d/m/Y"}}</p>
+              <button onclick="openApplyModal('{{ job.id }}', '{{ job.title|escapejs }}')" class="w-full md:w-auto block md:inline-block bg-white border border-red-700 text-red-700 font-bold px-6 py-2.5 rounded text-[13px] hover:bg-red-700 hover:text-white transition text-center cursor-pointer">
+                ỨNG TUYỂN NGAY
+              </button>
+            </div>
+          </div>
+          {% endfor %}
+
+          <div id="empty-filter-msg" class="text-center py-12 hidden">
+            <p class="text-gray-600 font-medium">Không có vị trí tuyển dụng phù hợp với phòng ban này.</p>
+          </div>
+
+        {% else %}
+          <div class="text-center py-12">
+            <p class="text-gray-600 font-medium">Chưa có vị trí tuyển dụng mới</p>
+            <p class="text-gray-400 text-sm mt-1">Vui lòng quay lại sau</p>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#1a1a1a] py-16 text-white border-t border-gray-800">
+    <div class="max-w-[1200px] mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-2xl md:text-3xl font-bold mb-4">Quy trình ứng tuyển</h2>
+        <p class="text-gray-400 text-[14px]">Quy trình tinh gọn, chuyên nghiệp, tiết kiệm thời gian cho ứng viên.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 relative gap-8 text-center">
+        <div class="hidden md:block absolute top-8 left-1/4 right-1/4 h-0.5 bg-gray-700 z-0"></div>
+        <div class="relative z-10"><div class="w-16 h-16 mx-auto bg-gray-800 border-2 border-red-600 rounded-full flex items-center justify-center font-bold text-xl mb-4">1</div><h4 class="font-bold text-[16px] mb-2">Nộp hồ sơ</h4><p class="text-[13px] text-gray-400">Gửi CV qua form trực tuyến hoặc email nhân sự.</p></div>
+        <div class="relative z-10"><div class="w-16 h-16 mx-auto bg-gray-800 border-2 border-red-600 rounded-full flex items-center justify-center font-bold text-xl mb-4">2</div><h4 class="font-bold text-[16px] mb-2">Lọc hồ sơ</h4><p class="text-[13px] text-gray-400">Phòng ban đánh giá mức độ phù hợp trong 3 ngày.</p></div>
+        <div class="relative z-10"><div class="w-16 h-16 mx-auto bg-gray-800 border-2 border-red-600 rounded-full flex items-center justify-center font-bold text-xl mb-4">3</div><h4 class="font-bold text-[16px] mb-2">Phỏng vấn</h4><p class="text-[13px] text-gray-400">Gặp mặt trực tiếp trưởng bộ phận & Nhân sự.</p></div>
+        <div class="relative z-10"><div class="w-16 h-16 mx-auto bg-red-700 border-2 border-red-700 rounded-full flex items-center justify-center font-bold text-xl mb-4 text-white">4</div><h4 class="font-bold text-[16px] mb-2">Nhận việc (Offer)</h4><p class="text-[13px] text-gray-400">Thỏa thuận lương thưởng và gia nhập công ty.</p></div>
+      </div>
+
+      <div class="text-center mt-12 pt-8 border-t border-gray-800">
+        <p class="text-[14px] text-gray-400">Mọi thắc mắc về tuyển dụng vui lòng liên hệ: {% if project.TEAM_HR_EMAIL %}<a href="mailto:{{ project.TEAM_HR_EMAIL }}" class="text-red-500 font-bold hover:underline">{{ project.TEAM_HR_EMAIL }}</a>{% else %}<a href="mailto:{{ project.email }}" class="text-red-500 font-bold hover:underline">{{ project.email }}</a>{% endif%} hoặc SĐT <span class="text-red-500 font-bold">{% if project.TEAM_HR_PHONE %} {{ project.TEAM_HR_PHONE }} {% else %} {{ project.phone }} {% endif %}</span></p>
+      </div>
+    </div>
+  </section>
+
+  <div id="apply-modal" class="fixed inset-0 z-[100] hidden bg-gray-900/80 backdrop-blur-sm overflow-y-auto h-full w-full flex items-center justify-center px-4 transition-opacity">
+    <div class="relative bg-white w-full max-w-lg rounded-lg shadow-2xl p-6 md:p-8 my-8" onclick="event.stopPropagation();">
+      <button type="button" onclick="closeApplyModal()" class="absolute top-4 right-4 text-gray-400 hover:text-red-700 transition cursor-pointer">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+
+      <h3 class="text-xl font-bold text-gray-900 mb-1">Ứng tuyển vị trí</h3>
+      <p id="modal-job-title" class="text-red-700 font-bold mb-6 text-[15px] border-b border-gray-100 pb-4"></p>
+
+      <form action="{% url_cms 'submit_application' %}" method="POST" enctype="multipart/form-data" class="space-y-4">
+        {% csrf_token %}
+        <input type="hidden" name="job_id" id="modal-job-id" value="">
+
+        <div>
+          <label class="block text-[13px] font-bold text-gray-700 mb-1">Họ và tên *</label>
+          <input type="text" name="name" required class="w-full px-4 py-2.5 text-[14px] bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-red-700 focus:bg-white transition" placeholder="Nhập đầy đủ họ tên">
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-[13px] font-bold text-gray-700 mb-1">Số điện thoại *</label>
+            <input type="tel" name="phone" required class="w-full px-4 py-2.5 text-[14px] bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-red-700 focus:bg-white transition" placeholder="09xxxxxxx">
+          </div>
+          <div>
+            <label class="block text-[13px] font-bold text-gray-700 mb-1">Email *</label>
+            <input type="email" name="email" required class="w-full px-4 py-2.5 text-[14px] bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-red-700 focus:bg-white transition" placeholder="email@domain.com">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-[13px] font-bold text-gray-700 mb-1">Tải lên CV (PDF, DOCX) *</label>
+          <input type="file" name="file" accept=".pdf,.doc,.docx" required class="w-full text-[14px] text-gray-500 bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-red-700 transition file:mr-4 file:py-2.5 file:px-4 file:rounded-l file:border-0 file:text-[13px] file:font-bold file:bg-gray-200 file:text-gray-700 hover:file:bg-gray-300 cursor-pointer">
+        </div>
+
+        <div>
+          <label class="block text-[13px] font-bold text-gray-700 mb-1">Thư ngỏ (Cover Letter)</label>
+          <textarea name="message" rows="3" class="w-full px-4 py-2.5 text-[14px] bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-red-700 focus:bg-white transition" placeholder="Giới thiệu ngắn gọn về năng lực và kinh nghiệm của bạn..."></textarea>
+        </div>
+
+        <div class="pt-2">
+          <button type="submit" class="w-full bg-red-700 text-white font-bold text-[14px] py-3.5 rounded hover:bg-red-800 transition shadow-md">GỬI HỒ SƠ ỨNG TUYỂN</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</main>
 {% endblock %}

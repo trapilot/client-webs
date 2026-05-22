@@ -1,23 +1,25 @@
 {% load url_cms %}
 
 {% if not page.is_home %}
-<section class="bg-white border-b">
-    <div class="container mx-auto px-4 py-4">
-        <div class="flex items-center gap-2 text-sm">
-            <a class="text-red-elevator hover:underline" href="{% url_cms project.home_page.code %}">{{ project.home_page.name }}</a>
-            <i class="fas fa-chevron-right text-gray-400"></i>
-            {% if page.parent and page.is_internal %}
-                <a class="text-red-elevator hover:underline" href="{% url_cms page.parent.code %}">{{ page.parent.name }}</a>
-                <i class="fas fa-chevron-right text-gray-400"></i>
-                {% if product %}
-                <span class="text-gray-600">{{ product.title }}</span>
-                {% elif portfolio %}
-                <span class="text-gray-600">{{ portfolio.name }}</span>
-                {% endif %}
-            {% else %}
-            <span class="text-gray-600">{{ page.name }}</span>
+<div class="bg-gray-100 py-3 border-b border-gray-200">
+    <div class="max-w-[1200px] mx-auto px-4 flex text-[13px] font-medium text-gray-500">
+        <a href="{% url_cms project.home_page.code %}" class="hover:text-red-700 transition">{{ project.home_page.name }}</a><span class="mx-2">/</span>
+        
+        {% if page.parent and page.is_internal %}
+            <a href="{% url_cms page.parent.code %}" class="hover:text-red-700 transition">{{ page.parent.name }}</a>
+            <span class="mx-2">/</span> 
+            {% if product %}
+            <span class="text-gray-900 font-bold">{{ product.name }}</span>
+            {% elif portfolio %}
+            <span class="text-gray-900 font-bold">{{ portfolio.name }}</span>
+            {% elif category %}
+            <span class="text-gray-900 font-bold">{{ category.name }}</span>
             {% endif %}
-        </div>
+        {% elif category %}
+            <span class="text-gray-900 font-bold">{{ category.name }}</span>
+        {% else %}
+            <span class="text-gray-900 font-bold">{{ page.name }}</span>
+        {% endif %}
     </div>
-</section>
+</div>
 {% endif %}
