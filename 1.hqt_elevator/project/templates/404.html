@@ -1,37 +1,43 @@
 {% extends "default/layouts/base.html" %}
-{% load cache trad url_cms %}
+{% load i18n %}
 
-{% block extracss %}
-    {{block.super}}
-    <link rel="stylesheet" href="{{http_host}}/static/css/404.css" />
-{% endblock extracss %}
+{% block title %}404 - Không tìm thấy trang | HQT Elevator{% endblock %}
 
-{% block breadcrumb %}
-{% endblock breadcrumb %}
+{% block innerhero %}
+{% endblock %}
 
 {% block content %}
-{% cache 86400 project.code LANGUAGE_CODE %}
-<div class="container-fluid">
-    <div id="pag404" class="row px-xl-5 error-400">
-        <div class="col-12 mb-5">
-            <p>{% trad "We're sorry..." %}</p>
-            <strong>{% trad "The page you are looking for is not available or does not exist." %}</strong>
-        </div>
-
-        <div class="col-12 mb-5">
-            <p class="title">{% trad "Here are the possible causes" %}:</p>
-            <ul>
-                <li>{% trad "Having typed an incorrect URL directly into the browser" %}</li>
-                <li>{% trad "If you have clicked on a link, there may be a problem with it. Through the tabs and links on this page you can access all the content of our website" %}</li>
-            </ul>
-        </div>
-        <br/>
-        <div class="col-12 mb-5">
-            <p class="title">{% trad "If you are not clear..." %}</p>
-            {% trad "You can always go to" %}
-            <a href="{% url_cms project.home_page.code %}" title="{% trad project.home_page.name %}">{{ project.home_page.name }}</a>
-        </div>
+<main class="font-sans text-gray-900 antialiased bg-gray-50 flex items-center justify-center min-h-[70vh] py-20 relative overflow-hidden">
+  
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[15rem] md:text-[25rem] font-black text-gray-200/50 z-0 select-none pointer-events-none tracking-tighter">
+    404
+  </div>
+  
+  <div class="relative z-10 text-center max-w-[650px] px-4">
+    <div class="w-20 h-20 mx-auto bg-red-50 text-red-700 rounded-full flex items-center justify-center mb-6 shadow-sm border border-red-100">
+      <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
     </div>
-</div>
-{% endcache %}
-{% endblock content %}
+    
+    <h1 class="text-3xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">Không tìm thấy trang!</h1>
+    <p class="text-gray-600 text-[15px] md:text-[16px] mb-10 leading-relaxed">
+      Rất tiếc, đường dẫn bạn đang truy cập không tồn tại, đã bị xóa hoặc thay đổi tên. <br class="hidden md:block">Vui lòng kiểm tra lại URL hoặc chọn các liên kết bên dưới để tiếp tục.
+    </p>
+    
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <a href="/" class="w-full sm:w-auto bg-red-700 text-white font-bold px-8 py-3.5 rounded text-[14px] hover:bg-red-800 transition shadow-md">
+        VỀ TRANG CHỦ
+      </a>
+      <a href="/san-pham" class="w-full sm:w-auto border-2 border-gray-900 text-gray-900 font-bold px-8 py-3.5 rounded text-[14px] hover:bg-gray-900 hover:text-white transition">
+        XEM SẢN PHẨM
+      </a>
+    </div>
+    
+    <div class="mt-12 text-[13px] text-gray-400">
+      Bạn cần hỗ trợ khẩn cấp? Gọi ngay: <a href="tel:1800966966" class="text-red-700 font-bold hover:underline">1800 966 966</a>
+    </div>
+  </div>
+  
+</main>
+{% endblock %}
