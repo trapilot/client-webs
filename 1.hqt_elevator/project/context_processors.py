@@ -103,6 +103,9 @@ def products(request, kwargs=None):
         6
     )
     products = paginator.get_page(request.GET.get("page"))
+    categories = ProductCategory.objects.filter(
+        is_active=True,
+    )
 
     if os.getenv("APP_DEMO", "False").lower() == "true":
         qs = list(
@@ -115,6 +118,7 @@ def products(request, kwargs=None):
 
     return dict({
         "products": products,
+        "categories": categories,
     })
 
 def product(request, kwargs=None):
