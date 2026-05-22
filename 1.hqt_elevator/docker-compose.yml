@@ -31,7 +31,7 @@ services:
       - "8000"
     networks:
       - app_net
-    command: sh -c "gunicorn project.wsgi:application --bind 0.0.0.0:8000 --workers 3 --timeout 120"
+    command: sh -c "gunicorn project.wsgi:application --bind 0.0.0.0:8000 --workers 2 --threads 4 --worker-class gthread --timeout 60 --keep-alive 5 --max-requests 1000 --max-requests-jitter 100 --preload"
     # command: sh -c "python manage.py runserver 0.0.0.0:8000"
 
   nginx:
