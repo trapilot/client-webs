@@ -83,6 +83,7 @@ MIDDLEWARE = [
     # 'cms_engine.middleware.MultipleProxyMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'cms_engine.middleware.CmsEngine',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -96,7 +97,7 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -162,6 +163,10 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 USE_TM = True
+
+LOCALE_PATHS = [
+    BASE_DIR / "locale",
+]
 
 # Static files
 STATIC_URL = '/static/'

@@ -6,15 +6,8 @@ from django.db.models import Q
 from .models import (
     Product, ProductCategory, ProductFeature, ProductGallery, ProductReview,
     Portfolio, PortfolioGallery,
-    # ContactInquiry,
     
 )
-
-# ===== ADMIN SITE CONFIGURATION =====
-admin.site.site_header = "Admin Panel"
-admin.site.site_title = "Elevator"
-admin.site.index_title = "Quản Lý Nội Dung"
-# ===== ADMIN SITE CONFIGURATION =====
 
 
 @admin.register(ProductCategory)
@@ -254,71 +247,3 @@ class PortfolioAdmin(admin.ModelAdmin):
             obj.get_status_display()
         )
     status_badge.short_description = 'Trạng Thái'
-
-
-# @admin.register(ContactInquiry)
-# class ContactInquiryAdmin(admin.ModelAdmin):
-#     list_display = ('full_name', 'inquiry_type_display', 'email', 'phone', 'status_badge', 'created_at', 'days_ago')
-#     list_filter = ('inquiry_type', 'status', 'created_at')
-#     search_fields = ('full_name', 'email', 'phone', 'subject')
-#     readonly_fields = ('created_at', 'updated_at', 'responded_at', 'ip_address')
-#     actions = ['mark_as_viewed', 'mark_as_contacted', 'mark_as_closed']
-    
-#     fieldsets = (
-#         ('Thông Tin Khách Hàng', {
-#             'fields': ('full_name', 'email', 'phone', 'company_name')
-#         }),
-#         ('Yêu Cầu', {
-#             'fields': ('inquiry_type', 'subject', 'message')
-#         }),
-#         ('Trạng Thái', {
-#             'fields': ('status', 'notes', 'responded_by', 'responded_at')
-#         }),
-#         ('Thông Tin Bổ Sung', {
-#             'fields': ('address', 'ip_address', 'created_at', 'updated_at'),
-#             'classes': ('collapse',)
-#         }),
-#     )
-
-#     def inquiry_type_display(self, obj):
-#         return obj.get_inquiry_type_display()
-#     inquiry_type_display.short_description = 'Loại Yêu Cầu'
-
-#     def status_badge(self, obj):
-#         colors = {
-#             'new': '#DC3545',
-#             'viewed': '#FFC107',
-#             'contacted': '#17A2B8',
-#             'closed': '#28A745',
-#         }
-#         return format_html(
-#             '<span style="background-color: {}; color: white; padding: 3px 10px; border-radius: 3px;">{}</span>',
-#             colors.get(obj.status),
-#             obj.get_status_display()
-#         )
-#     status_badge.short_description = 'Trạng Thái'
-
-#     def days_ago(self, obj):
-#         from django.utils.timezone import now
-#         delta = now() - obj.created_at
-#         return format_html(
-#             '<span style="color: gray;">{} ngày trước</span>',
-#             delta.days
-#         )
-#     days_ago.short_description = 'Cách Đây'
-
-#     def mark_as_viewed(self, request, queryset):
-#         updated = queryset.update(status='viewed')
-#         self.message_user(request, f'✓ {updated} yêu cầu được đánh dấu là đã xem')
-#     mark_as_viewed.short_description = 'Đánh dấu là Đã Xem'
-
-#     def mark_as_contacted(self, request, queryset):
-#         from django.utils.timezone import now
-#         updated = queryset.update(status='contacted', responded_by=request.user, responded_at=now())
-#         self.message_user(request, f'✓ {updated} yêu cầu được đánh dấu là đã liên hệ')
-#     mark_as_contacted.short_description = 'Đánh dấu là Đã Liên Hệ'
-
-#     def mark_as_closed(self, request, queryset):
-#         updated = queryset.update(status='closed')
-#         self.message_user(request, f'✓ {updated} yêu cầu được đóng lại')
-#     mark_as_closed.short_description = 'Đóng Yêu Cầu'

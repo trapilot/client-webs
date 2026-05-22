@@ -11,24 +11,38 @@ class CustomIndexDashboard(Dashboard):
     def init_with_context(self, context):
         site_name = get_admin_site_name(context)
 
-        self.children.append(modules.AppList(
-            u'Applications',
-            collapsible=True,
+        self.children.append(modules.ModelList(
+            u'Project',
+            models=('project.*',),
             column=1,
-            css_classes=('collapse closed',),
-            exclude=('django.contrib.*',),
+        ))
+
+        self.children.append(modules.ModelList(
+            u'Recruitment',
+            models=('recruitment_engine.*',),
+            column=1,
+        ))
+
+        self.children.append(modules.ModelList(
+            u'Content Management',
+            models=('cms_app.*',),
+            column=1,
+        ))
+
+        self.children.append(modules.ModelList(
+            u'Website Settings',
+            models=('cms_engine.*',),
+            column=1,
         ))
 
         self.children.append(modules.ModelList(
             u'Administration',
-            column=1,
-            collapsible=False,
             models=('django.contrib.*',),
+            column=1,
         ))
 
         self.children.append(modules.RecentActions(
-            u'Recent actions',
+            u'Recent Activity',
             limit=5,
-            collapsible=False,
             column=3,
         ))
