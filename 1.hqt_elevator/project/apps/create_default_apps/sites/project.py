@@ -19,24 +19,20 @@ def create_default_apps(sender, **kwargs):
     def is_exists(project):
         return Project.objects.filter(code=project).exists()
 
-    CODE=os.getenv('DJANGO_PROJECT_CODE', settings.SITE_CODE)
-    NAME=os.getenv('DJANGO_PROJECT_NAME', settings.SITE_CODE)
-    DOMAIN=os.getenv('DJANGO_PROJECT_HOST', settings.SITE_URL)
-
-    if is_exists(CODE):
+    if is_exists(settings.SITE_CODE):
         return
 
     # sleep to wait another project
     time.sleep(1)
 
     project = Project.objects.create(
-        code=CODE,
-        name=NAME,
+        code=settings.SITE_CODE,
+        name=settings.SITE_CODE,
         type="ECOMMERCE",
         is_ssl=False,
         language_text='vi',
         language_type=0,
-        domain_vi='%s' % (DOMAIN),
+        domain_vi='%s' % (settings.SITE_HOST),
         slogan_vi='HQT Elevator - Thương hiệu thang máy gia đình chuẩn Nhật Bản, nâng tầm an toàn, tiện nghi và đẳng cấp cho mọi không gian.',
     )
 

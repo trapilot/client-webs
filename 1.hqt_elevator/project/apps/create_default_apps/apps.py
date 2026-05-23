@@ -10,9 +10,7 @@ class CreateDefaultAppsConfig(AppConfig):
     name = 'project'
 
     def ready(self):
-        if os.getenv("DB_SEED", "False") == "True":
-            from project.apps.create_default_apps.sites.project import create_default_apps
-
+        if os.getenv("APP_INITIAL", "False") == "True":
             post_migrate.connect(create_default_user, sender=self)
             post_migrate.connect(create_access_group, sender=self)
             post_migrate.connect(create_default_apps, sender=self)
@@ -25,9 +23,9 @@ def create_default_user(sender, **kwargs):
     def is_exists(user):
         return auth_models.User.objects.filter(username=user).exists()
 
-    EMAIL = os.getenv('DJANGO_USER_EMAIL')
-    USERNAME = os.getenv('DJANGO_USER_NAME')
-    PASSWORD = os.getenv('DJANGO_USER_PASS')
+    EMAIL = os.getenv('APP_USER_EMAIL')
+    USERNAME = os.getenv('APP_USER_NAME')
+    PASSWORD = os.getenv('APP_USER_PASS')
 
     if USERNAME and PASSWORD:
         if is_exists(USERNAME):
@@ -48,11 +46,8 @@ def create_access_group(sender, **kwargs):
     def is_exists(group):
         return auth_models.Group.objects.filter(name=group).exists()
 
-    USERNAME = os.getenv('DJANGO_USER_NAME')
+    USERNAME = os.getenv('APP_USER_NAME')
     if USERNAME:
-        if not settings.DEBUG:
-            return
-
         user = auth_models.User.objects.get(username=USERNAME)
         if user:
             for name in GROUP_PERMISSIONS:
@@ -61,3 +56,4 @@ def create_access_group(sender, **kwargs):
                 group = auth_models.Group.objects.get(name=name)
                 user.groups.add(group)
 
+from project.apps.create_default_apps.sites.project import create_default_apps

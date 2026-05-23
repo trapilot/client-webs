@@ -4,7 +4,7 @@ set -e
 
 
 echo "Waiting for collect static files..."
-if [ "$APP_COLLECT" = "True" ] || [ "$APP_COLLECT" = "1" ]; then
+if [ "$APP_INITIAL" = "True" ] || [ "$APP_COLLECT" = "True" ]; then
 
   python manage.py collectstatic --no-input --force
 
@@ -18,7 +18,7 @@ if command -v nc >/dev/null 2>&1; then
 
   while ! nc -z db 3306; do
     echo "DB not ready yet, waiting..."
-    sleep 3
+    sleep 5
   done
 
 else
@@ -26,15 +26,15 @@ else
 fi
 
 # 🔥 Run migrations only if enabled
-if [ "$DB_MIGRATE" = "True" ] || [ "$DB_MIGRATE" = "1" ]; then
-  echo "DB_MIGRATE is enabled. Running migrations..."
+if [ "$APP_INITIAL" = "True" ] || [ "$APP_MIGATE" = "True" ]; then
+  echo "APP_MIGATE is enabled. Running migrations..."
 
   python manage.py flush --no-input
   python manage.py makemigrations
   python manage.py migrate
 
 else
-  echo "DB_MIGRATE is disabled. Skipping migrations."
+  echo "APP_MIGATE is disabled. Skipping migrations."
 fi
 
 # 🚀 Start main process

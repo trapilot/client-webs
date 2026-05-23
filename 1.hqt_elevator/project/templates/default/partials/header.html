@@ -4,11 +4,19 @@
   <div class="max-w-[1200px] mx-auto px-4">
     <div class="flex justify-between items-center h-[72px]">
       <a href="/" class="flex items-center gap-2">
+        {% if project.imageLogo|length %}
+        <div class="text-red-600">
+            {% thumbnail project.imageLogo "100x40" crop="center" as im %}
+            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ project.name }}" class="shadow-lg">
+            {% endthumbnail %}
+        </div>
+        {% else %}
         <svg class="w-8 h-8 text-red-700" fill="currentColor" viewBox="0 0 24 24"><path d="M4 4h4v16H4V4zm6 0h4v16h-4V4zm6 0h4v16h-4V4z"/></svg>
         <div class="leading-tight">
           <div class="text-xl font-black text-gray-900 tracking-tighter">HQT</div>
           <div class="text-[10px] font-bold text-gray-500 tracking-widest">ELEVATOR</div>
         </div>
+        {% endif %}
       </a>
       
       <nav class="hidden lg:flex space-x-7 text-[14px] font-bold text-gray-700 uppercase tracking-tight">

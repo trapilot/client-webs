@@ -14,7 +14,6 @@ import os
 from pathlib import Path
 
 from django.utils.translation  import gettext_lazy as _
-from urllib.parse import urlparse
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent
@@ -27,31 +26,28 @@ BASE_DIR = Path(__file__).resolve().parent
 SECRET_KEY = 'django-insecure-j)w)+b=001(jtrzc5v@iotv*bt0ifszt)!9c7d85pasikx2iol'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG", "False").lower() == "true"
+DEBUG = os.getenv("APP_DEBUG", "False") == "True"
 TEMPLATE_DEBUG = DEBUG
 THUMBNAIL_DEBUG = DEBUG
 
 # Application definition
 SITE_ID = int(os.getenv('SITE_ID', '1'))
-SITE_URL = os.getenv('SITE_URL', 'https://thangmayhqt.com')
-SITE_DEV = os.getenv('SITE_DEV', 'http://localhost')
 SITE_CODE = os.getenv('SITE_CODE', 'HQT_ELEVATOR')
+SITE_HOST = os.getenv('SITE_HOST', 'localhost')
 
 USE_X_FORWARDED_HOST = True
 USE_X_FORWARDED_PORT = True
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
-CSRF_TRUSTED_ORIGINS = [SITE_URL, SITE_DEV]
+CSRF_TRUSTED_ORIGINS = [f"http://{SITE_HOST}", f"https://{SITE_HOST}"]
 ALLOWED_HOSTS = [
-    urlparse(SITE_URL).hostname,
-    urlparse(SITE_DEV).hostname,
+    SITE_HOST,
     "127.0.0.1",
 ]
-
+print(CSRF_TRUSTED_ORIGINS)
 
 INSTALLED_APPS = [
     # 'mailer',
-    # 'tinymce',
     'grappelli.dashboard',
     'grappelli',
     'filebrowser',
@@ -194,10 +190,21 @@ STATICFILES_FINDERS = (
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+if os.getenv("APP_AI_MODE", "False") == "True":
+    CKEDITOR_CONFIGS = {
+        'default': {
+            'toolbar': 'full',
+
+            'extraPlugins': ','.join([
+                'openai',
+                'gemini',
+            ]),
+        },
+    }
 
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
+    "version": 1,  # the dictConfig format version
+    "disable_existing_loggers": False,  # retain the default loggers
     'formatters': {
         'verbose': {
             'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
@@ -207,11 +214,6 @@ LOGGING = {
             'format': '{levelname} {message}',
             'style': '{',
         }
-    },
-    'filters': {
-        'require_debug_true': {
-            '()': 'django.utils.log.RequireDebugTrue',
-        },
     },
     'handlers': {
         'console': {
@@ -223,14 +225,10 @@ LOGGING = {
             'filename': os.path.join(BASE_DIR, './logs/debug.log'),
         },
     },
-    'root': {
-        'handlers': ['console'],
-        'level': 'WARNING',
-    },
     'loggers': {
         'django': {
-            'handlers': ['console'],
-            'level': os.getenv('DJANGO_LOG_LEVEL', 'ERROR'),
+            'handlers': ['console'] if DEBUG else ['file'],
+            'level': os.getenv('SITE_LOG_LEVEL', 'ERROR'),
             'propagate': True,
         },
     },
