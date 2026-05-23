@@ -65,7 +65,7 @@ class ProductAdmin(admin.ModelAdmin):
             'fields': ('category', 'name', 'slug', 'code', 'image', 'status', 'is_featured',)
         }),
         ('Mô Tả', {
-            'fields': ('description',),
+            'fields': ('description', 'content',),
             'classes': ('collapse',)
         }),
         ('Thông Số Kỹ Thuật', {
