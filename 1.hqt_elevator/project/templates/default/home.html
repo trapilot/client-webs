@@ -137,16 +137,18 @@
       
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {% for category in categories %}
-        <div class="bg-white border border-gray-200 rounded overflow-hidden hover:shadow-xl transition-shadow group">
-          <div class="h-56 overflow-hidden">
-            <img src="{{ category.featured_image_url }}" alt="{{ category.name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+        <a href="{% url_cms 'category' category.slug %}">
+          <div class="bg-white border border-gray-200 rounded overflow-hidden hover:shadow-xl transition-shadow group">
+            <div class="h-56 overflow-hidden">
+              <img src="{{ category.featured_image_url }}" alt="{{ category.name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="p-5">
+              <h4 class="font-bold text-[16px] text-gray-900 mb-2">{{ category.name }}</h4>
+              <p class="text-[13px] text-gray-500 mb-4 h-10 overflow-hidden">{{ category.description }}</p>
+              <p class="text-red-700 font-bold text-[13px] hover:text-red-800 flex items-center">XEM CHI TIẾT <span class="ml-1">→</span></p>
+            </div>
           </div>
-          <div class="p-5">
-            <h4 class="font-bold text-[16px] text-gray-900 mb-2">{{ category.name }}</h4>
-            <p class="text-[13px] text-gray-500 mb-4 h-10 overflow-hidden">{{ category.description }}</p>
-            <a href="{% url_cms 'category' category.slug %}" class="text-red-700 font-bold text-[13px] hover:text-red-800 flex items-center">XEM CHI TIẾT <span class="ml-1">→</span></a>
-          </div>
-        </div>
+        </a>
         {% endfor %}
       </div>
       
