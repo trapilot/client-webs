@@ -115,6 +115,21 @@
     {% endif %}
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            const iconMenu = document.getElementById('icon-menu');
+            const iconClose = document.getElementById('icon-close');
+            
+            btn.addEventListener('click', function() {
+            // Bật/tắt menu
+            menu.classList.toggle('hidden');
+            
+            // Chuyển đổi icon Hamburger <-> Dấu X
+            iconMenu.classList.toggle('hidden');
+            iconClose.classList.toggle('hidden');
+            });
+        });
         document.querySelectorAll('.js-modal-popup').forEach(function (el) {
             el.addEventListener('click', function (e) {
                 e.preventDefault();

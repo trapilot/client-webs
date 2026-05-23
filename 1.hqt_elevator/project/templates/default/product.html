@@ -7,7 +7,34 @@
 {% endblock %}
 
 {% block extrajs %}
-<script></script>
+<script>
+function changeMainImage(element, imageUrl) {
+  const mainImage = document.getElementById('main-product-image');
+  mainImage.src = imageUrl;
+
+  const allThumbs = document.querySelectorAll('.gallery-thumb');
+  allThumbs.forEach(thumb => {
+    thumb.className = "gallery-thumb h-20 md:h-24 rounded border border-gray-200 overflow-hidden cursor-pointer hover:border-red-400 transition";
+    if(!thumb.classList.contains('active-thumb')) {
+      thumb.querySelector('img').className = "w-full h-full object-cover opacity-60 hover:opacity-100 transition";
+    }
+  });
+
+  element.className = "gallery-thumb active-thumb h-20 md:h-24 rounded border-2 border-red-700 overflow-hidden cursor-pointer transition";
+  element.querySelector('img').className = "w-full h-full object-cover transition";
+}
+
+function showAllThumbnails(btnElement) {
+  // Tìm tất cả các ô ảnh có class 'extra-thumb' và loại bỏ class 'hidden'
+  const extraThumbs = document.querySelectorAll('.extra-thumb');
+  extraThumbs.forEach(thumb => {
+    thumb.classList.remove('hidden');
+  });
+  
+  // Ẩn hoàn toàn ô nút bấm "+X" sau khi đã hiện hết ảnh
+  btnElement.style.display = 'none';
+}
+</script>
 {% endblock %}
 
 
@@ -19,7 +46,7 @@
       <div class="space-y-4">
         <div class="relative h-[400px] md:h-[500px] rounded-lg overflow-hidden border border-gray-100 shadow-sm bg-gray-50">
           <div class="absolute top-4 left-4 z-10 flex flex-col gap-2">
-            {% if product.í_vip %}
+            {% if product.is_vip %}
             <div class="bg-red-700 text-white text-[11px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider w-fit">Cao Cấp</div>
             {% endif %}
             {% if product.is_popular %}
@@ -32,19 +59,30 @@
             <div class="bg-orange-700 text-white text-[11px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider w-fit">Bán Chạy</div>
             {% endif %}
           </div>
-          <img src="{{ product.featured_image_url }}" alt="Thang máy kính tròn" class="w-full h-full object-cover">
+          <img id="main-product-image" src="{{ product.featured_image_url }}" alt="{{ product.name }}" class="w-full h-full object-cover transition-all duration-300">
         </div>
+
         <div class="grid grid-cols-4 gap-4">
-          <div class="h-20 md:h-24 rounded border-2 border-red-700 overflow-hidden cursor-pointer">
-            <img src="{{ product.featured_image_url }}" class="w-full h-full object-cover">
+          <div class="gallery-thumb h-20 md:h-24 rounded border-2 border-red-700 overflow-hidden cursor-pointer transition" onclick="changeMainImage(this, '{{ product.featured_image_url }}')">
+            <img src="{{ product.featured_image_url }}" class="w-full h-full object-cover transition">
           </div>
-          {% for gallery in product.gallery_set.all|slice:":2" %}
-          <div class="h-20 md:h-24 rounded border border-gray-200 overflow-hidden cursor-pointer hover:border-red-400 transition">
-            <img src="{{ gallery.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover opacity-60 hover:opacity-100">
-          </div>
+          
+          {% for gallery in product.gallery_set.all %}
+            {% if forloop.counter <= 2 %}
+              <div class="gallery-thumb h-20 md:h-24 rounded border border-gray-200 overflow-hidden cursor-pointer hover:border-red-400 transition" onclick="changeMainImage(this, '{{ gallery.image.url }}')">
+                <img src="{{ gallery.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover opacity-60 hover:opacity-100 transition">
+              </div>
+            {% else %}
+              <div class="gallery-thumb extra-thumb hidden h-20 md:h-24 rounded border border-gray-200 overflow-hidden cursor-pointer hover:border-red-400 transition" onclick="changeMainImage(this, '{{ gallery.image.url }}')">
+                <img src="{{ gallery.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover opacity-60 hover:opacity-100 transition">
+              </div>
+            {% endif %}
           {% endfor %}
+          
           {% if product.gallery_set.count > 2 %}
-          <div class="h-20 md:h-24 rounded border border-gray-200 overflow-hidden flex items-center justify-center bg-gray-100 text-gray-500 text-sm font-bold cursor-pointer hover:bg-gray-200 transition">+3</div>
+          <div id="btn-show-more-thumbs" onclick="showAllThumbnails(this)" class="h-20 md:h-24 rounded border border-gray-200 overflow-hidden flex items-center justify-center bg-gray-100 text-gray-500 text-sm font-bold cursor-pointer hover:bg-gray-200 transition select-none">
+            +{{ product.gallery_set.count|add:"-2" }}
+          </div>
           {% endif %}
         </div>
       </div>
