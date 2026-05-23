@@ -4,7 +4,7 @@ ACTION=$1
 
 case "$ACTION" in
   zip)
-    cd project && zip -r ../libs.zip libs
+    cd project && zip -r ../libs.zip libs -x "*/__pycache__/*" "*.pyc"
     echo "Zipped project/libs → libs.zip"
     ;;
   unzip)
@@ -18,7 +18,7 @@ case "$ACTION" in
     echo "Step 2: Auto translate to Vietnamese..."
 
     # pip install deep-translator polib
-    python scripts/auto_translate_po.py
+    python tools/auto_translate_po.py
 
     echo "Step 3: Compile messages..."
     python manage.py compilemessages

@@ -19,14 +19,17 @@
       <div class="space-y-4">
         <div class="relative h-[400px] md:h-[500px] rounded-lg overflow-hidden border border-gray-100 shadow-sm bg-gray-50">
           <div class="absolute top-4 left-4 z-10 flex flex-col gap-2">
+            {% if product.í_vip %}
+            <div class="bg-red-700 text-white text-[11px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider w-fit">Cao Cấp</div>
+            {% endif %}
             {% if product.is_popular %}
-            <div class="bg-red-700 text-white text-[11px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider w-fit">Phổ Biến</div>
+            <div class="bg-green-700 text-white text-[11px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider w-fit">Phổ Biến</div>
             {% endif %}
             {% if product.is_new %}
-            <div class="bg-blue-700 text-white text-[11px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider w-fit">Mới</div>
+            <div class="bg-blue-700 text-white text-[11px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider w-fit">Mới Ra Mắt</div>
             {% endif %}
-            {% if product.is_best_seller %}
-            <div class="bg-green-700 text-white text-[11px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider w-fit">Bán Chạy</div>
+            {% if product.is_bestseller %}
+            <div class="bg-orange-700 text-white text-[11px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider w-fit">Bán Chạy</div>
             {% endif %}
           </div>
           <img src="{{ product.featured_image_url }}" alt="Thang máy kính tròn" class="w-full h-full object-cover">

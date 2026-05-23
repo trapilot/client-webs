@@ -30,7 +30,9 @@ def site_settings(request, kwargs=None):
         is_active=True,
     ).order_by('sorted_as')
 
-    featured_category = random.choice(categories)
+    featured_category = None
+    if len(categories):
+        featured_category = random.choice(categories)
 
     return dict({
         "categories": categories,
@@ -160,7 +162,7 @@ def portfolio(request, kwargs=None):
         portfolio = get_object_or_404(Portfolio, slug=kwargs.get('slug'))
         related_portfolios = Portfolio.objects.filter(
             is_active=True,
-            type=portfolio.type,
+            category=portfolio.category,
         ).exclude(id=portfolio.id).order_by('sorted_as', 'created_at',)[:5]
     except ObjectDoesNotExist:
         portfolio = None
@@ -199,10 +201,17 @@ def article(request, kwargs=None):
 
     try:
         article = get_object_or_404(Article, slug_vi=kwargs.get('slug'))
+
+        Article.objects.filter(pk=article.pk).update(
+            visited_as=F('visited_as') + 1
+        )
+        article.refresh_from_db(fields=['visited_as'])
+
         related_articles = Article.objects.filter(
             is_active=True,
             tags__in=article.tags.all(),
         ).exclude(id=article.id).distinct().order_by('sorted_as', 'visited_as', '-published_at', 'created_at')[:3]
+        
         related_categories = (
             Category.objects
             .filter(is_active=True)

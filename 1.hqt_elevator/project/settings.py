@@ -109,7 +109,7 @@ TEMPLATES = [
 
                 'cms_engine.context_processors.project',
                 'cms_engine.context_processors.backoffice',
-                'project.context_processors.site_settings',
+                'project.context.default_processors.site_settings',
             ],
         },
     },

@@ -2,18 +2,23 @@
 
 set -e
 
+
 echo "Waiting for collect static files..."
-python manage.py collectstatic --no-input --force
+if [ "$APP_COLLECT" = "True" ] || [ "$APP_COLLECT" = "1" ]; then
 
-echo "Waiting for database..."
+  python manage.py collectstatic --no-input --force
 
-# ⏳ Wait for MySQL to be ready (only if nc exists)
+else
+  echo "APP_COLLECT is disabled. Skipping collect staticfiles."
+fi
+
+echo "Waiting for database..." # ⏳ Wait for MySQL to be ready (only if nc exists)
 if command -v nc >/dev/null 2>&1; then
   echo "nc found, waiting for DB..."
 
   while ! nc -z db 3306; do
     echo "DB not ready yet, waiting..."
-    sleep 2
+    sleep 3
   done
 
 else
@@ -21,7 +26,7 @@ else
 fi
 
 # 🔥 Run migrations only if enabled
-if [ "$DB_MIGRATE" = "True" ] || [ "$DB_MIGRATE" = "true" ] || [ "$DB_MIGRATE" = "1" ]; then
+if [ "$DB_MIGRATE" = "True" ] || [ "$DB_MIGRATE" = "1" ]; then
   echo "DB_MIGRATE is enabled. Running migrations..."
 
   python manage.py flush --no-input

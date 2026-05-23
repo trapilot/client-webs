@@ -96,6 +96,7 @@ class Product(models.Model):
     
     # Badge
     is_active = models.BooleanField(_(u'Active'), null=True, blank=True, default=True)
+    is_vip = models.BooleanField(_(u'High Class'), null=True, blank=True, default=False)
     is_popular = models.BooleanField(_(u'Popular'), null=True, blank=True, default=False)
     is_new = models.BooleanField(_(u'New'), null=True, blank=True, default=False)
     is_bestseller = models.BooleanField(_(u'Bestseller'), null=True, blank=True, default=False)
@@ -254,16 +255,31 @@ class ProductReview(models.Model):
         return f"{self.reviewer_name} - {self.product.name}"
 
 
-class Portfolio(models.Model):
-    TYPES = [
-        ('residential', 'Nhà Ở'),
-        ('commercial', 'Thương Mại'),
-        ('hospital', 'Bệnh Viện'),
-        ('industrial', 'Công Nghiệp'),
-        ('education', 'Giáo Dục'),
-        ('government', 'Chính Phủ'),
-    ]
+class PortfolioCategory(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    name = models.CharField(_(u'Name'), max_length=100, unique=True)
+    slug = models.SlugField('Slug', unique=True)
+    code = models.CharField(_(u'Code'), max_length=100, unique=True)
+    description = models.TextField(_(u'Description'), blank=True)
+    image = models.ImageField(_(u'Image'), upload_to='uploads/apps/portfolios/categories/', blank=True)
+    ctx_bg = models.CharField(_(u'Background Color'), blank=True, null=True, max_length=150)
+    ctx_color = models.CharField(_(u'Text Color'), blank=True, null=True, max_length=150)
+    is_active = models.BooleanField(_(u'Active'), default=True)
+    is_featured = models.BooleanField(_(u'Featured'), default=False)
+    sorted_as = models.IntegerField(_(u'Order'), default=0)
+    created_at = models.DateTimeField(_(u'Created'), auto_now_add=True)
+    updated_at = models.DateTimeField(_(u'Updated'), auto_now=True)
 
+    class Meta:
+        verbose_name = 'Portfolio Category'
+        verbose_name_plural = 'Portfolio Categories'
+        ordering = ['sorted_as', 'is_active', 'name']
+
+    def __str__(self):
+        return self.name
+
+    
+class Portfolio(models.Model):
     STATUS_CHOICES = [
         ('planning', 'Đang Lên Kế Hoạch'),
         ('ongoing', 'Đang Triển Khai'),
@@ -272,12 +288,13 @@ class Portfolio(models.Model):
     ]
 
     id = models.BigAutoField(primary_key=True)
+    category = models.ForeignKey(PortfolioCategory, on_delete=models.CASCADE, related_name='portfolio_set', verbose_name=_(u'Category'))
+
     name = models.CharField(_(u'Name'), max_length=300)
     slug = models.SlugField(_(u'Slug'), unique=True)
-    type = models.CharField(_(u'Type'), max_length=50, choices=TYPES)
     description = models.TextField(_(u'Description'), blank=True, null=True)
     content = RichTextField(_(u'Content'), blank=True, null=True)
-    image = models.ImageField(_(u'Image'), blank=True, null=True, upload_to='uploads/apps/portfolios/image')
+    image = models.ImageField(_(u'Image'), blank=True, null=True, upload_to='uploads/apps/portfolios/images')
     # galleries = models.ManyToManyField('PortfolioGallery', blank=True, null=True, related_name='portfolio_set', verbose_name=_(u'Gallery'))
     address = models.CharField(_(u'Address'), max_length=300, blank=True, null=True)
     city = models.CharField(_(u'City'), max_length=100, blank=True, null=True)
@@ -310,18 +327,12 @@ class Portfolio(models.Model):
         verbose_name_plural = 'Portfolios'
         ordering = ['sorted_as', '-is_featured', '-completion_date']
         indexes = [
-            models.Index(fields=['slug']),
-            models.Index(fields=['type']),
+            models.Index(fields=['category']),
             models.Index(fields=['city']),
         ]
 
     def __str__(self):
         return self.name
-    
-
-    @property
-    def type_text(self):
-        return self.get_type_display()
 
     @property
     def status_text(self):

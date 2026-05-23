@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from django.db.models import Q
 from .models import (
     Product, ProductCategory, ProductFeature, ProductGallery, ProductReview,
-    Portfolio, PortfolioGallery,
+    Portfolio, PortfolioCategory, PortfolioGallery,
     
 )
 
@@ -55,7 +55,7 @@ class ProductGalleryAdmin(admin.TabularInline):
 class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductFeatureAdmin, ProductGalleryAdmin]
     list_display = ('name', 'category', 'code', 'price_display', 'capacity', 'energy_saving', 'status_badge', 'is_featured')
-    list_filter = ('category', 'status', 'is_popular', 'is_new', 'is_bestseller', 'created_at')
+    list_filter = ('category', 'status', 'is_vip', 'is_popular', 'is_new', 'is_bestseller', 'created_at')
     search_fields = ('name', 'code', 'description')
     prepopulated_fields = {'slug': ('name',)}
     readonly_fields = ('created_at', 'updated_at', 'created_by')
@@ -82,7 +82,7 @@ class ProductAdmin(admin.ModelAdmin):
             'fields': ('base_price', 'discount_price')
         }),
         ('Badges & Status', {
-            'fields': ('is_popular', 'is_new', 'is_bestseller')
+            'fields': ('is_vip', 'is_popular', 'is_new', 'is_bestseller')
         }),
         ('SEO', {
             'fields': ('meta_title', 'meta_description', 'meta_keywords'),
@@ -179,6 +179,35 @@ class ProductReviewAdmin(admin.ModelAdmin):
 
 
 
+@admin.register(PortfolioCategory)
+class PortfolioCategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'code', 'is_active', 'is_featured', 'sorted_as', 'portfolio_count', 'created_at')
+    list_filter = ('is_active', 'created_at')
+    search_fields = ('name', 'code', 'description')
+    prepopulated_fields = {'slug': ('name',)}
+    ordering = ('sorted_as', 'name')
+    
+    fieldsets = (
+        ('Thông Tin Cơ Bản', {
+            'fields': ('code', 'name', 'slug', 'image')
+        }),
+        ('Mô Tả', {
+            'fields': ('description',)
+        }),
+        ('Cài Đặt', {
+            'fields': ('is_active', 'is_featured', 'sorted_as')
+        }),
+    )
+
+    def portfolio_count(self, obj):
+        count = obj.portfolio_set.count()
+        return format_html(
+            '<span style="background-color: #417505; color: white; padding: 3px 10px; border-radius: 3px;"><b>{}</b></span>',
+            count
+        )
+    portfolio_count.short_description = 'Số Dự Án'
+
+
 class PortfolioGalleryAdmin(admin.TabularInline):
     model = PortfolioGallery
     extra = 1
@@ -187,8 +216,8 @@ class PortfolioGalleryAdmin(admin.TabularInline):
 @admin.register(Portfolio)
 class PortfolioAdmin(admin.ModelAdmin):
     inlines = [PortfolioGalleryAdmin]
-    list_display = ('name', 'type', 'address_display', 'total_elevators', 'status_badge', 'completion_date', 'is_active', 'is_featured',)
-    list_filter = ('type', 'status', 'is_featured', 'completion_date', 'city')
+    list_display = ('name', 'category', 'address_display', 'total_elevators', 'status_badge', 'completion_date', 'is_active', 'is_featured',)
+    list_filter = ('category', 'status', 'is_featured', 'completion_date', 'city')
     search_fields = ('name', 'address', 'city', 'customer_company')
     prepopulated_fields = {'slug': ('name',)}
     readonly_fields = ('created_at', 'updated_at')
@@ -196,7 +225,7 @@ class PortfolioAdmin(admin.ModelAdmin):
     
     fieldsets = (
         (_(u'General'), {
-            'fields': ('type', 'name', 'slug', 'status', 'is_active', 'is_featured', 'sorted_as', 'image',)
+            'fields': ('category', 'name', 'slug', 'status', 'is_active', 'is_featured', 'sorted_as', 'image',)
         }),
         ('Mô Tả', {
             'fields': ('description', 'content',)
