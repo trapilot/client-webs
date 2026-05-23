@@ -12,7 +12,7 @@ function changeMainImage(element, imageUrl) {
   const mainImage = document.getElementById('main-product-image');
   mainImage.src = imageUrl;
 
-  const allThumbs = document.querySelectorAll('.gallery-thumb');
+  const allThumbs = document.querySelectorAll('.gallery-thumb active-thumb ');
   allThumbs.forEach(thumb => {
     thumb.className = "gallery-thumb h-20 md:h-24 rounded border border-gray-200 overflow-hidden cursor-pointer hover:border-red-400 transition";
     if(!thumb.classList.contains('active-thumb')) {
@@ -25,13 +25,11 @@ function changeMainImage(element, imageUrl) {
 }
 
 function showAllThumbnails(btnElement) {
-  // Tìm tất cả các ô ảnh có class 'extra-thumb' và loại bỏ class 'hidden'
   const extraThumbs = document.querySelectorAll('.extra-thumb');
   extraThumbs.forEach(thumb => {
     thumb.classList.remove('hidden');
   });
   
-  // Ẩn hoàn toàn ô nút bấm "+X" sau khi đã hiện hết ảnh
   btnElement.style.display = 'none';
 }
 </script>
