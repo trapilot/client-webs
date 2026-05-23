@@ -130,6 +130,14 @@ class Product(models.Model):
         return self.name
 
     @property
+    def has_price(self):
+        if self.base_price > 0:
+            return True
+        if self.discount_price:
+            return self.discount_price <= self.base_price
+        return False
+
+    @property
     def discount_percent(self):
         if self.discount_price:
             discount = ((self.base_price - self.discount_price) / self.base_price) * 100

@@ -52,17 +52,26 @@
       <div class="flex flex-col justify-center">
         <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">{{ product.name }}</h1>
         <p class="text-gray-500 text-[14px] mb-6">Mã SP: <span class="font-bold text-gray-700">{{ product.code }}</span></p>
-        
+        <div class="mb-6 flex items-end gap-3 flex-wrap">
+          <span class="text-3xl md:text-4xl font-black text-red-700">{{ product.sale_price|currency:'.,₫' }}</span>
+          {% if product.discount_percent > 0 %}
+            <span class="text-[16px] text-gray-400 font-medium line-through mb-1">{{ product.base_price }} ₫</span>
+            <span class="bg-red-100 text-red-700 text-[11px] font-bold px-2 py-1 rounded-sm mb-1.5 uppercase tracking-wider">-{{ product.discount_percent }}%</span>
+          {% endif %}
+        </div>
         <p class="text-[15px] text-gray-600 leading-relaxed mb-6">
           {{ product.description }}
         </p>
 
         <div class="bg-gray-50 p-5 rounded border border-gray-100 mb-8">
           <ul class="space-y-3">
+            <li class="flex justify-between border-b border-gray-200 pb-2"><span class="text-[14px] text-gray-500">Loại cửa</span><span class="text-[14px] font-bold text-gray-900">{{ product.door_type_text }}</span></li>
             <li class="flex justify-between border-b border-gray-200 pb-2"><span class="text-[14px] text-gray-500">Tải trọng</span><span class="text-[14px] font-bold text-gray-900">{{ product.capacity }}kg ({{ product.passenger_text }})</span></li>
-            <li class="flex justify-between border-b border-gray-200 pb-2"><span class="text-[14px] text-gray-500">Tốc độ</span><span class="text-[14px] font-bold text-gray-900">{{ product.speed }} m/s</span></li>
-            <li class="flex justify-between border-b border-gray-200 pb-2"><span class="text-[14px] text-gray-500">Kích thước hố tối thiểu</span><span class="text-[14px] font-bold text-gray-900">1400mm x 1400mm</span></li>
-            <li class="flex justify-between pt-1"><span class="text-[14px] text-gray-500">Hố Pit (Min)</span><span class="text-[14px] font-bold text-gray-900">300mm</span></li>
+            <li class="flex justify-between border-b border-gray-200 pb-2"><span class="text-[14px] text-gray-500">Tốc độ</span><span class="text-[14px] font-bold text-gray-900">{{ product.speed }}m/s</span></li>
+            <li class="flex justify-between border-b border-gray-200 pb-2"><span class="text-[14px] text-gray-500">Chiều cao tối đa</span><span class="text-[14px] font-bold text-gray-900">{{ product.height }}m</span></li>
+            <li class="flex justify-between border-b border-gray-200 pb-2"><span class="text-[14px] text-gray-500">Số Trạm Dừng</span><span class="text-[14px] font-bold text-gray-900">{{ product.number_stops_text }}</span></li>
+            <li class="flex justify-between border-b border-gray-200 pb-2"><span class="text-[14px] text-gray-500">Số Năm Bảo Hành</span><span class="text-[14px] font-bold text-gray-900">{{ product.warranty }}</span></li>
+            <li class="flex justify-between pt-1"><span class="text-[14px] text-gray-500">Chất Liệu</span><span class="text-[14px] font-bold text-gray-900">{{ product.material }}</span></li>
           </ul>
         </div>
 
@@ -78,12 +87,17 @@
   </section>
 
   <section class="max-w-[1200px] mx-auto px-4 py-12">
+    {% comment %}
     <div class="flex overflow-x-auto border-b border-gray-200 mb-8 hide-scrollbar">
       <button class="px-6 py-4 text-[15px] font-bold text-red-700 border-b-2 border-red-700 whitespace-nowrap">Đặc điểm nổi bật</button>
       <button class="px-6 py-4 text-[15px] font-bold text-gray-500 hover:text-red-700 whitespace-nowrap transition">Thông số chi tiết</button>
       <button class="px-6 py-4 text-[15px] font-bold text-gray-500 hover:text-red-700 whitespace-nowrap transition">Bản vẽ & Tài liệu</button>
     </div>
+    {% endcomment %}
     
+    {{ product.content|safe }}
+    
+    {% comment %}
     <div class="prose prose-sm md:prose-base max-w-none text-gray-600">
       <h3 class="text-xl font-bold text-gray-900 mb-4">Thiết kế đột phá, nâng tầm kiến trúc</h3>
       <p>Thang máy lồng kính tròn là giải pháp hoàn hảo cho các công trình có thiết kế không gian mở như giếng trời trung tâm, biệt thự cao cấp. Toàn bộ cấu trúc được thiết kế tinh giản, khung nhôm hợp kim nguyên khối kết hợp kính cường lực an toàn 2 lớp dày 10.38mm.</p>
@@ -106,6 +120,7 @@
         </div>
       </div>
     </div>
+    {% endcomment %}
   </section>
 </main>
 {% endblock content %}
