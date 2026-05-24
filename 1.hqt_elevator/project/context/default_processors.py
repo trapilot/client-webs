@@ -34,7 +34,21 @@ def site_settings(request, kwargs=None):
     if len(categories):
         featured_category = random.choice(categories)
 
+    background = None
+    try:
+        if request.page.is_home:
+            background = request.page.background_set.filter(
+                is_active=True,
+            ).first()
+        else:
+            background = request.page.innerbackground_set.filter(
+                is_active=True,
+            ).first()
+    except:
+        pass
+    
     return dict({
+        "background": background,
         "categories": categories,
         "featured_category": featured_category,
     })

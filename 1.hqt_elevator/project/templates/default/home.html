@@ -23,17 +23,35 @@
 <main class="font-sans text-gray-900 antialiased">
   <section class="relative bg-gray-900 min-h-[600px] flex flex-col justify-center">
     <div class="absolute inset-0 z-0">
-      <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Thang máy gia đình" class="w-full h-full object-cover" />
+      {% if background %}
+      <img src="{{ background.image.url }}" alt="{{ background.title }}" class="w-full h-full object-cover" />
+      {% endif %}
       <div class="absolute inset-0 bg-gradient-to-r from-gray-900/90 via-gray-900/60 to-transparent"></div>
     </div>
     
     <div class="relative z-10 max-w-[1200px] mx-auto px-4 w-full pt-16 pb-28 flex flex-col lg:flex-row justify-between items-center">
       
       <div class="lg:w-[55%] text-white">
-        <p class="text-sm font-semibold tracking-[0.2em] uppercase mb-3">Thang Máy Gia Đình</p>
-        <h1 class="text-4xl md:text-[54px] font-bold leading-[1.1] mb-6">NÂNG TẦM <br /> KHÔNG GIAN SỐNG</h1>
+        <p class="text-sm font-semibold tracking-[0.2em] uppercase mb-3">
+          {% if background.title|length %}
+            {{ background.title }}
+          {% else %}
+            Thang Máy Gia Đình
+          {% endif %}
+        </p>
+        <h1 class="text-4xl md:text-[54px] font-bold leading-[1.1] mb-6">
+          {% if background.subtitle|length %}
+            {{ background.subtitle|safe }}
+          {% else %}
+            NÂNG TẦM <br /> KHÔNG GIAN SỐNG
+          {% endif %}          
+        </h1>
         <p class="text-[15px] text-gray-200 mb-8 max-w-[400px] leading-relaxed">
-          Giải pháp thang máy gia đình cao cấp chuẩn Nhật Bản - An toàn, êm ái, thẩm mỹ và bền vững.
+          {% if background.description|length %}
+            {{ background.description|safe }}
+          {% else %}
+            Giải pháp thang máy gia đình cao cấp chuẩn Nhật Bản - An toàn, êm ái, thẩm mỹ và bền vững.
+          {% endif %}   
         </p>
         <div class="flex flex-wrap gap-4">
           <a href="{% url_cms 'contact' %}" class="bg-red-700 text-white px-6 py-3 text-sm rounded font-bold hover:bg-red-800 transition shadow-lg">NHẬN TƯ VẤN MIỄN PHÍ <span class="ml-1">→</span></a>
