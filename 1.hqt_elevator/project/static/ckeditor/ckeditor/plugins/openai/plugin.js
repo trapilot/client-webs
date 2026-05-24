@@ -17,6 +17,15 @@ CKEDITOR.plugins.add('openai', {
 
                     formData.append("content", content);
                     formData.append("provider", "openai");
+                    formData.append("metadata", JSON.stringify({
+                        bussiness: ["Luxury elevator company"],
+                        target_audience: ["Customer read the content"],
+                        style: ["Modern light"],
+                        sections: ["Product content"],
+                        primary_goal: ["Generate leads and quotation requests"],
+                        color_direction: ["Red, white, subtle gold accents"],
+                        tone: ["Premium, trustworthy, modern"]
+                    }));
 
                     const response = await fetch('/ai/generate-html/', {
                         method: 'POST',
