@@ -1,6 +1,7 @@
-<!DOCTYPE HTML>{% load seo_meta thumbnail i18n static trad url_cms url_link url_language region_language get cache is_browser gtm %}{% region_language LANGUAGE_CODE %}
+<!DOCTYPE HTML>{% load seo_meta html_tags thumbnail i18n static trad url_cms url_link url_language region_language get cache is_browser gtm %}{% region_language LANGUAGE_CODE %}
 <html lang="{{LANGUAGE_CODE}}">
 <head>
+{% compact 1 %}
     <title>{% block page_title %}{% seo_meta title %}{% endblock %}</title>
     <meta charset="UTF-8">
     <meta name="description" content="{% seo_meta description %}" />
@@ -8,17 +9,28 @@
     <meta name="author" content="namdwb@gmail.com" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="theme-color" content="#B91C1C">
     <meta name="robots" content="{{ page.robots }}">
-    {% if project.webmastertools %}<meta name="google-site-verification" content="{{project.webmastertools}}" />{% endif %}    
+    {% if project.webmastertools %}
+    <meta name="google-site-verification" content="{{project.webmastertools}}" />
+    {% endif %}    
     {% block open_graph %}
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="{% seo_meta code %}">
     <meta property="og:title" content="{% seo_meta title %}">
     <meta property="og:description" content="{% seo_meta description %}">
-    <meta property="og:image" content="https://example.com/thumbnail.jpg">
-    <meta property="og:url" content="{{ request.META.HTTP_HOST }}{{ request.META.REQUEST_URI }}">
-    <meta property="og:site_name" content="{{ project.name }}">
+    <meta property="og:image" content="{% seo_meta image %}">
     {% endblock open_graph %}
+    {% block twitter %}
+    <meta name="twitter:card" content="{% seo_meta card %}">
+    <meta name="twitter:title" content="{% seo_meta title %}">
+    <meta name="twitter:description" content="{% seo_meta description %}">
+    <meta name="twitter:image" content="{% seo_meta image %}">
+    {% endblock twitter %}
+    <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}">
+    {% comment %}
+    <meta property="og:site_name" content="{{ request.scheme }}://{{ request.get_host }}">
+    {% endcomment %}
+    <meta property="og:site_name" content="{{ project.name }}">
     <meta property="og:locale" content="{{LANGUAGE_CODE}}_{{REGION_CODE}}" />
     {% for code, language in project.languages_dict.items %}
         {% if code != LANGUAGE_CODE %}<meta property="og:locale:alternate" content="{{code}}_{{code|upper}}" />{% endif %}
@@ -30,7 +42,7 @@
         {% if lang == LANGUAGE_CODE and page and not page.is_home %}
             {% for lg, pg in page_languages.items %}
                 {% if lg == lang %}
-                <link rel="alternate" hreflang="{{lang}}" href="{{dommain}}/{{pg}}" />
+                <link rel="alternate" hreflang="{{lang}}" href="{{domain}}/{{pg}}" />
                 {% endif %}
             {% endfor %}
         {% endif %}
@@ -38,9 +50,11 @@
 
     <!-- Favicons -->
     {% if project.imageFavicon|length %}{% thumbnail project.imageFavicon "16x16" crop="center" as im %}<link rel="icon" type="image/x-icon" href="{{ im.url }}">{% endthumbnail %}{% endif %}
-
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    {% spaceless %}
     <style>
         * { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         .fab.fa-zalo {
@@ -84,7 +98,8 @@
     </script>
     <!-- End Google Analytics -->
     {% endif %}
-
+    {% endspaceless %}
+{% endcompact %}
 </head>
 
 <body class="class="bg-gray-50{% if not page.is_home %} inner{% endif %}{% if not page.code %} bookcore_page{% else %} {{ page.code }}{% endif %}">
@@ -102,6 +117,7 @@
     </div>
 
     <!-- Template Javascript -->
+{% compact 1 %}
     {% block extrajs %}{% endblock %}
 
     {% if project.GOOGLE_TAG_MANAGER %}
@@ -196,5 +212,6 @@
 
         });
     </script>
+{% endcompact %}
 </body>
 </html>

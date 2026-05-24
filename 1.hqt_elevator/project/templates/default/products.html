@@ -1,9 +1,7 @@
 {% extends "default/layouts/base.html" %}
 {% load i18n url_cms trad thumbnail seo_meta repeat %}
 
-
 {% block extracss %}
-<style></style>
 {% endblock %}
 
 {% block extrajs %}
@@ -11,7 +9,7 @@
   document.addEventListener('DOMContentLoaded', function() {
     const filterBtns = document.querySelectorAll('.filter-btn');
     const productItems = document.querySelectorAll('.product-item');
-console.log({productItems})
+    
     filterBtns.forEach(btn => {
       btn.addEventListener('click', function() {
         filterBtns.forEach(b => {
