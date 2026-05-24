@@ -44,7 +44,6 @@ ALLOWED_HOSTS = [
     SITE_HOST,
     "127.0.0.1",
 ]
-print(CSRF_TRUSTED_ORIGINS)
 
 INSTALLED_APPS = [
     # 'mailer',

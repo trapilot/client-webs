@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.db.models import Q
 from .models import (
-    Product, ProductCategory, ProductFeature, ProductGallery, ProductReview,
+    Product, ProductCategory, ProductFeature, ProductFaq, ProductGallery, ProductReview,
     Portfolio, PortfolioCategory, PortfolioGallery,
     
 )
@@ -44,6 +44,12 @@ class ProductFeatureAdmin(admin.TabularInline):
     extra = 1
     fields = ('name', 'value', 'icon', 'sorted_as',)
 
+class ProductFaqAdmin(admin.TabularInline):
+    model = ProductFaq
+    extra = 1
+    fields = ('question', 'answer', 'icon', 'sorted_as',)
+
+
 
 class ProductGalleryAdmin(admin.TabularInline):
     model = ProductGallery
@@ -53,7 +59,7 @@ class ProductGalleryAdmin(admin.TabularInline):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    inlines = [ProductFeatureAdmin, ProductGalleryAdmin]
+    inlines = [ProductFeatureAdmin, ProductFaqAdmin, ProductGalleryAdmin]
     list_display = ('name', 'category', 'code', 'price_display', 'capacity', 'energy_saving', 'status_badge', 'is_featured')
     list_filter = ('category', 'status', 'is_vip', 'is_popular', 'is_new', 'is_bestseller', 'created_at')
     search_fields = ('name', 'code', 'description')
@@ -62,7 +68,7 @@ class ProductAdmin(admin.ModelAdmin):
     
     fieldsets = (
         ('Thông Tin Cơ Bản', {
-            'fields': ('category', 'name', 'slug', 'code', 'image', 'status', 'is_featured',)
+            'fields': ('category', 'name', 'slug', 'code', 'image', 'pdf', 'status', 'is_featured',)
         }),
         ('Mô Tả', {
             'fields': ('description', 'content',),

@@ -4,6 +4,46 @@ ACTION=$1
 
 case "$ACTION" in
   zip)
+    find ../../ \
+    -path "*/venv" -prune -o \
+    \( -path "*/migrations/*.pyc" -o \
+      -path "*/migrations/*.py" ! -name "__init__.py" \) \
+    -exec rm -f {} +
+    
+    source venv/bin/activate
+    python manage.py makemigrations
+    deactivate
+
+    echo "Copying engine/libs apps..."
+    mkdir -p project/libs
+
+    grep -oE "'[^']+'" project/settings.py \
+    | tr -d "'" \
+    | cut -d'.' -f1 \
+    | grep -E '^(cms_|.*_engine$)' \
+    | sort -u \
+    | while read app; do
+
+        SRC="../../libs/$app"
+        DST="project/libs/$app"
+
+        if [ ! -d "$SRC" ]; then
+            echo "Skip missing: $SRC"
+            continue
+        fi
+
+        rm -rf "$DST"
+
+        rsync -a \
+            --exclude="__pycache__" \
+            --exclude="*.pyc" \
+            --exclude="*.pyo" \
+            "$SRC/" "$DST/"
+
+        echo "Copied: $app"
+
+    done
+
     cd project && zip -r ../libs.zip libs -x "*/__pycache__/*" "*.pyc"
     echo "Zipped project/libs → libs.zip"
     ;;

@@ -1,4 +1,5 @@
 import os
+import re
 import time
 import random
 from datetime import date
@@ -26,8 +27,9 @@ def create_default_apps(sender, **kwargs):
     time.sleep(1)
 
     project = Project.objects.create(
+        id=settings.SITE_ID,
         code=settings.SITE_CODE,
-        name=settings.SITE_CODE,
+        name=re.sub(r'[_-]+', ' ', settings.SITE_CODE),
         type="ECOMMERCE",
         is_ssl=False,
         language_text='vi',

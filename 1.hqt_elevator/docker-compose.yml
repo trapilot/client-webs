@@ -13,7 +13,8 @@ services:
       - app_net
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./init_db.sql:/docker-entrypoint-initdb.d/init.sql # --> change password first
+      - ./sql/migrations:/migrations
+      - ./sql/init_db.sql:/docker-entrypoint-initdb.d/init.sql # --> change password first
 
   web:
     build: .

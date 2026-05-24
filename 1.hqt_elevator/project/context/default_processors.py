@@ -129,7 +129,8 @@ def product(request, kwargs=None):
         product = get_object_or_404(
             Product.objects.prefetch_related(
                 'feature_set',
-                'gallery_set'
+                'gallery_set',
+                'faq_set',
             ),
             slug=kwargs.get('slug')
         )

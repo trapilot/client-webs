@@ -2,48 +2,42 @@
 <html lang="{{LANGUAGE_CODE}}">
 <head>
     <title>{% block page_title %}{% seo_meta title %}{% endblock %}</title>
+    <meta charset="UTF-8">
     <meta name="description" content="{% seo_meta description %}" />
     <meta name="keywords" content="{% seo_meta keywords %}" />
     <meta name="author" content="namdwb@gmail.com" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% if project.webmastertools %}
-    <meta name="google-site-verification" content="{{project.webmastertools}}" />
-    {% endif %}
+    <meta name="theme-color" content="#ffffff">
+    <meta name="robots" content="{{ page.robots }}">
+    {% if project.webmastertools %}<meta name="google-site-verification" content="{{project.webmastertools}}" />{% endif %}    
     {% block open_graph %}
-    <meta property="og:title" content="{% seo_meta title %}" />
-    <meta property="og:description" content="{% seo_meta description %}" />
-    <meta property="og:url" content="{{ request.META.HTTP_HOST }}{{ request.META.REQUEST_URI }}" />
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{% seo_meta title %}">
+    <meta property="og:description" content="{% seo_meta description %}">
+    <meta property="og:image" content="https://example.com/thumbnail.jpg">
+    <meta property="og:url" content="{{ request.META.HTTP_HOST }}{{ request.META.REQUEST_URI }}">
+    <meta property="og:site_name" content="{{ project.name }}">
     {% endblock open_graph %}
-    {% for lang, domain in domains.items %}
-        {% if lang == LANGUAGE_CODE %}
-            {% if page %}
-            <link rel="alternate" hreflang="x-default" href="{% url_cms page.code %}" />
-            {% else %}
-            <link rel="alternate" hreflang="x-default" href="{{domain}}" />
-            {% endif %}
-        {% else %}
-            {% if page and not page.is_home %}
-                {% for lg, pg in page_languages.items %}
-                    {% if lg == lang %}
-                    <link rel="alternate" hreflang="{{lang}}" href="{{dommain}}/{{pg}}" />
-                    {% endif %}
-                {% endfor %}
-            {% else %}
-            <link rel="alternate" hreflang="{{lang}}" href="{{dommain}}" />
-            {% endif %}
-        {% endif %}
-    {% endfor %}
     <meta property="og:locale" content="{{LANGUAGE_CODE}}_{{REGION_CODE}}" />
     {% for code, language in project.languages_dict.items %}
-        {% if code != LANGUAGE_CODE %}
-        <meta property="og:locale:alternate" content="{{code}}_{{code|upper}}" />
+        {% if code != LANGUAGE_CODE %}<meta property="og:locale:alternate" content="{{code}}_{{code|upper}}" />{% endif %}
+    {% endfor %}
+
+    <link rel="canonical" href="{{ request.scheme }}://{{ request.get_host }}{{ request.path|cut:'?' }}">
+    <link rel="alternate" href="{{ request.scheme }}://{{ request.get_host }}{{ request.path|cut:'?' }}" hreflang="{{LANGUAGE_CODE}}-{{REGION_CODE}}"/>
+    {% for lang, domain in domains.items %}
+        {% if lang == LANGUAGE_CODE and page and not page.is_home %}
+            {% for lg, pg in page_languages.items %}
+                {% if lg == lang %}
+                <link rel="alternate" hreflang="{{lang}}" href="{{dommain}}/{{pg}}" />
+                {% endif %}
+            {% endfor %}
         {% endif %}
     {% endfor %}
 
     <!-- Favicons -->
-    <link rel="icon" type="image/x-icon" href="{% static 'images/favico.png' %}">
-    <link rel="apple-touch-icon" href="{% static 'images/apple-touch-ico.png' %}">
+    {% if project.imageFavicon|length %}{% thumbnail project.imageFavicon "16x16" crop="center" as im %}<link rel="icon" type="image/x-icon" href="{{ im.url }}">{% endthumbnail %}{% endif %}
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">

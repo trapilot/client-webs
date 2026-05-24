@@ -78,6 +78,7 @@ class Product(models.Model):
     content = RichTextField(_(u'Content'), null=True, blank=True)
     
     image = models.ImageField(_(u'Thumbnail'), null=True, blank=True, upload_to='uploads/apps/products/image/')
+    pdf = models.FileField(_(u'Báo Giá'), null=True, blank=True, upload_to='uploads/apps/products/pdf/')
     # galleries = models.ManyToManyField('ProductGallery', null=True, blank=True, related_name='product_set', verbose_name=_(u'Gallery'))
     
     capacity = models.IntegerField(_(u'Sức chứa (kg)'), default=0, validators=[MinValueValidator(0)])
@@ -223,6 +224,23 @@ class ProductGallery(models.Model):
     def __str__(self):
         return f"Hình ảnh - {self.created_at}"
 
+class ProductFaq(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='faq_set', verbose_name=_(u'Product'))
+    question = models.CharField(_(u'Question'), max_length=200)
+    answer = models.CharField(_(u'Answer'), null=True, blank=True, max_length=200)
+    icon = models.CharField(_(u'Icon'), null=True, blank=True, max_length=100, help_text=mark_safe("<a target='_blank' href='https://fontawesome.com/search>https://fontawesome.com/search</a>"),)
+    is_active = models.BooleanField(_(u'Active'), null=True, blank=True, default=True)
+    sorted_as = models.IntegerField(_(u'Order'), null=True, blank=True, default=0)
+
+    class Meta:
+        verbose_name = 'Product FAQ'
+        verbose_name_plural = 'Product FAQs'
+        ordering = ['sorted_as', 'is_active']
+
+    def __str__(self):
+        return f"{self.product.name} - {self.question}"
+    
 class ProductReview(models.Model):
     RATING_CHOICES = [
         (1, '1 Sao'),
