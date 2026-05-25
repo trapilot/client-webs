@@ -189,17 +189,17 @@ STATICFILES_FINDERS = (
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-if os.getenv("APP_AI_MODE", "False") == "True":
-    CKEDITOR_CONFIGS = {
-        'default': {
-            'toolbar': 'full',
-
-            'extraPlugins': ','.join([
-                'openai',
-                'gemini',
-            ]),
-        },
-    }
+CKEDITOR_EXTRA_PLUGINS = []
+if os.getenv("OPENAI_API_KEY", ""):
+    CKEDITOR_EXTRA_PLUGINS.append('openai')
+if os.getenv("GEMINI_API_KEY", ""):
+    CKEDITOR_EXTRA_PLUGINS.append('gemini')
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'extraPlugins': ','.join(CKEDITOR_EXTRA_PLUGINS),
+    },
+}
 
 LOGGING = {
     "version": 1,  # the dictConfig format version

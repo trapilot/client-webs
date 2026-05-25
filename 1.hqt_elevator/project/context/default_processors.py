@@ -37,11 +37,11 @@ def site_settings(request, kwargs=None):
     background = None
     try:
         if request.page.is_home:
-            background = request.page.background_set.filter(
+            background = request.page.background_page_set.filter(
                 is_active=True,
             ).first()
         else:
-            background = request.page.innerbackground_set.filter(
+            background = request.page.background_hero_set.filter(
                 is_active=True,
             ).first()
     except:
