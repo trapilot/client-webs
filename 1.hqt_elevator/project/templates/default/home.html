@@ -11,12 +11,71 @@
 .animate-marquee {
   animation: marquee 25s linear infinite;
 }
+.active-item {
+  background-color: #2a2a2a;
+  border-color: #b91c1c; /* red-700 */
+}
+.active-item .icon-box {
+  border-color: #4b5563; /* gray-600 */
+}
+.active-item .icon-box svg {
+  color: #b91c1c; /* red-700 */
+}
+.active-item h4 {
+  color: #ffffff;
+}
+.inactive-item {
+  background-color: transparent;
+  border-color: transparent;
+}
+.inactive-item .icon-box {
+  border-color: #4b5563; /* gray-600 */
+}
+.inactive-item .icon-box svg {
+  color: #d1d5db; /* gray-300 */
+}
+.inactive-item h4 {
+  color: #ffffff; /* gray-100 */
+}
+.inactive-item:hover {
+  background-color: #2a2a2a;
+  border-color: #b91c1c; /* red-700 */
+}
+.inactive-item:hover .icon-box svg {
+  color: #b91c1c; /* red-700 */
+}
 </style>
 {% endblock %}
 
 {% block extrajs %}
 {{ block.super }}
-<script></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const menuItems = document.querySelectorAll('.solution-item');
+  const displayImage = document.getElementById('solution-image');
+
+  menuItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const newImageSrc = item.getAttribute('data-image');
+
+      displayImage.style.opacity = 0;
+
+      setTimeout(() => {
+        displayImage.src = newImageSrc;
+        displayImage.style.opacity = 1;
+      }, 150); 
+
+      menuItems.forEach(i => {
+        i.classList.remove('active-item');
+        i.classList.add('inactive-item');
+      });
+
+      item.classList.remove('inactive-item');
+      item.classList.add('active-item');
+    });
+  });
+});
+</script>
 {% endblock %}
 
 {% block content %}
@@ -187,53 +246,63 @@
       </div>
       
       <div class="flex flex-col lg:flex-row gap-12 items-center">
-        <div class="lg:w-5/12 space-y-6">
-          <div class="flex items-start bg-[#2a2a2a] p-4 rounded border-l-4 border-red-500">
-            <div class="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center mr-4 shrink-0">
-               <svg class="w-5 h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+          <div id="solutions-menu" class="lg:w-5/12 space-y-6">
+          
+          <div class="solution-item active-item flex items-start p-4 rounded border-l-4 transition cursor-pointer" 
+              data-image="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&q=80">
+            <div class="icon-box w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center mr-4 shrink-0 transition">
+              <svg class="w-5 h-5 text-gray-300 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
             </div>
             <div>
-              <h4 class="text-[16px] font-bold mb-1">Nhà phố, biệt thự</h4>
+              <h4 class="text-[16px] font-bold mb-1 text-white transition">Nhà phố, biệt thự</h4>
               <p class="text-[13px] text-gray-400">Giải pháp thang máy tối ưu cho nhà phố, biệt thự sang trọng.</p>
             </div>
           </div>
-          <div class="flex items-start p-4 hover:bg-[#2a2a2a] rounded transition border-l-4 border-transparent hover:border-red-500">
-            <div class="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center mr-4 shrink-0">
-              <svg class="w-5 h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+
+          <div class="solution-item inactive-item flex items-start p-4 rounded border-l-4 transition cursor-pointer"
+              data-image="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&q=80">
+            <div class="icon-box w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center mr-4 shrink-0 transition">
+              <svg class="w-5 h-5 text-gray-300 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
             </div>
             <div>
-              <h4 class="text-[16px] font-bold mb-1">Cải tạo, nâng cấp</h4>
+              <h4 class="text-[16px] font-bold mb-1 text-white transition">Cải tạo, nâng cấp</h4>
               <p class="text-[13px] text-gray-400">Lắp đặt dễ dàng, không ảnh hưởng kết cấu công trình.</p>
             </div>
           </div>
-          <div class="flex items-start p-4 hover:bg-[#2a2a2a] rounded transition border-l-4 border-transparent hover:border-red-500">
-            <div class="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center mr-4 shrink-0">
-               <svg class="w-5 h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+
+          <div class="solution-item inactive-item flex items-start p-4 rounded border-l-4 transition cursor-pointer"
+              data-image="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&q=80">
+            <div class="icon-box w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center mr-4 shrink-0 transition">
+              <svg class="w-5 h-5 text-gray-300 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
             </div>
             <div>
-              <h4 class="text-[16px] font-bold mb-1">Người cao tuổi</h4>
+              <h4 class="text-[16px] font-bold mb-1 text-white transition">Người cao tuổi</h4>
               <p class="text-[13px] text-gray-400">Di chuyển an toàn, thuận tiện, chăm sóc người thân trọn vẹn.</p>
             </div>
           </div>
-          <div class="flex items-start p-4 hover:bg-[#2a2a2a] rounded transition border-l-4 border-transparent hover:border-red-500">
-            <div class="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center mr-4 shrink-0">
-               <svg class="w-5 h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+
+          <div class="solution-item inactive-item flex items-start p-4 rounded border-l-4 transition cursor-pointer"
+              data-image="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&q=80">
+            <div class="icon-box w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center mr-4 shrink-0 transition">
+              <svg class="w-5 h-5 text-gray-300 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
             </div>
             <div>
-              <h4 class="text-[16px] font-bold mb-1">Thẩm mỹ & phong thủy</h4>
+              <h4 class="text-[16px] font-bold mb-1 text-white transition">Thẩm mỹ & phong thủy</h4>
               <p class="text-[13px] text-gray-400">Thiết kế tinh tế, hài hòa không gian và phong thủy ngôi nhà.</p>
             </div>
           </div>
         </div>
         
         <div class="lg:w-7/12 relative">
-          <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&q=80" alt="Video Giải pháp" class="w-full h-auto rounded-lg shadow-2xl">
+          <img id="solution-image" src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&q=80" alt="Video Giải pháp" class="w-full h-auto rounded-lg shadow-2xl transition-opacity duration-300">
+          {% comment %}
           <div class="absolute inset-0 flex items-center justify-center">
             <button class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-red-700 shadow-lg hover:scale-110 transition cursor-pointer">
               <svg class="w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
             </button>
-            <span class="absolute mt-24 text-sm font-bold tracking-widest uppercase">XEM VIDEO GIẢI PHÁP</span>
+            <span class="absolute mt-24 text-sm font-bold tracking-widest uppercase text-white">XEM VIDEO GIẢI PHÁP</span>
           </div>
+          {% endcomment %}
         </div>
       </div>
     </div>
