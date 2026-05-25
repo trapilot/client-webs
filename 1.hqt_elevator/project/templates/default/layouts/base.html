@@ -49,7 +49,7 @@
     {% endfor %}
 
     <!-- Favicons -->
-    {% if project.imageFavicon|length %}{% thumbnail project.imageFavicon "16x16" crop="center" as im %}<link rel="icon" type="image/x-icon" href="{{ im.url }}">{% endthumbnail %}{% endif %}
+    {% if project.imageFavicon|length %}<link rel="icon" type="image/x-icon" href="{{ project.imageFavicon.url }}">{% endif %}
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
