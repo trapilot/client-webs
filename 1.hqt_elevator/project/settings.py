@@ -30,6 +30,7 @@ DEBUG = os.getenv("APP_DEBUG", "False") == "True"
 TEMPLATE_DEBUG = DEBUG
 THUMBNAIL_DEBUG = DEBUG
 
+
 # Application definition
 SITE_ID = int(os.getenv('SITE_ID', '1'))
 SITE_CODE = os.getenv('SITE_CODE', 'HQT_ELEVATOR')
@@ -37,6 +38,10 @@ SITE_HOST = os.getenv('SITE_HOST', 'localhost')
 
 USE_X_FORWARDED_HOST = True
 USE_X_FORWARDED_PORT = True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 CSRF_TRUSTED_ORIGINS = [f"http://{SITE_HOST}", f"https://{SITE_HOST}"]

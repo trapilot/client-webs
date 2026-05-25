@@ -76,6 +76,22 @@ case "$ACTION" in
 
     echo "DONE: Vietnamese locale ready 🚀"
     ;;
+  ssl)
+    echo "Generate Let's Encrypt SSL..."
+
+    docker compose run --rm certbot certonly \
+      --webroot \
+      --webroot-path=/var/www/certbot \
+      -d thangmayhqt.com \
+      -d www.thangmayhqt.com \
+      --email thangmayhqt@gmail.com \
+      --agree-tos \
+      --no-eff-email
+
+    echo "SSL generated 🚀"
+
+    docker compose restart nginx
+    ;;
   *)
     echo "Usage: ./script.sh [zip|unzip|locale]"
     ;;
