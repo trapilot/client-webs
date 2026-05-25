@@ -15,21 +15,30 @@ case "$ACTION" in
     deactivate
 
     echo "Copying engine/libs apps..."
-    mkdir -p project/libs
-
-    grep -oE "'[^']+'" project/settings.py \
-    | tr -d "'" \
-    | cut -d'.' -f1 \
-    | grep -E '^(cms_|.*_engine$)' \
+    (
+      grep -oE "'[^']+'" ./project/settings.py \
+      | tr -d "'" \
+      | grep -E '^(cms_.*|.*_engine)$'
+      echo "shared_engine"
+    ) \
     | sort -u \
-    | while read app; do
+    | while read -r app; do
+        echo "Copying: $app"
+        if [[ "$app" == cms_* ]]; then
+          SRC="../../libs/$app"
+        elif [[ "$app" == "shared_engine" ]]; then
+          SRC="../../libs/app_engine/shared_engine"
+        elif [[ "$app" == *_engine ]]; then
+          SRC="../../libs/app_engine/$app"
+        else
+          echo "Skip unknown pattern: $app"
+          continue
+        fi
 
-        SRC="../../libs/$app"
         DST="project/libs/$app"
-
         if [ ! -d "$SRC" ]; then
-            echo "Skip missing: $SRC"
-            continue
+          echo "Skip missing: $SRC"
+          continue
         fi
 
         rm -rf "$DST"
@@ -41,7 +50,6 @@ case "$ACTION" in
             "$SRC/" "$DST/"
 
         echo "Copied: $app"
-
     done
 
     cd project && zip -r ../libs.zip libs -x "*/__pycache__/*" "*.pyc"
