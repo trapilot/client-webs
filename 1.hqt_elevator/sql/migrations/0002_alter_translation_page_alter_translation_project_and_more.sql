@@ -54,7 +54,7 @@ CREATE TABLE `cms_engine_banner` (
 
 
 -- Add customer_address field to testimonial table
-ALTER TABLE `cms_engine_testimonial`
+ALTER TABLE `cms_app_testimonial`
 ADD COLUMN `customer_address` VARCHAR(200) NULL
 AFTER `customer_image`;
 
