@@ -12,7 +12,7 @@ class CustomIndexDashboard(Dashboard):
         site_name = get_admin_site_name(context)
 
         self.children.append(modules.ModelList(
-            u'Project',
+            u'Product & Portfolio',
             models=('project.*',),
             column=1,
         ))
@@ -24,7 +24,7 @@ class CustomIndexDashboard(Dashboard):
         ))
 
         self.children.append(modules.ModelList(
-            u'Content Management',
+            u'Website Content',
             models=('cms_app.*',),
             column=1,
         ))

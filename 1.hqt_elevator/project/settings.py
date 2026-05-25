@@ -27,28 +27,28 @@ SECRET_KEY = 'django-insecure-j)w)+b=001(jtrzc5v@iotv*bt0ifszt)!9c7d85pasikx2iol
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("APP_DEBUG", "False") == "True"
-TEMPLATE_DEBUG = DEBUG
-THUMBNAIL_DEBUG = DEBUG
 
+if DEBUG:
+    print("Your http server is running on DEBUG mode....")
 
 # Application definition
 SITE_ID = int(os.getenv('SITE_ID', '1'))
 SITE_CODE = os.getenv('SITE_CODE', 'HQT_ELEVATOR')
 SITE_HOST = os.getenv('SITE_HOST', 'localhost')
+SITE_DEBUG = DEBUG or SITE_HOST == 'localhost'
 
+
+# Django definition
+TEMPLATE_DEBUG = SITE_DEBUG
+THUMBNAIL_DEBUG = SITE_DEBUG
 USE_X_FORWARDED_HOST = True
-USE_X_FORWARDED_PORT = True
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT = True
+CSRF_COOKIE_SECURE = not SITE_DEBUG
+SESSION_COOKIE_SECURE = not SITE_DEBUG
+SECURE_SSL_REDIRECT = not SITE_DEBUG
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 X_FRAME_OPTIONS = 'SAMEORIGIN'
-
 CSRF_TRUSTED_ORIGINS = [f"http://{SITE_HOST}", f"https://{SITE_HOST}"]
-ALLOWED_HOSTS = [
-    SITE_HOST,
-    "127.0.0.1",
-]
+ALLOWED_HOSTS = [SITE_HOST, "localhost", "127.0.0.1"]
 
 INSTALLED_APPS = [
     # 'mailer',
@@ -148,13 +148,10 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Internationalization
-LANGUAGE_DETECTION = {
-    'TYPE': 0,
-}
 LANGUAGE_CODE = 'vi-vn'
+LANGUAGE_TYPE = 0
 LANGUAGES = [
     ('vi', _('Vietnamese')),
-    # ('en', _('English')),
 ]
 
 TIME_ZONE = 'UTC'
