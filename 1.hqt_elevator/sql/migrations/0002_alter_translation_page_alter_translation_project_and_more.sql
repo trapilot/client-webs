@@ -1,25 +1,3 @@
--- Alter translation.page
-ALTER TABLE cms_engine_translation
-DROP CONSTRAINT IF EXISTS cms_engine_translation_page_id_fk;
-
-ALTER TABLE cms_engine_translation
-ADD CONSTRAINT cms_engine_translation_page_id_fk
-FOREIGN KEY (page_id)
-REFERENCES cms_engine_page(id)
-ON DELETE CASCADE;
-
-
--- Alter translation.project
-ALTER TABLE cms_engine_translation
-DROP CONSTRAINT IF EXISTS cms_engine_translation_project_id_fk;
-
-ALTER TABLE cms_engine_translation
-ADD CONSTRAINT cms_engine_translation_project_id_fk
-FOREIGN KEY (project_id)
-REFERENCES cms_engine_project(id)
-ON DELETE CASCADE;
-
-
 -- Create Banner table
 CREATE TABLE cms_engine_banner (
     id BIGSERIAL PRIMARY KEY,
