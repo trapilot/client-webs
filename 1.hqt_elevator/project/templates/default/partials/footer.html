@@ -7,7 +7,7 @@
       <a href="{% url_cms 'home' %}" class="flex items-center gap-2 mb-4">
         {% if project.imageLogo|length %}
         <div class="text-red-600">
-            {% thumbnail project.imageLogo "100x40" crop="center" as im %}
+            {% thumbnail project.imageLogo "100x100" crop="center" as im %}
             <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ project.name }}" class="shadow-lg">
             {% endthumbnail %}
         </div>

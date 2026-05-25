@@ -7,7 +7,7 @@
       <a href="/" class="flex items-center gap-2">
         {% if project.imageLogo|length %}
         <div class="text-red-600">
-            {% thumbnail project.imageLogo "100x40" crop="center" as im %}
+            {% thumbnail project.imageLogo "72x72" crop="center" as im %}
             <img src="{{ im.url }}?{{ project.updated_at.timestamp }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ project.name }}" class="shadow-lg">
             {% endthumbnail %}
         </div>
