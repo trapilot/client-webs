@@ -33,9 +33,9 @@ CREATE TABLE `cms_engine_banner` (
     `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
         ON UPDATE CURRENT_TIMESTAMP,
 
-    `page_id` BIGINT UNSIGNED NULL,
+    `page_id` BIGINT NULL,
 
-    `project_id` BIGINT UNSIGNED NULL,
+    `project_id` BIGINT NULL,
 
     PRIMARY KEY (`id`),
 
