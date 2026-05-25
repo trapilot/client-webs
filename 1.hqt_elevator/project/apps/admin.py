@@ -6,7 +6,7 @@ from django.db.models import Q
 from .models import (
     Product, ProductCategory, ProductFeature, ProductFaq, ProductGallery, ProductReview,
     Portfolio, PortfolioCategory, PortfolioGallery,
-    
+    Solution, SolutionFeature,
 )
 
 
@@ -282,3 +282,36 @@ class PortfolioAdmin(admin.ModelAdmin):
             obj.get_status_display()
         )
     status_badge.short_description = 'Trạng Thái'
+
+
+
+class SolutionFeatureAdmin(admin.TabularInline):
+    model = SolutionFeature
+    extra = 1
+    fields = ('name', 'value', 'icon', 'sorted_as',)
+
+@admin.register(Solution)
+class SolutionAdmin(admin.ModelAdmin):
+    inlines = [SolutionFeatureAdmin]
+    list_display = ('title', 'alias', 'is_active', 'is_featured')
+    prepopulated_fields = {'slug': ('title',)}
+    readonly_fields = ('created_at', 'updated_at')
+    
+    fieldsets = (
+        ('Thông Tin Cơ Bản', {
+            'fields': ('title', 'slug', 'alias', 'image', 'icon',  'is_active', 'is_featured',)
+        }),
+        ('Mô Tả', {
+            'fields': ('description', 'content',),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    def thumbnail_display(self, obj):
+        if obj.image:
+            return format_html(
+                '<img src="{}" width="50" height="50" style="object-fit: cover;" />',
+                obj.image.url
+            )
+        return ""
+    thumbnail_display.short_description = 'Hình Ảnh'

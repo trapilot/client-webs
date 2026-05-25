@@ -6,6 +6,7 @@ case "$ACTION" in
   zip)
     find ../../ \
     -path "*/venv" -prune -o \
+    -path "*/webs" -prune -o \
     \( -path "*/migrations/*.pyc" -o \
       -path "*/migrations/*.py" ! -name "__init__.py" \) \
     -exec rm -f {} +

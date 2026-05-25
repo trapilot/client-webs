@@ -235,6 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
   </section>
 
+  {% if solutions|length %}
   <section class="py-16 bg-[#212121] text-white">
     <div class="max-w-[1200px] mx-auto px-4">
       <div class="text-center mb-12">
@@ -246,51 +247,23 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
       
       <div class="flex flex-col lg:flex-row gap-12 items-center">
-          <div id="solutions-menu" class="lg:w-5/12 space-y-6">
-          
+        <div id="solutions-menu" class="lg:w-5/12 space-y-6">
+          {% for solution in solutions %}
           <div class="solution-item active-item flex items-start p-4 rounded border-l-4 transition cursor-pointer" 
-              data-image="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&q=80">
+              data-image="{{ solution.featured_image_url }}">
             <div class="icon-box w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center mr-4 shrink-0 transition">
+              {% if solution.icon|length %}
+              {{ solution.icon|safe }}
+              {% else %}
               <svg class="w-5 h-5 text-gray-300 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+              {% endif %}
             </div>
             <div>
-              <h4 class="text-[16px] font-bold mb-1 text-white transition">Nhà phố, biệt thự</h4>
-              <p class="text-[13px] text-gray-400">Giải pháp thang máy tối ưu cho nhà phố, biệt thự sang trọng.</p>
+              <h4 class="text-[16px] font-bold mb-1 text-white transition">{{ solution.alias }}</h4>
+              <p class="text-[13px] text-gray-400">{{ solution.description }}</p>
             </div>
           </div>
-
-          <div class="solution-item inactive-item flex items-start p-4 rounded border-l-4 transition cursor-pointer"
-              data-image="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&q=80">
-            <div class="icon-box w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center mr-4 shrink-0 transition">
-              <svg class="w-5 h-5 text-gray-300 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-            </div>
-            <div>
-              <h4 class="text-[16px] font-bold mb-1 text-white transition">Cải tạo, nâng cấp</h4>
-              <p class="text-[13px] text-gray-400">Lắp đặt dễ dàng, không ảnh hưởng kết cấu công trình.</p>
-            </div>
-          </div>
-
-          <div class="solution-item inactive-item flex items-start p-4 rounded border-l-4 transition cursor-pointer"
-              data-image="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&q=80">
-            <div class="icon-box w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center mr-4 shrink-0 transition">
-              <svg class="w-5 h-5 text-gray-300 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-            </div>
-            <div>
-              <h4 class="text-[16px] font-bold mb-1 text-white transition">Người cao tuổi</h4>
-              <p class="text-[13px] text-gray-400">Di chuyển an toàn, thuận tiện, chăm sóc người thân trọn vẹn.</p>
-            </div>
-          </div>
-
-          <div class="solution-item inactive-item flex items-start p-4 rounded border-l-4 transition cursor-pointer"
-              data-image="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&q=80">
-            <div class="icon-box w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center mr-4 shrink-0 transition">
-              <svg class="w-5 h-5 text-gray-300 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
-            </div>
-            <div>
-              <h4 class="text-[16px] font-bold mb-1 text-white transition">Thẩm mỹ & phong thủy</h4>
-              <p class="text-[13px] text-gray-400">Thiết kế tinh tế, hài hòa không gian và phong thủy ngôi nhà.</p>
-            </div>
-          </div>
+          {% endfor %}
         </div>
         
         <div class="lg:w-7/12 relative">
@@ -307,6 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     </div>
   </section>
+  {% endif %}
 
   {% if portfolios|length %}
   <section class="py-16 bg-white">

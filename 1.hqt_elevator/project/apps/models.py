@@ -445,3 +445,58 @@ class PortfolioGallery(models.Model):
 
     def __str__(self):
         return f"Hình ảnh - {self.created_at}"
+
+
+class Solution(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    alias = models.CharField(_(u'Alias'), max_length=200)
+    title = models.CharField(_(u'Title'), max_length=200)
+    slug = models.SlugField(_(u'Slug'), unique=True)    
+    description = models.TextField(_(u'Description'), null=True, blank=True)
+    icon = models.TextField(_(u'Icon'), null=True, blank=True)
+    content = RichTextField(_(u'Content'), null=True, blank=True)
+    image = models.ImageField(_(u'Thumbnail'), null=True, blank=True, upload_to='uploads/apps/products/image/')
+    is_active = models.BooleanField(_(u'Active'), null=True, blank=True, default=True)
+    is_featured = models.BooleanField(_(u'Featured'), null=True, blank=True, default=False)
+    sorted_as = models.PositiveIntegerField(_(u'Order'), null=True, blank=True, default=0)
+    
+    created_at = models.DateTimeField(_(u'Created'), auto_now_add=True)
+    updated_at = models.DateTimeField(_(u'Updated'), auto_now=True)
+
+    class Meta:
+        verbose_name = 'Solution'
+        verbose_name_plural = 'Solutions'
+        ordering = ['sorted_as', 'is_active', '-created_at']
+
+    def __str__(self):
+        return self.title
+
+    DEFAULT_IMAGES = [
+        "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&q=80",
+        "https://thangmayhqt.com/static/images/giai-phap-xay-dung-biet-thu-gpxd.jpg",
+        "https://thangmayhqt.com/static/images/elevator_renovation.jpg",
+
+    ]
+
+    @property
+    def featured_image_url(self):
+        if self.image:
+            return self.image.url
+        return random.choice(self.DEFAULT_IMAGES)
+    
+class SolutionFeature(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    solution = models.ForeignKey(Solution, on_delete=models.CASCADE, related_name='feature_set', verbose_name=_(u'Solution'))
+    name = models.CharField(_(u'Name'), max_length=200)
+    value = models.CharField(_(u'Value'), null=True, blank=True, max_length=200)
+    icon = models.CharField(_(u'Icon'), null=True, blank=True, max_length=100, help_text=mark_safe("<a target='_blank' href='https://fontawesome.com/search>https://fontawesome.com/search</a>"),)
+    is_active = models.BooleanField(_(u'Active'), null=True, blank=True, default=True)
+    sorted_as = models.IntegerField(_(u'Order'), null=True, blank=True, default=0)
+
+    class Meta:
+        verbose_name = 'Solution Feature'
+        verbose_name_plural = 'Solution Features'
+        ordering = ['sorted_as', 'is_active']
+
+    def __str__(self):
+        return f"{self.solution.title} - {self.name}"

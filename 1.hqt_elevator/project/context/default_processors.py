@@ -17,6 +17,7 @@ from project.apps.models import (
     Portfolio,
     Product,
     ProductCategory,
+    Solution,
 )
 from recruitment_engine.models import (
     Department,
@@ -61,11 +62,17 @@ def home(request, kwargs=None):
         is_featured=True,
     ).order_by('sorted_as')[:8]
 
+    solutions = Solution.objects.filter(
+        is_active=True,
+        is_featured=True,
+    ).order_by('sorted_as')[:4]
+
     return dict({
         "testimonial": testimonial,
         "testimonials": testimonials,
         "partners": partners,
         "portfolios": portfolios,
+        "solutions": solutions,
     })
 
 def support(request, kwargs=None):
@@ -234,6 +241,15 @@ def article(request, kwargs=None):
         "article": article,
         "related_articles": related_articles,
         "related_categories": related_categories,
+    })
+
+def solutions(request, kwargs=None):
+    solutions = Solution.objects.filter(
+        is_active=True,
+    ).order_by('sorted_as')
+
+    return dict({
+        "solutions": solutions,
     })
 
 def recruitment(request, kwargs=None):
