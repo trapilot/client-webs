@@ -18,6 +18,7 @@ from project.apps.models import (
     Product,
     ProductCategory,
     Solution,
+    Benefit,
 )
 from recruitment_engine.models import (
     Department,
@@ -67,12 +68,18 @@ def home(request, kwargs=None):
         is_featured=True,
     ).order_by('sorted_as')[:4]
 
+    benefits = Benefit.objects.filter(
+        is_active=True,
+        is_featured=True,
+    ).order_by('sorted_as')[:4]
+
     return dict({
         "testimonial": testimonial,
         "testimonials": testimonials,
         "partners": partners,
         "portfolios": portfolios,
         "solutions": solutions,
+        "benefits": benefits,
     })
 
 def support(request, kwargs=None):

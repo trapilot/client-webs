@@ -500,3 +500,22 @@ class SolutionFeature(models.Model):
 
     def __str__(self):
         return f"{self.solution.title} - {self.name}"
+    
+
+class Benefit(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    icon = models.TextField()
+    
+    is_active = models.BooleanField(_(u'Active'), null=True, blank=True, default=True)
+    is_featured = models.BooleanField(_(u'Featured'), null=True, blank=True, default=True)
+    sorted_as = models.IntegerField(_(u'Order'), null=True, blank=True, default=0)
+    
+    created_at = models.DateTimeField(_(u'Created'), auto_now_add=True)
+    updated_at = models.DateTimeField(_(u'Updated'), auto_now=True)
+
+    class Meta:
+        ordering = ['sorted_as', 'is_active']
+
+    def __str__(self):
+        return self.title

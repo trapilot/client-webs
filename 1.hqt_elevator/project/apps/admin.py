@@ -7,6 +7,7 @@ from .models import (
     Product, ProductCategory, ProductFeature, ProductFaq, ProductGallery, ProductReview,
     Portfolio, PortfolioCategory, PortfolioGallery,
     Solution, SolutionFeature,
+    Benefit,
 )
 
 
@@ -315,3 +316,19 @@ class SolutionAdmin(admin.ModelAdmin):
             )
         return ""
     thumbnail_display.short_description = 'Hình Ảnh'
+
+
+@admin.register(Benefit)
+class BenefitAdmin(admin.ModelAdmin):
+    list_display = ('title', 'is_active', 'is_featured')
+    readonly_fields = ('created_at', 'updated_at')
+    
+    fieldsets = (
+        ('Thông Tin Cơ Bản', {
+            'fields': ('title', 'icon',  'is_active', 'is_featured',)
+        }),
+        ('Mô Tả', {
+            'fields': ('description',),
+            'classes': ('collapse',)
+        }),
+    )
