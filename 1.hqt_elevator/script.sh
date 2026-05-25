@@ -92,6 +92,10 @@ case "$ACTION" in
 
     docker compose restart nginx
     ;;
+  renew)
+    docker compose run --rm certbot renew
+    docker compose restart nginx
+    ;;
   *)
     echo "Usage: ./script.sh [zip|unzip|locale]"
     ;;
