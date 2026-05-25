@@ -7,9 +7,13 @@
       <a href="/" class="flex items-center gap-2">
         {% if project.imageLogo|length %}
         <div class="text-red-600">
-            {% thumbnail project.imageLogo "72x72" crop="center" as im %}
-            <img src="{{ im.url }}?{{ project.updated_at.timestamp }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ project.name }}" class="shadow-lg">
-            {% endthumbnail %}
+            <img
+              src="{{ project.imageLogo.url }}?v={{ project.updated_at|date:'U' }}"
+              alt="{{ project.name }}"
+              class="w-[72px] h-[72px] object-contain"
+              width="72"
+              height="72"
+            >
         </div>
         {% else %}
         <svg class="w-8 h-8 text-red-700" fill="currentColor" viewBox="0 0 24 24"><path d="M4 4h4v16H4V4zm6 0h4v16h-4V4zm6 0h4v16h-4V4z"/></svg>
