@@ -24,7 +24,6 @@ EOF
 '
 
 echo "Run custom SQL migrations..."
-
 FILES=$(find sql/migrations -name "*.sql" | sort)
 
 for file in $FILES; do
