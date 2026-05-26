@@ -20,6 +20,8 @@ jobs:
           curl -s ifconfig.me
           echo ""
           echo "Testing SSH port..."
+          echo ${{ secrets.VPS_HOST }}
+          echo ${{ secrets.VPS_PORT }}
           nc -vz ${{ secrets.VPS_HOST }} ${{ secrets.VPS_PORT }} || true
 
       - name: Deploy to VPS via SSH
