@@ -13,6 +13,8 @@ git pull origin hqt_elevator
 echo "Unzip libs..."
 ./script.sh unzip
 
+
+
 # echo "Ensure SQL history table..."
 # docker exec $DB_CONTAINER sh -c '
 # mysql -u $DB_USER -p$DB_PASSWORD $DB_NAME <<EOF
