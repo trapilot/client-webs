@@ -34,8 +34,9 @@ if DEBUG:
 # Application definition
 SITE_ID = int(os.getenv('SITE_ID', '1'))
 SITE_CODE = os.getenv('SITE_CODE', 'HQT_ELEVATOR')
-SITE_HOST = os.getenv('SITE_HOST', 'localhost')
-SITE_DEBUG = DEBUG or SITE_HOST == 'localhost'
+SITE_HOST = os.getenv('SITE_HOST', '127.0.0.1')
+SITE_DOMAIN = os.getenv('SITE_DOMAIN', 'localhost')
+SITE_DEBUG = DEBUG or SITE_DOMAIN == 'localhost'
 
 
 # Django definition
@@ -47,8 +48,8 @@ SESSION_COOKIE_SECURE = not SITE_DEBUG
 SECURE_SSL_REDIRECT = not SITE_DEBUG
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 X_FRAME_OPTIONS = 'SAMEORIGIN'
-CSRF_TRUSTED_ORIGINS = [f"http://{SITE_HOST}", f"https://{SITE_HOST}"]
-ALLOWED_HOSTS = [SITE_HOST, "localhost", "127.0.0.1", "0.0.0.0"]
+CSRF_TRUSTED_ORIGINS = [f"http://{SITE_DOMAIN}", f"https://{SITE_DOMAIN}"]
+ALLOWED_HOSTS = [SITE_HOST, SITE_DOMAIN, "localhost", "127.0.0.1", "0.0.0.0"]
 
 INSTALLED_APPS = [
     # 'mailer',
