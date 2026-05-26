@@ -10,7 +10,7 @@
       <a href="{% url_cms 'article' article.slug %}" class="group block bg-white rounded-lg overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition duration-300 mb-10 flex flex-col md:flex-row">
         <div class="md:w-1/2 h-64 md:h-auto relative overflow-hidden">
           {% if article.image %}
-          <img src="{{ article.image.url }}" alt="{{ article.title }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+          <img src="{{ article.image.url }}" alt="{{ article.title }}" fetchpriority="high" loading="eager" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
           {% endif %}
         </div>
         <div class="md:w-1/2 p-6 md:p-10 flex flex-col justify-center">
@@ -34,7 +34,7 @@
           <a href="{% url_cms 'article' article.slug %}" class="group bg-white border border-gray-200 rounded overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col">
             <div class="relative h-56 overflow-hidden">
               {% if article.image %}
-              <img src="{{ article.image.url }}" alt="{{ article.title }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+              <img src="{{ article.image.url }}" alt="{{ article.title }}" fetchpriority="high" loading="eager" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
               {% endif %}
               {% for category in article.categories.all %}
               <div class="absolute top-4 left-4 bg-gray-900/80 backdrop-blur-sm text-white text-[11px] font-bold px-2 py-1 rounded uppercase tracking-wider z-10">{{ category.name }}</div>

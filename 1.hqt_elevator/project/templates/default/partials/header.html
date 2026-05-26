@@ -11,6 +11,7 @@
               src="{{ project.imageLogo.url }}?v={{ project.updated_at|date:'U' }}"
               alt="{{ project.name }}"
               class="w-[72px] h-[72px] object-contain"
+              fetchpriority="high" loading="eager" decoding="async"
               width="72"
               height="72"
             >

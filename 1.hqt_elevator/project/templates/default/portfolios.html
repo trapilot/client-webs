@@ -16,7 +16,7 @@
         {% for portfolio in portfolios %}
         {% if forloop.first %}
         <a href="{% url_cms 'portfolio' portfolio.slug %}" class="group relative block overflow-hidden rounded lg:col-span-2 h-[300px] md:h-[400px]">
-          <img src="{{ portfolio.featured_image_url }}" alt="Dự án 1" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+          <img src="{{ portfolio.featured_image_url }}" alt="{{ portfolio.name }}" fetchpriority="high" loading="eager" decoding="async" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
           <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
           <div class="absolute bottom-0 left-0 p-6 md:p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
             <span class="text-red-500 font-bold text-[11px] tracking-widest uppercase mb-2 block">{{ portfolio.category.name }}</span>
@@ -28,7 +28,7 @@
 
         {% if forloop.counter == 2 %}
         <a href="{% url_cms 'portfolio' portfolio.slug %}" class="group relative block overflow-hidden rounded h-[300px] md:h-[400px]">
-          <img src="{{ portfolio.featured_image_url }}" alt="Dự án 2" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+          <img src="{{ portfolio.featured_image_url }}" alt="{{ portfolio.name }}" fetchpriority="high" loading="eager" decoding="async" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
           <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
           <div class="absolute bottom-0 left-0 p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
             <span class="text-red-500 font-bold text-[11px] tracking-widest uppercase mb-2 block">{{ portfolio.category.name }}</span>
@@ -39,7 +39,7 @@
 
         {% if forloop.counter == 3 %}
         <a href="{% url_cms 'portfolio' portfolio.slug %}" class="group relative block overflow-hidden rounded h-[300px] md:h-[400px]">
-          <img src="{{ portfolio.featured_image_url }}" alt="Dự án 3" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+          <img src="{{ portfolio.featured_image_url }}" alt="{{ portfolio.name }}" fetchpriority="high" loading="eager" decoding="async" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
           <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
           <div class="absolute bottom-0 left-0 p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
             <span class="text-red-500 font-bold text-[11px] tracking-widest uppercase mb-2 block">{{ portfolio.category.name }}</span>
@@ -50,7 +50,7 @@
 
         {% if forloop.counter == 4 %}
         <a href="{% url_cms 'portfolio' portfolio.slug %}" class="group relative block overflow-hidden rounded lg:col-span-2 h-[300px] md:h-[400px]">
-          <img src="{{ portfolio.featured_image_url }}" alt="Dự án 4" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+          <img src="{{ portfolio.featured_image_url }}" alt="{{ portfolio.name }}" fetchpriority="high" loading="eager" decoding="async" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
           <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
           <div class="absolute bottom-0 left-0 p-6 md:p-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
             <span class="text-red-500 font-bold text-[11px] tracking-widest uppercase mb-2 block">{{ portfolio.category.name }}</span>

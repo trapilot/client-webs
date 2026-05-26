@@ -12,7 +12,7 @@
   
   <section class="relative h-[60vh] min-h-[500px] flex items-end">
     <div class="absolute inset-0 z-0">
-      <img src="{{ portfolio.featured_image_url }}" alt="Vinhomes Riverside" class="w-full h-full object-cover">
+      <img src="{{ portfolio.featured_image_url }}" alt="Vinhomes Riverside" fetchpriority="high" loading="eager" decoding="async" class="w-full h-full object-cover">
       <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/50 to-transparent"></div>
     </div>
     <div class="relative z-10 max-w-[1200px] mx-auto px-4 w-full pb-16">
@@ -66,9 +66,9 @@
       <div class="lg:col-span-2 grid grid-cols-2 gap-4 h-fit">
         {% for gallery in portfolio.gallery_set.all|slice:"3" %}
           {% if forloop.counter < 3 %}
-          <img src="{{ gallery.image.url }}" class="w-full h-[300px] md:h-[400px] object-cover rounded shadow-sm hover:shadow-lg transition">
+          <img src="{{ gallery.image.url }}" fetchpriority="high" loading="eager" decoding="async" class="w-full h-[300px] md:h-[400px] object-cover rounded shadow-sm hover:shadow-lg transition">
           {% elif forloop.counter == 3 %}
-          <img src="{{ gallery.image.url }}" class="w-full h-[250px] md:h-[300px] object-cover rounded shadow-sm col-span-2 hover:shadow-lg transition">
+          <img src="{{ gallery.image.url }}" fetchpriority="high" loading="eager" decoding="async" class="w-full h-[250px] md:h-[300px] object-cover rounded shadow-sm col-span-2 hover:shadow-lg transition">
           {% endif %}
         {% endfor %}
       </div>

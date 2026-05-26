@@ -11,6 +11,7 @@
                 height="{{ im.height }}"
                 alt="{{ project.name }}"
                 class="w-full h-full object-cover"
+                fetchpriority="high" loading="eager" decoding="async"
             >
         </div>
         {% endthumbnail %}
