@@ -50,7 +50,7 @@ def create_default_apps(sender, **kwargs):
             geolng='105.978242',
             geozm='17',
             is_active=True,
-            is_default=True,
+            is_root=True,
         ),
     ])
 
@@ -1155,7 +1155,7 @@ def create_default_apps(sender, **kwargs):
 
     branch = Branch.objects.get(
         project=project,
-        is_default=True,
+        is_root=True,
     )
     Department.objects.bulk_create([
         Department(
