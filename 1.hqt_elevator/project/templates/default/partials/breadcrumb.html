@@ -12,6 +12,8 @@
             <span class="text-gray-900 font-bold">{{ product.name }}</span>
             {% elif portfolio %}
             <span class="text-gray-900 font-bold">{{ portfolio.name }}</span>
+            {% elif article %}
+            <span class="text-gray-900 font-bold">{{ article.title }}</span>
             {% elif category %}
             <span class="text-gray-900 font-bold">{{ category.name }}</span>
             {% endif %}
