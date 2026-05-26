@@ -14,7 +14,6 @@ echo "Unzip libs..."
 ./script.sh unzip
 
 echo "Ensure SQL history table..."
-
 docker exec $DB_CONTAINER sh -c '
 mysql -u $DB_USER -p$DB_PASSWORD $DB_NAME <<EOF
 CREATE TABLE IF NOT EXISTS custom_sql_history (
