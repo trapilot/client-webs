@@ -13,9 +13,6 @@ git pull origin hqt_elevator
 echo "Unzip libs..."
 ./script.sh unzip
 
-echo "Run Django migrations..."
-docker exec web python manage.py migrate
-
 echo "Ensure SQL history table..."
 
 docker exec $DB_CONTAINER sh -c '
