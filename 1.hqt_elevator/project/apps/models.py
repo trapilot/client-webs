@@ -9,8 +9,9 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import User
 
-
 from ckeditor.fields import RichTextField
+
+from shared_engine.managers import GeneralManager
 
 
 class ProductCategory(models.Model):
@@ -54,6 +55,8 @@ class ProductCategory(models.Model):
 
 
 class Product(models.Model):
+    objects = GeneralManager()
+
     STATUS_CHOICES = [
         ('draft', 'Nháp'),
         ('published', 'Xuất Bản'),
@@ -306,6 +309,8 @@ class PortfolioCategory(models.Model):
 
     
 class Portfolio(models.Model):
+    objects = GeneralManager()
+    
     STATUS_CHOICES = [
         ('planning', 'Đang Lên Kế Hoạch'),
         ('ongoing', 'Đang Triển Khai'),
