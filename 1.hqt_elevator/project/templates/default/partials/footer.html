@@ -34,7 +34,7 @@
       <div class="flex space-x-3">
         {% for network in project.social_networks %}
         <a href="{{ network.url|url_link }}" class="w-8 h-8 rounded bg-gray-800 flex items-center justify-center text-white hover:bg-red-600 transition">
-          <i class="{{ network.code }}"></i>
+          <i class="{{ network.icon_code }}"></i>
         </a>
         {% endfor %}
       </div>
