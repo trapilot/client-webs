@@ -115,6 +115,7 @@ def products(request, kwargs=None):
     paginator = Paginator(
         Product.objects.filter(
             is_active=True,
+            status='published',
         ).order_by('sorted_as', 'created_at'),
         6
     )
@@ -151,6 +152,7 @@ def product(request, kwargs=None):
 
         related_products = Product.objects.filter(
             is_active=True,
+            status='published',
             category=product.category,
         ).exclude(id=product.id).order_by('sorted_as', 'created_at',)[:4]
     except ObjectDoesNotExist:
