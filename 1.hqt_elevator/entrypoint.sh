@@ -26,8 +26,8 @@ else
 fi
 
 # 🔥 Run migrations only if enabled
-if [ "$APP_INITIAL" = "True" ] || [ "$APP_MIGATE" = "True" ]; then
-  echo "APP_MIGATE is enabled. Running migrations..."
+if [ "$APP_INITIAL" = "True" ] || [ "$APP_MIGRATE" = "True" ]; then
+  echo "APP_MIGRATE is enabled. Running migrations..."
 
   python manage.py flush --no-input
   python manage.py makemigrations
