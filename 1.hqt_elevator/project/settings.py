@@ -80,13 +80,13 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'cms_engine.middleware.Redireccion',
+    'cms_engine.middleware.RedirectionMiddleware',
     # 'cms_engine.middleware.MultipleProxyMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'cms_engine.middleware.CmsEngine',
+    'cms_engine.middleware.ResolverMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
