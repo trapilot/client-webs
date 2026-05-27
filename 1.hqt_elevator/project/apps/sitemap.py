@@ -25,8 +25,9 @@ def extension(project, context):
             if page.code == 'product':
                 products = Product.objects.is_activated()
                 for product in products:
-                    context = SitemapContext(language=lang, lastmod=product.updated_at)
-                    pages.append(build_sitemap(project, page, context, slug=product.slug))
+                    if product.status == 'published':
+                        context = SitemapContext(language=lang, lastmod=product.updated_at)
+                        pages.append(build_sitemap(project, page, context, slug=product.slug))
             elif page.code == 'article':
                 articles = Article.objects.is_activated()
                 for article in articles:
