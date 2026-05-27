@@ -15,7 +15,7 @@ def create_default_apps(sender, **kwargs):
     from cms_engine.models import Site, Page, Branch, Constant, SocialNetwork, OperatingHour
     from cms_app.models import Category, Tag, Article, Testimonial, Partner, FAQ, FAQAnswer
     from recruitment_engine.models import Department, Job
-    from site.apps.models import ProductCategory, Product, ProductFeature, Portfolio, PortfolioCategory
+    from project.apps.models import ProductCategory, Product, ProductFeature, Portfolio, PortfolioCategory
 
     def is_exists(site):
         return Site.objects.filter(code=site).exists()
