@@ -48,10 +48,7 @@ def home(request, kwargs=None):
         is_active=True,
         is_featured=True,
         # rating__gte=3
-    )[:3]
-    ids = list(testimonials.values_list('id', flat=True))
-    random_id = random.choice(ids) if ids else None
-    testimonial = Testimonial.objects.filter(id=random_id).first()
+    )[:5]
 
     partners = Partner.objects.filter(
         is_active=True,
@@ -74,7 +71,6 @@ def home(request, kwargs=None):
     ).order_by('sorted_as')[:4]
 
     return dict({
-        "testimonial": testimonial,
         "testimonials": testimonials,
         "partners": partners,
         "portfolios": portfolios,
