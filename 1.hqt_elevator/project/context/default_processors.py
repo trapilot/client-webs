@@ -120,15 +120,6 @@ def products(request, kwargs=None):
         is_active=True,
     )
 
-    if os.getenv("APP_DEMO", "False").lower() == "true":
-        qs = list(
-            Product.objects.filter(
-                is_active=True,
-            ).order_by('sorted_as', 'created_at')
-        ) * 10
-        paginator = Paginator(qs, 6)
-        products = paginator.get_page(request.GET.get("page"))
-
     return dict({
         "products": products,
         "categories": categories,
@@ -194,15 +185,6 @@ def articles(request, kwargs=None):
         4
     )
     articles = paginator.get_page(request.GET.get("page"))
-
-    if os.getenv("APP_DEMO", "False").lower() == "true":
-        qs = list(
-            Article.objects.filter(
-                is_active=True,
-            ).order_by('sorted_as', 'created_at')
-        ) * 10
-        paginator = Paginator(qs, 4)
-        articles = paginator.get_page(request.GET.get("page"))
 
     return dict({
         "articles": articles,

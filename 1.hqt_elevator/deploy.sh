@@ -14,8 +14,10 @@ echo "Unzip libs..."
 ./script.sh unzip
 
 
+echo "Ensure SQL history table..."
+echo "DB_USER=$DB_USER"
+echo "DB_NAME=$DB_NAME"
 
-# # echo "Ensure SQL history table..."
 # docker exec $DB_CONTAINER sh -c '
 # mysql -u $DB_USER -p$DB_PASSWORD $DB_NAME <<EOF
 # CREATE TABLE IF NOT EXISTS migrate_libs_history (

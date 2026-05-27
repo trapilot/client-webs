@@ -315,7 +315,7 @@ class Portfolio(models.Model):
         ('planning', 'Đang Lên Kế Hoạch'),
         ('ongoing', 'Đang Triển Khai'),
         ('completed', 'Hoàn Thành'),
-        ('archived', 'Lưu Trữ'),
+        # ('archived', 'Lưu Trữ'),
     ]
 
     id = models.BigAutoField(primary_key=True)
