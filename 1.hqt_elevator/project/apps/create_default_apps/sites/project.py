@@ -12,21 +12,21 @@ from django.utils.text import slugify
 
 @receiver(post_migrate)
 def create_default_apps(sender, **kwargs):
-    from cms_engine.models import Project, Page, Branch, Constant, SocialNetwork, OperatingHour
+    from cms_engine.models import Site, Page, Branch, Constant, SocialNetwork, OperatingHour
     from cms_app.models import Category, Tag, Article, Testimonial, Partner, FAQ, FAQAnswer
     from recruitment_engine.models import Department, Job
-    from project.apps.models import ProductCategory, Product, ProductFeature, Portfolio, PortfolioCategory
+    from site.apps.models import ProductCategory, Product, ProductFeature, Portfolio, PortfolioCategory
 
-    def is_exists(project):
-        return Project.objects.filter(code=project).exists()
+    def is_exists(site):
+        return Site.objects.filter(code=site).exists()
 
     if is_exists(settings.SITE_CODE):
         return
 
-    # sleep to wait another project
+    # sleep to wait another site
     time.sleep(1)
 
-    project = Project.objects.create(
+    site = Site.objects.create(
         id=settings.SITE_ID,
         code=settings.SITE_CODE,
         name=re.sub(r'[_-]+', ' ', settings.SITE_CODE),
@@ -40,7 +40,7 @@ def create_default_apps(sender, **kwargs):
 
     Branch.objects.bulk_create([
         Branch(
-            project=project,
+            site=site,
             name_vi='Vinhomes Ocean Park 3, Xã Nghĩa Trụ, Hưng Yên',
             address_vi='Vịnh Thiên Đường 7 căn 67 Vinhomes Ocean Park 3, Xã Nghĩa Trụ, Hưng Yên',
             description_vi='',
@@ -56,35 +56,35 @@ def create_default_apps(sender, **kwargs):
 
     SocialNetwork.objects.bulk_create([
         SocialNetwork(
-            project=project,
+            site=site,
             name='Facebook',
             icon_text='f',
             icon_code='fab fa-facebook-f',
             is_active=True,
         ),
         SocialNetwork(
-            project=project,
+            site=site,
             name='Youtube',
             icon_text='▶',
             icon_code='fab fa-youtube',
             is_active=True,
         ),
         SocialNetwork(
-            project=project,
+            site=site,
             name='Tiktok',
             icon_text='♪',
             icon_code='fab fa-tiktok',
             is_active=True,
         ),
         SocialNetwork(
-            project=project,
+            site=site,
             name='Zalo',
             icon_text='Z',
             icon_code='fab fa-zalo',
             is_active=True,
         ),
         SocialNetwork(
-            project=project,
+            site=site,
             name='LinkedIn',
             icon_text='in',
             icon_code='fab fa-linkedin-in',
@@ -94,37 +94,37 @@ def create_default_apps(sender, **kwargs):
 
     Constant.objects.bulk_create([
         Constant(
-            project=project,
+            site=site,
             name='GOOGLE_TAG_MANAGER',
             type='STR',
             type_value='',
         ),
         Constant(
-            project=project,
+            site=site,
             name='ENABLE_POPUP_NEWSLETTER',
             type='BOOL',
             type_value='0',
         ),
         Constant(
-            project=project,
+            site=site,
             name='TEAM_TECH_EMAIL',
             type='STR',
             type_value='thangmayhqt@gmail.com',
         ),
         Constant(
-            project=project,
+            site=site,
             name='TEAM_TECH_PHONE',
             type='STR',
             type_value='+84 93 4369133',
         ),
         Constant(
-            project=project,
+            site=site,
             name='TEAM_HR_EMAIL',
             type='STR',
             type_value='thangmayhqt@gmail.com',
         ),
         Constant(
-            project=project,
+            site=site,
             name='TEAM_HR_PHONE',
             type='STR',
             type_value='+84 93 4369133',
@@ -133,37 +133,37 @@ def create_default_apps(sender, **kwargs):
     
     OperatingHour.objects.bulk_create([
         OperatingHour(
-            project=project,
+            site=site,
             weekday=1,
             hour_from='08:00:00',
             hour_to='18:00:00',
         ),
         OperatingHour(
-            project=project,
+            site=site,
             weekday=2,
             hour_from='08:00:00',
             hour_to='18:00:00',
         ),
         OperatingHour(
-            project=project,
+            site=site,
             weekday=3,
             hour_from='08:00:00',
             hour_to='18:00:00',
         ),
         OperatingHour(
-            project=project,
+            site=site,
             weekday=4,
             hour_from='08:00:00',
             hour_to='18:00:00',
         ),
         OperatingHour(
-            project=project,
+            site=site,
             weekday=5,
             hour_from='08:00:00',
             hour_to='18:00:00',
         ),
         OperatingHour(
-            project=project,
+            site=site,
             weekday=6,
             hour_from='08:00:00',
             hour_to='12:00:00',
@@ -173,7 +173,7 @@ def create_default_apps(sender, **kwargs):
 
     parent_pages = [
         Page(
-            project=project,
+            site=site,
             code='home',
             is_active=True,
             is_external=False,
@@ -185,7 +185,7 @@ def create_default_apps(sender, **kwargs):
             sub_menu_col=0,
             sub_menu_row=0,
             view='CmsEngineView.as_view(template_name="default/home.html")',
-            context='project.context.default_processors.home',
+            context='site.context.default_processors.home',
             meta_type='website',
             url_vi='trang-chu',
             name_vi='Trang Chủ',
@@ -194,7 +194,7 @@ def create_default_apps(sender, **kwargs):
             h2_vi='Giải pháp thang máy gia đình cao cấp<br />chuẩn Nhật Bản - An toàn, đẳng cấp,<br />thêm giá trị cho ngôi nhà'
         ),
         Page(
-            project=project,
+            site=site,
             code='products',
             is_active=True,
             is_external=False,
@@ -206,7 +206,7 @@ def create_default_apps(sender, **kwargs):
             sub_menu_col=0,
             sub_menu_row=0,
             view='CmsEngineView.as_view(template_name="default/products.html")',
-            context='project.context.default_processors.products',
+            context='site.context.default_processors.products',
             meta_type='website',
             url_vi='san-pham',
             name_vi='Sản Phẩm',
@@ -215,7 +215,7 @@ def create_default_apps(sender, **kwargs):
             h2_vi='Khám phá đầy đủ các giải pháp thang máy gia đình và công cộng từ HQT Elevator',
         ),
         Page(
-            project=project,
+            site=site,
             code='services',
             is_active=False,
             is_external=False,
@@ -235,7 +235,7 @@ def create_default_apps(sender, **kwargs):
             h2_vi='Từ lắp đặt, bảo dưỡng đến sửa chữa - HQT Elevator luôn sẵn sàng phục vụ 24/7',
         ),
         Page(
-            project=project,
+            site=site,
             code='portfolios',
             is_active=True,
             is_external=False,
@@ -247,7 +247,7 @@ def create_default_apps(sender, **kwargs):
             sub_menu_col=0,
             sub_menu_row=0,
             view='CmsEngineView.as_view(template_name="default/portfolios.html")',
-            context='project.context.default_processors.portfolios',
+            context='site.context.default_processors.portfolios',
             meta_type='website',
             url_vi='du-an',
             name_vi='Dự Án',
@@ -256,7 +256,7 @@ def create_default_apps(sender, **kwargs):
             h2_vi='Hàng trăm công trình thành công trên toàn quốc, từ nhà phố đến tòa nhà cao tầng',
         ),
         Page(
-            project=project,
+            site=site,
             code='solutions',
             is_active=True,
             is_external=False,
@@ -276,7 +276,7 @@ def create_default_apps(sender, **kwargs):
             h2_vi='HQT Elevator cung cấp giải pháp tối ưu cho mọi loại công trình và nhu cầu',
         ),
         Page(
-            project=project,
+            site=site,
             code='support',
             is_active=True,
             is_external=False,
@@ -288,7 +288,7 @@ def create_default_apps(sender, **kwargs):
             sub_menu_col=0,
             sub_menu_row=0,
             view='CmsEngineView.as_view(template_name="default/support.html")',
-            context='project.context.default_processors.support',
+            context='site.context.default_processors.support',
             meta_type='website',
             url_vi='ho-tro',
             name_vi='Hổ Trợ',
@@ -297,7 +297,7 @@ def create_default_apps(sender, **kwargs):
             h2_vi='Câu trả lời cho tất cả câu hỏi về thang máy và dịch vụ của chúng tôi',
         ),
         Page(
-            project=project,
+            site=site,
             code='contact',
             is_active=True,
             is_external=False,
@@ -317,7 +317,7 @@ def create_default_apps(sender, **kwargs):
             h2_vi='Chúng tôi luôn sẵn sàng lắng nghe và hỗ trợ bạn trong mọi nhu cầu',
         ),
         Page(
-            project=project,
+            site=site,
             code='guide',
             is_active=True,
             is_external=False,
@@ -337,7 +337,7 @@ def create_default_apps(sender, **kwargs):
             h2_vi='Hướng dẫn chi tiết và an toàn sử dụng thang máy HQT Elevator',
         ),
         Page(
-            project=project,
+            site=site,
             code='guarantee',
             is_active=True,
             is_external=False,
@@ -357,7 +357,7 @@ def create_default_apps(sender, **kwargs):
             h2_vi='Sửa chữa nhanh chóng, chuyên nghiệp với bảo hành 12 tháng',
         ),
         Page(
-            project=project,
+            site=site,
             code='maintenance',
             is_active=True,
             is_external=False,
@@ -377,7 +377,7 @@ def create_default_apps(sender, **kwargs):
             h2_vi='Dịch vụ bảo dưỡng định kỳ để đảm bảo thang máy hoạt động an toàn và hiệu quả',
         ),
         Page(
-            project=project,
+            site=site,
             code='about',
             is_active=True,
             is_external=False,
@@ -397,7 +397,7 @@ def create_default_apps(sender, **kwargs):
             h2_vi='Hơn 20 năm cung cấp giải pháp thang máy chất lượng cao cho khách hàng Việt Nam',
         ),
         Page(
-            project=project,
+            site=site,
             code='articles',
             is_active=True,
             is_external=False,
@@ -409,7 +409,7 @@ def create_default_apps(sender, **kwargs):
             sub_menu_col=3,
             sub_menu_row=2,
             view='CmsEngineView.as_view(template_name="default/articles.html")',
-            context='project.context.default_processors.articles',
+            context='site.context.default_processors.articles',
             meta_type='website',
             url_vi='tin-tuc',
             name_vi='Tin Tức',
@@ -418,7 +418,7 @@ def create_default_apps(sender, **kwargs):
             h2_vi='Cập nhật thông tin, mẹo sử dụng, và những câu chuyện thành công từ HQT Elevator',
         ),
         Page(
-            project=project,
+            site=site,
             code='recruitment',
             is_active=True,
             is_external=False,
@@ -430,7 +430,7 @@ def create_default_apps(sender, **kwargs):
             sub_menu_col=3,
             sub_menu_row=3,
             view='CmsEngineView.as_view(template_name="default/recruitment.html")',
-            context='project.context.default_processors.recruitment',
+            context='site.context.default_processors.recruitment',
             meta_type='website',
             url_vi='tuyen-dung',
             name_vi='Tuyển Dụng',
@@ -444,7 +444,7 @@ def create_default_apps(sender, **kwargs):
     parents = {
         p.code: p
         for p in Page.objects.filter(
-            project=project,
+            site=site,
             code__in=[
                 'products',
                 'portfolios',
@@ -454,12 +454,12 @@ def create_default_apps(sender, **kwargs):
     }
     child_pages = [
         Page(
-            project=project,
+            site=site,
             code='category',
             is_active=True,
             is_internal=True,
             view='CmsEngineView.as_view(template_name="default/category.html")',
-            context='project.context.default_processors.category',
+            context='site.context.default_processors.category',
             meta_type='website',
             url_vi=r'danh-muc/(?P<slug>[-\w]+)',
             name_vi='Danh Mục Sản Phẩm',
@@ -467,14 +467,14 @@ def create_default_apps(sender, **kwargs):
             meta_description_vi='{{category.description}}',
         ),
         Page(
-            project=project,
+            site=site,
             parent=parents['products'],
             code='product',
             is_active=True,
             is_internal=True,
             is_external=False,
             view='CmsEngineView.as_view(template_name="default/product.html")',
-            context='project.context.default_processors.product',
+            context='site.context.default_processors.product',
             meta_type='website',
             url_vi=r'san-pham/(?P<slug>[-\w]+)',
             name_vi='Sản Phẩm',
@@ -482,14 +482,14 @@ def create_default_apps(sender, **kwargs):
             meta_description_vi='{{product.description}}',
         ),
         Page(
-            project=project,
+            site=site,
             parent=parents['portfolios'],
             code='portfolio',
             is_active=True,
             is_internal=True,
             is_home=False,
             view='CmsEngineView.as_view(template_name="default/portfolio.html")',
-            context='project.context.default_processors.portfolio',
+            context='site.context.default_processors.portfolio',
             meta_type='website',
             url_vi=r'du-an/(?P<slug>[-\w]+)',
             name_vi='Dự Án',
@@ -497,13 +497,13 @@ def create_default_apps(sender, **kwargs):
             meta_description_vi='{{portfolio.description}}',
         ),
         Page(
-            project=project,
+            site=site,
             parent=parents['articles'],
             code='article',
             is_active=True,
             is_internal=True,
             view='CmsEngineView.as_view(template_name="default/article.html")',
-            context='project.context.default_processors.article',
+            context='site.context.default_processors.article',
             meta_type='website',
             url_vi=r'tin-tuc/(?P<slug>[-\w]+)',
             name_vi='Tin Tức',
@@ -515,35 +515,35 @@ def create_default_apps(sender, **kwargs):
 
     Category.objects.bulk_create([
         Category(
-            project=project,
+            site=site,
             code="cam-nang",
             name_vi="Cẩm Nang",
             is_active=True,
             is_featured=True,
         ),
         Category(
-            project=project,
+            site=site,
             code="kien-thuc",
             name_vi="Kiến Thức",
             is_active=True,
             is_featured=True,
         ),
         Category(
-            project=project,
+            site=site,
             code="xu-huong",
             name_vi="Xu Hướng",
             is_active=True,
             is_featured=True,
         ),
         Category(
-            project=project,
+            site=site,
             code="huong-dan",
             name_vi="Hướng Dẫn",
             is_active=True,
             is_featured=True,
         ),
         Category(
-            project=project,
+            site=site,
             code="cong-nghe",
             name_vi="Công Nghệ",
             is_active=True,
@@ -553,25 +553,25 @@ def create_default_apps(sender, **kwargs):
 
     Tag.objects.bulk_create([
         Tag(
-            project=project,
+            site=site,
             code="thang-may",
             name_vi="Thang Máy",
             is_active=True,
         ),
         Tag(
-            project=project,
+            site=site,
             code="khong-gian",
             name_vi="Không Gian",
             is_active=True,
         ),
         Tag(
-            project=project,
+            site=site,
             code="an-toan",
             name_vi="An Toàn",
             is_active=True,
         ),
         Tag(
-            project=project,
+            site=site,
             code="tiet-kiem-dien",
             name_vi="Tiết Kiệm Điện",
             is_active=True,
@@ -580,7 +580,7 @@ def create_default_apps(sender, **kwargs):
 
     Testimonial.objects.bulk_create([
         Testimonial(
-            project=project,
+            site=site,
             customer_name="Lê Hoàng Yến",
             customer_title="Kỹ Sư",
             customer_image="",
@@ -590,7 +590,7 @@ def create_default_apps(sender, **kwargs):
             is_featured=True,
         ),
         Testimonial(
-            project=project,
+            site=site,
             customer_name="Nguyễn Thành Đạt",
             customer_title="Kế Toán",
             customer_image="",
@@ -600,7 +600,7 @@ def create_default_apps(sender, **kwargs):
             is_featured=True,
         ),
         Testimonial(
-            project=project,
+            site=site,
             customer_name="Trương Quốc Cường",
             customer_title="Bác Sỹ",
             customer_image="",
@@ -613,43 +613,43 @@ def create_default_apps(sender, **kwargs):
     
     Partner.objects.bulk_create([
         Partner(
-            project=project,
+            site=site,
             name="Mitsubishi",
             is_active=True,
             is_featured=True,
         ),
         Partner(
-            project=project,
+            site=site,
             name="Fuji",
             is_active=True,
             is_featured=True,
         ),
         Partner(
-            project=project,
+            site=site,
             name="Hitachi",
             is_active=True,
             is_featured=True,
         ),
         Partner(
-            project=project,
+            site=site,
             name="Hyundai",
             is_active=True,
             is_featured=True,
         ),
         Partner(
-            project=project,
+            site=site,
             name="Thyssenkrupp",
             is_active=True,
             is_featured=True,
         ),
         Partner(
-            project=project,
+            site=site,
             name="Schneider Electric",
             is_active=True,
             is_featured=True,
         ),
         Partner(
-            project=project,
+            site=site,
             name="Panasonic",
             is_active=True,
             is_featured=True,
@@ -785,7 +785,7 @@ def create_default_apps(sender, **kwargs):
     ]
     FAQ.objects.bulk_create([
         FAQ(
-            project=project,
+            site=site,
             question_vi=data["question_vi"],
             is_active=True,
         )
@@ -794,7 +794,7 @@ def create_default_apps(sender, **kwargs):
     faq_map = {
         faq.question_vi: faq.id
         for faq in FAQ.objects.filter(
-            project=project,
+            site=site,
             question_vi__in=[x["question_vi"] for x in faq_data]
         )
     }
@@ -928,7 +928,7 @@ def create_default_apps(sender, **kwargs):
             is_featured=True,
             customer_name="Phạm Anh Tú",
             customer_company="Pearl Retail",
-            meta_title="Pearl Plaza Elevator Project",
+            meta_title="Pearl Plaza Elevator Site",
             meta_description="Hệ thống thang máy thương mại hiện đại.",
             meta_keywords="thang máy thương mại, mall elevator",
         ),
@@ -1171,26 +1171,26 @@ def create_default_apps(sender, **kwargs):
     ])
 
     branch = Branch.objects.get(
-        project=project,
+        site=site,
         is_root=True,
     )
     Department.objects.bulk_create([
         Department(
-            project=project,
+            site=site,
             branch=branch,
             code='engineering_installation',
             title_vi='Kỹ thuật - Lắp đặt',
             is_active=True,
         ),
         Department(
-            project=project,
+            site=site,
             branch=branch,
             code='business_sales',
             title_vi='Kinh doanh - Bán hàng',
             is_active=True,
         ),
         Department(
-            project=project,
+            site=site,
             branch=branch,
             code='support_warranty',
             title_vi='CSKH - Bảo hành',
@@ -1199,7 +1199,7 @@ def create_default_apps(sender, **kwargs):
     ])
     departments = {
         d.code: d for d in Department.objects.filter(
-            project=project,
+            site=site,
             branch=branch
         )
     }
@@ -1247,8 +1247,8 @@ def create_default_apps(sender, **kwargs):
         )
     Job.objects.bulk_create(jobs)
 
-    categories = list(Category.objects.filter(project=project))
-    tags = list(Tag.objects.filter(project=project))
+    categories = list(Category.objects.filter(site=site))
+    tags = list(Tag.objects.filter(site=site))
     articles_data = [
         {
             "title": "Giải pháp thang máy an toàn cho công trình hiện đại",
@@ -1272,7 +1272,7 @@ def create_default_apps(sender, **kwargs):
     articles = []
     for item in articles_data:
         article = Article.objects.create(
-            project=project,
+            site=site,
             title_vi=item["title"],
             summary_vi=item["summary"],
             content_vi=item["content"],

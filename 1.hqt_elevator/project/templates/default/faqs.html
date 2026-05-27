@@ -298,8 +298,8 @@
                 <div class="content-faq bg-gray-50 px-6 pb-6">
                     <p class="text-gray-700">Bạn có thể liên hệ với HQT Elevator qua:</p>
                     <ul class="list-disc list-inside space-y-2 text-gray-700 mt-3">
-                        <li><strong>Điện thoại:</strong> {{ project.phone }} (24/7)</li>
-                        <li><strong>Email:</strong> {{ project.email }}</li>
+                        <li><strong>Điện thoại:</strong> {{ site.phone }} (24/7)</li>
+                        <li><strong>Email:</strong> {{ site.email }}</li>
                         <li><strong>Chat trực tuyến:</strong> Sẵn sàng trên website</li>
                         <li><strong>Văn phòng:</strong> 3 chi nhánh tại TP.HCM</li>
                     </ul>
@@ -329,9 +329,9 @@
         <div class="max-w-2xl mx-auto text-center">
             <h2 class="text-3xl font-bold mb-2">Không Tìm Thấy Câu Trả Lời?</h2>
             <p class="mb-6 opacity-90">Liên hệ với đội hỗ trợ của chúng tôi ngay</p>
-            <a href="tel:{{ project.phone|cut:' ' }}">
+            <a href="tel:{{ site.phone|cut:' ' }}">
                 <button class="bg-white text-red-500 px-8 py-3 rounded font-bold hover:shadow-lg transition flex items-center justify-center gap-2 mx-auto">
-                    <i class="fas fa-phone"></i> {{ project.phone }}
+                    <i class="fas fa-phone"></i> {{ site.phone }}
                 </button>
             </a>
         </div>

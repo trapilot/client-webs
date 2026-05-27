@@ -5,11 +5,11 @@
     <div class="flex justify-between items-center h-[72px]">
       
       <a href="/" class="flex items-center gap-2">
-        {% if project.imageLogo|length %}
+        {% if site.imageLogo %}
         <div class="text-red-600">
             <img
-              src="{{ project.imageLogo.url }}?v={{ project.updated_at|date:'U' }}"
-              alt="{{ project.name }}"
+              src="{{ site.imageLogo.url }}?v={{ site.updated_at|date:'U' }}"
+              alt="{{ site.name }}"
               class="w-[72px] h-[72px] object-contain"
               fetchpriority="high" loading="eager" decoding="async"
               width="72"
@@ -26,15 +26,15 @@
       </a>
       
       <nav class="hidden lg:flex space-x-7 text-[14px] font-bold text-gray-700 uppercase tracking-tight">
-        {% for p in project.navigation_primary %}
+        {% for p in site.navigation_primary %}
           <a href="{% url_cms p.code %}" class="hover:text-red-700 transition pb-1{% if page.code == p.code %} border-b-2 border-red-700 text-red-700{% endif %}">{{ p.name }}</a>
         {% endfor %}
       </nav>
 
       <div class="flex items-center gap-3">
-        <a href="tel:{{ project.phone|cut:' ' }}" class="bg-red-700 text-white px-3 sm:px-5 py-2 rounded-md font-bold text-[13px] sm:text-sm hover:bg-red-800 transition flex items-center shadow-md">
+        <a href="tel:{{ site.phone|cut:' ' }}" class="bg-red-700 text-white px-3 sm:px-5 py-2 rounded-md font-bold text-[13px] sm:text-sm hover:bg-red-800 transition flex items-center shadow-md">
           <svg class="w-4 h-4 sm:mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
-          <span class="hidden sm:inline">{{ project.phone }}</span>
+          <span class="hidden sm:inline">{{ site.phone }}</span>
         </a>
         
         <button id="mobile-menu-btn" class="lg:hidden text-gray-900 p-1 focus:outline-none hover:text-red-700 transition cursor-pointer">
@@ -50,7 +50,7 @@
 
   <div id="mobile-menu" class="hidden lg:hidden absolute w-full bg-white border-t border-gray-100 shadow-xl top-[72px] left-0 z-40">
     <nav class="flex flex-col px-4 py-2 space-y-1 text-[14px] font-bold text-gray-700 uppercase tracking-tight">
-      {% for p in project.navigation_primary %}
+      {% for p in site.navigation_primary %}
         <a href="{% url_cms p.code %}" class="block py-3 border-b border-gray-50 hover:text-red-700 transition{% if page.code == p.code %} text-red-700{% endif %}">
           {{ p.name }}
         </a>

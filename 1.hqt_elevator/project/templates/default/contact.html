@@ -23,7 +23,7 @@
             </div>
             <div>
               <h4 class="font-bold text-gray-900 text-[15px] mb-1">Địa chỉ</h4>
-              <p class="text-[14px] text-gray-600 leading-relaxed">{{ project.address }}</p>
+              <p class="text-[14px] text-gray-600 leading-relaxed">{{ site.address }}</p>
             </div>
           </div>
 
@@ -34,9 +34,9 @@
             <div>
               <h4 class="font-bold text-gray-900 text-[15px] mb-1">Hotline (24/7)</h4>
               <p class="text-[14px] text-gray-600 leading-relaxed">
-                <a href="tel:{{ project.phone|cut:' ' }}" class="font-bold hover:text-red-700 transition">{{ project.phone }}</a>
-                {% if project.TEAM_TECH_PHONE and project.phone != project.TEAM_TECH_PHONE %}
-                <br>Kỹ thuật: {{ project.TEAM_TECH_PHONE }}
+                <a href="tel:{{ site.phone|cut:' ' }}" class="font-bold hover:text-red-700 transition">{{ site.phone }}</a>
+                {% if site.TEAM_TECH_PHONE and site.phone != site.TEAM_TECH_PHONE %}
+                <br>Kỹ thuật: {{ site.TEAM_TECH_PHONE }}
                 {% endif %}
               </p>
             </div>
@@ -49,9 +49,9 @@
             <div>
               <h4 class="font-bold text-gray-900 text-[15px] mb-1">Email</h4>
               <p class="text-[14px] text-gray-600 leading-relaxed">
-                <a href="mailto:{{ project.email }}" class="hover:text-red-700 transition">{{ project.email }}</a>
-                {% if project.TEAM_TECH_EMAIL and project.email != project.TEAM_TECH_EMAIL %}
-                <br>{{ project.TEAM_TECH_EMAIL }}
+                <a href="mailto:{{ site.email }}" class="hover:text-red-700 transition">{{ site.email }}</a>
+                {% if site.TEAM_TECH_EMAIL and site.email != site.TEAM_TECH_EMAIL %}
+                <br>{{ site.TEAM_TECH_EMAIL }}
                 {% endif %}
               </p>
             </div>
@@ -63,7 +63,7 @@
             </div>
             <div>
               <h4 class="font-bold text-gray-900 text-[15px] mb-1">Giờ Làm Việc</h4>
-              {% for day in project.operating_days %}
+              {% for day in site.operating_days %}
               <p class="text-[14px] text-gray-600 leading-relaxed">{{ day.label }}: <span class="text-red-500 font-bold text-sm">{{ day.hour_text }}</span></p>
               {% endfor %}
             </div>
@@ -121,7 +121,7 @@
 
   <section class="h-[400px] w-full bg-gray-200">
     <iframe 
-      src="https://www.google.com/maps?q={{ project.location.lat }},{{ project.location.lng }}&hl=vi&z={{project.location.zoom}}&output=embed" 
+      src="https://www.google.com/maps?q={{ site.location.lat }},{{ site.location.lng }}&hl=vi&z={{site.location.zoom}}&output=embed" 
       width="100%" 
       height="100%" 
       style="border:0;" 
