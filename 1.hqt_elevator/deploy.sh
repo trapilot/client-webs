@@ -15,48 +15,48 @@ echo "Unzip libs..."
 
 
 
-# echo "Ensure SQL history table..."
-docker exec $DB_CONTAINER sh -c '
-mysql -u $DB_USER -p$DB_PASSWORD $DB_NAME <<EOF
-CREATE TABLE IF NOT EXISTS migrate_libs_history (
-    filename VARCHAR(255) PRIMARY KEY,
-    executed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-EOF
-'
+# # echo "Ensure SQL history table..."
+# docker exec $DB_CONTAINER sh -c '
+# mysql -u $DB_USER -p$DB_PASSWORD $DB_NAME <<EOF
+# CREATE TABLE IF NOT EXISTS migrate_libs_history (
+#     filename VARCHAR(255) PRIMARY KEY,
+#     executed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+# );
+# EOF
+# '
 
-echo "Run custom SQL migrations..."
-FILES=$(find sql/migrations -name "*.sql" | sort)
+# echo "Run custom SQL migrations..."
+# FILES=$(find sql/migrations -name "*.sql" | sort)
 
-for file in $FILES; do
+# for file in $FILES; do
 
-    filename=$(basename "$file")
+#     filename=$(basename "$file")
 
-    EXISTS=$(docker exec $DB_CONTAINER sh -c "
-mysql -N -s -u $DB_USER -p\$DB_PASSWORD \$DB_NAME \
--e \"SELECT COUNT(*) FROM migrate_libs_history WHERE filename='$filename';\"
-")
+#     EXISTS=$(docker exec $DB_CONTAINER sh -c "
+# mysql -N -s -u $DB_USER -p\$DB_PASSWORD \$DB_NAME \
+# -e \"SELECT COUNT(*) FROM migrate_libs_history WHERE filename='$filename';\"
+# ")
 
-    if [ "$EXISTS" = "0" ]; then
+#     if [ "$EXISTS" = "0" ]; then
 
-        echo "Executing: $filename"
+#         echo "Executing: $filename"
 
-        docker exec $DB_CONTAINER sh -c "
-mysql -u $DB_USER -p\$DB_PASSWORD \$DB_NAME \
-< /migrations/$filename
-"
+#         docker exec $DB_CONTAINER sh -c "
+# mysql -u $DB_USER -p\$DB_PASSWORD \$DB_NAME \
+# < /migrations/$filename
+# "
 
-        docker exec $DB_CONTAINER sh -c "
-mysql -u $DB_USER -p\$DB_PASSWORD \$DB_NAME \
--e \"INSERT INTO migrate_libs_history(filename) VALUES('$filename');\"
-"
+#         docker exec $DB_CONTAINER sh -c "
+# mysql -u $DB_USER -p\$DB_PASSWORD \$DB_NAME \
+# -e \"INSERT INTO migrate_libs_history(filename) VALUES('$filename');\"
+# "
 
-        echo "Done: $filename"
+#         echo "Done: $filename"
 
-    else
-        echo "Skip: $filename"
-    fi
-done
+#     else
+#         echo "Skip: $filename"
+#     fi
+# done
 
 echo "Restart web..."
 docker restart web
