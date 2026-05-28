@@ -93,7 +93,7 @@
         <a href="{% url_cms page.code article.slug %}" class="group bg-white border border-gray-200 rounded overflow-hidden hover:shadow-xl transition-all duration-300 block">
           <div class="h-48 overflow-hidden">
             {% if article.image %}
-            <img src="{{ article.image.url }}" fetchpriority="high" loading="eager" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+            <img src="{{ article.image.url }}" alt="{{ article.title }}" fetchpriority="high" loading="eager" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
             {% endif %}
           </div>
           <div class="p-5">

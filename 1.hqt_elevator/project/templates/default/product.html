@@ -62,7 +62,7 @@ function showAllThumbnails(btnElement) {
 
         <div class="grid grid-cols-4 gap-4">
           <div class="gallery-thumb h-20 md:h-24 rounded border-2 border-red-700 overflow-hidden cursor-pointer transition" onclick="changeMainImage(this, '{{ product.featured_image_url }}')">
-            <img src="{{ product.featured_image_url }}" fetchpriority="high" loading="eager" decoding="async" class="w-full h-full object-cover transition">
+            <img src="{{ product.featured_image_url }}" alt="{{ product.name }}" fetchpriority="high" loading="eager" decoding="async" class="w-full h-full object-cover transition">
           </div>
           
           {% for gallery in product.gallery_set.all %}

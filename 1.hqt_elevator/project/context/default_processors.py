@@ -1,5 +1,4 @@
 import random
-import os
 
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
@@ -152,12 +151,26 @@ def product(request, kwargs=None):
 
 
 def portfolios(request, kwargs=None):
-    portfolios = Portfolio.objects.filter(
-        is_active=True,
-    ).order_by('sorted_as', 'created_at',)[:100]
+    paginator = Paginator(
+        Portfolio.objects.filter(
+            is_active=True,
+        ).order_by('sorted_as', 'created_at'),
+        4
+    )
+    portfolios = paginator.get_page(request.GET.get("page"))
+
+    grouped_portfolios = []
+    for index in range(0, len(portfolios), 2):
+        items = portfolios[index:index + 2]
+        grouped_portfolios.append({
+            "index": index // 2,
+            "items": items,
+            "count": len(items),
+        })
 
     return dict({
         "portfolios": portfolios,
+        "grouped_portfolios": grouped_portfolios,
     })
 
 def portfolio(request, kwargs=None):
