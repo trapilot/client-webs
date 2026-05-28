@@ -26,6 +26,8 @@ RUN apt-get update && apt-get install -y \
     libpng16-16 \
     libwebp7 \
     netcat-openbsd \
+    default-libmysqlclient-dev \
+    libmariadb3 \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /root/.local /root/.local
