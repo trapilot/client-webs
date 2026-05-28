@@ -41,12 +41,6 @@ class CustomIndexDashboard(Dashboard):
         ))
 
         self.children.append(modules.ModelList(
-            u'Website Settings',
-            models=('cms_engine.*',),
-            column=1,
-        ))
-
-        self.children.append(modules.ModelList(
             u'Administration',
             models=('django.contrib.*',),
             column=1,
