@@ -11,21 +11,32 @@ class CustomIndexDashboard(Dashboard):
     def init_with_context(self, context):
         site_name = get_admin_site_name(context)
 
-        self.children.append(modules.ModelList(
-            u'Features',
-            models=('project.*',),
+        self.children.append(modules.Group(
+            title="Application",
             column=1,
+            collapsible=True,
+            children=[
+                modules.ModelList(
+                    u'App Features',
+                    models=('project.*',),
+                    column=1,
+                ),
+                modules.ModelList(
+                    u'App Content',
+                    models=('cms_app.*',),
+                    column=1,
+                ),
+                modules.ModelList(
+                    u'Recruitment',
+                    models=('recruitment_engine.*',),
+                    column=1,
+                ),
+            ]
         ))
 
         self.children.append(modules.ModelList(
-            u'Recruitment',
-            models=('recruitment_engine.*',),
-            column=1,
-        ))
-
-        self.children.append(modules.ModelList(
-            u'Website Content',
-            models=('cms_app.*',),
+            u'Website Settings',
+            models=('cms_engine.*',),
             column=1,
         ))
 
