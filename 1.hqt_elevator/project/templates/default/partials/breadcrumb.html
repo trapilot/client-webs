@@ -1,27 +1,14 @@
-{% load url_cms %}
+{% load url_cms seo_meta %}
 
 {% if not page.is_home %}
 <div class="bg-gray-100 py-3 border-b border-gray-200">
-    <div class="max-w-[1200px] mx-auto px-4 flex text-[13px] font-medium text-gray-500">
+    <div class="max-w-[1200px] mx-auto px-4 flex text-[13px] font-medium text-gray-700 capitalize">
         <a href="{% url_cms site.home_page.code %}" class="hover:text-red-700 transition">{{ site.home_page.name }}</a><span class="mx-2">/</span>
-        
         {% if page.parent and page.is_internal %}
-            <a href="{% url_cms page.parent.code %}" class="hover:text-red-700 transition">{{ page.parent.name }}</a>
-            <span class="mx-2">/</span> 
-            {% if product %}
-            <span class="text-gray-900 font-bold">{{ product.name }}</span>
-            {% elif portfolio %}
-            <span class="text-gray-900 font-bold">{{ portfolio.name }}</span>
-            {% elif article %}
-            <span class="text-gray-900 font-bold">{{ article.title }}</span>
-            {% elif category %}
-            <span class="text-gray-900 font-bold">{{ category.name }}</span>
-            {% endif %}
-        {% elif category %}
-            <span class="text-gray-900 font-bold">{{ category.name }}</span>
-        {% else %}
-            <span class="text-gray-900 font-bold">{{ page.name }}</span>
+        <a href="{% url_cms page.parent.code %}" class="hover:text-red-700 transition">{{ page.parent.name }}</a>
+        <span class="mx-2">/</span> 
         {% endif %}
+        <span class="text-gray-900 font-bold">{% seo_meta title %}</span>
     </div>
 </div>
 {% endif %}
