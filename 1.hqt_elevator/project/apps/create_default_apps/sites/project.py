@@ -18,7 +18,7 @@ def create_default_apps(sender, **kwargs):
     from project.apps.models import ProductCategory, Product, ProductFeature, Portfolio, PortfolioCategory
 
     def is_exists(site):
-        return Site.objects.filter(code=site).exists()
+        return Site.objects.get(code=site).exists()
 
     if is_exists(settings.SITE_CODE):
         return

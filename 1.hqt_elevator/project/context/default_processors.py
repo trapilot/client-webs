@@ -152,7 +152,7 @@ def product(request, kwargs=None):
 
 def portfolios(request, kwargs=None):
     paginator = Paginator(
-        Portfolio.objects.filter(
+        Portfolio.objects.prefetch_related('category').filter(
             is_active=True,
         ).order_by('sorted_as', 'created_at'),
         4

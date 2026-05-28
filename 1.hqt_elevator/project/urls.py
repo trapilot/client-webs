@@ -30,3 +30,4 @@ urlpatterns += urls.autodiscover()
 
 if settings.DEBUG:
     urlpatterns += staticfiles_urlpatterns()
+    urlpatterns += path("__debug__/", include("debug_toolbar.urls")),

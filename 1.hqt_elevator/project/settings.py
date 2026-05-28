@@ -50,6 +50,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 CSRF_TRUSTED_ORIGINS = [f"http://{SITE_DOMAIN}", f"https://{SITE_DOMAIN}"]
 ALLOWED_HOSTS = [SITE_HOST, SITE_DOMAIN, "localhost", "127.0.0.1", "0.0.0.0"]
+INTERNAL_IPS = ALLOWED_HOSTS # debug_toolbar
 
 INSTALLED_APPS = [
     # 'mailer',
@@ -60,6 +61,7 @@ INSTALLED_APPS = [
     'smart_selects',
     'captcha',
     'sorl.thumbnail',
+    'debug_toolbar',
 
     # Core Library
     'django.contrib.admin',
@@ -81,12 +83,13 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'cms_engine.middleware.RedirectionMiddleware',
+    'cms_engine.middleware.ResolverMiddleware',
     # 'cms_engine.middleware.MultipleProxyMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'cms_engine.middleware.ResolverMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
