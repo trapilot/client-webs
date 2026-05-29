@@ -3,7 +3,7 @@
 {% if not page.is_home %}
 <div class="bg-gray-100 py-3 border-b border-gray-200">
     <div class="max-w-[1200px] mx-auto px-4 flex text-[13px] font-medium text-gray-700 capitalize">
-        <a href="{% url_cms site.home_page.code %}" class="hover:text-red-700 transition">{{ site.home_page.name }}</a><span class="mx-2">/</span>
+        <a href="{% url_cms site.page_home.code %}" class="hover:text-red-700 transition">{{ site.page_home.name }}</a><span class="mx-2">/</span>
         {% if page.parent and page.is_internal %}
         <a href="{% url_cms page.parent.code %}" class="hover:text-red-700 transition">{{ page.parent.name }}</a>
         <span class="mx-2">/</span> 
