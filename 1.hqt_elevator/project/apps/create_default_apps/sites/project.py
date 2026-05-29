@@ -12,8 +12,8 @@ from django.utils.text import slugify
 
 @receiver(post_migrate)
 def create_default_apps(sender, **kwargs):
-    from cms_engine.models import Site, Page, Branch, Constant, SocialNetwork, OperatingHour
-    from cms_app.models import Category, Tag, Article, Testimonial, Partner, FAQ, FAQAnswer
+    from cms_engine.models import Site, Page, Branch, Constant, SocialNetwork, OperatingHour, Testimonial, Brand
+    from cms_app.models import Category, Tag, Article, FAQ, FAQAnswer
     from recruitment_engine.models import Department, Job
     from project.apps.models import ProductCategory, Product, ProductFeature, Portfolio, PortfolioCategory
 
@@ -611,44 +611,44 @@ def create_default_apps(sender, **kwargs):
         )
     ])
     
-    Partner.objects.bulk_create([
-        Partner(
+    Brand.objects.bulk_create([
+        Brand(
             site=site,
             name="Mitsubishi",
             is_active=True,
             is_featured=True,
         ),
-        Partner(
+        Brand(
             site=site,
             name="Fuji",
             is_active=True,
             is_featured=True,
         ),
-        Partner(
+        Brand(
             site=site,
             name="Hitachi",
             is_active=True,
             is_featured=True,
         ),
-        Partner(
+        Brand(
             site=site,
             name="Hyundai",
             is_active=True,
             is_featured=True,
         ),
-        Partner(
+        Brand(
             site=site,
             name="Thyssenkrupp",
             is_active=True,
             is_featured=True,
         ),
-        Partner(
+        Brand(
             site=site,
             name="Schneider Electric",
             is_active=True,
             is_featured=True,
         ),
-        Partner(
+        Brand(
             site=site,
             name="Panasonic",
             is_active=True,

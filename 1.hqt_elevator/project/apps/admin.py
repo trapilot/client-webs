@@ -318,7 +318,7 @@ class SolutionAdmin(admin.ModelAdmin):
     thumbnail_display.short_description = 'Hình Ảnh'
 
 
-@admin.register(Benefit)
+# @admin.register(Benefit)
 class BenefitAdmin(admin.ModelAdmin):
     list_display = ('title', 'is_active', 'is_featured')
     readonly_fields = ('created_at', 'updated_at')

@@ -8,8 +8,6 @@ from django.db.models import Count, F, Q
 from cms_app.models import (
     Category,
     Article,
-    Testimonial,
-    Partner,
     FAQ,
 )
 from project.apps.models import (
@@ -48,17 +46,6 @@ def site_settings(request, kwargs=None):
 
 
 def home(request, kwargs=None):
-    testimonials = Testimonial.objects.filter(
-        is_active=True,
-        is_featured=True,
-        # rating__gte=3
-    )[:5]
-
-    partners = Partner.objects.filter(
-        is_active=True,
-        is_featured=True,
-    ).order_by('sorted_as')[:8]
-
     portfolios = Portfolio.objects.filter(
         is_active=True,
         is_featured=True,
@@ -75,8 +62,6 @@ def home(request, kwargs=None):
     ).order_by('sorted_as')[:4]
 
     return dict({
-        "testimonials": testimonials,
-        "partners": partners,
         "portfolios": portfolios,
         "solutions": solutions,
         "benefits": benefits,
