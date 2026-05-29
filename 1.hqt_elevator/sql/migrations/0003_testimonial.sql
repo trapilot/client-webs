@@ -26,22 +26,22 @@ CREATE TABLE `cms_engine_testimonial` (
 
     PRIMARY KEY (`id`),
 
-    KEY `idx_testimonial_site_id` (`site_id`),
-    KEY `idx_testimonial_page_id` (`page_id`),
-    KEY `idx_testimonial_rating` (`rating`),
-    KEY `idx_testimonial_sorted_as` (`sorted_as`),
+    KEY `idx_engine_testimonial_site_id` (`site_id`),
+    KEY `idx_engine_testimonial_page_id` (`page_id`),
+    KEY `idx_engine_testimonial_rating` (`rating`),
+    KEY `idx_engine_testimonial_sorted_as` (`sorted_as`),
 
-    CONSTRAINT `fk_testimonial_site`
+    CONSTRAINT `fk_engine_testimonial_site`
         FOREIGN KEY (`site_id`)
         REFERENCES `cms_engine_site` (`id`)
         ON DELETE CASCADE,
 
-    CONSTRAINT `fk_testimonial_page`
+    CONSTRAINT `fk_engine_testimonial_page`
         FOREIGN KEY (`page_id`)
         REFERENCES `cms_engine_page` (`id`)
         ON DELETE CASCADE,
 
-    CONSTRAINT `chk_testimonial_rating`
+    CONSTRAINT `chk_engine_testimonial_rating`
         CHECK (`rating` BETWEEN 1 AND 5)
 
 ) ENGINE=InnoDB
