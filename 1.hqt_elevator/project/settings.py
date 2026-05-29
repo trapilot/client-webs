@@ -111,7 +111,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
 
-                'cms_engine.context_processors.site',
+                'cms_engine.context_processors.session',
                 'cms_engine.context_processors.backoffice',
                 'project.context.default_processors.site_settings',
             ],

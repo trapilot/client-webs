@@ -35,9 +35,14 @@ def site_settings(request, kwargs=None):
     if len(categories):
         featured_category = random.choice(categories)
     
+    site = getattr(request, 'site', None)
     return dict({
         "categories": categories,
         "featured_category": featured_category,
+        "theme": {
+            "color": getattr(site, 'THEME_COLOR', "#B91C1C"),
+            "author": getattr(site, 'THEME_AUTHOR', None),
+        },
     })
 ## ============= GLOBAL SETTINGS ====================================
 
