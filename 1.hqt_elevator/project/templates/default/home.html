@@ -153,9 +153,17 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     </div>
 
+    {% if benefits|length %}
     <div class="absolute bottom-0 w-full bg-black/60 border-t border-gray-700 backdrop-blur-sm z-20 hidden md:block">
       <div class="max-w-[1200px] mx-auto px-4 py-4">
         <div class="grid grid-cols-4 gap-4 divide-x divide-gray-600 text-white">
+          {% for benefit in benefits %}
+          <div class="flex items-center gap-3 pl-4">
+            <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <div class="text-[13px]"><strong class="block">{{benefit.title}}</strong> <span class="text-gray-400">{{benefit.description}}</span></div>
+          </div>
+          {% endfor %}
+          {% comment %}
           <div class="flex items-center gap-3 pl-4">
             <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             <div class="text-[13px]"><strong class="block">Công nghệ Nhật Bản</strong> <span class="text-gray-400">An toàn chuẩn mực</span></div>
@@ -172,12 +180,14 @@ document.addEventListener('DOMContentLoaded', () => {
             <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
             <div class="text-[13px]"><strong class="block">Tiết kiệm điện năng</strong> <span class="text-gray-400">Hiệu suất cao</span></div>
           </div>
+          {% endcomment %}
         </div>
       </div>
     </div>
   </section>
+  {% endif %}
 
-  {% if benefits|length %}
+  {% if page.highlights|length %}
   <section class="py-16 bg-white">
     <div class="max-w-[1200px] mx-auto px-4">
       <div class="text-center mb-10">
@@ -189,17 +199,17 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center mt-12">
-        {% for benefit in benefits %}
+        {% for highlight in page.highlights %}
         <div class="bg-white p-6 border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] rounded-md hover:shadow-lg transition">
           <div class="w-14 h-14 mx-auto mb-4 text-red-600">
-            {% if benefit.icon %}
-            {{ benefit.icon|safe }}
+            {% if highlight.icon_svg %}
+            {{ highlight.icon_svg|safe }}
             {% else %}
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
             {% endif %}
           </div>
-          <h4 class="font-bold text-[15px] text-gray-900 mb-2">{{ benefit.title|upper }}</h4>
-          <p class="text-[13px] text-gray-500 leading-relaxed">{{ benefit.description }}</p>
+          <h4 class="font-bold text-[15px] text-gray-900 mb-2">{{ highlight.title|upper }}</h4>
+          <p class="text-[13px] text-gray-500 leading-relaxed">{{ highlight.heading }}</p>
         </div>
         {% endfor %}
       </div>
