@@ -32,16 +32,17 @@
       </nav>
 
       <div class="flex items-center gap-3">
-        <a href="tel:{{ site.hotline|cut:' ' }}" class="bg-red-700 text-white px-3 sm:px-5 py-2 rounded-md font-bold text-[13px] sm:text-sm hover:bg-red-800 transition flex items-center shadow-md">
+        <a href="tel:{{ site.hotline|cut:' ' }}" aria-label="Gọi số {{ site.hotline|cut:' ' }}" class="bg-red-700 text-white px-3 sm:px-5 py-2 rounded-md font-bold text-[13px] sm:text-sm hover:bg-red-800 transition flex items-center shadow-md">
           <svg class="w-4 h-4 sm:mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
           <span class="hidden sm:inline">{{ site.hotline }}</span>
         </a>
         
-        <button id="mobile-menu-btn" class="lg:hidden text-gray-900 p-1 focus:outline-none hover:text-red-700 transition cursor-pointer">
+        <button id="mobile-menu-btn" aria-label="Mở menu" class="lg:hidden text-gray-900 p-1 focus:outline-none hover:text-red-700 transition cursor-pointer">
           <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path id="icon-menu" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
             <path id="icon-close" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
           </svg>
+          <span class="sr-only">Mở menu</span>
         </button>
       </div>
 
