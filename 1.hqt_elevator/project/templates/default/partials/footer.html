@@ -1,6 +1,6 @@
 {% load url_cms url_link thumbnail copy_rights %}
 
-<footer class="bg-[#1a1a1a] text-gray-400 pt-16 pb-6 text-[13px]">
+<footer class="bg-[#1a1a1a] text-gray-300 pt-16 pb-6 text-[13px]">
   <div class="max-w-[1200px] mx-auto px-4 grid grid-cols-1 md:grid-cols-12 gap-8 border-b border-gray-800 pb-12">
     
     <div class="md:col-span-4">
@@ -27,10 +27,17 @@
       <p class="mb-4 leading-relaxed pr-4">
         {% if site.slogan|length %}
         {{ site.slogan|safe }}
-        {% else %}
-        HQT Elevator - Thương hiệu thang máy gia đình chuẩn Nhật Bản, nâng tầm an toàn, tiện nghi và đẳng cấp cho mọi không gian.
         {% endif %}
       </p>
+      {% if site.licenses|length %}
+      <div class="flex space-x-3 mb-4">
+        {% for license in site.licenses %}
+          <a href="{{ license.link|url_link }}" target="_blank" class="bg-gray-800 flex items-center justify-center text-white hover:bg-red-600 transition">
+            <img src="{{ license.logo.url }}" alt="{{ license.license_number }}" class="img-fluid rounded">
+          </a>
+        {% endfor %}
+      </div>
+      {% endif %}
       <div class="flex space-x-3">
         {% for network in site.social_networks %}
           <a href="{{ network.url|url_link }}" class="w-8 h-8 rounded bg-gray-800 flex items-center justify-center text-white hover:bg-red-600 transition">
@@ -82,7 +89,7 @@
     </div>
   </div>
   
-  <div class="max-w-[1200px] mx-auto px-4 mt-6 flex flex-col md:flex-row justify-between items-center text-[11px] text-gray-500">
+  <div class="max-w-[1200px] mx-auto px-4 mt-6 flex flex-col md:flex-row justify-between items-center text-[11px] text-gray-200">
     <p>{% copy_rights 2026 %} HQT Elevator. All rights reserved.</p>
     <div class="space-x-4 mt-4 md:mt-0 flex items-center">
       <a href="{% url_cms site.page_legal.code %}" class="hover:text-white transition">Chính sách bảo mật</a>

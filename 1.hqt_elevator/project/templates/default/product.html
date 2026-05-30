@@ -78,7 +78,7 @@ function showAllThumbnails(btnElement) {
           {% endfor %}
           
           {% if product.gallery_set.count > 2 %}
-          <div id="btn-show-more-thumbs" onclick="showAllThumbnails(this)" class="h-20 md:h-24 rounded border border-gray-200 overflow-hidden flex items-center justify-center bg-gray-100 text-gray-500 text-sm font-bold cursor-pointer hover:bg-gray-200 transition select-none">
+          <div id="btn-show-more-thumbs" onclick="showAllThumbnails(this)" class="h-20 md:h-24 rounded border border-gray-200 overflow-hidden flex items-center justify-center bg-gray-100 text-gray-600 text-sm font-bold cursor-pointer hover:bg-gray-200 transition select-none">
             +{{ product.gallery_set.count|add:"-2" }}
           </div>
           {% endif %}
