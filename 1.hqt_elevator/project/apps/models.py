@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 
 from shared_engine.managers import GeneralManager
-from shared_engine.upload import upload_to
+from shared_engine.transcode import upload_to
 
 
 class ProductCategory(models.Model):
@@ -36,23 +36,6 @@ class ProductCategory(models.Model):
 
     def __str__(self):
         return self.name
-    
-    DEFAULT_IMAGES = [
-        "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=400&h=300&fit=crop",
-        "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=600&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&h=400&fit=crop",
-        "https://media.istockphoto.com/id/1987087979/vi/anh/ng%C3%B4i-nh%C3%A0-d%C3%A0nh-cho-m%E1%BB%99t-gia-%C4%91%C3%ACnh-b%E1%BB%81n-v%E1%BB%AFng-m%E1%BB%9Bi-c%C3%B3-v%C6%B0%E1%BB%9Dn.jpg?s=1024x1024&w=is&k=20&c=lwz4GSBLH1IDHA8liOVm92W3UjktWs4eb-dwhkIkcdg=",
-        "https://media.istockphoto.com/id/1436217023/vi/anh/b%C3%AAn-ngo%C3%A0i-c%E1%BB%A7a-m%E1%BB%99t-ng%C3%B4i-nh%C3%A0-ngo%E1%BA%A1i-%C3%B4-m%C3%A0u-xanh.jpg?s=1024x1024&w=is&k=20&c=oMcsXNmdiUMZ4b6qDVw45n0Fu5EbOs0RUcXz6-tQjPg=",
-
-    ]
-
-    @property
-    def featured_image_url(self):
-        if self.image:
-            return self.image.url
-        return random.choice(self.DEFAULT_IMAGES)
 
 
 class Product(models.Model):
@@ -178,22 +161,6 @@ class Product(models.Model):
                 pass
         return 'Tùy Chỉnh'
     
-    DEFAULT_IMAGES = [
-        "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=400&h=300&fit=crop",
-        "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=600&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&h=400&fit=crop",
-        "https://media.istockphoto.com/id/1987087979/vi/anh/ng%C3%B4i-nh%C3%A0-d%C3%A0nh-cho-m%E1%BB%99t-gia-%C4%91%C3%ACnh-b%E1%BB%81n-v%E1%BB%AFng-m%E1%BB%9Bi-c%C3%B3-v%C6%B0%E1%BB%9Dn.jpg?s=1024x1024&w=is&k=20&c=lwz4GSBLH1IDHA8liOVm92W3UjktWs4eb-dwhkIkcdg=",
-        "https://media.istockphoto.com/id/1436217023/vi/anh/b%C3%AAn-ngo%C3%A0i-c%E1%BB%A7a-m%E1%BB%99t-ng%C3%B4i-nh%C3%A0-ngo%E1%BA%A1i-%C3%B4-m%C3%A0u-xanh.jpg?s=1024x1024&w=is&k=20&c=oMcsXNmdiUMZ4b6qDVw45n0Fu5EbOs0RUcXz6-tQjPg=",
-
-    ]
-
-    @property
-    def featured_image_url(self):
-        if self.image:
-            return self.image.url
-        return random.choice(self.DEFAULT_IMAGES)
 
 class ProductFeature(models.Model):
     id = models.BigAutoField(primary_key=True)
@@ -419,22 +386,6 @@ class Portfolio(models.Model):
             months -= 1
         
         return max(months, 0)
-    
-    DEFAULT_IMAGES = [
-        "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=600&h=400&fit=crop",
-        "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&h=400&fit=crop",
-        "https://media.istockphoto.com/id/1987087979/vi/anh/ng%C3%B4i-nh%C3%A0-d%C3%A0nh-cho-m%E1%BB%99t-gia-%C4%91%C3%ACnh-b%E1%BB%81n-v%E1%BB%AFng-m%E1%BB%9Bi-c%C3%B3-v%C6%B0%E1%BB%9Dn.jpg?s=1024x1024&w=is&k=20&c=lwz4GSBLH1IDHA8liOVm92W3UjktWs4eb-dwhkIkcdg=",
-        "https://media.istockphoto.com/id/1436217023/vi/anh/b%C3%AAn-ngo%C3%A0i-c%E1%BB%A7a-m%E1%BB%99t-ng%C3%B4i-nh%C3%A0-ngo%E1%BA%A1i-%C3%B4-m%C3%A0u-xanh.jpg?s=1024x1024&w=is&k=20&c=oMcsXNmdiUMZ4b6qDVw45n0Fu5EbOs0RUcXz6-tQjPg=",
-
-    ]
-
-    @property
-    def featured_image_url(self):
-        if self.image:
-            return self.image.url
-        return random.choice(self.DEFAULT_IMAGES)
 
 
 class PortfolioGallery(models.Model):
@@ -477,18 +428,6 @@ class Solution(models.Model):
     def __str__(self):
         return self.title
 
-    DEFAULT_IMAGES = [
-        "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&q=80",
-        "https://thangmayhqt.com/static/images/giai-phap-xay-dung-biet-thu-gpxd.jpg",
-        "https://thangmayhqt.com/static/images/elevator_renovation.jpg",
-
-    ]
-
-    @property
-    def featured_image_url(self):
-        if self.image:
-            return self.image.url
-        return random.choice(self.DEFAULT_IMAGES)
     
 class SolutionFeature(models.Model):
     id = models.BigAutoField(primary_key=True)

@@ -61,7 +61,7 @@ function showAllThumbnails(btnElement) {
         </div>
 
         <div class="grid grid-cols-4 gap-4">
-          <div class="gallery-thumb h-20 md:h-24 rounded border-2 border-red-700 overflow-hidden cursor-pointer transition" onclick="changeMainImage(this, '{{ product.featured_image_url }}')">
+          <div class="gallery-thumb h-20 md:h-24 rounded border-2 border-red-700 overflow-hidden cursor-pointer transition" onclick="changeMainImage(this, '{{ product.image.url }}')">
           {% picture product.image alt=product.name class_name="w-full h-full object-cover transition" %}
           </div>
           
