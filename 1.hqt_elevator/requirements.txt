@@ -19,6 +19,7 @@ jsmin==3.0.1
 lockfile==0.12.2
 packaging==26.2
 pillow==12.2.0
+pillow-avif-plugin==1.5.5
 python-dateutil==2.9.0.post0
 requests==2.34.2
 mysqlclient==2.2.1

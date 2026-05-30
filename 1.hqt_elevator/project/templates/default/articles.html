@@ -1,5 +1,5 @@
 {% extends "default/layouts/base.html" %}
-{% load url_cms trad thumbnail cache seo_meta repeat static %}
+{% load url_cms trad thumbnail picture cache seo_meta repeat static %}
 
 {% block content %}
 <main class="font-sans text-gray-900 antialiased bg-gray-50">
@@ -9,9 +9,7 @@
       {% if forloop.first %}
       <a href="{% url_cms 'article' article.slug %}" class="group block bg-white rounded-lg overflow-hidden border border-gray-200 shadow-sm hover:shadow-xl transition duration-300 mb-10 flex flex-col md:flex-row">
         <div class="md:w-1/2 h-64 md:h-auto relative overflow-hidden">
-          {% if article.image %}
-          <img src="{{ article.image.url }}" alt="{{ article.title }}" fetchpriority="high" loading="eager" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
-          {% endif %}
+          {% picture article.image preset="card" alt=article.title class_name="w-full h-full object-cover group-hover:scale-105 transition duration-700" %}
         </div>
         <div class="md:w-1/2 p-6 md:p-10 flex flex-col justify-center">
           <div class="flex items-center gap-3 mb-4">
@@ -33,9 +31,7 @@
           {% if not forloop.first %}
           <a href="{% url_cms 'article' article.slug %}" class="group bg-white border border-gray-200 rounded overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col">
             <div class="relative h-56 overflow-hidden">
-              {% if article.image %}
-              <img src="{{ article.image.url }}" alt="{{ article.title }}" fetchpriority="high" loading="eager" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
-              {% endif %}
+              {% picture article.image preset="card" alt=article.title class_name="w-full h-full object-cover group-hover:scale-110 transition duration-700" %}
               {% for category in article.categories.all %}
               <div class="absolute top-4 left-4 bg-gray-900/80 backdrop-blur-sm text-white text-[11px] font-bold px-2 py-1 rounded uppercase tracking-wider z-10">{{ category.name }}</div>
               {% endfor %}

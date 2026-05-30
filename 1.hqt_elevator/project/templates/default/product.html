@@ -1,5 +1,5 @@
 {% extends "default/layouts/base.html" %}
-{% load i18n url_cms trad thumbnail seo_meta repeat currency %}
+{% load i18n url_cms trad thumbnail picture seo_meta repeat currency %}
 
 {% block extracss %}
 {% endblock %}
@@ -57,22 +57,22 @@ function showAllThumbnails(btnElement) {
             <div class="bg-orange-700 text-white text-[11px] font-bold px-3 py-1 rounded-sm uppercase tracking-wider w-fit">Bán Chạy</div>
             {% endif %}
           </div>
-          <img id="main-product-image" src="{{ product.featured_image_url }}" alt="{{ product.name }}" fetchpriority="high" loading="eager" decoding="async" class="w-full h-full object-cover transition-all duration-300">
+          {% picture product.image id="main-product-image" alt=product.name class_name="w-full h-full object-cover transition-all duration-300" %}
         </div>
 
         <div class="grid grid-cols-4 gap-4">
           <div class="gallery-thumb h-20 md:h-24 rounded border-2 border-red-700 overflow-hidden cursor-pointer transition" onclick="changeMainImage(this, '{{ product.featured_image_url }}')">
-            <img src="{{ product.featured_image_url }}" alt="{{ product.name }}" fetchpriority="high" loading="eager" decoding="async" class="w-full h-full object-cover transition">
+          {% picture product.image alt=product.name class_name="w-full h-full object-cover transition" %}
           </div>
           
           {% for gallery in product.gallery_set.all %}
             {% if forloop.counter <= 2 %}
               <div class="gallery-thumb h-20 md:h-24 rounded border border-gray-200 overflow-hidden cursor-pointer hover:border-red-400 transition" onclick="changeMainImage(this, '{{ gallery.image.url }}')">
-                <img src="{{ gallery.image.url }}" alt="{{ product.name }}" fetchpriority="high" loading="eager" decoding="async" class="w-full h-full object-cover opacity-60 hover:opacity-100 transition">
+                {% picture gallery.image alt=product.name class_name="w-full h-full object-cover opacity-60 hover:opacity-100 transition" %}
               </div>
             {% else %}
               <div class="gallery-thumb extra-thumb hidden h-20 md:h-24 rounded border border-gray-200 overflow-hidden cursor-pointer hover:border-red-400 transition" onclick="changeMainImage(this, '{{ gallery.image.url }}')">
-                <img src="{{ gallery.image.url }}" alt="{{ product.name }}" fetchpriority="high" loading="eager" decoding="async" class="w-full h-full object-cover opacity-60 hover:opacity-100 transition">
+                {% picture gallery.image alt=product.name class_name="w-full h-full object-cover opacity-60 hover:opacity-100 transition" %}
               </div>
             {% endif %}
           {% endfor %}
@@ -137,31 +137,6 @@ function showAllThumbnails(btnElement) {
     
     {{ product.content|safe }}
     
-    {% comment %}
-    <div class="prose prose-sm md:prose-base max-w-none text-gray-600">
-      <h3 class="text-xl font-bold text-gray-900 mb-4">Thiết kế đột phá, nâng tầm kiến trúc</h3>
-      <p>Thang máy lồng kính tròn là giải pháp hoàn hảo cho các công trình có thiết kế không gian mở như giếng trời trung tâm, biệt thự cao cấp. Toàn bộ cấu trúc được thiết kế tinh giản, khung nhôm hợp kim nguyên khối kết hợp kính cường lực an toàn 2 lớp dày 10.38mm.</p>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 my-8">
-        <div>
-          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" alt="Chi tiết" class="rounded shadow-sm">
-        </div>
-        <div class="flex flex-col justify-center">
-          <ul class="space-y-4 list-none pl-0">
-            <li class="flex items-start">
-              <span class="w-6 h-6 rounded-full bg-red-100 text-red-700 flex items-center justify-center font-bold text-xs mr-3 mt-1 shrink-0">1</span>
-              <div><strong class="text-gray-900 block">Động cơ Gearless siêu êm:</strong> Không sử dụng hộp số, giúp thang vận hành êm ái, tiết kiệm 40% điện năng và không cần châm dầu mỡ.</div>
-            </li>
-            <li class="flex items-start">
-              <span class="w-6 h-6 rounded-full bg-red-100 text-red-700 flex items-center justify-center font-bold text-xs mr-3 mt-1 shrink-0">2</span>
-              <div><strong class="text-gray-900 block">Hệ thống an toàn đa lớp:</strong> Cảm biến mành hồng ngoại (Photocell) toàn cửa, phanh cơ khí tự động (Safety gear), tự động cứu hộ khi mất điện (ARD).</div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    {% endcomment %}
-
     {% if product.faq_set.count > 0 %}
     <div class="bg-slate-50">
       <div class="mx-auto max-w-7xl px-5 py-16 md:px-8">

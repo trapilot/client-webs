@@ -1,5 +1,5 @@
 {% extends "default/layouts/base.html" %}
-{% load url_cms trad thumbnail cache seo_meta repeat static %}
+{% load url_cms trad thumbnail picture cache seo_meta repeat static %}
 
 {% block extracss %}
 {% endblock %}
@@ -22,7 +22,7 @@
                     {% elif forloop.parentloop.counter0|divisibleby:2 and forloop.first or not forloop.parentloop.counter0|divisibleby:2 and not forloop.first %}
                       lg:col-span-2
                     {% endif %}">
-            <img src="{{ portfolio.featured_image_url }}" alt="{{ portfolio.name }}" fetchpriority="high" loading="eager" decoding="async" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            {% picture portfolio.image preset="card" alt=portfolio.name class_name="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" %}
             <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div class="absolute bottom-0 left-0 p-6 
                         {% if group.count == 1 or forloop.parentloop.counter0|divisibleby:2 and forloop.first or not forloop.parentloop.counter0|divisibleby:2 and not forloop.first %}md:p-8{% endif %} 

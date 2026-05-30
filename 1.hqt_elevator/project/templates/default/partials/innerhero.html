@@ -1,20 +1,11 @@
-{% load thumbnail %}
+{% load thumbnail picture %}
 
 {% if not page.is_home and page.h1|length %}
 <section class="bg-gray-900 relative py-12 md:py-20 overflow-hidden">
     {% if page.background %}
-        {% thumbnail page.background.image "1920x500" crop="center" as im %}
         <div class="absolute inset-0">
-            <img
-                src="{{ im.url }}"
-                width="{{ im.width }}"
-                height="{{ im.height }}"
-                alt="{{ site.name }}"
-                class="w-full h-full object-cover"
-                fetchpriority="high" loading="eager" decoding="async"
-            >
+            {% picture page.background.image preset="hero" alt=site.name class_name="w-full h-full object-cover" %}
         </div>
-        {% endthumbnail %}
         <!-- overlay -->
         <div class="absolute inset-0 bg-gray-900 py-12 md:py-20 "></div>
     {% endif %}

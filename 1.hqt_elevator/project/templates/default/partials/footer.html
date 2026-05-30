@@ -1,4 +1,4 @@
-{% load url_cms url_link thumbnail copy_rights %}
+{% load url_cms url_link thumbnail picture copy_rights %}
 
 <footer class="bg-[#1a1a1a] text-gray-300 pt-16 pb-6 text-[13px]">
   <div class="max-w-[1200px] mx-auto px-4 grid grid-cols-1 md:grid-cols-12 gap-8 border-b border-gray-800 pb-12">
@@ -33,7 +33,7 @@
       <div class="flex space-x-3 mb-4">
         {% for license in site.licenses %}
           <a href="{{ license.link|url_link }}" target="_blank" class="bg-gray-800 flex items-center justify-center text-white hover:bg-red-600 transition">
-            <img src="{{ license.logo.url }}" alt="{{ license.license_number }}" class="img-fluid rounded">
+          {% picture license.logo preset="card" alt=license.number class_name="img-fluid rounded" %}
           </a>
         {% endfor %}
       </div>

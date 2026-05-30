@@ -12,6 +12,7 @@ from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 
 from shared_engine.managers import GeneralManager
+from shared_engine.upload import upload_to
 
 
 class ProductCategory(models.Model):
@@ -21,7 +22,7 @@ class ProductCategory(models.Model):
     code = models.CharField(_(u'Code'), max_length=100, unique=True)
     description = models.TextField(_(u'Description'), blank=True)
     content = RichTextField(_(u'Content'), blank=True)
-    image = models.ImageField(_(u'Image'), upload_to='uploads/apps/categories/', blank=True)
+    image = models.ImageField(_(u'Image'), upload_to=upload_to('uploads/apps/categories'), blank=True)
     is_active = models.BooleanField(_(u'Active'), default=True)
     is_featured = models.BooleanField(_(u'Featured'), default=False)
     sorted_as = models.IntegerField(_(u'Order'), default=0)
@@ -80,8 +81,8 @@ class Product(models.Model):
     description = models.CharField(_(u'Description'), null=True, blank=True, max_length=500)
     content = RichTextField(_(u'Content'), null=True, blank=True)
     
-    image = models.ImageField(_(u'Thumbnail'), null=True, blank=True, upload_to='uploads/apps/products/image/')
-    pdf = models.FileField(_(u'Báo Giá'), null=True, blank=True, upload_to='uploads/apps/products/pdf/')
+    image = models.ImageField(_(u'Thumbnail'), null=True, blank=True, upload_to=upload_to('uploads/apps/products/images'))
+    pdf = models.FileField(_(u'Báo Giá'), null=True, blank=True, upload_to=upload_to('uploads/apps/products/pdfs'))
     # galleries = models.ManyToManyField('ProductGallery', null=True, blank=True, related_name='product_set', verbose_name=_(u'Gallery'))
     
     capacity = models.IntegerField(_(u'Sức chứa (kg)'), default=0, validators=[MinValueValidator(0)])
@@ -215,7 +216,7 @@ class ProductFeature(models.Model):
 class ProductGallery(models.Model):
     id = models.BigAutoField(primary_key=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='gallery_set', verbose_name=_(u'Product'))
-    image = models.ImageField(_(u'Image'), blank=True, null=True, upload_to='uploads/apps/products/galleries/')
+    image = models.ImageField(_(u'Image'), blank=True, null=True, upload_to=upload_to('uploads/apps/products/galleries'))
     sorted_as = models.IntegerField(_(u'Order'), blank=True, null=True, default=0)
     created_at = models.DateTimeField(_(u'Created'), auto_now_add=True)
 
@@ -290,7 +291,7 @@ class PortfolioCategory(models.Model):
     slug = models.SlugField('Slug', unique=True)
     code = models.CharField(_(u'Code'), max_length=100, unique=True)
     description = models.TextField(_(u'Description'), blank=True)
-    image = models.ImageField(_(u'Image'), upload_to='uploads/apps/portfolios/categories/', blank=True)
+    image = models.ImageField(_(u'Image'), upload_to=upload_to('uploads/apps/portfolios/categories'), blank=True)
     color_bg = models.CharField(_(u'Background Color'), blank=True, null=True, max_length=150)
     color_color = models.CharField(_(u'Text Color'), blank=True, null=True, max_length=150)
     is_active = models.BooleanField(_(u'Active'), default=True)
@@ -325,7 +326,7 @@ class Portfolio(models.Model):
     slug = models.SlugField(_(u'Slug'), unique=True)
     description = models.TextField(_(u'Description'), blank=True, null=True)
     content = RichTextField(_(u'Content'), blank=True, null=True)
-    image = models.ImageField(_(u'Image'), blank=True, null=True, upload_to='uploads/apps/portfolios/images')
+    image = models.ImageField(_(u'Image'), blank=True, null=True, upload_to=upload_to('uploads/apps/portfolios/images'))
     # galleries = models.ManyToManyField('PortfolioGallery', blank=True, null=True, related_name='portfolio_set', verbose_name=_(u'Gallery'))
     address = models.CharField(_(u'Address'), max_length=300, blank=True, null=True)
     city = models.CharField(_(u'City'), max_length=100, blank=True, null=True)
@@ -439,7 +440,7 @@ class Portfolio(models.Model):
 class PortfolioGallery(models.Model):
     id = models.BigAutoField(primary_key=True)
     portfolio = models.ForeignKey(Portfolio, on_delete=models.CASCADE, related_name='gallery_set', verbose_name=_(u'Portfolio'))
-    image = models.ImageField(_(u'Image'), upload_to='uploads/apps/portfolios/galleries/')
+    image = models.ImageField(_(u'Image'), upload_to=upload_to('uploads/apps/portfolios/galleries'))
     sorted_as = models.IntegerField(_(u'Order'), default=0)
     created_at = models.DateTimeField(_(u'Created'), auto_now_add=True)
 
@@ -460,7 +461,7 @@ class Solution(models.Model):
     description = models.TextField(_(u'Description'), null=True, blank=True)
     icon = models.TextField(_(u'Icon'), null=True, blank=True)
     content = RichTextField(_(u'Content'), null=True, blank=True)
-    image = models.ImageField(_(u'Thumbnail'), null=True, blank=True, upload_to='uploads/apps/products/image/')
+    image = models.ImageField(_(u'Thumbnail'), null=True, blank=True, upload_to=upload_to('uploads/apps/products/images'))
     is_active = models.BooleanField(_(u'Active'), null=True, blank=True, default=True)
     is_featured = models.BooleanField(_(u'Featured'), null=True, blank=True, default=False)
     sorted_as = models.PositiveIntegerField(_(u'Order'), null=True, blank=True, default=0)
