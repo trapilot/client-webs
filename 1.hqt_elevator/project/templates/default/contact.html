@@ -34,10 +34,7 @@
             <div>
               <h4 class="font-bold text-gray-900 text-[15px] mb-1">Hotline (24/7)</h4>
               <p class="text-[14px] text-gray-600 leading-relaxed">
-                <a href="tel:{{ site.phone|cut:' ' }}" class="font-bold hover:text-red-700 transition">{{ site.phone }}</a>
-                {% if site.TEAM_TECH_PHONE and site.phone != site.TEAM_TECH_PHONE %}
-                <br>Kỹ thuật: {{ site.TEAM_TECH_PHONE }}
-                {% endif %}
+                <a href="tel:{{ site.hotline|cut:' ' }}" class="font-bold hover:text-red-700 transition">{{ site.hotline }}</a>
               </p>
             </div>
           </div>
@@ -50,9 +47,6 @@
               <h4 class="font-bold text-gray-900 text-[15px] mb-1">Email</h4>
               <p class="text-[14px] text-gray-600 leading-relaxed">
                 <a href="mailto:{{ site.email }}" class="hover:text-red-700 transition">{{ site.email }}</a>
-                {% if site.TEAM_TECH_EMAIL and site.email != site.TEAM_TECH_EMAIL %}
-                <br>{{ site.TEAM_TECH_EMAIL }}
-                {% endif %}
               </p>
             </div>
           </div>

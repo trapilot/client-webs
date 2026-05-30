@@ -444,10 +444,10 @@ document.addEventListener('DOMContentLoaded', () => {
           <a href="{% url_cms 'contact' %}" class="h-full h-full">
             <button class="bg-white text-red-700 px-6 py-2.5 rounded font-bold text-sm hover:bg-gray-100 transition shadow-md">NHẬN TƯ VẤN NGAY</button>
           </a>
-          <a href="tel:{{ site.phone|cut:' ' }}" class="h-full h-full">
+          <a href="tel:{{ site.hotline|cut:' ' }}" class="h-full h-full">
             <button class="border border-white text-white px-6 py-2.5 rounded font-bold text-sm hover:bg-white/10 transition flex items-center">
               <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
-              {{ site.phone }}
+              {{ site.hotline }}
             </button>
           </a>
         </div>

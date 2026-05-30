@@ -48,7 +48,7 @@
     </div>
     
     <div class="md:col-span-2">
-      <h4 class="text-white font-bold mb-4 uppercase text-[12px] tracking-wider">SẢN PHẨM</h4>
+      <div class="text-white font-bold mb-4 uppercase text-[12px] tracking-wider">SẢN PHẨM</div>
       <ul class="space-y-2">
         {% for category in categories %}
         <li><a href="{% url_cms 'category' category.slug %}" class="hover:text-red-500 transition">{{ category.name }}</a></li>
@@ -57,7 +57,7 @@
     </div>
 
     <div class="md:col-span-2">
-      <h4 class="text-white font-bold mb-4 uppercase text-[12px] tracking-wider">HỖ TRỢ</h4>
+      <div class="text-white font-bold mb-4 uppercase text-[12px] tracking-wider">HỖ TRỢ</div>
       <ul class="space-y-2">
         {% for p in site.navigation_second %}
           {% if p.sub_menu_col == 2 %}
@@ -68,7 +68,7 @@
     </div>
 
     <div class="md:col-span-2">
-      <h4 class="text-white font-bold mb-4 uppercase text-[12px] tracking-wider">VỀ CHÚNG TÔI</h4>
+      <div class="text-white font-bold mb-4 uppercase text-[12px] tracking-wider">VỀ CHÚNG TÔI</div>
       <ul class="space-y-2">
         {% for p in site.navigation_second %}
           {% if p.sub_menu_col == 3 %}
@@ -79,10 +79,10 @@
     </div>
 
     <div class="md:col-span-2">
-      <h4 class="text-white font-bold mb-4 uppercase text-[12px] tracking-wider">LIÊN HỆ</h4>
+      <div class="text-white font-bold mb-4 uppercase text-[12px] tracking-wider">LIÊN HỆ</div>
       <ul class="space-y-3">
         <li class="flex items-start"><span class="mr-2 text-white">📍</span> <div>{{ site.address }}</div></li>
-        <li class="flex items-center"><span class="mr-2 text-white">📞</span> {{ site.phone }}</li>
+        <li class="flex items-center"><span class="mr-2 text-white">📞</span> {{ site.hotline }}</li>
         <li class="flex items-center"><span class="mr-2 text-white">✉️</span> {{ site.email }}</li>
         {% comment %}<li class="flex items-center"><span class="mr-2 text-white">🌐</span> {{ site.domain }}</li>{% endcomment %}
       </ul>
