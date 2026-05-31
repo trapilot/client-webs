@@ -83,7 +83,7 @@ class Product(models.Model):
     discount_price = models.DecimalField(_(u'Giá Giảm'), null=True, blank=True, max_digits=15, decimal_places=0)
     
     # Badge
-    is_active = models.BooleanField(_(u'Active'), null=True, blank=True, default=True)
+    is_active = models.BooleanField(_(u'Active'), default=True)
     is_vip = models.BooleanField(_(u'High Class'), null=True, blank=True, default=False)
     is_popular = models.BooleanField(_(u'Popular'), null=True, blank=True, default=False)
     is_new = models.BooleanField(_(u'New'), null=True, blank=True, default=False)
@@ -168,7 +168,7 @@ class ProductFeature(models.Model):
     name = models.CharField(_(u'Name'), max_length=200)
     value = models.CharField(_(u'Value'), null=True, blank=True, max_length=200)
     icon = models.CharField(_(u'Icon'), null=True, blank=True, max_length=100, help_text=mark_safe("<a target='_blank' href='https://fontawesome.com/search>https://fontawesome.com/search</a>"),)
-    is_active = models.BooleanField(_(u'Active'), null=True, blank=True, default=True)
+    is_active = models.BooleanField(_(u'Active'), default=True)
     sorted_as = models.IntegerField(_(u'Sorting'), null=True, blank=True, default=0)
 
     class Meta:
@@ -201,7 +201,7 @@ class ProductFaq(models.Model):
     question = models.CharField(_(u'Question'), max_length=200)
     answer = models.CharField(_(u'Answer'), null=True, blank=True, max_length=200)
     icon = models.CharField(_(u'Icon'), null=True, blank=True, max_length=100, help_text=mark_safe("<a target='_blank' href='https://fontawesome.com/search>https://fontawesome.com/search</a>"),)
-    is_active = models.BooleanField(_(u'Active'), null=True, blank=True, default=True)
+    is_active = models.BooleanField(_(u'Active'), default=True)
     sorted_as = models.IntegerField(_(u'Sorting'), null=True, blank=True, default=0)
 
     class Meta:
@@ -413,7 +413,7 @@ class Solution(models.Model):
     icon = models.TextField(_(u'Icon'), null=True, blank=True)
     content = RichTextField(_(u'Content'), null=True, blank=True)
     image = models.ImageField(_(u'Thumbnail'), null=True, blank=True, upload_to=upload_to('uploads/apps/products/images'))
-    is_active = models.BooleanField(_(u'Active'), null=True, blank=True, default=True)
+    is_active = models.BooleanField(_(u'Active'), default=True)
     is_featured = models.BooleanField(_(u'Featured'), null=True, blank=True, default=False)
     sorted_as = models.PositiveIntegerField(_(u'Sorting'), null=True, blank=True, default=0)
     
@@ -435,7 +435,7 @@ class SolutionFeature(models.Model):
     name = models.CharField(_(u'Name'), max_length=200)
     value = models.CharField(_(u'Value'), null=True, blank=True, max_length=200)
     icon = models.CharField(_(u'Icon'), null=True, blank=True, max_length=100, help_text=mark_safe("<a target='_blank' href='https://fontawesome.com/search>https://fontawesome.com/search</a>"),)
-    is_active = models.BooleanField(_(u'Active'), null=True, blank=True, default=True)
+    is_active = models.BooleanField(_(u'Active'), default=True)
     sorted_as = models.IntegerField(_(u'Sorting'), null=True, blank=True, default=0)
 
     class Meta:
@@ -452,7 +452,7 @@ class Benefit(models.Model):
     description = models.TextField()
     icon = models.TextField()
     
-    is_active = models.BooleanField(_(u'Active'), null=True, blank=True, default=True)
+    is_active = models.BooleanField(_(u'Active'), default=True)
     is_featured = models.BooleanField(_(u'Featured'), null=True, blank=True, default=True)
     sorted_as = models.IntegerField(_(u'Sorting'), null=True, blank=True, default=0)
     

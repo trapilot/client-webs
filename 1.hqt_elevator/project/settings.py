@@ -153,21 +153,18 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 LANGUAGE_CODE = 'vi-vn'
-LANGUAGE_TYPE = 0
 LANGUAGES = [
+    # ('en', _('English')),
     ('vi', _('Vietnamese')),
 ]
-
-TIME_ZONE = 'UTC'
 
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 USE_TM = True
 
-LOCALE_PATHS = [
-    BASE_DIR / "locale",
-]
+TIME_ZONE = 'UTC'
+LOCALE_PATHS = []
 
 # Static files
 STATIC_URL = '/static/'
@@ -207,6 +204,11 @@ CKEDITOR_CONFIGS = {
     },
 }
 
+# We added new administration (grappelli)
+GRAPPELLI_INDEX_DASHBOARD = 'project.dashboard.CustomIndexDashboard'
+GRAPPELLI_ADMIN_TITLE = "Administrator"
+# GRAPPELLI_SWITCH_USER = True
+
 LOGGING = {
     "version": 1,  # the dictConfig format version
     "disable_existing_loggers": False,  # retain the default loggers
@@ -239,11 +241,6 @@ LOGGING = {
     },
 }
 
-# We added new administration (grappelli)
-GRAPPELLI_INDEX_DASHBOARD = 'project.dashboard.CustomIndexDashboard'
-GRAPPELLI_ADMIN_TITLE = "Administrator"
-# GRAPPELLI_SWITCH_USER = True
-
 # We added cache
 # CACHES = {
     # 'default': {
@@ -274,3 +271,7 @@ EMAIL_USE_SSL = False  # Set to True if using SSL
 DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')  # Default sender email address
 DEFAULT_NOTIFY_EMAIL = os.getenv('DEFAULT_NOTIFY_EMAIL', '')  # Custom notify email address
 DEFAULT_MARKETING_EMAIL = os.getenv('DEFAULT_MARKETING_EMAIL', '')  # Custom newsletter email address
+
+
+if not DEBUG:
+    LOCALE_PATHS.append(BASE_DIR / "locale")

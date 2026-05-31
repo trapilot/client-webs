@@ -1,0 +1,59 @@
+-- =========================================
+-- Django Migration → MySQL 8 Conversion
+-- Generated on 2026-05-31
+-- =========================================
+
+-- 1. RENAME COLUMN
+ALTER TABLE site
+RENAME COLUMN extra_robots TO robots_extra;
+
+-- 2. DROP FIELD
+ALTER TABLE marketingclaim
+DROP COLUMN icon;
+
+-- 3. ADD FIELDS
+
+ALTER TABLE branch
+ADD COLUMN icon_img VARCHAR(255) NULL;
+
+ALTER TABLE highlight
+ADD COLUMN icon_img VARCHAR(255) NULL;
+
+ALTER TABLE socialnetwork
+ADD COLUMN icon_img VARCHAR(255) NULL;
+
+ALTER TABLE marketingclaim
+ADD COLUMN heading_vi VARCHAR(255) NULL,
+ADD COLUMN icon_code VARCHAR(30) NULL,
+ADD COLUMN icon_img VARCHAR(255) NULL,
+ADD COLUMN icon_svg TEXT NULL,
+ADD COLUMN icon_text VARCHAR(150) NULL,
+ADD COLUMN subheading_vi VARCHAR(255) NULL;
+
+-- 4. ALTER EXISTING FIELDS
+
+ALTER TABLE banner
+MODIFY COLUMN image_vi VARCHAR(255) NULL;
+
+ALTER TABLE landing
+MODIFY COLUMN backgroud_footer VARCHAR(255) NULL,
+MODIFY COLUMN backgroud_header VARCHAR(255) NOT NULL,
+MODIFY COLUMN logo VARCHAR(255) NULL;
+
+ALTER TABLE license
+MODIFY COLUMN logo VARCHAR(255) NULL;
+
+ALTER TABLE marketingclaim
+MODIFY COLUMN is_active TINYINT(1) NULL DEFAULT 1;
+
+ALTER TABLE page
+MODIFY COLUMN icon VARCHAR(255) NULL;
+
+ALTER TABLE site
+MODIFY COLUMN image404 VARCHAR(255) NULL,
+MODIFY COLUMN imageFavicon VARCHAR(255) NULL,
+MODIFY COLUMN imageLogo VARCHAR(255) NULL,
+MODIFY COLUMN language_type INT NOT NULL DEFAULT 0;
+
+-- 5. DELETE TABLE
+DROP TABLE IF EXISTS TopFeature;

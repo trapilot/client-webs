@@ -32,7 +32,7 @@ def create_default_apps(sender, **kwargs):
         name=re.sub(r'[_-]+', ' ', settings.SITE_CODE),
         type="ECOMMERCE",
         is_ssl=False,
-        language_text='vi',
+        language_text=','.join([code for code, _name in settings.LANGUAGES]),
         language_type=0,
         domain_vi='%s' % (settings.SITE_DOMAIN),
         slogan_vi='HQT Elevator - Thương hiệu thang máy gia đình chuẩn Nhật Bản, nâng tầm an toàn, tiện nghi và đẳng cấp cho mọi không gian.',

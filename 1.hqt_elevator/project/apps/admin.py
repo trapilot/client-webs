@@ -17,7 +17,7 @@ class ProductCategoryAdmin(admin.ModelAdmin):
     list_filter = ('is_active', 'created_at')
     search_fields = ('name', 'code', 'description')
     prepopulated_fields = {'slug': ('name',)}
-    ordering = ('sorted_as', 'name')
+    ordering = ('sorted_as', '-is_active', 'name')
     
     fieldsets = (
         ('Thông Tin Cơ Bản', {
@@ -192,7 +192,7 @@ class PortfolioCategoryAdmin(admin.ModelAdmin):
     list_filter = ('is_active', 'created_at')
     search_fields = ('name', 'code', 'description')
     prepopulated_fields = {'slug': ('name',)}
-    ordering = ('sorted_as', 'name')
+    ordering = ('sorted_as', '-is_active', 'name')
     
     fieldsets = (
         ('Thông Tin Cơ Bản', {

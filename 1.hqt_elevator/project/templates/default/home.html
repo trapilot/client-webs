@@ -153,14 +153,14 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     </div>
     
-    {% if site.top_features|length %}
+    {% if site.marketing_claims|length %}
     <div class="absolute bottom-0 w-full bg-black/60 border-t border-gray-700 backdrop-blur-sm z-20 hidden md:block">
       <div class="max-w-[1200px] mx-auto px-4 py-4">
         <div class="grid grid-cols-4 gap-4 divide-x divide-gray-600 text-white">
-          {% for top_feature in site.top_features %}
+          {% for marketing_claim in site.marketing_claims %}
           <div class="flex items-center gap-3 pl-4">
-            <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            <div class="text-[13px]"><strong class="block">{{top_feature.title}}</strong> <span class="text-gray-300">{{top_feature.heading}}</span></div>
+            {{ marketing_claim.icon_svg|safe }}
+            <div class="text-[13px]"><strong class="block">{{marketing_claim.title}}</strong> <span class="text-gray-300">{{marketing_claim.heading}}</span></div>
           </div>
           {% endfor %}
         </div>
