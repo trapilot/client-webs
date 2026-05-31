@@ -13,7 +13,7 @@ from django.utils.text import slugify
 @receiver(post_migrate)
 def create_default_apps(sender, **kwargs):
     from cms_engine.models import Site, Page, Branch, Constant, SocialNetwork, OperatingHour, Testimonial, Brand
-    from cms_app.models import Category, Tag, Article, FAQ, FAQAnswer
+    from blog_engine.models import Category, Tag, Article, FAQ, FAQAnswer
     from recruitment_engine.models import Department, Job
     from project.apps.models import ProductCategory, Product, ProductFeature, Portfolio, PortfolioCategory
 

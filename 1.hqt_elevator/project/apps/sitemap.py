@@ -2,7 +2,7 @@ from django.utils.translation import get_language
 
 from cms_engine.sitemap import UrlSitemap, SitemapContext
 from cms_engine.utils import build_page_url
-from cms_app.models import Article
+from blog_engine.models import Article
 from project.apps.models import Product, Portfolio
 
 
