@@ -61,19 +61,19 @@ case "$ACTION" in
     echo "Unzipped libs.zip → project/"
     ;;
   locale)
-    echo "Step 1: Extract messages..."
-    python manage.py makemessages -l vi -i venv -i env -i node_modules -i static -i media
+    echo "Step 1: Cleanup messages..."
+    rm -rf project/locale/vi
 
-    echo "Step 2: Auto translate to Vietnamese..."
+    echo "Step 2: Extract messages..."
+    python manage.py makemessages -l vi -i venv -i templates -i node_modules -i static -i media
 
-    # pip install deep-translator polib
+    echo "Step 3: Auto translate to Vietnamese..."
+
+    pip install deep-translator polib
     python tools/auto_translate_po.py
 
-    echo "Step 3: Compile messages..."
+    echo "Step 4: Compile messages..."
     python manage.py compilemessages
-
-    echo "Step 4: Moving to locale direction..."
-    mv locale project/locale
 
     echo "DONE: Vietnamese locale ready 🚀"
     ;;

@@ -12,22 +12,22 @@ class CustomIndexDashboard(Dashboard):
         site_name = get_admin_site_name(context)
 
         self.children.append(modules.Group(
-            title="Application",
+            title=_(u"Application"),
             column=1,
             collapsible=True,
             children=[
                 modules.ModelList(
-                    u'App Features',
+                    _(u'Project Management'),
                     models=('project.*',),
                     column=1,
                 ),
                 modules.ModelList(
-                    u'App Content',
+                    _(u'Content Management'),
                     models=('cms_app.*',),
                     column=1,
                 ),
                 modules.ModelList(
-                    u'Recruitment',
+                    _(u'Recruitment Management'),
                     models=('recruitment_engine.*',),
                     column=1,
                 ),
@@ -35,19 +35,19 @@ class CustomIndexDashboard(Dashboard):
         ))
 
         self.children.append(modules.ModelList(
-            u'Website Settings',
+            _(u'Settings'),
             models=('cms_engine.*',),
             column=1,
         ))
 
         self.children.append(modules.ModelList(
-            u'Administration',
+            _(u'Administration'),
             models=('django.contrib.*',),
             column=1,
         ))
 
         self.children.append(modules.RecentActions(
-            u'Recent Activity',
+            _(u'Recent Activity'),
             limit=8,
             column=2,
         ))

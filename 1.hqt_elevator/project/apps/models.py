@@ -25,13 +25,13 @@ class ProductCategory(models.Model):
     image = models.ImageField(_(u'Image'), upload_to=upload_to('uploads/apps/categories'), blank=True)
     is_active = models.BooleanField(_(u'Active'), default=True)
     is_featured = models.BooleanField(_(u'Featured'), default=False)
-    sorted_as = models.IntegerField(_(u'Order'), default=0)
+    sorted_as = models.IntegerField(_(u'Sorting'), default=0)
     created_at = models.DateTimeField(_(u'Created'), auto_now_add=True)
     updated_at = models.DateTimeField(_(u'Updated'), auto_now=True)
 
     class Meta:
-        verbose_name = 'Product Category'
-        verbose_name_plural = 'Product Categories'
+        verbose_name = _(u'Product Category')
+        verbose_name_plural = _(u'Product Categories')
         ordering = ['sorted_as', 'is_active', 'name']
 
     def __str__(self):
@@ -93,7 +93,7 @@ class Product(models.Model):
     # Status
     status = models.CharField(_(u'Status'), null=True, blank=True, max_length=20, choices=STATUS_CHOICES, default='published')
     is_featured = models.BooleanField(_(u'Featured'), null=True, blank=True, default=False)
-    sorted_as = models.PositiveIntegerField(_(u'Order'), null=True, blank=True, default=0)
+    sorted_as = models.PositiveIntegerField(_(u'Sorting'), null=True, blank=True, default=0)
     
     # Meta
     meta_title = models.CharField(_(u'Title'), null=True, blank=True, max_length=200)
@@ -105,8 +105,8 @@ class Product(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='user_created_product')
 
     class Meta:
-        verbose_name = 'Product'
-        verbose_name_plural = 'Products'
+        verbose_name = _(u'Product')
+        verbose_name_plural = _(u'Products')
         ordering = ['sorted_as', 'is_active', '-created_at']
         indexes = [
             models.Index(fields=['slug']),
@@ -169,11 +169,11 @@ class ProductFeature(models.Model):
     value = models.CharField(_(u'Value'), null=True, blank=True, max_length=200)
     icon = models.CharField(_(u'Icon'), null=True, blank=True, max_length=100, help_text=mark_safe("<a target='_blank' href='https://fontawesome.com/search>https://fontawesome.com/search</a>"),)
     is_active = models.BooleanField(_(u'Active'), null=True, blank=True, default=True)
-    sorted_as = models.IntegerField(_(u'Order'), null=True, blank=True, default=0)
+    sorted_as = models.IntegerField(_(u'Sorting'), null=True, blank=True, default=0)
 
     class Meta:
-        verbose_name = 'Product Feature'
-        verbose_name_plural = 'Product Features'
+        verbose_name = _(u'Product Feature')
+        verbose_name_plural = _(u'Product Features')
         ordering = ['sorted_as', 'is_active']
 
     def __str__(self):
@@ -184,12 +184,12 @@ class ProductGallery(models.Model):
     id = models.BigAutoField(primary_key=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='gallery_set', verbose_name=_(u'Product'))
     image = models.ImageField(_(u'Image'), blank=True, null=True, upload_to=upload_to('uploads/apps/products/galleries'))
-    sorted_as = models.IntegerField(_(u'Order'), blank=True, null=True, default=0)
+    sorted_as = models.IntegerField(_(u'Sorting'), blank=True, null=True, default=0)
     created_at = models.DateTimeField(_(u'Created'), auto_now_add=True)
 
     class Meta:
-        verbose_name = 'Product Gallery'
-        verbose_name_plural = 'Product Galleries'
+        verbose_name = _(u'Product Gallery')
+        verbose_name_plural = _(u'Product Galleries')
         ordering = ['sorted_as']
 
     def __str__(self):
@@ -202,11 +202,11 @@ class ProductFaq(models.Model):
     answer = models.CharField(_(u'Answer'), null=True, blank=True, max_length=200)
     icon = models.CharField(_(u'Icon'), null=True, blank=True, max_length=100, help_text=mark_safe("<a target='_blank' href='https://fontawesome.com/search>https://fontawesome.com/search</a>"),)
     is_active = models.BooleanField(_(u'Active'), null=True, blank=True, default=True)
-    sorted_as = models.IntegerField(_(u'Order'), null=True, blank=True, default=0)
+    sorted_as = models.IntegerField(_(u'Sorting'), null=True, blank=True, default=0)
 
     class Meta:
-        verbose_name = 'Product FAQ'
-        verbose_name_plural = 'Product FAQs'
+        verbose_name = _(u'Product FAQ')
+        verbose_name_plural = _(u'Product FAQs')
         ordering = ['sorted_as', 'is_active']
 
     def __str__(self):
@@ -240,8 +240,8 @@ class ProductReview(models.Model):
     updated_at = models.DateTimeField(_(u'Updated'), auto_now=True)
 
     class Meta:
-        verbose_name = 'Product Review'
-        verbose_name_plural = 'Product Reviews'
+        verbose_name = _(u'Product Review')
+        verbose_name_plural = _(u'Product Reviews')
         ordering = ['-created_at']
         indexes = [
             models.Index(fields=['product']),
@@ -263,13 +263,13 @@ class PortfolioCategory(models.Model):
     color_color = models.CharField(_(u'Text Color'), blank=True, null=True, max_length=150)
     is_active = models.BooleanField(_(u'Active'), default=True)
     is_featured = models.BooleanField(_(u'Featured'), default=False)
-    sorted_as = models.IntegerField(_(u'Order'), default=0)
+    sorted_as = models.IntegerField(_(u'Sorting'), default=0)
     created_at = models.DateTimeField(_(u'Created'), auto_now_add=True)
     updated_at = models.DateTimeField(_(u'Updated'), auto_now=True)
 
     class Meta:
-        verbose_name = 'Portfolio Category'
-        verbose_name_plural = 'Portfolio Categories'
+        verbose_name = _(u'Project Category')
+        verbose_name_plural = _(u'Project Categories')
         ordering = ['sorted_as', 'is_active', 'name']
 
     def __str__(self):
@@ -307,7 +307,7 @@ class Portfolio(models.Model):
     completion_date = models.DateField('Ngày Hoàn Thành', blank=True, null=True)
     
     status = models.CharField(_(u'Status'), max_length=50, choices=STATUS_CHOICES, default='completed')
-    sorted_as = models.PositiveIntegerField(_(u'Order'), default=0)
+    sorted_as = models.PositiveIntegerField(_(u'Sorting'), default=0)
     is_active = models.BooleanField(_(u'Active'), blank=True, null=True, default=True)
     is_featured = models.BooleanField(_(u'Featured'), blank=True, null=True, default=False)
     
@@ -322,8 +322,8 @@ class Portfolio(models.Model):
     updated_at = models.DateTimeField(_(u'Updated'), auto_now=True)
 
     class Meta:
-        verbose_name = 'Portfolio'
-        verbose_name_plural = 'Portfolios'
+        verbose_name = _(u'Project')
+        verbose_name_plural = _(u'Projects')
         ordering = ['sorted_as', '-is_featured', '-completion_date']
         indexes = [
             models.Index(fields=['category']),
@@ -390,14 +390,14 @@ class Portfolio(models.Model):
 
 class PortfolioGallery(models.Model):
     id = models.BigAutoField(primary_key=True)
-    portfolio = models.ForeignKey(Portfolio, on_delete=models.CASCADE, related_name='gallery_set', verbose_name=_(u'Portfolio'))
+    portfolio = models.ForeignKey(Portfolio, on_delete=models.CASCADE, related_name='gallery_set', verbose_name=_(u'Project'))
     image = models.ImageField(_(u'Image'), upload_to=upload_to('uploads/apps/portfolios/galleries'))
-    sorted_as = models.IntegerField(_(u'Order'), default=0)
+    sorted_as = models.IntegerField(_(u'Sorting'), default=0)
     created_at = models.DateTimeField(_(u'Created'), auto_now_add=True)
 
     class Meta:
-        verbose_name = 'Portfolio Image'
-        verbose_name_plural = 'Portfolio Images'
+        verbose_name = _(u'Project Image')
+        verbose_name_plural = _(u'Project Images')
         ordering = ['sorted_as']
 
     def __str__(self):
@@ -415,14 +415,14 @@ class Solution(models.Model):
     image = models.ImageField(_(u'Thumbnail'), null=True, blank=True, upload_to=upload_to('uploads/apps/products/images'))
     is_active = models.BooleanField(_(u'Active'), null=True, blank=True, default=True)
     is_featured = models.BooleanField(_(u'Featured'), null=True, blank=True, default=False)
-    sorted_as = models.PositiveIntegerField(_(u'Order'), null=True, blank=True, default=0)
+    sorted_as = models.PositiveIntegerField(_(u'Sorting'), null=True, blank=True, default=0)
     
     created_at = models.DateTimeField(_(u'Created'), auto_now_add=True)
     updated_at = models.DateTimeField(_(u'Updated'), auto_now=True)
 
     class Meta:
-        verbose_name = 'Solution'
-        verbose_name_plural = 'Solutions'
+        verbose_name = _(u'Solution')
+        verbose_name_plural = _(u'Solutions')
         ordering = ['sorted_as', 'is_active', '-created_at']
 
     def __str__(self):
@@ -436,11 +436,11 @@ class SolutionFeature(models.Model):
     value = models.CharField(_(u'Value'), null=True, blank=True, max_length=200)
     icon = models.CharField(_(u'Icon'), null=True, blank=True, max_length=100, help_text=mark_safe("<a target='_blank' href='https://fontawesome.com/search>https://fontawesome.com/search</a>"),)
     is_active = models.BooleanField(_(u'Active'), null=True, blank=True, default=True)
-    sorted_as = models.IntegerField(_(u'Order'), null=True, blank=True, default=0)
+    sorted_as = models.IntegerField(_(u'Sorting'), null=True, blank=True, default=0)
 
     class Meta:
-        verbose_name = 'Solution Feature'
-        verbose_name_plural = 'Solution Features'
+        verbose_name = _(u'Solution Feature')
+        verbose_name_plural = _(u'Solution Features')
         ordering = ['sorted_as', 'is_active']
 
     def __str__(self):
@@ -454,7 +454,7 @@ class Benefit(models.Model):
     
     is_active = models.BooleanField(_(u'Active'), null=True, blank=True, default=True)
     is_featured = models.BooleanField(_(u'Featured'), null=True, blank=True, default=True)
-    sorted_as = models.IntegerField(_(u'Order'), null=True, blank=True, default=0)
+    sorted_as = models.IntegerField(_(u'Sorting'), null=True, blank=True, default=0)
     
     created_at = models.DateTimeField(_(u'Created'), auto_now_add=True)
     updated_at = models.DateTimeField(_(u'Updated'), auto_now=True)

@@ -1,0 +1,1712 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-31 03:52+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: project/apps/admin.py:234 project/libs/cms_app/admin.py:36
+#: project/libs/cms_app/admin.py:58 project/libs/cms_app/admin.py:90
+#: project/libs/cms_app/admin.py:120 project/libs/cms_engine/admin.py:48
+#: project/libs/cms_engine/admin.py:69 project/libs/cms_engine/admin.py:85
+#: project/libs/cms_engine/admin.py:108 project/libs/cms_engine/admin.py:117
+#: project/libs/cms_engine/admin.py:146 project/libs/cms_engine/admin.py:184
+#: project/libs/cms_engine/admin.py:231 project/libs/cms_engine/admin.py:296
+#: project/libs/cms_engine/admin.py:367 project/libs/cms_engine/admin.py:391
+#: project/libs/cms_engine/admin.py:421 project/libs/cms_engine/admin.py:461
+#: project/libs/recruitment_engine/admin.py:18
+#: project/libs/recruitment_engine/admin.py:42
+#: project/libs/recruitment_engine/admin.py:74
+msgid "General"
+msgstr "Tổng quan"
+
+#: project/apps/apps.py:8 project/apps/models.py:325
+#: project/apps/models.py:393
+msgid "Project"
+msgstr "Dự án"
+
+#: project/apps/models.py:20 project/apps/models.py:60
+#: project/apps/models.py:168 project/apps/models.py:257
+#: project/apps/models.py:292 project/apps/models.py:435
+#: project/libs/cms_app/models.py:60 project/libs/cms_app/models.py:101
+#: project/libs/cms_app/models.py:197 project/libs/cms_engine/models.py:51
+#: project/libs/cms_engine/models.py:524 project/libs/cms_engine/models.py:652
+#: project/libs/cms_engine/models.py:767 project/libs/cms_engine/models.py:862
+#: project/libs/cms_engine/models.py:1463
+#: project/libs/cms_engine/models.py:1511
+#: project/libs/recruitment_engine/models.py:37
+#: project/libs/recruitment_engine/models.py:93
+#: project/libs/recruitment_engine/models.py:150
+msgid "Name"
+msgstr "Tên"
+
+#: project/apps/models.py:22 project/apps/models.py:62
+#: project/apps/models.py:259 project/libs/cms_app/models.py:55
+#: project/libs/cms_app/models.py:99 project/libs/cms_engine/models.py:50
+#: project/libs/cms_engine/models.py:537 project/libs/cms_engine/models.py:619
+#: project/libs/cms_engine/models.py:655 project/libs/cms_engine/models.py:726
+#: project/libs/cms_engine/models.py:826
+#: project/libs/cms_engine/models.py:1410
+#: project/libs/recruitment_engine/models.py:36
+msgid "Code"
+msgstr ""
+
+#: project/apps/models.py:23 project/apps/models.py:64
+#: project/apps/models.py:100 project/apps/models.py:260
+#: project/apps/models.py:294 project/apps/models.py:318
+#: project/apps/models.py:412 project/libs/cms_engine/backoffice/forms.py:168
+#: project/libs/cms_engine/models.py:526 project/libs/cms_engine/models.py:621
+#: project/libs/cms_engine/models.py:1354
+#: project/libs/cms_engine/models.py:1406
+#: project/libs/recruitment_engine/models.py:39
+#: project/libs/recruitment_engine/models.py:97
+msgid "Description"
+msgstr "Sự miêu tả"
+
+#: project/apps/models.py:24 project/apps/models.py:65
+#: project/apps/models.py:232 project/apps/models.py:295
+#: project/apps/models.py:414 project/libs/cms_app/models.py:62
+#: project/libs/cms_app/models.py:155 project/libs/cms_engine/admin.py:299
+#: project/libs/cms_engine/backoffice/forms.py:170
+#: project/libs/cms_engine/models.py:874
+msgid "Content"
+msgstr "Nội dung"
+
+#: project/apps/models.py:25 project/apps/models.py:186
+#: project/apps/models.py:261 project/apps/models.py:296
+#: project/apps/models.py:394 project/libs/cms_app/models.py:57
+#: project/libs/cms_app/models.py:158 project/libs/cms_engine/models.py:1349
+msgid "Image"
+msgstr ""
+
+#: project/apps/models.py:26 project/apps/models.py:86
+#: project/apps/models.py:171 project/apps/models.py:204
+#: project/apps/models.py:264 project/apps/models.py:311
+#: project/apps/models.py:416 project/apps/models.py:438
+#: project/apps/models.py:455 project/libs/cms_app/models.py:69
+#: project/libs/cms_app/models.py:106 project/libs/cms_app/models.py:161
+#: project/libs/cms_app/models.py:233 project/libs/cms_engine/models.py:543
+#: project/libs/cms_engine/models.py:589 project/libs/cms_engine/models.py:627
+#: project/libs/cms_engine/models.py:731 project/libs/cms_engine/models.py:830
+#: project/libs/cms_engine/models.py:1233
+#: project/libs/cms_engine/models.py:1415
+#: project/libs/cms_engine/models.py:1471
+#: project/libs/cms_engine/models.py:1519
+#: project/libs/recruitment_engine/models.py:44
+#: project/libs/recruitment_engine/models.py:106
+#: project/libs/shared_engine/managers.py:12
+msgid "Active"
+msgstr ""
+
+#: project/apps/models.py:27 project/apps/models.py:95
+#: project/apps/models.py:265 project/apps/models.py:312
+#: project/apps/models.py:417 project/apps/models.py:456
+#: project/libs/cms_app/models.py:70
+msgid "Featured"
+msgstr "Nổi bật"
+
+#: project/apps/models.py:28 project/apps/models.py:96
+#: project/apps/models.py:172 project/apps/models.py:187
+#: project/apps/models.py:205 project/apps/models.py:266
+#: project/apps/models.py:310 project/apps/models.py:395
+#: project/apps/models.py:418 project/apps/models.py:439
+#: project/apps/models.py:457 project/libs/cms_app/models.py:68
+#: project/libs/cms_app/models.py:105 project/libs/cms_app/models.py:160
+#: project/libs/cms_app/models.py:232 project/libs/cms_app/models.py:259
+#: project/libs/cms_engine/models.py:542 project/libs/cms_engine/models.py:588
+#: project/libs/cms_engine/models.py:626 project/libs/cms_engine/models.py:661
+#: project/libs/cms_engine/models.py:732
+#: project/libs/cms_engine/models.py:1361
+#: project/libs/cms_engine/models.py:1416
+#: project/libs/cms_engine/models.py:1472
+#: project/libs/cms_engine/models.py:1518
+#: project/libs/recruitment_engine/models.py:43
+#: project/libs/recruitment_engine/models.py:105
+msgid "Sorting"
+msgstr "Sắp xếp"
+
+#: project/apps/models.py:29 project/apps/models.py:103
+#: project/apps/models.py:188 project/apps/models.py:239
+#: project/apps/models.py:267 project/apps/models.py:321
+#: project/apps/models.py:396 project/apps/models.py:420
+#: project/apps/models.py:459 project/libs/cms_app/models.py:72
+#: project/libs/cms_app/models.py:108 project/libs/cms_app/models.py:168
+#: project/libs/cms_app/models.py:205 project/libs/cms_app/models.py:235
+#: project/libs/cms_engine/models.py:92 project/libs/cms_engine/models.py:546
+#: project/libs/cms_engine/models.py:591 project/libs/cms_engine/models.py:629
+#: project/libs/cms_engine/models.py:663 project/libs/cms_engine/models.py:698
+#: project/libs/cms_engine/models.py:734 project/libs/cms_engine/models.py:773
+#: project/libs/cms_engine/models.py:918
+#: project/libs/cms_engine/models.py:1194
+#: project/libs/cms_engine/models.py:1238
+#: project/libs/cms_engine/models.py:1284
+#: project/libs/cms_engine/models.py:1363
+#: project/libs/cms_engine/models.py:1418
+#: project/libs/cms_engine/models.py:1474
+#: project/libs/cms_engine/models.py:1521
+#: project/libs/recruitment_engine/models.py:46
+#: project/libs/recruitment_engine/models.py:108
+#: project/libs/recruitment_engine/models.py:157
+msgid "Created"
+msgstr "Tạo"
+
+#: project/apps/models.py:30 project/apps/models.py:104
+#: project/apps/models.py:240 project/apps/models.py:268
+#: project/apps/models.py:322 project/apps/models.py:421
+#: project/apps/models.py:460 project/libs/cms_app/models.py:73
+#: project/libs/cms_app/models.py:109 project/libs/cms_app/models.py:169
+#: project/libs/cms_app/models.py:236 project/libs/cms_engine/models.py:93
+#: project/libs/cms_engine/models.py:547 project/libs/cms_engine/models.py:592
+#: project/libs/cms_engine/models.py:630 project/libs/cms_engine/models.py:664
+#: project/libs/cms_engine/models.py:699 project/libs/cms_engine/models.py:735
+#: project/libs/cms_engine/models.py:774 project/libs/cms_engine/models.py:919
+#: project/libs/cms_engine/models.py:1195
+#: project/libs/cms_engine/models.py:1239
+#: project/libs/cms_engine/models.py:1285
+#: project/libs/cms_engine/models.py:1364
+#: project/libs/cms_engine/models.py:1419
+#: project/libs/cms_engine/models.py:1475
+#: project/libs/cms_engine/models.py:1522
+#: project/libs/recruitment_engine/models.py:47
+#: project/libs/recruitment_engine/models.py:109
+#: project/libs/recruitment_engine/models.py:158
+msgid "Updated"
+msgstr "Đã cập nhật"
+
+#: project/apps/models.py:33
+msgid "Product Category"
+msgstr "Danh mục sản phẩm"
+
+#: project/apps/models.py:34
+msgid "Product Categories"
+msgstr "Danh mục sản phẩm"
+
+#: project/apps/models.py:58 project/apps/models.py:290
+#: project/libs/cms_app/models.py:229
+msgid "Category"
+msgstr "Loại"
+
+#: project/apps/models.py:61 project/apps/models.py:293
+#: project/apps/models.py:411 project/libs/cms_app/models.py:156
+msgid "Slug"
+msgstr ""
+
+#: project/apps/models.py:67 project/apps/models.py:415
+msgid "Thumbnail"
+msgstr ""
+
+#: project/apps/models.py:68
+msgid "Báo Giá"
+msgstr "Báo Giá"
+
+#: project/apps/models.py:71
+msgid "Sức chứa (kg)"
+msgstr "Dung lượng (kg)"
+
+#: project/apps/models.py:72
+msgid "Tốc Độ (m/s)"
+msgstr "Tốc độ (m/s)"
+
+#: project/apps/models.py:73
+msgid "Chiều Cao Tối Đa (m)"
+msgstr "Chiều Cao Tối Đa (m)"
+
+#: project/apps/models.py:74
+msgid "Tiêu Thụ Điện (kWh/h)"
+msgstr "Tiêu Thụ Điện (kWh/h)"
+
+#: project/apps/models.py:75
+msgid "Tiết Kiệm Điện (%)"
+msgstr "Tiết Kiệm Điện (%)"
+
+#: project/apps/models.py:76
+msgid "Số Năm Bảo Hành"
+msgstr "Số Năm Bảo Hành"
+
+#: project/apps/models.py:77
+msgid "Lượng Người"
+msgstr "Lượng người"
+
+#: project/apps/models.py:78
+msgid "Số Trạm Dừng"
+msgstr "Số Trạm Dừng"
+
+#: project/apps/models.py:79
+msgid "Chất Liệu   "
+msgstr "Chất liệu"
+
+#: project/apps/models.py:80
+msgid "Loại Cửa"
+msgstr "Cửa Loại"
+
+#: project/apps/models.py:82
+msgid "Giá Gốc"
+msgstr "Giá Gốc"
+
+#: project/apps/models.py:83
+msgid "Giá Giảm"
+msgstr "Giá Giảm"
+
+#: project/apps/models.py:87
+msgid "High Class"
+msgstr "Cao cấp"
+
+#: project/apps/models.py:88
+msgid "Popular"
+msgstr "Phổ biến"
+
+#: project/apps/models.py:89
+msgid "New"
+msgstr "Mới"
+
+#: project/apps/models.py:90
+msgid "Bestseller"
+msgstr "Bán chạy nhất"
+
+#: project/apps/models.py:94 project/apps/models.py:309
+#: project/libs/cms_app/models.py:204 project/libs/cms_engine/models.py:1348
+msgid "Status"
+msgstr "Trạng thái"
+
+#: project/apps/models.py:99 project/apps/models.py:231
+#: project/apps/models.py:317 project/apps/models.py:410
+#: project/libs/cms_app/models.py:153
+#: project/libs/cms_engine/backoffice/forms.py:167
+#: project/libs/cms_engine/models.py:620 project/libs/cms_engine/models.py:722
+#: project/libs/cms_engine/models.py:1351
+#: project/libs/cms_engine/models.py:1403
+#: project/libs/cms_engine/models.py:1464
+msgid "Title"
+msgstr "Tiêu đề"
+
+#: project/apps/models.py:101 project/apps/models.py:319
+#: project/libs/cms_engine/backoffice/forms.py:169
+msgid "Keywords"
+msgstr "Từ khóa"
+
+#: project/apps/models.py:108 project/apps/models.py:167
+#: project/apps/models.py:185 project/apps/models.py:200
+msgid "Product"
+msgstr "Sản phẩm"
+
+#: project/apps/models.py:109
+msgid "Products"
+msgstr "Các sản phẩm"
+
+#: project/apps/models.py:169 project/apps/models.py:436
+#: project/libs/cms_app/models.py:64 project/libs/cms_engine/models.py:771
+#: project/libs/cms_engine/models.py:1166
+#: project/libs/cms_engine/models.py:1278
+msgid "Value"
+msgstr "Giá trị"
+
+#: project/apps/models.py:170 project/apps/models.py:203
+#: project/apps/models.py:413 project/apps/models.py:437
+#: project/libs/cms_app/models.py:56 project/libs/cms_app/models.py:100
+#: project/libs/cms_app/models.py:157 project/libs/cms_engine/admin.py:72
+#: project/libs/cms_engine/admin.py:88 project/libs/cms_engine/admin.py:126
+#: project/libs/cms_engine/admin.py:397 project/libs/cms_engine/models.py:622
+#: project/libs/cms_engine/models.py:829
+msgid "Icon"
+msgstr ""
+
+#: project/apps/models.py:175
+msgid "Product Feature"
+msgstr "Tính năng sản phẩm"
+
+#: project/apps/models.py:176
+msgid "Product Features"
+msgstr "Tính năng sản phẩm"
+
+#: project/apps/models.py:191
+msgid "Product Gallery"
+msgstr "Thư viện sản phẩm"
+
+#: project/apps/models.py:192
+msgid "Product Galleries"
+msgstr "Phòng trưng bày sản phẩm"
+
+#: project/apps/models.py:201 project/libs/cms_app/models.py:228
+msgid "Question"
+msgstr "Câu hỏi"
+
+#: project/apps/models.py:202 project/libs/cms_app/models.py:258
+msgid "Answer"
+msgstr "Trả lời"
+
+#: project/apps/models.py:208
+msgid "Product FAQ"
+msgstr "Câu hỏi thường gặp về sản phẩm"
+
+#: project/apps/models.py:209
+msgid "Product FAQs"
+msgstr "Câu hỏi thường gặp về sản phẩm"
+
+#: project/apps/models.py:227
+msgid "Reviewer Name"
+msgstr "Tên người đánh giá"
+
+#: project/apps/models.py:228
+msgid "Reviewer Email"
+msgstr "Email người đánh giá"
+
+#: project/apps/models.py:230 project/libs/cms_engine/admin.py:450
+#: project/libs/cms_engine/models.py:1469
+msgid "Rating"
+msgstr "Đánh giá"
+
+#: project/apps/models.py:234
+msgid "Verified"
+msgstr "Đã xác minh"
+
+#: project/apps/models.py:235
+msgid "Approved"
+msgstr "Tán thành"
+
+#: project/apps/models.py:243
+msgid "Product Review"
+msgstr "Đánh giá sản phẩm"
+
+#: project/apps/models.py:244
+msgid "Product Reviews"
+msgstr "Đánh giá sản phẩm"
+
+#: project/apps/models.py:262 project/libs/cms_app/models.py:58
+#: project/libs/cms_app/models.py:102 project/libs/cms_engine/models.py:1512
+msgid "Background Color"
+msgstr "Màu nền"
+
+#: project/apps/models.py:263 project/libs/cms_app/models.py:59
+#: project/libs/cms_app/models.py:103 project/libs/cms_engine/models.py:1513
+msgid "Text Color"
+msgstr "Màu văn bản"
+
+#: project/apps/models.py:271
+msgid "Project Category"
+msgstr "Danh mục dự án"
+
+#: project/apps/models.py:272
+msgid "Project Categories"
+msgstr "Hạng mục dự án"
+
+#: project/apps/models.py:298 project/libs/cms_app/models.py:200
+#: project/libs/cms_engine/models.py:525
+#: project/libs/cms_engine/models.py:1465
+#: project/libs/cms_engine/models.py:1516
+#: project/libs/recruitment_engine/models.py:95
+msgid "Address"
+msgstr "Địa chỉ"
+
+#: project/apps/models.py:299
+msgid "City"
+msgstr "Thành phố"
+
+#: project/apps/models.py:314 project/libs/cms_engine/admin.py:428
+msgid "Customer"
+msgstr "Khách hàng"
+
+#: project/apps/models.py:315 project/libs/cms_engine/models.py:1466
+msgid "Company"
+msgstr "Công ty"
+
+#: project/apps/models.py:326
+msgid "Projects"
+msgstr "Dự án"
+
+#: project/apps/models.py:399
+msgid "Project Image"
+msgstr "Hình ảnh dự án"
+
+#: project/apps/models.py:400
+msgid "Project Images"
+msgstr "Hình ảnh dự án"
+
+#: project/apps/models.py:409
+msgid "Alias"
+msgstr "Bí danh"
+
+#: project/apps/models.py:424 project/apps/models.py:434
+msgid "Solution"
+msgstr "Giải pháp"
+
+#: project/apps/models.py:425
+msgid "Solutions"
+msgstr "Giải pháp"
+
+#: project/apps/models.py:442
+msgid "Solution Feature"
+msgstr "Tính năng giải pháp"
+
+#: project/apps/models.py:443
+msgid "Solution Features"
+msgstr "Tính năng giải pháp"
+
+#: project/dashboard.py:15
+msgid "Application"
+msgstr "Ứng dụng"
+
+#: project/dashboard.py:20
+msgid "Project Management"
+msgstr "Quản lý dự án"
+
+#: project/dashboard.py:25 project/libs/cms_app/apps.py:8
+msgid "Content Management"
+msgstr "Quản lý nội dung"
+
+#: project/dashboard.py:30
+msgid "Recruitment Management"
+msgstr "Quản lý tuyển dụng"
+
+#: project/dashboard.py:38
+msgid "Settings"
+msgstr "Cài đặt"
+
+#: project/dashboard.py:44
+msgid "Administration"
+msgstr "Sự quản lý"
+
+#: project/dashboard.py:50
+msgid "Recent Activity"
+msgstr "Hoạt động gần đây"
+
+#: project/libs/cms_app/admin.py:145 project/libs/cms_app/models.py:201
+msgid "Subject"
+msgstr "Chủ thể"
+
+#: project/libs/cms_app/forms.py:27
+#: project/libs/recruitment_engine/forms.py:31
+msgid "The email entered is not valid"
+msgstr "Email đã nhập không hợp lệ"
+
+#: project/libs/cms_app/forms.py:39
+msgid "Accept Privacy Policy"
+msgstr "Chấp nhận Chính sách quyền riêng tư"
+
+#: project/libs/cms_app/models.py:30 project/libs/cms_app/models.py:97
+#: project/libs/cms_app/models.py:133 project/libs/cms_app/models.py:194
+#: project/libs/cms_app/models.py:224 project/libs/cms_engine/models.py:522
+#: project/libs/cms_engine/models.py:578 project/libs/cms_engine/models.py:617
+#: project/libs/cms_engine/models.py:650 project/libs/cms_engine/models.py:692
+#: project/libs/cms_engine/models.py:719 project/libs/cms_engine/models.py:764
+#: project/libs/cms_engine/models.py:814
+#: project/libs/cms_engine/models.py:1183
+#: project/libs/cms_engine/models.py:1261
+#: project/libs/cms_engine/models.py:1330
+#: project/libs/cms_engine/models.py:1386
+#: project/libs/cms_engine/models.py:1447
+#: project/libs/cms_engine/models.py:1495
+#: project/libs/recruitment_engine/models.py:22
+msgid "Site"
+msgstr "Địa điểm"
+
+#: project/libs/cms_app/models.py:38 project/libs/cms_engine/models.py:1160
+#: project/libs/cms_engine/models.py:1270
+#: project/libs/cms_engine/models.py:1339
+#: project/libs/cms_engine/models.py:1395
+#: project/libs/cms_engine/models.py:1455
+#: project/libs/cms_engine/models.py:1503
+msgid "Page"
+msgstr "Trang"
+
+#: project/libs/cms_app/models.py:43
+msgid "Useful for if want to be related with a special page."
+msgstr "Hữu ích nếu muốn liên quan đến một trang đặc biệt."
+
+#: project/libs/cms_app/models.py:51 project/libs/cms_engine/models.py:822
+msgid "Parent"
+msgstr "cha mẹ"
+
+#: project/libs/cms_app/models.py:52
+msgid "It is used to create nested lists."
+msgstr "Nó được sử dụng để tạo các danh sách lồng nhau."
+
+#: project/libs/cms_app/models.py:61 project/libs/cms_app/models.py:154
+#: project/libs/recruitment_engine/models.py:38
+#: project/libs/recruitment_engine/models.py:96
+msgid "Summary"
+msgstr "Bản tóm tắt"
+
+#: project/libs/cms_app/models.py:65
+msgid "Value that the category has, for example that of rating or star"
+msgstr "Giá trị mà danh mục có, ví dụ như xếp hạng hoặc sao"
+
+#: project/libs/cms_app/models.py:76
+msgid "Article Category"
+msgstr "Danh mục bài viết"
+
+#: project/libs/cms_app/models.py:77 project/libs/cms_app/models.py:140
+msgid "Article Categories"
+msgstr "Danh mục bài viết"
+
+#: project/libs/cms_app/models.py:112
+msgid "Article Tag"
+msgstr "Thẻ bài viết"
+
+#: project/libs/cms_app/models.py:113 project/libs/cms_app/models.py:149
+msgid "Article Tags"
+msgstr "Thẻ bài viết"
+
+#: project/libs/cms_app/models.py:159 project/libs/cms_app/models.py:231
+msgid "View Count"
+msgstr "Số lượt xem"
+
+#: project/libs/cms_app/models.py:162
+msgid "Author"
+msgstr "Tác giả"
+
+#: project/libs/cms_app/models.py:164
+msgid "Publish"
+msgstr "Xuất bản"
+
+#: project/libs/cms_app/models.py:165
+msgid "Date on which the post will be activated on the web."
+msgstr "Ngày mà bài viết sẽ được kích hoạt trên web."
+
+#: project/libs/cms_app/models.py:172
+msgid "Article"
+msgstr "Bài báo"
+
+#: project/libs/cms_app/models.py:173
+msgid "Articles"
+msgstr "bài viết"
+
+#: project/libs/cms_app/models.py:198 project/libs/cms_engine/models.py:527
+#: project/libs/recruitment_engine/models.py:40
+#: project/libs/recruitment_engine/models.py:152
+msgid "Email"
+msgstr "E-mail"
+
+#: project/libs/cms_app/models.py:199 project/libs/cms_engine/models.py:529
+#: project/libs/recruitment_engine/models.py:41
+#: project/libs/recruitment_engine/models.py:151
+msgid "Phone"
+msgstr "Điện thoại"
+
+#: project/libs/cms_app/models.py:202 project/libs/cms_engine/models.py:1468
+msgid "Comment"
+msgstr "Bình luận"
+
+#: project/libs/cms_app/models.py:203
+msgid "Note"
+msgstr "Ghi chú"
+
+#: project/libs/cms_app/models.py:208
+msgid "Inquiry Contact"
+msgstr "Thắc mắc Liên hệ"
+
+#: project/libs/cms_app/models.py:209
+msgid "Inquiry Contacts"
+msgstr "Liên hệ yêu cầu"
+
+#: project/libs/cms_engine/admin.py:197 project/libs/cms_engine/models.py:53
+msgid "Slogan"
+msgstr "Khẩu hiệu"
+
+#: project/libs/cms_engine/admin.py:200
+msgid "Domains"
+msgstr "Tên miền"
+
+#: project/libs/cms_engine/admin.py:237
+msgid "Menu"
+msgstr "Thực đơn"
+
+#: project/libs/cms_engine/admin.py:244
+msgid "Template"
+msgstr "Bản mẫu"
+
+#: project/libs/cms_engine/admin.py:247
+msgid "Robots"
+msgstr ""
+
+#: project/libs/cms_engine/admin.py:250
+msgid "Sitemap"
+msgstr ""
+
+#: project/libs/cms_engine/admin.py:253
+msgid "Metadata"
+msgstr "Siêu dữ liệu"
+
+#: project/libs/cms_engine/admin.py:468 project/libs/cms_engine/models.py:1525
+msgid "Brand"
+msgstr "Thương hiệu"
+
+#: project/libs/cms_engine/apps.py:8 project/libs/cms_engine/models.py:97
+msgid "Website Settings"
+msgstr "Cài đặt trang web"
+
+#: project/libs/cms_engine/backoffice/defaults.py:11
+msgid "Content Management System"
+msgstr "Hệ thống quản lý nội dung"
+
+#: project/libs/cms_engine/backoffice/forms.py:39
+msgid "This user does not have sufficient permissions to access the cms"
+msgstr "Người dùng này không có đủ quyền để truy cập cms"
+
+#: project/libs/cms_engine/backoffice/forms.py:61
+msgid "Confirmation"
+msgstr "Xác nhận"
+
+#: project/libs/cms_engine/backoffice/forms.py:62
+msgid "Check this box to confirm the removal of the redirection"
+msgstr "Chọn hộp này để xác nhận việc xóa chuyển hướng"
+
+#: project/libs/cms_engine/backoffice/forms.py:68
+#: project/libs/cms_engine/backoffice/forms.py:178
+#: project/libs/cms_engine/backoffice/forms.py:215
+#: project/libs/recruitment_engine/models.py:100
+msgid "File"
+msgstr ""
+
+#: project/libs/cms_engine/backoffice/forms.py:69
+msgid ""
+"Select the excel file that contains the redirects. Only the two will be "
+"taken into account. first columns, where the first is the old url and the "
+"second the new url. The old url is due specify without the domain name. For "
+"example: /content.html . The new url can be specified complete."
+msgstr ""
+
+#: project/libs/cms_engine/backoffice/forms.py:86
+#: project/libs/cms_engine/backoffice/forms.py:191
+#: project/libs/cms_engine/backoffice/forms.py:260
+msgid "The format must be in .xls format"
+msgstr "Định dạng phải ở định dạng .xls"
+
+#: project/libs/cms_engine/backoffice/forms.py:99
+#, python-format
+msgid "Error on line %d. Does not contain the old url or the new url."
+msgstr ""
+
+#: project/libs/cms_engine/backoffice/forms.py:104
+#, python-format
+msgid "Error on line %d. The destination url does not start with http://"
+msgstr ""
+
+#: project/libs/cms_engine/backoffice/forms.py:171
+#: project/libs/cms_engine/models.py:889
+msgid "H1"
+msgstr "H1"
+
+#: project/libs/cms_engine/backoffice/forms.py:172
+#: project/libs/cms_engine/models.py:890
+msgid "H2"
+msgstr "H2"
+
+#: project/libs/cms_engine/backoffice/forms.py:173
+#: project/libs/cms_engine/models.py:891
+msgid "H3"
+msgstr "H3"
+
+#: project/libs/cms_engine/backoffice/forms.py:214
+msgid "Hotel"
+msgstr "Khách sạn"
+
+#: project/libs/cms_engine/backoffice/views.py:258
+msgid "translations saved correctly"
+msgstr "bản dịch được lưu chính xác"
+
+#: project/libs/cms_engine/backoffice/views.py:407
+msgid "SEO changes saved successfully"
+msgstr "Đã lưu thành công các thay đổi về SEO"
+
+#: project/libs/cms_engine/backoffice/views.py:560
+msgid "Upload completed successfully"
+msgstr "Tải lên hoàn tất thành công"
+
+#: project/libs/cms_engine/defaults.py:12
+msgid "English"
+msgstr "Tiếng Anh"
+
+#: project/libs/cms_engine/defaults.py:13 project/settings.py:158
+msgid "Vietnamese"
+msgstr "Tiếng Việt"
+
+#: project/libs/cms_engine/defaults.py:14
+msgid "Japanese"
+msgstr "tiếng Nhật"
+
+#: project/libs/cms_engine/defaults.py:15
+msgid "Chinese"
+msgstr "Tiếng Trung"
+
+#: project/libs/cms_engine/forms.py:30
+#, python-format
+msgid ""
+"You cannot activate the new webmobile because the site does not have the "
+"page %s. Check the documentation "
+"https://roiback.atlassian.net/wiki/display/IT/Webmobile+2.0"
+msgstr ""
+
+#: project/libs/cms_engine/forms.py:51
+msgid "Code exists."
+msgstr "Mã tồn tại."
+
+#: project/libs/cms_engine/forms.py:66
+msgid "Context invalid format"
+msgstr "Định dạng ngữ cảnh không hợp lệ"
+
+#: project/libs/cms_engine/forms.py:84
+msgid "Repeated value"
+msgstr "Giá trị lặp lại"
+
+#: project/libs/cms_engine/models.py:36
+msgid "BLOG"
+msgstr "BLOG"
+
+#: project/libs/cms_engine/models.py:37
+msgid "ECOMMERCE"
+msgstr "THƯƠNG MẠI THƯƠNG MẠI"
+
+#: project/libs/cms_engine/models.py:38
+msgid "RESTAURANT"
+msgstr "NHÀ HÀNG"
+
+#: project/libs/cms_engine/models.py:42
+msgid "Auto"
+msgstr "Tự động"
+
+#: project/libs/cms_engine/models.py:43
+msgid "Prefix in subdomain"
+msgstr "Tiền tố trong tên miền phụ"
+
+#: project/libs/cms_engine/models.py:44
+msgid "Geographic domain"
+msgstr "Miền địa lý"
+
+#: project/libs/cms_engine/models.py:45
+msgid "Multipal Domains"
+msgstr "Nhiều tên miền"
+
+#: project/libs/cms_engine/models.py:52 project/libs/cms_engine/models.py:580
+#: project/libs/cms_engine/models.py:770
+#: project/libs/cms_engine/models.py:1347
+msgid "Type"
+msgstr "Kiểu"
+
+#: project/libs/cms_engine/models.py:54
+msgid "Languages"
+msgstr "Ngôn ngữ"
+
+#: project/libs/cms_engine/models.py:55
+msgid "Domain Type"
+msgstr "Loại tên miền"
+
+#: project/libs/cms_engine/models.py:57
+msgid "Domain"
+msgstr "Lãnh địa"
+
+#: project/libs/cms_engine/models.py:58
+msgid ""
+"Domain for each language. If the site works with language folders, always "
+"put the same domain. Do not add the port."
+msgstr ""
+"Tên miền cho từng ngôn ngữ. Nếu trang web hoạt động với các thư mục ngôn "
+"ngữ, hãy luôn đặt cùng một tên miền. Không thêm cổng."
+
+#: project/libs/cms_engine/models.py:61 project/libs/cms_engine/models.py:840
+msgid "SSL"
+msgstr "SSL"
+
+#: project/libs/cms_engine/models.py:62
+msgid "Indicate the domain that listens to the site under ssl"
+msgstr "Cho biết tên miền nghe trang web dưới ssl"
+
+#: project/libs/cms_engine/models.py:65
+msgid "Sitemap context"
+msgstr "Ngữ cảnh sơ đồ trang web"
+
+#: project/libs/cms_engine/models.py:66
+msgid ""
+"Returns a list of UrlSitemap objects that are added to the default sitemap."
+msgstr ""
+"Trả về danh sách các đối tượng UrlSitemap được thêm vào sơ đồ trang web mặc "
+"định."
+
+#: project/libs/cms_engine/models.py:69
+msgid "Robots extra"
+msgstr "Robot bổ sung"
+
+#: project/libs/cms_engine/models.py:70
+msgid ""
+"The cms itself already has a default robots, but if we want to add extra "
+"rules, they can be added here."
+msgstr ""
+"Bản thân cms đã có robot mặc định, nhưng nếu chúng ta muốn thêm các quy tắc "
+"bổ sung, chúng có thể được thêm vào đây."
+
+#: project/libs/cms_engine/models.py:74
+msgid "Image 404"
+msgstr "Hình ảnh 404"
+
+#: project/libs/cms_engine/models.py:76
+msgid "Image that will be seen on the 404 error page of the site."
+msgstr "Hình ảnh sẽ được nhìn thấy trên trang lỗi 404 của trang web."
+
+#: project/libs/cms_engine/models.py:79
+msgid "Image logo"
+msgstr "Biểu tượng hình ảnh"
+
+#: project/libs/cms_engine/models.py:81
+msgid "Image logo of the site."
+msgstr "Logo hình ảnh của trang web."
+
+#: project/libs/cms_engine/models.py:84
+msgid "Image favicon"
+msgstr "Hình ảnh đại diện"
+
+#: project/libs/cms_engine/models.py:86
+msgid "Image favicon of the site."
+msgstr "Hình ảnh favicon của trang web."
+
+#: project/libs/cms_engine/models.py:96
+msgid "Website Setting"
+msgstr "Cài đặt trang web"
+
+#: project/libs/cms_engine/models.py:314 project/libs/cms_engine/models.py:335
+msgid "Closed"
+msgstr "Đã đóng"
+
+#: project/libs/cms_engine/models.py:528
+msgid "Hotline"
+msgstr "Đường dây nóng"
+
+#: project/libs/cms_engine/models.py:530
+msgid "Fax"
+msgstr "Fax"
+
+#: project/libs/cms_engine/models.py:531
+msgid "Latitude"
+msgstr "Vĩ độ"
+
+#: project/libs/cms_engine/models.py:532
+msgid "Longitude"
+msgstr "Kinh độ"
+
+#: project/libs/cms_engine/models.py:533
+msgid "Zoom"
+msgstr "Phóng"
+
+#: project/libs/cms_engine/models.py:534
+#: project/libs/cms_engine/models.py:1514
+msgid "Logo"
+msgstr ""
+
+#: project/libs/cms_engine/models.py:536 project/libs/cms_engine/models.py:654
+#: project/libs/cms_engine/models.py:725
+#: project/libs/cms_engine/models.py:1409
+msgid "Text"
+msgstr "Chữ"
+
+#: project/libs/cms_engine/models.py:540 project/libs/cms_engine/models.py:658
+#: project/libs/cms_engine/models.py:729
+#: project/libs/cms_engine/models.py:1413
+msgid "Svg"
+msgstr "Svg"
+
+#: project/libs/cms_engine/models.py:544
+msgid "Root"
+msgstr "Gốc"
+
+#: project/libs/cms_engine/models.py:550
+#: project/libs/recruitment_engine/models.py:30
+#: project/libs/recruitment_engine/models.py:79
+msgid "Branch"
+msgstr "Chi nhánh"
+
+#: project/libs/cms_engine/models.py:551
+msgid "Branches"
+msgstr "Chi nhánh"
+
+#: project/libs/cms_engine/models.py:561
+msgid "Ministry of Industry and Trade Website Notification"
+msgstr "Thông báo website Bộ Công Thương"
+
+#: project/libs/cms_engine/models.py:562
+msgid "Ministry of Industry and Trade E-commerce Registration"
+msgstr "Bộ Công Thương Đăng ký thương mại điện tử"
+
+#: project/libs/cms_engine/models.py:563
+msgid "Business Registration Certificate"
+msgstr "Giấy chứng nhận đăng ký kinh doanh"
+
+#: project/libs/cms_engine/models.py:564
+msgid "ICP License"
+msgstr "Giấy phép ICP"
+
+#: project/libs/cms_engine/models.py:565
+msgid "Social Network License"
+msgstr "Giấy phép mạng xã hội"
+
+#: project/libs/cms_engine/models.py:566
+msgid "Trademark Certificate"
+msgstr "Giấy chứng nhận nhãn hiệu"
+
+#: project/libs/cms_engine/models.py:567
+msgid "Copyright Certificate"
+msgstr "Giấy chứng nhận bản quyền"
+
+#: project/libs/cms_engine/models.py:568
+msgid "SSL Certificate"
+msgstr "Chứng chỉ SSL"
+
+#: project/libs/cms_engine/models.py:569
+msgid "Other"
+msgstr "Khác"
+
+#: project/libs/cms_engine/models.py:581
+msgid "Number"
+msgstr "Con số"
+
+#: project/libs/cms_engine/models.py:582 project/libs/cms_engine/models.py:623
+msgid "Link"
+msgstr "liên kết"
+
+#: project/libs/cms_engine/models.py:584
+msgid "Issue Date"
+msgstr "Ngày phát hành"
+
+#: project/libs/cms_engine/models.py:585
+msgid "Renewal Date"
+msgstr "Ngày gia hạn"
+
+#: project/libs/cms_engine/models.py:585
+msgid "Latest renewal date if applicable"
+msgstr "Ngày gia hạn mới nhất nếu có"
+
+#: project/libs/cms_engine/models.py:586
+msgid "Notes"
+msgstr "Ghi chú"
+
+#: project/libs/cms_engine/models.py:595
+msgid "License"
+msgstr "Giấy phép"
+
+#: project/libs/cms_engine/models.py:596
+msgid "Licenses"
+msgstr "Giấy phép"
+
+#: project/libs/cms_engine/models.py:624
+msgid "Link text"
+msgstr "Liên kết văn bản"
+
+#: project/libs/cms_engine/models.py:633
+msgid "Marketing claim"
+msgstr "Tuyên bố tiếp thị"
+
+#: project/libs/cms_engine/models.py:634
+msgid "Marketing claims"
+msgstr "Tuyên bố tiếp thị"
+
+#: project/libs/cms_engine/models.py:653 project/libs/cms_engine/models.py:864
+msgid "Url"
+msgstr ""
+
+#: project/libs/cms_engine/models.py:660
+msgid "Activate"
+msgstr "Kích hoạt"
+
+#: project/libs/cms_engine/models.py:667
+msgid "Social network"
+msgstr "Mạng xã hội"
+
+#: project/libs/cms_engine/models.py:668
+msgid "Social networks"
+msgstr "Mạng xã hội"
+
+#: project/libs/cms_engine/models.py:678
+msgid "Monday"
+msgstr "Thứ hai"
+
+#: project/libs/cms_engine/models.py:679
+msgid "Tuesday"
+msgstr "Thứ ba"
+
+#: project/libs/cms_engine/models.py:680
+msgid "Wednesday"
+msgstr "Thứ Tư"
+
+#: project/libs/cms_engine/models.py:681
+msgid "Thursday"
+msgstr "Thứ năm"
+
+#: project/libs/cms_engine/models.py:682
+msgid "Friday"
+msgstr "Thứ sáu"
+
+#: project/libs/cms_engine/models.py:683
+msgid "Saturday"
+msgstr "Thứ bảy"
+
+#: project/libs/cms_engine/models.py:684
+msgid "Sunday"
+msgstr "Chủ nhật"
+
+#: project/libs/cms_engine/models.py:695
+msgid "From Hour"
+msgstr "Từ Giờ"
+
+#: project/libs/cms_engine/models.py:696
+msgid "To Hour"
+msgstr "Đến giờ"
+
+#: project/libs/cms_engine/models.py:702
+msgid "Operating hour"
+msgstr "Giờ hoạt động"
+
+#: project/libs/cms_engine/models.py:703
+msgid "Operating hours"
+msgstr "Giờ hoạt động"
+
+#: project/libs/cms_engine/models.py:723
+#: project/libs/cms_engine/models.py:1352
+#: project/libs/cms_engine/models.py:1404
+msgid "Heading"
+msgstr "tiêu đề"
+
+#: project/libs/cms_engine/models.py:724
+#: project/libs/cms_engine/models.py:1353
+#: project/libs/cms_engine/models.py:1405
+msgid "Sub Heading"
+msgstr "Tiêu đề phụ"
+
+#: project/libs/cms_engine/models.py:738
+msgid "Top Feature"
+msgstr "Tính năng hàng đầu"
+
+#: project/libs/cms_engine/models.py:739
+msgid "Top Features"
+msgstr "Tính năng hàng đầu"
+
+#: project/libs/cms_engine/models.py:749
+msgid "STRING"
+msgstr "SỢI DÂY"
+
+#: project/libs/cms_engine/models.py:750
+msgid "INTEGER"
+msgstr "số nguyên"
+
+#: project/libs/cms_engine/models.py:751
+msgid "LIST"
+msgstr "DANH SÁCH"
+
+#: project/libs/cms_engine/models.py:752
+msgid "DICTIONARY"
+msgstr "TỪ ĐIỂN"
+
+#: project/libs/cms_engine/models.py:753
+msgid "BOOLEAN"
+msgstr "BOOLEAN"
+
+#: project/libs/cms_engine/models.py:754
+msgid "DATETIME"
+msgstr "NGÀY GIỜ"
+
+#: project/libs/cms_engine/models.py:768
+msgid ""
+"Lowercase. As if it were an attribute of the site itself. It is accessed "
+"with a site __get__."
+msgstr ""
+"Chữ thường. Như thể nó là một thuộc tính của chính trang web đó. Nó được "
+"truy cập bằng trang __get__."
+
+#: project/libs/cms_engine/models.py:777
+msgid "Constant"
+msgstr "Không thay đổi"
+
+#: project/libs/cms_engine/models.py:778
+msgid "Constants"
+msgstr "Hằng số"
+
+#: project/libs/cms_engine/models.py:823
+msgid "Parent page. It is used to create nested lists in the sitemap"
+msgstr ""
+"Trang phụ huynh. Nó được sử dụng để tạo danh sách lồng nhau trong sơ đồ "
+"trang web"
+
+#: project/libs/cms_engine/models.py:827
+msgid ""
+"Identifier code of the page. It is usually a text string, written in "
+"lowercase"
+msgstr ""
+"Mã nhận dạng của trang. Nó thường là một chuỗi văn bản, được viết bằng chữ "
+"thường"
+
+#: project/libs/cms_engine/models.py:832
+msgid "External"
+msgstr "Bên ngoài"
+
+#: project/libs/cms_engine/models.py:833
+msgid "Indicates if the link on this page redirects to an external website"
+msgstr ""
+"Cho biết liệu liên kết trên trang này có chuyển hướng đến một trang web bên "
+"ngoài hay không"
+
+#: project/libs/cms_engine/models.py:836
+msgid "Internal"
+msgstr "Nội bộ"
+
+#: project/libs/cms_engine/models.py:837
+msgid "Indicates if the link on this page link to an internal articles"
+msgstr ""
+"Cho biết liệu liên kết trên trang này có liên kết đến một bài viết nội bộ "
+"hay không"
+
+#: project/libs/cms_engine/models.py:841
+msgid "Indicates if this page use https"
+msgstr "Cho biết liệu trang này có sử dụng https hay không"
+
+#: project/libs/cms_engine/models.py:844
+msgid "Index"
+msgstr "chỉ mục"
+
+#: project/libs/cms_engine/models.py:845
+msgid "Follow"
+msgstr "Theo"
+
+#: project/libs/cms_engine/models.py:846
+msgid "Archive"
+msgstr "Lưu trữ"
+
+#: project/libs/cms_engine/models.py:847
+msgid "Snippet"
+msgstr "Đoạn trích"
+
+#: project/libs/cms_engine/models.py:849
+msgid "Home"
+msgstr "Trang chủ"
+
+#: project/libs/cms_engine/models.py:849
+msgid "Indicates if this page is the home"
+msgstr "Cho biết trang này có phải là trang chủ hay không"
+
+#: project/libs/cms_engine/models.py:850
+msgid "Contact"
+msgstr "Liên hệ"
+
+#: project/libs/cms_engine/models.py:850
+msgid "Indicates the Contact page"
+msgstr "Cho biết trang Liên hệ"
+
+#: project/libs/cms_engine/models.py:851
+msgid "Terms of Use"
+msgstr "Điều khoản sử dụng"
+
+#: project/libs/cms_engine/models.py:851
+msgid "Indicates the Terms of Use page"
+msgstr "Cho biết trang Điều khoản sử dụng"
+
+#: project/libs/cms_engine/models.py:852
+msgid "Privacy Policy"
+msgstr "Chính sách bảo mật"
+
+#: project/libs/cms_engine/models.py:852
+msgid "Indicates the Privacy Policy page"
+msgstr "Cho biết trang Chính sách quyền riêng tư"
+
+#: project/libs/cms_engine/models.py:853
+msgid "Top Menu"
+msgstr "Thực đơn trên cùng"
+
+#: project/libs/cms_engine/models.py:854
+msgid "Sub Menu"
+msgstr "Menu phụ"
+
+#: project/libs/cms_engine/models.py:856 project/libs/cms_engine/models.py:858
+msgid "Menu Row"
+msgstr "Hàng thực đơn"
+
+#: project/libs/cms_engine/models.py:857 project/libs/cms_engine/models.py:859
+msgid "Menu Column"
+msgstr "Cột thực đơn"
+
+#: project/libs/cms_engine/models.py:861
+msgid "Order Url"
+msgstr "Url đặt hàng"
+
+#: project/libs/cms_engine/models.py:861
+msgid "Order for when a url-reverse is done"
+msgstr "Thứ tự khi hoàn tất việc đảo ngược url"
+
+#: project/libs/cms_engine/models.py:865
+msgid ""
+"If no URL is specified, it is built from the page name plus the .htm "
+"extension. Otherwise, add the full regular expression."
+msgstr ""
+"Nếu không có URL nào được chỉ định, nó sẽ được tạo từ tên trang cộng với "
+"phần mở rộng .htm. Nếu không, hãy thêm biểu thức chính quy đầy đủ."
+
+#: project/libs/cms_engine/models.py:867
+#: project/libs/cms_engine/models.py:1167
+msgid "Meta title"
+msgstr "Tiêu đề meta"
+
+#: project/libs/cms_engine/models.py:868
+#: project/libs/cms_engine/models.py:1168
+msgid "Meta description"
+msgstr "Mô tả meta"
+
+#: project/libs/cms_engine/models.py:869
+#: project/libs/cms_engine/models.py:1169
+msgid "Meta keywords"
+msgstr "Từ khóa meta"
+
+#: project/libs/cms_engine/models.py:870
+msgid "Meta Type"
+msgstr "Loại meta"
+
+#: project/libs/cms_engine/models.py:871
+msgid "Meta card"
+msgstr "Thẻ meta"
+
+#: project/libs/cms_engine/models.py:872
+msgid "Meta image"
+msgstr "Hình ảnh meta"
+
+#: project/libs/cms_engine/models.py:873
+msgid "Meta Schema"
+msgstr "Lược đồ meta"
+
+#: project/libs/cms_engine/models.py:876
+msgid "Template View"
+msgstr "Xem mẫu"
+
+#: project/libs/cms_engine/models.py:877
+msgid ""
+"By default we use the generic views of the CMS, but it can be replaced by "
+"any other."
+msgstr ""
+"Theo mặc định, chúng tôi sử dụng các chế độ xem chung của CMS nhưng nó có "
+"thể được thay thế bằng bất kỳ chế độ xem nào khác."
+
+#: project/libs/cms_engine/models.py:880
+msgid "Context"
+msgstr "Bối cảnh"
+
+#: project/libs/cms_engine/models.py:881
+msgid ""
+"A method that returns a dictionary can be specified to pass a custom context"
+" to your view."
+msgstr ""
+"Một phương thức trả về một từ điển có thể được chỉ định để chuyển ngữ cảnh "
+"tùy chỉnh sang chế độ xem của bạn."
+
+#: project/libs/cms_engine/models.py:884
+msgid "Cache context"
+msgstr "Bối cảnh bộ đệm"
+
+#: project/libs/cms_engine/models.py:885
+msgid ""
+"If enabled, the system will automatically cache the entire context to save "
+"time."
+msgstr ""
+"Nếu được bật, hệ thống sẽ tự động lưu trữ toàn bộ bối cảnh để tiết kiệm thời"
+" gian."
+
+#: project/libs/cms_engine/models.py:895
+msgid "always"
+msgstr "luôn luôn"
+
+#: project/libs/cms_engine/models.py:896
+msgid "hourly"
+msgstr "hàng giờ"
+
+#: project/libs/cms_engine/models.py:897
+msgid "daily"
+msgstr "hằng ngày"
+
+#: project/libs/cms_engine/models.py:898
+msgid "weekly"
+msgstr "hàng tuần"
+
+#: project/libs/cms_engine/models.py:899
+msgid "monthly"
+msgstr "hàng tháng"
+
+#: project/libs/cms_engine/models.py:900
+msgid "yearly"
+msgstr "hàng năm"
+
+#: project/libs/cms_engine/models.py:901
+msgid "never"
+msgstr "không bao giờ"
+
+#: project/libs/cms_engine/models.py:915
+msgid "Frequency"
+msgstr "Tính thường xuyên"
+
+#: project/libs/cms_engine/models.py:916
+msgid "Priority"
+msgstr "Sự ưu tiên"
+
+#: project/libs/cms_engine/models.py:922
+msgid "Content Page"
+msgstr "Trang nội dung"
+
+#: project/libs/cms_engine/models.py:923
+msgid "Content Pages"
+msgstr "Trang nội dung"
+
+#: project/libs/cms_engine/models.py:1052
+#, python-format
+msgid "There is no view: %s"
+msgstr ""
+
+#: project/libs/cms_engine/models.py:1162
+msgid "Object"
+msgstr "Sự vật"
+
+#: project/libs/cms_engine/models.py:1163
+msgid "Name of the object that is passed in the context of the page"
+msgstr "Tên của đối tượng được truyền trong ngữ cảnh của trang"
+
+#: project/libs/cms_engine/models.py:1165
+msgid "Field"
+msgstr "Cánh đồng"
+
+#: project/libs/cms_engine/models.py:1165
+msgid "Model field to match the value"
+msgstr "Trường mô hình để khớp với giá trị"
+
+#: project/libs/cms_engine/models.py:1172
+msgid "Meta object"
+msgstr "Đối tượng meta"
+
+#: project/libs/cms_engine/models.py:1173
+msgid "Meta objects"
+msgstr "Đối tượng meta"
+
+#: project/libs/cms_engine/models.py:1186
+msgid "Url old"
+msgstr "Url cũ"
+
+#: project/libs/cms_engine/models.py:1187
+msgid ""
+"Without the domain name. Only from the domain name. For example: "
+"/reviews.htm"
+msgstr "Nếu không có tên miền . Chỉ từ tên miền . Ví dụ: /reviews.htm"
+
+#: project/libs/cms_engine/models.py:1190
+msgid "Url new"
+msgstr "Url mới"
+
+#: project/libs/cms_engine/models.py:1191
+msgid ""
+"The complete url, with the domain, where it will be redirected. If this "
+"field is blank, the system does a 410 redirect (Gone away)"
+msgstr ""
+"Url hoàn chỉnh, cùng với tên miền, nơi nó sẽ được chuyển hướng. Nếu trường "
+"này trống, hệ thống sẽ thực hiện chuyển hướng 410 (Đã biến mất)"
+
+#: project/libs/cms_engine/models.py:1198
+msgid "URL Redirect"
+msgstr "Chuyển hướng URL"
+
+#: project/libs/cms_engine/models.py:1199
+msgid "URL Redirects"
+msgstr "Chuyển hướng URL"
+
+#: project/libs/cms_engine/models.py:1235
+#: project/libs/cms_engine/models.py:1358
+#: project/libs/recruitment_engine/models.py:102
+msgid "Since Date"
+msgstr "Kể từ Ngày"
+
+#: project/libs/cms_engine/models.py:1236
+#: project/libs/cms_engine/models.py:1359
+#: project/libs/recruitment_engine/models.py:103
+msgid "Until Date"
+msgstr "Cho đến ngày"
+
+#: project/libs/cms_engine/models.py:1242
+msgid "Landing Page"
+msgstr "Trang đích"
+
+#: project/libs/cms_engine/models.py:1243
+msgid "Landing Pages"
+msgstr "Trang đích"
+
+#: project/libs/cms_engine/models.py:1262
+msgid "If a site is specified, common for all pages of the site"
+msgstr ""
+"Nếu một trang web được chỉ định, chung cho tất cả các trang của trang web"
+
+#: project/libs/cms_engine/models.py:1275
+#: project/libs/cms_engine/models.py:1344
+#: project/libs/cms_engine/models.py:1400
+#: project/libs/cms_engine/models.py:1460
+#: project/libs/cms_engine/models.py:1508
+msgid "If a page is specified, only for the specified page"
+msgstr "Nếu một trang được chỉ định, chỉ dành cho trang được chỉ định"
+
+#: project/libs/cms_engine/models.py:1277
+msgid "Identifier"
+msgstr "Mã định danh"
+
+#: project/libs/cms_engine/models.py:1280
+msgid "Exists"
+msgstr "tồn tại"
+
+#: project/libs/cms_engine/models.py:1281
+msgid ""
+"Indicates if the translation exists in any of the templates. There is a "
+"command that performs this check."
+msgstr ""
+"Cho biết liệu bản dịch có tồn tại trong bất kỳ mẫu nào hay không. Có một "
+"lệnh thực hiện việc kiểm tra này."
+
+#: project/libs/cms_engine/models.py:1288
+msgid "Language Translation"
+msgstr "Dịch ngôn ngữ"
+
+#: project/libs/cms_engine/models.py:1289
+msgid "Language Translations"
+msgstr "Bản dịch ngôn ngữ"
+
+#: project/libs/cms_engine/models.py:1318
+msgid "Hero"
+msgstr ""
+
+#: project/libs/cms_engine/models.py:1319
+msgid "Popup"
+msgstr ""
+
+#: project/libs/cms_engine/models.py:1320
+msgid "Slider"
+msgstr ""
+
+#: project/libs/cms_engine/models.py:1321
+msgid "Promo"
+msgstr ""
+
+#: project/libs/cms_engine/models.py:1331
+msgid "If a site is specified, common for all banners of the site"
+msgstr ""
+"Nếu một trang web được chỉ định, chung cho tất cả các biểu ngữ của trang web"
+
+#: project/libs/cms_engine/models.py:1350
+msgid "Video"
+msgstr ""
+
+#: project/libs/cms_engine/models.py:1355
+#: project/libs/cms_engine/models.py:1407
+msgid "Button Text"
+msgstr "Văn bản nút"
+
+#: project/libs/cms_engine/models.py:1356
+#: project/libs/cms_engine/models.py:1408
+msgid "Button Link"
+msgstr "Nút liên kết"
+
+#: project/libs/cms_engine/models.py:1367
+msgid "Page Banner"
+msgstr "Biểu ngữ trang"
+
+#: project/libs/cms_engine/models.py:1368
+msgid "Page Banners"
+msgstr "Biểu ngữ trang"
+
+#: project/libs/cms_engine/models.py:1387
+msgid "If a site is specified, common for all highlights of the site"
+msgstr ""
+"Nếu một trang web được chỉ định, chung cho tất cả các điểm nổi bật của trang"
+" web"
+
+#: project/libs/cms_engine/models.py:1422
+msgid "Service Highlight"
+msgstr "Dịch vụ nổi bật"
+
+#: project/libs/cms_engine/models.py:1423
+msgid "Service Highlights"
+msgstr "Dịch vụ nổi bật"
+
+#: project/libs/cms_engine/models.py:1467
+msgid "Avatar"
+msgstr "Hình đại diện"
+
+#: project/libs/cms_engine/models.py:1478
+msgid "Testimonial"
+msgstr "Lời chứng thực"
+
+#: project/libs/cms_engine/models.py:1479
+msgid "Testimonials"
+msgstr "Lời chứng thực"
+
+#: project/libs/cms_engine/models.py:1515
+msgid "Website"
+msgstr "Trang web"
+
+#: project/libs/cms_engine/models.py:1526
+msgid "Brands"
+msgstr "Thương hiệu"
+
+#: project/libs/cms_engine/sitemap.py:119
+#: project/libs/cms_engine/sitemap.py:167
+msgid "The sitemap_extension method must return a list"
+msgstr "Phương thức sitemap_extension phải trả về một danh sách"
+
+#: project/libs/cms_engine/sitemap.py:123
+msgid "The sitemap_extension list should return a list of UrlsSitemap objects"
+msgstr ""
+"Danh sách sitemap_extension sẽ trả về danh sách các đối tượng UrlsSitemap"
+
+#: project/libs/cms_engine/sitemap.py:188
+#, python-brace-format
+msgid "Page {0} (id:{1}) has no parent"
+msgstr "Trang {0} (id:{1}) không có trang gốc"
+
+#: project/libs/recruitment_engine/apps.py:6
+msgid "Recruitment"
+msgstr "tuyển dụng"
+
+#: project/libs/recruitment_engine/forms.py:20
+msgid "Only PDF, DOC, or DOCX files are accepted"
+msgstr "Chỉ chấp nhận các tệp PDF, DOC hoặc DOCX"
+
+#: project/libs/recruitment_engine/forms.py:23
+msgid "The file size has exceeded the 5MB limit"
+msgstr "Kích thước tệp đã vượt quá giới hạn 5MB"
+
+#: project/libs/recruitment_engine/models.py:50
+#: project/libs/recruitment_engine/models.py:87
+msgid "Department"
+msgstr "Phòng"
+
+#: project/libs/recruitment_engine/models.py:51
+msgid "Departments"
+msgstr "Phòng ban"
+
+#: project/libs/recruitment_engine/models.py:61
+msgid "Full time"
+msgstr "Toàn thời gian"
+
+#: project/libs/recruitment_engine/models.py:62
+msgid "Part time"
+msgstr "Bán thời gian"
+
+#: project/libs/recruitment_engine/models.py:63
+msgid "Contract"
+msgstr "Hợp đồng"
+
+#: project/libs/recruitment_engine/models.py:64
+msgid "Freelance"
+msgstr "Làm tự do"
+
+#: project/libs/recruitment_engine/models.py:65
+msgid "Internship"
+msgstr "Kỳ thực tập"
+
+#: project/libs/recruitment_engine/models.py:66
+msgid "Temporary"
+msgstr "Tạm thời"
+
+#: project/libs/recruitment_engine/models.py:70
+msgid "Onsite"
+msgstr "Tại chỗ"
+
+#: project/libs/recruitment_engine/models.py:71
+msgid "Remote"
+msgstr "Xa"
+
+#: project/libs/recruitment_engine/models.py:72
+msgid "Hybrid"
+msgstr "lai"
+
+#: project/libs/recruitment_engine/models.py:91
+msgid "Job Type"
+msgstr "Loại công việc"
+
+#: project/libs/recruitment_engine/models.py:92
+msgid "Job Mode"
+msgstr "Chế độ công việc"
+
+#: project/libs/recruitment_engine/models.py:94
+msgid "Salary"
+msgstr "Lương"
+
+#: project/libs/recruitment_engine/models.py:98
+msgid "Requirement"
+msgstr "Yêu cầu"
+
+#: project/libs/recruitment_engine/models.py:99
+msgid "Benefit"
+msgstr "Lợi ích"
+
+#: project/libs/recruitment_engine/models.py:112
+#: project/libs/recruitment_engine/models.py:148
+msgid "Job"
+msgstr "Công việc"
+
+#: project/libs/recruitment_engine/models.py:113
+msgid "Jobs"
+msgstr "Việc làm"
+
+#: project/libs/recruitment_engine/models.py:153
+msgid "Referer"
+msgstr "Người giới thiệu"
+
+#: project/libs/recruitment_engine/models.py:154
+msgid "Curriculum Vitae"
+msgstr "Sơ yếu lý lịch"
+
+#: project/libs/recruitment_engine/models.py:155
+msgid "Message"
+msgstr "Tin nhắn"
+
+#: project/libs/recruitment_engine/models.py:161
+msgid "Applicant"
+msgstr "Người xin việc"
+
+#: project/libs/recruitment_engine/models.py:162
+msgid "Applicants"
+msgstr "Ứng viên"
+
+#: project/libs/recruitment_engine/views.py:25
+msgid ""
+"Your application has been submitted successfully! Our HR team will contact "
+"you soon"
+msgstr ""
+"Đơn đăng ký của bạn đã được gửi thành công! Đội ngũ nhân sự của chúng tôi sẽ"
+" sớm liên hệ với bạn"
+
+#: project/libs/shared_engine/forms.py:11
+msgid "The image field is required"
+msgstr "Trường hình ảnh là bắt buộc"
+
+#: project/libs/shared_engine/forms.py:13
+#: project/libs/shared_engine/forms.py:22
+#: project/libs/shared_engine/forms.py:32
+#: project/libs/shared_engine/forms.py:41
+msgid "Wrong filename"
+msgstr "Tên tệp sai"
+
+#: project/libs/shared_engine/forms.py:30
+msgid "The file field is required"
+msgstr "Trường tập tin là bắt buộc"
+
+#: project/libs/shared_engine/managers.py:13
+msgid "Inactive"
+msgstr "Không hoạt động"
+
+#: project/libs/shared_engine/managers.py:16
+msgid "Draft"
+msgstr "Bản nháp"
+
+#: project/libs/shared_engine/managers.py:17
+msgid "Published"
+msgstr "Đã xuất bản"
+
+#: project/libs/shared_engine/managers.py:18
+msgid "Archived"
+msgstr "Đã lưu trữ"
