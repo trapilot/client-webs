@@ -117,11 +117,16 @@ document.addEventListener('DOMContentLoaded', () => {
           {% endif %}
         </p>
         <h1 class="text-4xl md:text-[54px] font-bold leading-[1.1] mb-6">
-          {% if page.background.subheading|length %}
-            {{ page.background.subheading|safe }}
+          {% if page.background.title|length %}
+            {{ page.background.title|safe }}
           {% else %}
-            NÂNG TẦM <br /> KHÔNG GIAN SỐNG
-          {% endif %}          
+            NÂNG TẦM
+          {% endif %}
+          {% if page.background.subtitle|length %}
+            {{ page.background.subtitle|safe }}
+          {% else %}
+            <br /> KHÔNG GIAN SỐNG
+          {% endif %}
         </h1>
         <p class="text-[15px] text-gray-200 mb-8 max-w-[400px] leading-relaxed">
           {% if page.background.description|length %}

@@ -158,6 +158,10 @@ LANGUAGES = [
     ('vi', _('Vietnamese')),
 ]
 
+DATETIME_FORMAT = "d/m/Y H:i"
+DATE_FORMAT = "d/m/Y"
+TIME_FORMAT = "H:i"
+
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True

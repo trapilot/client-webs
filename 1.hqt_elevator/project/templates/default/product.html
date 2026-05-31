@@ -7,8 +7,18 @@
 {% block extrajs %}
 <script>
 function changeMainImage(element, imageUrl) {
-  const mainImage = document.getElementById('main-product-image');
-  mainImage.src = imageUrl;
+  const mainImg = document.getElementById('main-product-image');
+  const mainPicture = mainImg.closest('picture');
+  const mainSources = mainPicture.querySelectorAll('source');
+
+  const thumbPicture = element.querySelector('picture');
+  const thumbSources = thumbPicture.querySelectorAll('source');
+  const thumbImg = thumbPicture.querySelector('img');
+  thumbSources.forEach((thumbSource, index) => {
+    if (mainSources[index]) {
+      mainSources[index].srcset = thumbSource.srcset;
+    }
+  });
 
   const allThumbs = document.querySelectorAll('.gallery-thumb');
   allThumbs.forEach(thumb => {
