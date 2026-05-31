@@ -71,9 +71,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cms_engine',
+    'cms_app',
 
     # Lib Engine
-    'blog_engine',
     'recruitment_engine',
     
     # App Engine

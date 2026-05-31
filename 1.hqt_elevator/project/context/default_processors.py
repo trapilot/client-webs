@@ -5,7 +5,7 @@ from django.core.paginator import Paginator
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Count, F, Q
 
-from blog_engine.models import (
+from cms_app.models import (
     Category,
     Article,
     FAQ,

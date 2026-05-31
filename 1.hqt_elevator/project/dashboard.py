@@ -23,7 +23,7 @@ class CustomIndexDashboard(Dashboard):
                 ),
                 modules.ModelList(
                     _(u'Content Management'),
-                    models=('blog_engine.*',),
+                    models=('cms_app.*',),
                     column=1,
                 ),
                 modules.ModelList(

@@ -10,7 +10,13 @@ from filebrowser.sites import site
 from shared_engine.utils import urls
 from shared_engine.views import generate_html
 
+from cms_app.views import (
+    InquiryView,
+    InquiryPolicyView,
+)
+
 admin.autodiscover()
+
 
 urlpatterns = [
     path('admin/filebrowser/', site.urls),
@@ -24,6 +30,17 @@ urlpatterns = [
     re_path(r"^media/(?P<path>.*)$", serve, {"document_root": settings.MEDIA_ROOT}),
     re_path(r"^static/(?P<path>.*)$", serve, {"document_root": settings.STATIC_ROOT}),
     # re_path(r'^static/(.*)$', serve, {'document_root': os.path.join(PATH_ACTUAL, 'static'), 'show_indexes': True}),
+    path(
+        'submit-inquiry/simple/',
+        InquiryView.as_view(),
+        name='submit_inquiry',
+    ),
+
+    path(
+        'submit-inquiry/policy/',
+        InquiryPolicyView.as_view(),
+        name='submit_inquiry_policy',
+    ),
 ]
 
 urlpatterns += urls.autodiscover()
