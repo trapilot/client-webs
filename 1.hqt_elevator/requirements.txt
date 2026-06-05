@@ -26,7 +26,6 @@ requests==2.34.2
 mysqlclient==2.2.1
 python-dotenv==1.2.2
 six==1.17.0
-sorl-thumbnail==13.0.0
 sqlparse==0.5.5
 urllib3==2.7.0
 xlrd==2.0.2

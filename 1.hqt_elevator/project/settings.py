@@ -52,14 +52,12 @@ CSRF_TRUSTED_ORIGINS = [f"http://{SITE_DOMAIN}", f"https://{SITE_DOMAIN}"]
 ALLOWED_HOSTS = [SITE_HOST, SITE_DOMAIN, f"www.{SITE_DOMAIN}", "localhost", "127.0.0.1", "0.0.0.0"]
 
 INSTALLED_APPS = [
-    # 'mailer',
     'grappelli.dashboard',
     'grappelli',
     'filebrowser',
     'ckeditor',
     'smart_selects',
     'captcha',
-    'sorl.thumbnail',
     'debug_toolbar',
 
     # Core Library
@@ -74,9 +72,8 @@ INSTALLED_APPS = [
     'shared_engine',
     'web_engine',
     'site_engine',
-    'marketing_engine',
-    'blog_engine',
     'recruitment_engine',
+    'marketing_engine',
     
     # App Engine
     'project.apps',
@@ -114,7 +111,6 @@ TEMPLATES = [
 
                 'web_engine.context_processors.session',
                 'web_engine.context_processors.backoffice',
-                'project.context_processors.default.site_settings',
             ],
         },
     },

@@ -10,7 +10,7 @@ from django.utils.translation import gettext_lazy as _
 class AppsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'project.apps'
-    verbose_name = _("Project")
+    verbose_name = _("Application")
 
     def ready(self):
         if os.getenv("APP_INITIAL", "False") == "True":

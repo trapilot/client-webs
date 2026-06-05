@@ -17,39 +17,49 @@ class CustomIndexDashboard(Dashboard):
         # for m in apps.get_models():
         #     print(m._meta.label_lower, m._meta.model)
 
-        # self.children.append(modules.Group(
-        #     title=_(u"Application"),
+        self.children.append(modules.Group(
+            title=_(u"Application"),
+            column=1,
+            collapsible=True,
+            children=[
+                modules.ModelList(
+                    # _(u'Product Management'),
+                    models=('project.*',),
+                    column=1,
+                ),
+                modules.ModelList(
+                    _(u'Website Content'),
+                    models=get_sorted_models_of_app('site_engine'),
+                    column=1,
+                ),
+                modules.ModelList(
+                    _(u'Maketing'),
+                    models=get_sorted_models_of_app('marketing_engine'),
+                    column=1,
+                ),
+                modules.ModelList(
+                    _(u'Recruitment'),
+                    models=get_sorted_models_of_app('recruitment_engine'),
+                    column=1,
+                ),
+            ]
+        ))
+        # self.children.append(modules.ModelList(
+        #     _(u'Application'),
+        #     models=('project.*',),
         #     column=1,
-        #     collapsible=True,
-        #     children=[
-        #         modules.ModelList(
-        #             _(u'Project Management'),
-        #             models=('project.*',),
-        #             column=1,
-        #         ),
-        #         modules.ModelList(
-        #             _(u'Content Management'),
-        #             models=('blog_engine.*',),
-        #             column=1,
-        #         ),
-        #         modules.ModelList(
-        #             _(u'Recruitment'),
-        #             models=('recruitment_engine.*',),
-        #             column=1,
-        #         ),
-        #     ]
         # ))
-        self.children.append(modules.ModelList(
-            _(u'Website Content'),
-            models=get_sorted_models_of_app('site_engine'),
-            column=1,
-        ))
+        # self.children.append(modules.ModelList(
+        #     _(u'Website Content'),
+        #     models=get_sorted_models_of_app('site_engine'),
+        #     column=1,
+        # ))
 
-        self.children.append(modules.ModelList(
-            _(u'Maketing'),
-            models=get_sorted_models_of_app('marketing_engine'),
-            column=1,
-        ))
+        # self.children.append(modules.ModelList(
+        #     _(u'Maketing'),
+        #     models=get_sorted_models_of_app('marketing_engine'),
+        #     column=1,
+        # ))
 
         self.children.append(modules.ModelList(
             _(u'Configuration'),

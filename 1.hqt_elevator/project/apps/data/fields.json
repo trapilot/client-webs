@@ -1,0 +1,22 @@
+{
+  "project": [
+    {
+      "name": "total_elevators",
+      "label": "Tổng số thang máy",
+      "type": "number",
+      "default_value": "0",
+      "unit": "",
+      "required": "0"
+    },
+    {
+      "name": "building_floors",
+      "label": "Tầng tòa nhà",
+      "type": "number",
+      "default_value": "0",
+      "unit": "",
+      "required": "0"
+    }
+  ],
+  "solution": [
+  ]
+}

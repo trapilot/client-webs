@@ -2,8 +2,8 @@ from django.utils.translation import get_language
 
 from web_engine.sitemap import UrlSitemap, SitemapContext
 from web_engine.utils import build_page_url
-from blog_engine.models import Article
-from project.apps.models import Product, Portfolio
+from site_engine.models import Post, Project, Solution
+from project.apps.models import Product
 
 
 def extension(site, context):
@@ -29,14 +29,19 @@ def extension(site, context):
                         context = SitemapContext(language=lang, lastmod=product.updated_at)
                         pages.append(build_sitemap(site, page, context, slug=product.slug))
             elif page.code == 'article':
-                articles = Article.objects.is_activated()
+                articles = Post.objects.is_activated()
                 for article in articles:
                     context = SitemapContext(language=lang, lastmod=article.updated_at)
                     pages.append(build_sitemap(site, page, context, slug=article.slug))
-            elif page.code == 'portfolio':
-                portfolios = Portfolio.objects.is_activated()
-                for portfolio in portfolios:
-                    context = SitemapContext(language=lang, lastmod=portfolio.updated_at)
-                    pages.append(build_sitemap(site, page, context, slug=portfolio.slug))
+            elif page.code == 'project':
+                projects = Project.objects.is_activated()
+                for project in projects:
+                    context = SitemapContext(language=lang, lastmod=project.updated_at)
+                    pages.append(build_sitemap(site, page, context, slug=project.slug))
+            elif page.code == 'solution':
+                solutions = Solution.objects.is_activated()
+                for solution in solutions:
+                    context = SitemapContext(language=lang, lastmod=solution.updated_at)
+                    pages.append(build_sitemap(site, page, context, slug=solution.slug))
 
     return pages

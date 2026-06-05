@@ -14,7 +14,7 @@ from django.utils.text import slugify
 @receiver(post_migrate)
 def create_default_apps(sender, **kwargs):
     from web_engine.models import Site, Page, Branch, Constant, SocialNetwork, OperatingHour, MarketingClaim, Highlight
-    from site_engine.models import Category, Tag
+    from site_engine.models import ProjectField, SolutionField, Category, Tag
 
     def is_exists(site):
         return Site.objects.filter(code=site).exists()
@@ -171,6 +171,38 @@ def create_default_apps(sender, **kwargs):
             page=page_home,
             type=item.pop('type'),
             label_vi=item.pop('label_vi'),
+            defaults=item
+        )
+    
+    # 9. Load Fields
+    print(' - Loading Site Fields...')
+    field_path = os.path.join(settings.BASE_DIR, 'apps', 'data', 'fields.json')
+
+    if not os.path.exists(field_path):
+        print(f'[ERROR] File not found: {field_path}')
+        return
+
+    with open(field_path, 'r', encoding='utf-8') as file:
+        fields = json.load(file)
+
+    for item in fields.get('project', []):
+        ProjectField.objects.update_or_create(
+            site=site,
+            type=item.pop('type'),
+            name=item.pop('name'),
+            unit=item.pop('unit'),
+            default_value=item.pop('default_value'),
+            required=item.pop('required') == 1,
+            defaults=item
+        )
+    for item in fields.get('solution', []):
+        SolutionField.objects.update_or_create(
+            site=site,
+            type=item.pop('type'),
+            name=item.pop('name'),
+            unit=item.pop('unit'),
+            default_value=item.pop('default_value'),
+            required=item.pop('required') == 1,
             defaults=item
         )
 
