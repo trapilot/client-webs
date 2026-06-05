@@ -1,0 +1,84 @@
+{
+  "features": [
+    {
+      "type": "FEATURE",
+      "label_vi": "AN TOÀN CHUẨN MỰC",
+      "title_vi": "Hệ thống cảm biến và công nghệ bảo vệ đa lớp, đạt tiêu chuẩn an toàn quốc tế",
+      "icon_svg": "<svg fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'></path></svg>"
+    },
+    {
+      "type": "FEATURE",
+      "label_vi": "VẬN HÀNH ÊM ÁI",
+      "title_vi": "Động cơ tiên tiến, giảm thiểu tiếng ồn và độ rung, mang lại trải nghiệm êm ái",
+      "icon_svg": "<svg fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z'></path></svg>"
+    },
+    {
+      "type": "FEATURE",
+      "label_vi": "TIẾT KIỆM ĐIỆN NĂNG",
+      "title_vi": "Công nghệ tiết kiệm điện thông minh giúp giảm chi phí vận hành tối đa",
+      "icon_svg": "<svg fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M13 10V3L4 14h7v7l9-11h-7z'></path></svg>"
+    },
+    {
+      "type": "FEATURE",
+      "label_vi": "BẢO HÀNH UY TÍN",
+      "title_vi": "Bảo hành lên đến 5 năm, bảo trì tận nơi 24/7 trên toàn quốc",
+      "icon_svg": "<svg fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z'></path></svg>"
+    }
+  ],
+  "trusted_infos": [
+    {
+      "type": "TRUSTED_INFO",
+      "label_vi": "10+",
+      "title_vi": "Năm kinh nghiệm",
+      "icon_svg": "<svg class='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'></path></svg>"
+    },
+    {
+      "type": "TRUSTED_INFO",
+      "label_vi": "500+",
+      "title_vi": "Công trình đã thực hiện",
+      "icon_svg": "<svg class='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4'></path></svg>"
+    },
+    {
+      "type": "TRUSTED_INFO",
+      "label_vi": "99%",
+      "title_vi": "Khách hàng hài lòng",
+      "icon_svg": "<svg class='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.514'></path></svg>"
+    },
+    {
+      "type": "TRUSTED_INFO",
+      "label_vi": "24/7",
+      "title_vi": "Hỗ trợ kỹ thuật",
+      "icon_svg": "<svg class='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z'></path></svg>"
+    }
+  ],
+  "partner_brands": [
+    {
+      "type": "PARTNER_BRAND",
+      "label_vi": "Fuji"
+    },
+    {
+      "type": "PARTNER_BRAND",
+      "label_vi": "Hitachi"
+    },
+    {
+      "type": "PARTNER_BRAND",
+      "label_vi": "Hyundai"
+    },
+    {
+      "type": "PARTNER_BRAND",
+      "label_vi": "Mitsubishi"
+    },
+    {
+      "type": "PARTNER_BRAND",
+      "label_vi": "Panasonic"
+    },
+    {
+      "type": "PARTNER_BRAND",
+      "label_vi": "Schneider Electric"
+    },
+    {
+      "type": "PARTNER_BRAND",
+      "label_vi": "Thyssenkrupp"
+    }
+  ]
+}

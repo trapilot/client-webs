@@ -12,8 +12,8 @@
 
     <div class="max-w-[1200px] mx-auto px-4 relative z-10 text-center">
         <h1 class="text-3xl md:text-5xl font-bold text-white mb-4 uppercase">
-            {% if page.background.heading|length %}
-                {{ page.background.heading }}
+            {% if page.background.label|length %}
+                {{ page.background.label }}
             {% else %}
                 {{ page.h1 }}
             {% endif %}

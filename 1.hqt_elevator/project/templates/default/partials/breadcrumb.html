@@ -8,7 +8,11 @@
         <a href="{% url_cms page.parent.code %}" class="hover:text-red-800 transition">{{ page.parent.name }}</a>
         <span class="mx-2">/</span> 
         {% endif %}
+        {% if landing %}
+        <span class="text-gray-900 font-bold">{{ landing.title }}</span>
+        {% else %}
         <span class="text-gray-900 font-bold">{% seo_meta title %}</span>
+        {% endif %}
     </div>
 </div>
 {% endif %}

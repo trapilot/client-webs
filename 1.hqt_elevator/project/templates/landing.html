@@ -1,0 +1,113 @@
+{% extends "default/layouts/base.html" %}
+{% load i18n thumbnail %}
+
+{% block title %}{{ landing.title }} | HQT Elevator{% endblock %}
+
+{% block header %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block content %}
+<main class="relative min-h-screen flex flex-col justify-between bg-gray-900 font-sans text-gray-900 antialiased">
+    
+    <div class="absolute inset-0 z-0">
+        {% if landing.background %}
+            <img src="{{ landing.background.url }}" alt="{{ landing.title }}" class="w-full h-full object-cover opacity-50">
+        {% else %}
+            <div class="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900"></div>
+        {% endif %}
+    </div>
+
+    {% if landing.header %}
+    <div class="relative z-10 w-full bg-black/60 text-center py-2 text-[11px] text-gray-400 tracking-wider">
+        {{ landing.header }}
+    </div>
+    {% endif %}
+
+    <div class="relative z-10 flex-grow flex items-center justify-center py-12 px-4">
+        <div class="max-w-3xl w-full bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden border border-gray-100">
+            
+            {% if landing.logo %}
+            <div class="bg-gray-50 py-6 border-b border-gray-100 flex justify-center">
+                <img src="{{ landing.logo.url }}" alt="Campaign Logo" class="h-12 md:h-16 object-contain">
+            </div>
+            {% endif %}
+
+            <div class="p-8 md:p-12 text-center">
+                {% if landing.label %}
+                    <span class="inline-block bg-red-100 text-red-700 font-bold text-[11px] uppercase tracking-widest px-3 py-1 rounded-sm mb-6">
+                        {{ landing.label|safe }}
+                    </span>
+                {% endif %}
+
+                {% if landing.title %}
+                    <h1 class="text-3xl md:text-5xl font-black text-gray-900 mb-4 leading-tight tracking-tight">
+                        {{ landing.title }}
+                    </h1>
+                {% endif %}
+
+                {% if landing.subtitle %}
+                    <h2 class="text-xl md:text-2xl font-bold text-gray-600 mb-6">
+                        {{ landing.subtitle }}
+                    </h2>
+                {% endif %}
+
+                {% if landing.description %}
+                    <p class="text-[15px] md:text-lg text-gray-500 mb-8 leading-relaxed max-w-2xl mx-auto">
+                        {{ landing.description }}
+                    </p>
+                {% endif %}
+
+                {% if landing.html %}
+                    <div class="prose prose-sm md:prose-base prose-red max-w-none text-left text-gray-700 mb-10 border-t border-gray-100 pt-8">
+                        {{ landing.html|safe }}
+                    </div>
+                {% endif %}
+
+                {% if landing.button_link and landing.button_text %}
+                    <div class="mt-8 flex flex-col items-center border-t border-gray-100 pt-8">
+                        {% if landing.specials %}
+                            <div class="text-red-600 font-bold text-sm mb-4 animate-pulse">{{ landing.specials }}</div>
+                        {% endif %}
+                        
+                        <a href="{{ landing.button_link }}" class="inline-block bg-red-700 text-white font-bold text-[16px] px-12 py-4 rounded hover:bg-red-800 hover:-translate-y-1 transition-all duration-300 shadow-[0_8px_30px_rgb(185,28,28,0.3)]">
+                            {{ landing.button_text }}
+                        </a>
+                        
+                        {% if landing.click %}
+                            <span class="text-[12px] text-gray-400 mt-3 font-medium flex items-center">
+                                <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
+                                {{ landing.click }}
+                            </span>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <footer class="relative z-10 w-full bg-black/80 backdrop-blur-sm border-t border-gray-800 py-6 mt-auto">
+        <div class="max-w-4xl mx-auto px-4 flex flex-wrap justify-center items-center gap-x-6 gap-y-3 text-[12px] font-medium text-gray-400">
+            
+            {% if landing.policies %}
+                <a href="#" class="hover:text-white transition">{{ landing.policies }}</a>
+                <span class="text-gray-700">|</span>
+            {% endif %}
+            
+            {% if landing.taxes %}
+                <span>{{ landing.taxes }}</span>
+                <span class="text-gray-700">|</span>
+            {% endif %}
+            
+            {% if landing.concerns %}
+                <span>{{ landing.concerns }}</span>
+                <span class="text-gray-700">|</span>
+            {% endif %}
+            
+            {% if landing.unsubscribe %}
+                <a href="#" class="text-gray-500 hover:text-red-500 transition underline underline-offset-2">{{ landing.unsubscribe }}</a>
+            {% endif %}
+
+        </div>
+    </footer>
+</main>
+{% endblock %}

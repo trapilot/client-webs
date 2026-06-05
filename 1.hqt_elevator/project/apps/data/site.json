@@ -1,0 +1,52 @@
+{
+  "site": {
+    "code": "HQT_ELEVATOR",
+    "name": "HQT Elevator",
+    "type": "ECOMMERCE",
+    "mode": 0,
+    "is_ssl": false,
+    "sitemap_extension": "project.apps.sitemap.extension",
+    "domain_vi": "localhost",
+    "slogan_vi": "HQT Elevator - Thương hiệu thang máy gia đình chuẩn Nhật Bản, nâng tầm an toàn, tiện nghi và đẳng cấp cho mọi không gian."
+  },
+  "branches": [
+    {
+      "name_vi": "Vinhomes Ocean Park 3",
+      "address_vi": "Vịnh Thiên Đường 7 căn 67 Vinhomes Ocean Park 3, Xã Nghĩa Trụ, Hưng Yên",
+      "description_vi": "",
+      "hotline": "+84 93 4369133",
+      "phone": "+84 93 4369133",
+      "email": "thangmayhqt@gmail.com",
+      "geolat": "20.9538792",
+      "geolng": "105.978242",
+      "geozm": "17",
+      "is_active": true,
+      "is_root": true
+    }
+  ],
+  "social_networks": [
+    {"name": "Facebook", "icon_name": "f", "icon_code": "fab fa-facebook-f", "is_active": true},
+    {"name": "Youtube", "icon_name": "▶", "icon_code": "fab fa-youtube", "is_active": true},
+    {"name": "Tiktok", "icon_name": "♪", "icon_code": "fab fa-tiktok", "is_active": true},
+    {"name": "Zalo", "icon_name": "Z", "icon_code": "fab fa-zalo", "is_active": true},
+    {"name": "LinkedIn", "icon_name": "in", "icon_code": "fab fa-linkedin-in", "is_active": true}
+  ],
+  "constants": [
+    {"name": "GOOGLE_TAG_MANAGER", "type": "STR", "type_value": "GTM-XXX"},
+    {"name": "ENABLE_POPUP_NEWSLETTER", "type": "BOOL", "type_value": "No"}
+  ],
+  "operating_hours": [
+    {"weekday": 1, "since_hour": "08:00:00", "until_hour": "18:00:00"},
+    {"weekday": 2, "since_hour": "08:00:00", "until_hour": "18:00:00"},
+    {"weekday": 3, "since_hour": "08:00:00", "until_hour": "18:00:00"},
+    {"weekday": 4, "since_hour": "08:00:00", "until_hour": "18:00:00"},
+    {"weekday": 5, "since_hour": "08:00:00", "until_hour": "18:00:00"},
+    {"weekday": 6, "since_hour": "08:00:00", "until_hour": "12:00:00"}
+  ],
+  "marketing_claims": [
+    {"label_vi": "An toàn chuẩn mực", "title_vi": "Công nghệ Nhật Bản", "icon_svg": "<svg class='w-6 h-6 text-red-500' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'></path></svg>"},
+    {"label_vi": "Hiệu suất cao", "title_vi": "Tiết kiệm điện năng", "icon_svg": "<svg class='w-6 h-6 text-red-500' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M13 10V3L4 14h7v7l9-11h-7z'></path></svg>"},
+    {"label_vi": "Hài hòa kiến trúc", "title_vi": "Thiết kế tinh tế", "icon_svg": "<svg class='w-6 h-6 text-red-500' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z'></path></svg>"},
+    {"label_vi": "Bảo trì tận nơi 24/7", "title_vi": "Bảo hành dài hạn", "icon_svg": "<svg class='w-6 h-6 text-red-500' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'></path></svg>"}
+  ]
+}

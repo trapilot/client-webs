@@ -1,4 +1,4 @@
-CREATE TABLE cms_engine_license (
+CREATE TABLE web_engine_license (
     id BIGINT NOT NULL AUTO_INCREMENT,
     
     type VARCHAR(50) NOT NULL DEFAULT 'other',
@@ -27,7 +27,7 @@ CREATE TABLE cms_engine_license (
     
     CONSTRAINT fk_license_site
         FOREIGN KEY (site_id)
-        REFERENCES cms_engine_site (id)
+        REFERENCES web_engine_site (id)
         ON DELETE CASCADE,
     
     CONSTRAINT unique_site_type

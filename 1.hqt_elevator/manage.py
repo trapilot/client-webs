@@ -10,15 +10,15 @@ if os.path.exists('.env'):
     from dotenv import load_dotenv
     load_dotenv()
 
-    sys.path.append(os.path.join(BASE_DIR, '../../', 'libs'))
-    sys.path.append(os.path.join(BASE_DIR, '../../', 'libs', 'app_engine'))
+    sys.path.append(os.path.join(BASE_DIR, '../../', 'core'))
+    sys.path.append(os.path.join(BASE_DIR, '../../', 'apps'))
 
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
     try:
         from django.core.management import execute_from_command_line
-        sys.path.append(os.path.join(BASE_DIR, 'project', 'libs'))
+        # sys.path.append(os.path.join(BASE_DIR, 'project', 'libs'))
     except ImportError as exc:
         raise ImportError(
             "Couldn't import Django. Are you sure it's installed and "

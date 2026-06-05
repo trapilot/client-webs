@@ -5,10 +5,9 @@ from django.core.paginator import Paginator
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Count, F, Q
 
-from cms_app.models import (
+from blog_engine.models import (
     Category,
-    Article,
-    FAQ,
+    Post,
 )
 from project.apps.models import (
     Portfolio,
@@ -68,12 +67,7 @@ def home(request, kwargs=None):
     })
 
 def support(request, kwargs=None):
-    faqs = FAQ.objects.prefetch_related('answer_set').filter(
-        is_active=True
-    ).order_by('sorted_as')[:10]
-
     return dict({
-        "faqs": faqs,
     })
 
 def category(request, kwargs=None):
@@ -182,7 +176,7 @@ def portfolio(request, kwargs=None):
 
 def articles(request, kwargs=None):
     paginator = Paginator(
-        Article.objects.filter(
+        Post.objects.filter(
             is_active=True,
         ).order_by('sorted_as', 'visited_as', 'created_at'),
         4
@@ -198,14 +192,14 @@ def article(request, kwargs=None):
     related_categories = []
 
     try:
-        article = get_object_or_404(Article, slug_vi=kwargs.get('slug'))
+        article = get_object_or_404(Post, slug_vi=kwargs.get('slug'))
 
-        Article.objects.filter(pk=article.pk).update(
+        Post.objects.filter(pk=article.pk).update(
             visited_as=F('visited_as') + 1
         )
         article.refresh_from_db(fields=['visited_as'])
 
-        related_articles = Article.objects.filter(
+        related_articles = Post.objects.filter(
             is_active=True,
             tags__in=article.tags.all(),
         ).exclude(id=article.id).distinct().order_by('sorted_as', 'visited_as', '-published_at', 'created_at')[:3]

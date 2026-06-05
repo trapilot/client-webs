@@ -1,5 +1,5 @@
 {% extends "default/layouts/base.html" %}
-{% load i18n url_cms trad thumbnail picture cache seo_meta repeat rating_star %}
+{% load i18n url_cms trans thumbnail picture cache seo_meta repeat rating_star imagepath %}
 
 {% block extracss %}
 {{ block.super }}
@@ -110,8 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
       
       <div class="lg:w-[55%] text-white">
         <p class="text-sm font-semibold tracking-[0.2em] uppercase mb-3">
-          {% if page.background.heading|length %}
-            {{ page.background.heading }}
+          {% if page.background.label|length %}
+            {{ page.background.label }}
           {% else %}
             Thang Máy Gia Đình
           {% endif %}
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
           {% for marketing_claim in site.marketing_claims %}
           <div class="flex items-center gap-3 pl-4">
             {{ marketing_claim.icon_svg|safe }}
-            <div class="text-[13px]"><strong class="block">{{marketing_claim.title}}</strong> <span class="text-gray-300">{{marketing_claim.heading}}</span></div>
+            <div class="text-[13px]"><strong class="block">{{marketing_claim.title}}</strong> <span class="text-gray-300">{{marketing_claim.label}}</span></div>
           </div>
           {% endfor %}
         </div>
@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
   {% endif %}
   </section>
 
-  {% if page.highlights|length %}
+  {% if site.features|length %}
   <section class="py-16 bg-white">
     <div class="max-w-[1200px] mx-auto px-4">
       <div class="text-center mb-10">
@@ -186,17 +186,17 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center mt-12">
-        {% for highlight in page.highlights %}
+        {% for feature in site.features %}
         <div class="bg-white p-6 border border-gray-100 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] rounded-md hover:shadow-lg transition">
           <div class="w-14 h-14 mx-auto mb-4 text-red-600">
-            {% if highlight.icon_svg %}
-            {{ highlight.icon_svg|safe }}
+            {% if feature.icon_svg %}
+            {{ feature.icon_svg|safe }}
             {% else %}
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
             {% endif %}
           </div>
-          <h4 class="font-bold text-[15px] text-gray-900 mb-2">{{ highlight.title|upper }}</h4>
-          <p class="text-[13px] text-gray-500 leading-relaxed">{{ highlight.heading }}</p>
+          <h4 class="font-bold text-[15px] text-gray-900 mb-2">{{ feature.label|upper }}</h4>
+          <p class="text-[13px] text-gray-500 leading-relaxed">{{ feature.title }}</p>
         </div>
         {% endfor %}
       </div>
@@ -207,13 +207,30 @@ document.addEventListener('DOMContentLoaded', () => {
   <section class="py-16 bg-gray-50">
     <div class="max-w-[1200px] mx-auto px-4">
       <div class="text-center mb-10">
-        <h2 class="text-xs font-bold text-red-700 uppercase tracking-[0.15em] mb-2">SẢN PHẨM NỔI BẬT</h2>
+        <h2 class="text-xs font-bold text-red-700 uppercase tracking-[0.15em] mb-2">DỰ ÁN NỔI BẬT</h2>
         <h3 class="text-[28px] font-bold text-gray-900 relative inline-block">
           Đa dạng lựa chọn – Phù hợp mọi không gian
           <span class="absolute -bottom-3 left-1/2 -translate-x-1/2 w-12 h-0.5 bg-red-700"></span>
         </h3>
       </div>
       
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {% for project in site.home_projects %}
+        <a href="{% url_cms 'category' category.slug %}">
+          <div class="bg-white border border-gray-200 rounded overflow-hidden hover:shadow-xl transition-shadow group">
+            <div class="h-56 overflow-hidden">
+              {% picture post.image preset="card" alt=post.title class_name="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" %}
+            </div>
+            <div class="p-5">
+              <h4 class="font-bold text-[16px] text-gray-900 mb-2">{{ post.title }}</h4>
+              <p class="text-[13px] text-gray-500 mb-4 h-10 overflow-hidden">{{ post.summary }}</p>
+              <p class="text-red-700 font-bold text-[13px] hover:text-red-800 flex items-center">XEM CHI TIẾT <span class="ml-1">→</span></p>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {% for category in categories %}
         <a href="{% url_cms 'category' category.slug %}">
@@ -237,7 +254,63 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
   </section>
 
-  {% if solutions|length %}
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-[1200px] mx-auto px-4">
+      <div class="text-center mb-10">
+        <h2 class="text-xs font-bold text-red-700 uppercase tracking-[0.15em] mb-2">SẢN PHẨM NỔI BẬT</h2>
+        <h3 class="text-[28px] font-bold text-gray-900 relative inline-block">
+          Đa dạng lựa chọn – Phù hợp mọi không gian
+          <span class="absolute -bottom-3 left-1/2 -translate-x-1/2 w-12 h-0.5 bg-red-700"></span>
+        </h3>
+      </div>
+      
+      {% for category in site.categories %}
+      {% if category.code == "SOLUTION" %}
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {% if category.posts.exists %}
+        {% for post in category.posts.all %}
+        <a href="{% url_cms 'category' category.slug %}">
+          <div class="bg-white border border-gray-200 rounded overflow-hidden hover:shadow-xl transition-shadow group">
+            <div class="h-56 overflow-hidden">
+              {% picture post.image preset="card" alt=post.title class_name="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" %}
+            </div>
+            <div class="p-5">
+              <h4 class="font-bold text-[16px] text-gray-900 mb-2">{{ post.title }}</h4>
+              <p class="text-[13px] text-gray-500 mb-4 h-10 overflow-hidden">{{ post.summary }}</p>
+              <p class="text-red-700 font-bold text-[13px] hover:text-red-800 flex items-center">XEM CHI TIẾT <span class="ml-1">→</span></p>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+        {% endif %}
+      </div>
+      {% endif %}
+      {% endfor %}
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {% for category in categories %}
+        <a href="{% url_cms 'category' category.slug %}">
+          <div class="bg-white border border-gray-200 rounded overflow-hidden hover:shadow-xl transition-shadow group">
+            <div class="h-56 overflow-hidden">
+              {% picture category.image preset="card" alt=category.name class_name="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" %}
+            </div>
+            <div class="p-5">
+              <h4 class="font-bold text-[16px] text-gray-900 mb-2">{{ category.name }}</h4>
+              <p class="text-[13px] text-gray-500 mb-4 h-10 overflow-hidden">{{ category.description }}</p>
+              <p class="text-red-700 font-bold text-[13px] hover:text-red-800 flex items-center">XEM CHI TIẾT <span class="ml-1">→</span></p>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+      
+      <div class="text-center mt-10">
+        <a href="{% url_cms 'products' %}" class="inline-block bg-red-700 text-white px-8 py-3 rounded text-sm font-bold hover:bg-red-800 transition shadow-md">XEM TẤT CẢ SẢN PHẨM</a>
+      </div>
+    </div>
+  </section>
+
+  {% if site.solutions|length %}
   <section class="py-16 bg-[#212121] text-white">
     <div class="max-w-[1200px] mx-auto px-4">
       <div class="text-center mb-12">
@@ -250,25 +323,27 @@ document.addEventListener('DOMContentLoaded', () => {
       
       <div class="flex flex-col lg:flex-row gap-12 items-center">
         <div id="solutions-menu" class="lg:w-5/12 space-y-6">
-          {% for solution in solutions %}
-          <div class="solution-item{% if forloop.first %} active-item{% endif %} flex items-start p-4 rounded border-l-4 transition cursor-pointer" data-image="{{ solution.image.url }}">
+          {% for solution in site.home_solutions %}
+          <div class="solution-item{% if forloop.first %} active-item{% endif %} flex items-start p-4 rounded border-l-4 transition cursor-pointer" data-image="{{ solution.image|imagepath }}">
             <div class="icon-box w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center mr-4 shrink-0 transition">
-              {% if solution.icon|length %}
-              {{ solution.icon|safe }}
+              {% if solution.icon_svg|length %}
+              {{ solution.icon_svg|safe }}
               {% else %}
               <svg class="w-5 h-5 text-gray-300 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
               {% endif %}
             </div>
             <div>
-              <h4 class="text-[16px] font-bold mb-1 text-white transition">{{ solution.alias }}</h4>
-              <p class="text-[13px] text-gray-400">{{ solution.description }}</p>
+              <h4 class="text-[16px] font-bold mb-1 text-white transition">{{ solution.label }}</h4>
+              <p class="text-[13px] text-gray-400">{{ solution.summary }}</p>
             </div>
           </div>
           {% endfor %}
         </div>
         
         <div class="lg:w-7/12 relative">
-          <img id="solution-image" src="{{ solutions.0.image.url }}" alt="{{ solutions.0.image.url }}" class="w-full h-auto rounded-lg shadow-2xl transition-opacity duration-300">
+          {% with solution=site.home_solutions.0 %}
+            <img id="solution-image" src="{{ solution.image|imagepath }}" alt="{{ solution.name }}" class="w-full h-auto rounded-lg shadow-2xl transition-opacity duration-300">
+          {% endwith %}
           {% comment %}
           <div class="absolute inset-0 flex items-center justify-center">
             <button class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-red-700 shadow-lg hover:scale-110 transition cursor-pointer">
@@ -381,57 +456,40 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="bg-white p-8 rounded border border-gray-100 shadow-sm">
         <h3 class="text-xs font-bold text-red-700 uppercase tracking-[0.1em] mb-8">HQT ELEVATOR TRONG CON SỐ</h3>
         <div class="grid grid-cols-2 gap-y-8 gap-x-4">
+          {% for trusted_info in page.trusted_infos %}
           <div class="flex items-start">
-            <div class="w-10 h-10 rounded-full border border-red-200 text-red-600 flex items-center justify-center mr-3 shrink-0"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+            <div class="w-10 h-10 rounded-full border border-red-200 text-red-600 flex items-center justify-center mr-3 shrink-0">
+              {{ trusted_info.icon_svg|safe }}
+            </div>
             <div>
               <div class="text-[22px] font-black text-gray-900 leading-none mb-1">
-                {{ site.INFO_YEAR_EXP|default:"10" }}+
+                {{ trusted_info.label }}
               </div>
-              <div class="text-[13px] text-gray-500">Năm kinh nghiệm</div>
+              <div class="text-[13px] text-gray-500">{{ trusted_info.title }}</div>
             </div>
           </div>
-          <div class="flex items-start">
-            <div class="w-10 h-10 rounded-full border border-red-200 text-red-600 flex items-center justify-center mr-3 shrink-0"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg></div>
-            <div>
-              <div class="text-[22px] font-black text-gray-900 leading-none mb-1">{{ site.INFO_PORTFOLIO_EXP|default:"200" }}+</div>
-              <div class="text-[13px] text-gray-500">Công trình đã thực hiện</div>
-            </div>
-          </div>
-          <div class="flex items-start">
-            <div class="w-10 h-10 rounded-full border border-red-200 text-red-600 flex items-center justify-center mr-3 shrink-0"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.514"></path></svg></div>
-            <div>
-              <div class="text-[22px] font-black text-gray-900 leading-none mb-1">{{ site.INFO_CUSTOMER_EXP|default:"98" }}%</div>
-              <div class="text-[13px] text-gray-500">Khách hàng hài lòng</div>
-            </div>
-          </div>
-          <div class="flex items-start">
-            <div class="w-10 h-10 rounded-full border border-red-200 text-red-600 flex items-center justify-center mr-3 shrink-0"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path></svg></div>
-            <div>
-              <div class="text-[22px] font-black text-gray-900 leading-none mb-1">{{ site.INFO_SUPPORT_EXP|default:"24/7" }}</div>
-              <div class="text-[13px] text-gray-500">Hỗ trợ kỹ thuật</div>
-            </div>
-          </div>
+          {% endfor %}
         </div>
       </div>
     </div>
   </section>
 
-  {% if site.brands|length %}
+  {% if site.partner_brands|length %}
   <section class="py-10 bg-white border-b border-gray-200">
     <div class="max-w-[1200px] mx-auto px-4">
       <div class="text-center mb-6">
         <h2 class="text-xs font-bold text-red-700 uppercase tracking-[0.1em]">ĐỐI TÁC - THƯƠNG HIỆU</h2>
       </div>
       <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition duration-300">
-        {% for brand in site.brands %}
+        {% for brand in site.partner_brands %}
         <div class="flex-shrink-0 grayscale hover:grayscale-0 transition duration-300">
-            {% if brand.website %}<a href="{{ brand.website }}" _target=""blank>{% else %}<div>{% endif %}
-                {% if brand.logo %}
-                  {% picture brand.logo preset="card" alt=brand.name class_name="h-14 object-contain" %}
+            {% if brand.button_link %}<a href="{{ brand.button_link }}" _target=""blank>{% else %}<div>{% endif %}
+                {% if brand.icon_img %}
+                  {% picture brand.icon_img preset="card" alt=brand.name class_name="h-14 object-contain" %}
                 {% else %}
-                  <div class="text-xl font-bold {{brand.color_text|default:'text-green-600'}}">{{ brand.name }}</div>
+                  <div class="text-xl font-bold {{brand.icon_code|default:'text-green-600'}}">{{ brand.label }}</div>
                 {% endif %}
-            {% if brand.website %}</a>{% else %}</div>{% endif %}
+            {% if brand.button_link %}</a>{% else %}</div>{% endif %}
         </div>
         {% endfor %}
       </div>

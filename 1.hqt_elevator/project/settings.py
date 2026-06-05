@@ -50,7 +50,6 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 CSRF_TRUSTED_ORIGINS = [f"http://{SITE_DOMAIN}", f"https://{SITE_DOMAIN}"]
 ALLOWED_HOSTS = [SITE_HOST, SITE_DOMAIN, f"www.{SITE_DOMAIN}", "localhost", "127.0.0.1", "0.0.0.0"]
-INTERNAL_IPS = ALLOWED_HOSTS # debug_toolbar
 
 INSTALLED_APPS = [
     # 'mailer',
@@ -70,21 +69,20 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cms_engine',
-    'cms_app',
 
-    # Lib Engine
+    # Core Engine
+    'shared_engine',
+    'web_engine',
+    'site_engine',
+    'marketing_engine',
+    'blog_engine',
     'recruitment_engine',
     
     # App Engine
     'project.apps',
-    'project.apps.create_default_apps', ## --> FOR FIRST INSTALL
 ]
 
 MIDDLEWARE = [
-    'cms_engine.middleware.RedirectionMiddleware',
-    'cms_engine.middleware.ResolverMiddleware',
-    # 'cms_engine.middleware.MultipleProxyMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -94,6 +92,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'web_engine.middleware.RedirectionMiddleware',
+    'web_engine.middleware.ResolverMiddleware',
+    # 'web_engine.middleware.MultipleProxyMiddleware',
 ]
 
 ROOT_URLCONF = 'project.urls'
@@ -111,9 +112,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
 
-                'cms_engine.context_processors.session',
-                'cms_engine.context_processors.backoffice',
-                'project.context.default_processors.site_settings',
+                'web_engine.context_processors.session',
+                'web_engine.context_processors.backoffice',
+                'project.context_processors.default.site_settings',
             ],
         },
     },
@@ -206,6 +207,13 @@ CKEDITOR_CONFIGS = {
         'toolbar': 'full',
         'extraPlugins': ','.join(CKEDITOR_EXTRA_PLUGINS),
     },
+}
+
+# debug_toolbar
+INTERNAL_IPS = ALLOWED_HOSTS
+DEBUG_EXCLUDE_PATTERNS = ["/admin/",]
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TOOLBAR_CALLBACK': lambda request: not any(DEBUG and request.path.startswith(p) for p in DEBUG_EXCLUDE_PATTERNS),
 }
 
 # We added new administration (grappelli)
