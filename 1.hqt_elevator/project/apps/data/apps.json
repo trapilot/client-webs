@@ -1,0 +1,28 @@
+{
+  "categories": [
+    {
+      "code": "TMTL",
+      "name_vi": "Thang Máy Thủy Lực",
+      "slug_vi": "thang-may-thuy-luc",
+      "summary_vi": "Thang máy thủy lực HQT Elevator là giải pháp di chuyển hiện đại, phù hợp cho nhà phố, biệt thự và các công trình cần tối ưu không gian lắp đặt. Sản phẩm vận hành êm ái, an toàn, không yêu cầu phòng máy truyền thống và dễ dàng tích hợp với nhiều phong cách kiến trúc sang trọng"
+    },
+    {
+      "code": "TMTH",
+      "name_vi": "Thang Máy Tải Hàng",
+      "slug_vi": "thang-may-tai-hang",
+      "summary_vi": "Thang máy tải hàng HQT Elevator được thiết kế chuyên dụng cho kho xưởng, nhà máy, cửa hàng, siêu thị và các công trình cần vận chuyển hàng hóa thường xuyên. Sản phẩm có kết cấu chắc chắn, tải trọng linh hoạt, vận hành ổn định và an toàn, giúp tối ưu quy trình lưu chuyển hàng hóa, tiết kiệm thời gian và nâng cao hiệu suất vận hành"
+    },
+    {
+      "code": "TMGD",
+      "name_vi": "Thang Máy Gia Đình",
+      "slug_vi": "thang-may-gia-dinh",
+      "summary_vi": "Thang máy gia đình HQT Elevator được thiết kế dành riêng cho nhà phố, biệt thự và không gian sống hiện đại. Sản phẩm kết hợp giữa tính an toàn, vận hành êm ái, tiết kiệm diện tích và thẩm mỹ sang trọng, giúp nâng tầm tiện nghi sống đồng thời phù hợp với nhiều phong cách kiến trúc gia đình"
+    },
+    {
+      "code": "TMCC",
+      "name_vi": "Thang Máy Công Cộng",
+      "slug_vi": "thang-may-cong-cong",
+      "summary_vi": "Thang máy công cộng HQT Elevator được thiết kế dành cho các tòa nhà, văn phòng, trung tâm thương mại và khu vực có mật độ sử dụng cao. Sản phẩm nổi bật với kết cấu bền bỉ, vận hành ổn định, tải trọng linh hoạt và thiết kế hiện đại, mang đến trải nghiệm di chuyển an toàn, tiện nghi và chuyên nghiệp cho mọi công trình"
+    }
+  ]
+}

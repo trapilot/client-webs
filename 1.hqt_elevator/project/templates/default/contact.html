@@ -73,7 +73,7 @@
         {% endif %}
         <div class="bg-white border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.08)] rounded-lg p-6 md:p-10">
           <h3 class="text-xl font-bold text-gray-900 mb-6 border-b border-gray-100 pb-4">Gửi Yêu Cầu Tư Vấn</h3>
-          <form method="post" action="{% url_cms 'submit_inquiry' %}" class="js-ajax-form space-y-5">
+          <form method="post" action="{% url_cms 'cms_contact' %}" class="js-ajax-form space-y-5">
             {% csrf_token %}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>

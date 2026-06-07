@@ -18,5 +18,88 @@
     }
   ],
   "solution": [
+  ],
+  "product": [
+    {
+      "name": "door_type",
+      "label": "Loại cửa",
+      "type": "select",
+      "default_value": "TWO_PANEL_CENTER",
+      "value_choices": "TWO_PANEL_CENTER|Mở 2 cánh ở giữa",
+      "unit": "",
+      "required": "1"
+    },
+    {
+      "name": "capacity",
+      "label": "Công suất",
+      "type": "number",
+      "default_value": "0",
+      "unit": "kg",
+      "required": "0"
+    },
+    {
+      "name": "passenger",
+      "label": "Sức chứa",
+      "type": "number",
+      "default_value": "",
+      "unit": "người",
+      "required": "0"
+    },
+    {
+      "name": "height",
+      "label": "Chiều cao tối đa",
+      "type": "number",
+      "default_value": "",
+      "unit": "m",
+      "required": "0"
+    },
+    {
+      "name": "speed",
+      "label": "Tốc độ",
+      "type": "number",
+      "default_value": "",
+      "unit": "m/s",
+      "required": "0"
+    },
+    {
+      "name": "power_consumption",
+      "label": "Tiêu thụ điện năng",
+      "type": "number",
+      "default_value": "",
+      "unit": "kWh/h",
+      "required": "0"
+    },
+    {
+      "name": "energy_saving",
+      "label": "Tiết kiệm điện",
+      "type": "number",
+      "default_value": "",
+      "unit": "%",
+      "required": "0"
+    },
+    {
+      "name": "warranty",
+      "label": "Số năm bảo hành",
+      "type": "number",
+      "default_value": "",
+      "unit": "%",
+      "required": "0"
+    },
+    {
+      "name": "number_stops",
+      "label": "Số điểm dừng",
+      "type": "number",
+      "default_value": "",
+      "unit": "",
+      "required": "0"
+    },
+    {
+      "name": "cabin_material",
+      "label": "Vật liệu",
+      "type": "text",
+      "default_value": "",
+      "unit": "",
+      "required": "0"
+    }
   ]
 }

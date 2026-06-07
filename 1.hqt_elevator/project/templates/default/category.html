@@ -1,5 +1,5 @@
 {% extends "default/layouts/base.html" %}
-{% load i18n url_cms trans picture seo_meta repeat %}
+{% load i18n url_cms trans picture seo_meta repeat queryset %}
 
 {% block extracss %}
 {% endblock %}
@@ -9,6 +9,7 @@
 
 
 {% block content %}
+{% paginate category.product_set.is_activated 6 as products %}
 <main class="font-sans text-gray-900 antialiased bg-gray-50">
   <section class="py-10 md:py-16">
     <div class="max-w-[1200px] mx-auto px-4">

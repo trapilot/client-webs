@@ -11,17 +11,19 @@ from shared_engine.transcode import upload_to
 from web_engine.utils import default_site_code
 from web_engine.models import Site
 from site_engine.models import Project
+from project.apps.managers import PageManager
 
 
 class Category(models.Model, metaclass=TransMeta):
-    objects = GeneralManager()
+    objects = PageManager()
     ADMIN_ORDER = 1
+    INTERNAL_SET = True
 
     site = models.ForeignKey(
         Site,
         on_delete=models.CASCADE,
         default=default_site_code,
-        related_name='product_category',
+        related_name='category_app',
         verbose_name=_(u'Site'),
     )
 
@@ -49,21 +51,22 @@ class Category(models.Model, metaclass=TransMeta):
         return self.name
     
 class Product(models.Model, metaclass=TransMeta):
-    objects = GeneralManager()
+    objects = PageManager()
     ADMIN_ORDER = 2
+    INTERNAL_SET = True
 
     site = models.ForeignKey(
         Site,
         on_delete=models.CASCADE,
         default=default_site_code,
-        related_name='product_items',
+        related_name='product_app',
         verbose_name=_(u'Site'),
     )
 
     category = models.ForeignKey(
         Category,
         on_delete=models.CASCADE,
-        related_name='product_items',
+        related_name='product_set',
         verbose_name=_(u'Category'),
     )
 
@@ -78,7 +81,7 @@ class Product(models.Model, metaclass=TransMeta):
     code = models.CharField(_(u'Code'), max_length=100, unique=True)    
     name = models.CharField(_(u'Name'), max_length=200)
     slug = models.SlugField(_(u'Slug'), unique=True)
-    summary = models.CharField(_(u'Summary'), null=True, blank=True, max_length=500)
+    summary = models.TextField(_(u'Summary'), blank=True, null=True)
     content = RichTextField(_(u'Content'), null=True, blank=True)
 
     pdf = models.FileField(_(u'Pdf'), null=True, blank=True, upload_to=upload_to('uploads/apps/product/pdfs'))
@@ -97,7 +100,7 @@ class Product(models.Model, metaclass=TransMeta):
     warranty = models.IntegerField(_(u'Years of Warranty'), null=True, blank=True, default=0, validators=[MinValueValidator(0)])
     passenger = models.IntegerField(_(u'Number of People'), default=0, validators=[MinValueValidator(0)])
     number_stops = models.IntegerField(_(u'Number of Stops'), null=True, blank=True, default=0, validators=[MinValueValidator(0)])
-    material = models.CharField(_(u'Elevator Materials'), null=True, blank=True, max_length=100)
+    cabin_material = models.CharField(_(u'Cabin Materials'), null=True, blank=True, max_length=100)
     door_type = models.IntegerField(_('Elevator Door Type'), null=True, blank=True, choices=DoorType.choices, default=DoorType.TWO_PANEL_CENTER)
     products_used = models.ManyToManyField(Project, blank=True, related_name='product_set', verbose_name=_(u'Used Products'))
 
@@ -124,11 +127,32 @@ class Product(models.Model, metaclass=TransMeta):
     class Meta:
         verbose_name = _(u'Product')
         verbose_name_plural = _(u'Products')
-        translate = ('name', 'slug', 'summary', 'content',)
+        translate = ('name', 'slug', 'summary', 'content', 'meta_title', 'meta_description', 'meta_keywords',)
         ordering = ['sorted_as', 'is_active', 'is_home']
 
     def __str__(self):
         return self.name
+    
+    @classmethod
+    def auto_prefetch_related(cls):
+        return [
+            'feature_set',
+            'gallery_set',
+            'faq_set',
+        ]
+
+    @property
+    def discount_percent(self):
+        if self.sale_price:
+            discount = ((self.base_price - self.sale_price) / self.base_price) * 100
+            return int(discount)
+        return 0
+    
+    @property
+    def passenger_text(self):
+        if self.passenger > 0:
+            return f"{self.passenger} người"
+        return 'Tùy Chỉnh'
 
 
 class ProductFeature(models.Model, metaclass=TransMeta):
@@ -189,3 +213,27 @@ class ProductGallery(models.Model, metaclass=TransMeta):
     def __str__(self):
         return f"{self.product} - {self.created_at}"
 
+class ProductFaq(models.Model, metaclass=TransMeta):
+    objects = GeneralManager()
+    
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        related_name='faq_set',
+        verbose_name=_(u'Product'),
+    )
+
+    question = models.CharField(_(u'Question'), max_length=200)
+    answer = models.CharField(_(u'Answer'), null=True, blank=True, max_length=200)
+    icon = models.CharField(_(u'Icon'), null=True, blank=True, max_length=100, help_text=mark_safe("<a target='_blank' href='https://fontawesome.com/search>https://fontawesome.com/search</a>"),)
+    is_active = models.BooleanField(_(u'Active'), default=True)
+    sorted_as = models.IntegerField(_(u'Sorting'), null=True, blank=True, default=0)
+
+    class Meta:
+        verbose_name = _(u'Product FAQ')
+        verbose_name_plural = _(u'Product FAQs')
+        translate = ('question', 'answer',)
+        ordering = ['sorted_as', 'is_active']
+
+    def __str__(self):
+        return f"{self.product.name} - {self.question}"

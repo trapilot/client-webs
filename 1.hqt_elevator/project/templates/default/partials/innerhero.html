@@ -1,37 +1,26 @@
 {% load picture %}
 
-{% if not page.is_home and page.h1|length %}
+{% if not page.is_home and page.background %}
 <section class="bg-gray-900 relative py-12 md:py-20 overflow-hidden">
-    {% if page.background %}
-        <div class="absolute inset-0">
-            {% picture page.background.image preset="hero" alt=site.name class_name="w-full h-full object-cover" %}
-        </div>
-        <!-- overlay -->
-        <div class="absolute inset-0 bg-gray-900/70"></div>
-    {% endif %}
+    <div class="absolute inset-0">
+        {% picture page.background.image preset="hero" alt=site.name class_name="w-full h-full object-cover" %}
+    </div>
+    <!-- overlay -->
+    <div class="absolute inset-0 bg-gray-900/70"></div>
 
     <div class="max-w-[1200px] mx-auto px-4 relative z-10 text-center">
         <h1 class="text-3xl md:text-5xl font-bold text-white mb-4 uppercase">
-            {% if page.background.label|length %}
-                {{ page.background.label }}
-            {% else %}
-                {{ page.h1 }}
-            {% endif %}
+            {{ page.background.title }}
         </h1>
 
-        {% if page.background.title|length %}
-        <p class="text-gray-300 text-[14px] max-w-2xl mx-auto mb-4">
-            {{ page.background.title }}
-        </p>
-        {% elif page.background.subtitle|length %}
+        {% if page.background.subtitle|length %}
         <p class="text-gray-300 text-[14px] max-w-2xl mx-auto mb-4">
             {{ page.background.subtitle }}
         </p>
-        {% elif page.h2|length %}
-        <p class="text-gray-300 text-[14px] max-w-2xl mx-auto mb-4">
-            {{ page.h2 }}
-        </p>
         {% endif %}
+        <p class="text-gray-300 text-[14px] max-w-2xl mx-auto mb-4">
+            {{ page.background.description }}
+        </p>
     </div>
 </section>
 {% endif %}

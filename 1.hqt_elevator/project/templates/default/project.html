@@ -1,5 +1,5 @@
 {% extends "default/layouts/base.html" %}
-{% load i18n url_cms trans picture seo_meta repeat %}
+{% load i18n url_cms trans picture seo_meta repeat queryset %}
 
 {% block extracss %}
 {% endblock %}
@@ -12,12 +12,12 @@
   
   <section class="relative h-[60vh] min-h-[500px] flex items-end">
     <div class="absolute inset-0 z-0">
-      {% picture portfolio.image preset="hero" alt=portfolio.name class_name="w-full h-full object-cover" %}
+      {% picture project.image preset="hero" alt=project.name class_name="w-full h-full object-cover" %}
       <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/50 to-transparent"></div>
     </div>
     <div class="relative z-10 max-w-[1200px] mx-auto px-4 w-full pb-16">
-      <span class="text-red-500 font-bold text-[12px] tracking-[0.2em] uppercase mb-4 block">{{ portfolio.category.name }}</span>
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">{{ portfolio.name }}</h1>
+      <span class="text-red-500 font-bold text-[12px] tracking-[0.2em] uppercase mb-4 block">{{ project.category.name }}</span>
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">{{ project.name }}</h1>
     </div>
   </section>
 
@@ -25,24 +25,33 @@
     <div class="max-w-[1200px] mx-auto px-4 py-8 grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-red-600/50">
       <div class="pl-4 md:pl-0">
         <div class="text-[11px] text-red-200 uppercase tracking-wider font-bold mb-1">Địa chỉ</div>
-        <div class="text-[16px] md:text-[18px] font-bold">{{ portfolio.address }}</div>
+        <div class="text-[16px] md:text-[18px] font-bold">{{ project..address }}</div>
       </div>
       <div class="pl-6">
         <div class="text-[11px] text-red-200 uppercase tracking-wider font-bold mb-1">Tổng thang máy</div>
-        <div class="text-[16px] md:text-[18px] font-bold">{{ portfolio.total_elevators }}</div>
+        <div class="text-[16px] md:text-[18px] font-bold">{{ project.attributes.total_elevators }}</div>
       </div>
       <div class="pl-6">
         <div class="text-[11px] text-red-200 uppercase tracking-wider font-bold mb-1">Số tầng</div>
-        <div class="text-[16px] md:text-[18px] font-bold">{{ portfolio.building_floors }}</div>
+        <div class="text-[16px] md:text-[18px] font-bold">{{ project.attributes.building_floors }}</div>
       </div>
       <div class="pl-6">
-        {% if portfolio.status == 'completed' %}
-        <div class="text-[11px] text-red-200 uppercase tracking-wider font-bold mb-1">Thời gian</div>
-        <div class="text-[16px] md:text-[18px] font-bold">{% if portfolio.duration_months > 2 %} {{ portfolio.duration_months }} tháng {% else %} {{ portfolio.duration_days }} ngày{% endif %}</div>
-        {% else %}
-        <div class="text-[11px] text-red-200 uppercase tracking-wider font-bold mb-1">Tình trạng</div>
-        <div class="text-[16px] md:text-[18px] font-bold">{{ portfolio.status_text }}</div>
-        {% endif %}
+        <div class="text-[11px] text-red-200 uppercase tracking-wider font-bold mb-1">
+          {% if project.duration_months or project.duration_days %}
+          Hoàn Thành
+          {% else %}
+          Tình trạng
+          {% endif %}
+        </div>
+        <div class="text-[16px] md:text-[18px] font-bold">
+          {% if project.duration_months > 2 %}
+            {{ project.duration_months }} tháng
+          {% elif project.duration_days %}
+            {{ project.duration_days }} ngày
+          {% else %}
+            Đang Triển Khai
+          {% endif %}
+        </div>
       </div>
     </div>
   </section>
@@ -50,23 +59,23 @@
   <section class="py-16 md:py-24 max-w-[1200px] mx-auto px-4">
     <div class="grid grid-cols-1 gap-12 lg:gap-16 mb-16">
       <div class="lg:col-span-1">
-        {{ portfolio.content|safe }}
+        {{ project.content|safe|default:"No content" }}
       </div>
       
-      {% if portfolio.gallery_set.count %}
+      {% if project.gallery_set.count %}
       <div class="lg:col-span-2 grid grid-cols-2 gap-4 h-fit">
-        {% for gallery in portfolio.gallery_set.all|slice:"3" %}
+        {% for gallery in project.gallery_set.all|slice:"3" %}
           {% if forloop.counter < 3 %}
-            {% picture gallery.image preset="card" alt=portfolio.name class_name="w-full h-[300px] md:h-[400px] object-cover rounded shadow-sm hover:shadow-lg transition" %}
+            {% picture gallery.image preset="card" alt=project.name class_name="w-full h-[300px] md:h-[400px] object-cover rounded shadow-sm hover:shadow-lg transition" %}
           {% elif forloop.counter == 3 %}
-            {% picture gallery.image preset="card" alt=portfolio.name class_name="w-full h-[250px] md:h-[300px] object-cover rounded shadow-sm col-span-2 hover:shadow-lg transition" %}
+            {% picture gallery.image preset="card" alt=project.name class_name="w-full h-[250px] md:h-[300px] object-cover rounded shadow-sm col-span-2 hover:shadow-lg transition" %}
           {% endif %}
         {% endfor %}
       </div>
       {% endif %}
     </div>
 
-    {% if portfolio.products_used.all %}
+    {% if project.products_used.all %}
     <div class="mt-12 pt-12 border-t border-gray-200">
       <div class="mb-8">
         <h2 class="text-xs font-bold text-red-700 uppercase tracking-[0.15em] mb-2">THIẾT BỊ LẮP ĐẶT</h2>
@@ -74,7 +83,7 @@
       </div>
       
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {% for product in portfolio.products_used.all %}
+        {% for product in project.products_used.all %}
         <a href="{% url_cms 'product' product.slug %}" class="group bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
           <div class="relative h-56 overflow-hidden bg-gray-100">
             {% picture product.image preset="card" alt=product.name class_name="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" %}

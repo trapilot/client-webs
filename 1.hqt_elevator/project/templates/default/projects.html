@@ -1,5 +1,5 @@
 {% extends "default/layouts/base.html" %}
-{% load url_cms trans picture cache seo_meta repeat static %}
+{% load url_cms trans picture cache seo_meta repeat static queryset %}
 
 {% block extracss %}
 {% endblock %}
@@ -8,32 +8,33 @@
 {% endblock %}
 
 {% block content %}
+{% paginate_with_group site.project_set.is_activated 4 2 as data %}
 <main class="font-sans text-gray-900 antialiased">
   <section class="py-12 md:py-16 bg-white">
     <div class="max-w-[1200px] mx-auto px-4">
-      
+
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-      {% for group in grouped_portfolios %}
-        {% for portfolio in group.items %}
-          <a href="{% url_cms 'portfolio' portfolio.slug %}" 
+      {% for group in data.groups %}
+        {% for project in group.items %}
+          <a href="{% url_cms 'project' project.slug %}" 
             class="group relative block overflow-hidden rounded h-[300px] md:h-[400px] 
                     {% if group.count == 1 %}
                       lg:col-span-3
                     {% elif forloop.parentloop.counter0|divisibleby:2 and forloop.first or not forloop.parentloop.counter0|divisibleby:2 and not forloop.first %}
                       lg:col-span-2
                     {% endif %}">
-            {% picture portfolio.image preset="card" alt=portfolio.name class_name="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" %}
+            {% picture project.image preset="card" alt=project.name class_name="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" %}
             <div class="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div class="absolute bottom-0 left-0 p-6 
                         {% if group.count == 1 or forloop.parentloop.counter0|divisibleby:2 and forloop.first or not forloop.parentloop.counter0|divisibleby:2 and not forloop.first %}md:p-8{% endif %} 
                         translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-              <span class="text-red-500 font-bold text-[11px] tracking-widest uppercase mb-2 block">{{ portfolio.category.name }}</span>
+              <span class="text-red-500 font-bold text-[11px] tracking-widest uppercase mb-2 block">{{ project.category.name }}</span>
               
               {% if group.count == 1 or forloop.parentloop.counter0|divisibleby:2 and forloop.first or not forloop.parentloop.counter0|divisibleby:2 and not forloop.first %}
-                <h3 class="text-xl md:text-2xl font-bold text-white mb-1">{{ portfolio.name }}</h3>
-                <p class="text-gray-300 text-[13px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">{{ portfolio.description }}</p>
+                <h3 class="text-xl md:text-2xl font-bold text-white mb-1">{{ project.name }}</h3>
+                <p class="text-gray-300 text-[13px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">{{ project.summary }}</p>
               {% else %}
-                <h3 class="text-lg font-bold text-white mb-1">{{ portfolio.name }}</h3>
+                <h3 class="text-lg font-bold text-white mb-1">{{ project.name }}</h3>
               {% endif %}              
             </div>
           </a>
@@ -41,15 +42,15 @@
       {% endfor %}      
     </div>
       
-    {% if portfolios.paginator.num_pages > 1 %}
+    {% if data.page.paginator.num_pages > 1 %}
       <div class="mt-12 flex justify-center space-x-2">
-        {% if portfolios.has_previous %}
-          <a href="?page={{ page_obj.previous_page_number }}"> 
+        {% if data.page.has_previous %}
+          <a href="?page={{ data.page.previous_page_number }}"> 
             <button class="w-10 h-10 flex items-center justify-center rounded border border-gray-200 bg-white text-gray-500 hover:border-red-700 hover:text-red-700 transition font-bold">&larr;</button>
           </a>
         {% endif %}
-        {% for num in portfolios.paginator.page_range %}
-          {% if portfolios.number == num %}
+        {% for num in data.page.paginator.page_range %}
+          {% if data.page.number == num %}
             <span class="w-10 h-10 flex items-center justify-center rounded bg-red-700 text-white font-bold shadow-md">{{ num }}</span>
           {% else %}
             <a href="?page={{ num }}">
@@ -57,8 +58,8 @@
             </a>
           {% endif %}
         {% endfor %}
-        {% if portfolios.has_next %}
-          <a href="?page={{ portfolios.next_page_number }}">
+        {% if data.page.has_next %}
+          <a href="?page={{ data.page.next_page_number }}">
             <button class="w-10 h-10 flex items-center justify-center rounded border border-gray-200 bg-white text-gray-500 hover:border-red-700 hover:text-red-700 transition font-bold">&rarr;</button>              
           </a>
         {% endif %}

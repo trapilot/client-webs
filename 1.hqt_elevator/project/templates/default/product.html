@@ -106,7 +106,7 @@ function showAllThumbnails(btnElement) {
           {% endif %}
         </div>
         <p class="text-[15px] text-gray-600 leading-relaxed mb-6">
-          {{ product.description }}
+          {{ product.summary }}
         </p>
 
         <div class="bg-gray-50 p-5 rounded border border-gray-100 mb-8">
@@ -117,7 +117,7 @@ function showAllThumbnails(btnElement) {
             <li class="flex justify-between border-b border-gray-200 pb-2"><span class="text-[14px] text-gray-700">Chiều cao tối đa</span><span class="text-[14px] font-bold text-gray-900">{{ product.height }}m</span></li>
             <li class="flex justify-between border-b border-gray-200 pb-2"><span class="text-[14px] text-gray-700">Số Trạm Dừng</span><span class="text-[14px] font-bold text-gray-900">{{ product.number_stops_text }}</span></li>
             <li class="flex justify-between border-b border-gray-200 pb-2"><span class="text-[14px] text-gray-700">Số Năm Bảo Hành</span><span class="text-[14px] font-bold text-gray-900">{{ product.warranty }}</span></li>
-            <li class="flex justify-between pt-1"><span class="text-[14px] text-gray-700">Chất Liệu</span><span class="text-[14px] font-bold text-gray-900">{{ product.material }}</span></li>
+            <li class="flex justify-between pt-1"><span class="text-[14px] text-gray-700">Chất Liệu</span><span class="text-[14px] font-bold text-gray-900">{{ product.cabin_material }}</span></li>
           </ul>
         </div>
 
@@ -175,6 +175,35 @@ function showAllThumbnails(btnElement) {
     </div>
     {% endif %}
 
+    {% if product_related|length %}
+    <div class="mt-12 pt-12 border-t border-gray-200">
+      <div class="mb-8">
+        <h2 class="text-xs font-bold text-red-700 uppercase tracking-[0.15em] mb-2">Sản Phẩm Liên Quan</h2>
+      </div>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for product in product_related %}
+        <a href="{% url_cms 'product' product.slug %}" class="group bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
+          <div class="relative h-56 overflow-hidden bg-gray-100">
+            {% picture product.image preset="card" alt=product.name class_name="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" %}
+          </div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h4 class="font-bold text-[18px] text-gray-900 mb-2 group-hover:text-red-700 transition-colors">{{ product.name }}</h4>
+            <div class="text-[13px] text-gray-500 mb-4 space-y-1">
+              <p><span class="font-bold text-gray-700">{{ product.category.name|upper }}</span></p>
+              <p>Mã SP: <span class="font-bold text-gray-700">{{ product.code }}</span></p>
+              <p>Tải trọng: <span class="font-bold text-gray-700">{{ product.capacity }}kg</span></p>
+              <p>Tốc độ: <span class="font-bold text-gray-700">{{ product.speed }}m/s</span></p>
+            </div>
+            <div class="border-t border-gray-100 pt-4 mt-auto">
+              <span class="text-red-700 font-bold text-[13px] flex items-center">XEM CHI TIẾT <span class="ml-1 text-lg leading-none">→</span></span>
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
   </section>
 </main>
 {% endblock content %}

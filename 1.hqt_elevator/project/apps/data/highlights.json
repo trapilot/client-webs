@@ -1,50 +1,109 @@
 {
   "features": [
     {
+      "page_code": "home",
       "type": "FEATURE",
       "label_vi": "AN TOÀN CHUẨN MỰC",
       "title_vi": "Hệ thống cảm biến và công nghệ bảo vệ đa lớp, đạt tiêu chuẩn an toàn quốc tế",
       "icon_svg": "<svg fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'></path></svg>"
     },
     {
+      "page_code": "home",
       "type": "FEATURE",
       "label_vi": "VẬN HÀNH ÊM ÁI",
       "title_vi": "Động cơ tiên tiến, giảm thiểu tiếng ồn và độ rung, mang lại trải nghiệm êm ái",
       "icon_svg": "<svg fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z'></path></svg>"
     },
     {
+      "page_code": "home",
       "type": "FEATURE",
       "label_vi": "TIẾT KIỆM ĐIỆN NĂNG",
       "title_vi": "Công nghệ tiết kiệm điện thông minh giúp giảm chi phí vận hành tối đa",
       "icon_svg": "<svg fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M13 10V3L4 14h7v7l9-11h-7z'></path></svg>"
     },
     {
+      "page_code": "home",
       "type": "FEATURE",
       "label_vi": "BẢO HÀNH UY TÍN",
       "title_vi": "Bảo hành lên đến 5 năm, bảo trì tận nơi 24/7 trên toàn quốc",
       "icon_svg": "<svg fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z'></path></svg>"
+    },
+
+    {
+      "page_code": "recruitment",
+      "type": "FEATURE",
+      "label_vi": "Thu nhập hấp dẫn",
+      "title_vi": "Lương thưởng cạnh tranh, xét tăng lương định kỳ và thưởng hiệu quả dự án cao",
+      "icon_svg": "<svg class='w-7 h-7' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z'></path></svg>"
+    },
+    {
+      "page_code": "recruitment",
+      "type": "FEATURE",
+      "label_vi": "Đào tạo chuyên sâu",
+      "title_vi": "Cơ hội làm việc trực tiếp với chuyên gia, đào tạo nâng cao tay nghề chuẩn Nhật Bản",
+      "icon_svg": "<svg class='w-7 h-7' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4'></path></svg>"
+    },
+    {
+      "page_code": "recruitment",
+      "type": "FEATURE",
+      "label_vi": "Phúc lợi toàn diện",
+      "title_vi": "Bảo hiểm sức khỏe cao cấp, du lịch thường niên, khám sức khỏe định kỳ",
+      "icon_svg": "<svg class='w-7 h-7' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z'></path></svg>"
+    },
+    {
+      "page_code": "recruitment",
+      "type": "FEATURE",
+      "label_vi": "Lộ trình thăng tiến",
+      "title_vi": "Môi trường minh bạch, đánh giá năng lực công bằng và cơ hội phát triển rõ ràng",
+      "icon_svg": "<svg class='w-7 h-7' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z'></path></svg>"
+    },
+
+    {
+      "page_code": "about",
+      "type": "FEATURE",
+      "label_vi": "Chất Lượng Nhật Bản",
+      "title_vi": "Sử dụng 100% linh kiện chính hãng, tuân thủ tiêu chuẩn an toàn khắt khe nhất, đảm bảo vận hành bền bỉ",
+      "icon_svg": ""
+    },
+    {
+      "page_code": "about",
+      "type": "FEATURE",
+      "label_vi": "Thẩm Mỹ Tinh Tế",
+      "title_vi": "Mỗi chiếc thang máy là một tác phẩm nghệ thuật, được may đo riêng biệt để tôn lên vẻ đẹp kiến trúc ngôi nhà",
+      "icon_svg": ""
+    },
+    {
+      "page_code": "about",
+      "type": "FEATURE",
+      "label_vi": "Tận Tâm Phục Vụ",
+      "title_vi": "Hệ thống trạm bảo hành toàn quốc. Đội ngũ kỹ sư trực 24/7, luôn đồng hành cùng gia đình bạn",
+      "icon_svg": ""
     }
   ],
   "trusted_infos": [
     {
+      "page_code": "home",
       "type": "TRUSTED_INFO",
       "label_vi": "10+",
       "title_vi": "Năm kinh nghiệm",
       "icon_svg": "<svg class='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'></path></svg>"
     },
     {
+      "page_code": "home",
       "type": "TRUSTED_INFO",
       "label_vi": "500+",
       "title_vi": "Công trình đã thực hiện",
       "icon_svg": "<svg class='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4'></path></svg>"
     },
     {
+      "page_code": "home",
       "type": "TRUSTED_INFO",
       "label_vi": "99%",
       "title_vi": "Khách hàng hài lòng",
       "icon_svg": "<svg class='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.514'></path></svg>"
     },
     {
+      "page_code": "home",
       "type": "TRUSTED_INFO",
       "label_vi": "24/7",
       "title_vi": "Hỗ trợ kỹ thuật",
@@ -53,30 +112,37 @@
   ],
   "partner_brands": [
     {
+      "page_code": "home",
       "type": "PARTNER_BRAND",
       "label_vi": "Fuji"
     },
     {
+      "page_code": "home",
       "type": "PARTNER_BRAND",
       "label_vi": "Hitachi"
     },
     {
+      "page_code": "home",
       "type": "PARTNER_BRAND",
       "label_vi": "Hyundai"
     },
     {
+      "page_code": "home",
       "type": "PARTNER_BRAND",
       "label_vi": "Mitsubishi"
     },
     {
+      "page_code": "home",
       "type": "PARTNER_BRAND",
       "label_vi": "Panasonic"
     },
     {
+      "page_code": "home",
       "type": "PARTNER_BRAND",
       "label_vi": "Schneider Electric"
     },
     {
+      "page_code": "home",
       "type": "PARTNER_BRAND",
       "label_vi": "Thyssenkrupp"
     }

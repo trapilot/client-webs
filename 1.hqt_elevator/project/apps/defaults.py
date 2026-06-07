@@ -13,8 +13,9 @@ from django.utils.text import slugify
 
 @receiver(post_migrate)
 def create_default_apps(sender, **kwargs):
-    from web_engine.models import Site, Page, Branch, Constant, SocialNetwork, OperatingHour, MarketingClaim, Highlight
-    from site_engine.models import ProjectField, SolutionField, Category, Tag
+    from web_engine.models import Site, Page, Branch, Constant, SocialNetwork, OperatingHour, MarketingClaim, Highlight, Banner
+    from site_engine.models import ProductField, ProjectField, SolutionField
+    from project.apps.models import Category
 
     def is_exists(site):
         return Site.objects.filter(code=site).exists()
@@ -114,6 +115,8 @@ def create_default_apps(sender, **kwargs):
     page_home = None   
     for item in pages:
         page_code = item.pop('code')
+        page_childs = item.pop('childs', [])
+        page_banners = item.pop('banners', [])
         parent_code = item.pop('parent_code', None)
         parent_context = item.pop('context', None)
         
@@ -128,9 +131,29 @@ def create_default_apps(sender, **kwargs):
             defaults=item
         )
         page_map[page_code] = page
-        if page.is_home:
+        if page_home is None and page.is_home:
             page_home = page
         
+        for item in page_childs:
+            child_code = item.pop('code')
+            item['parent'] = page
+
+            child, created = Page.objects.update_or_create(
+                site=site,
+                code=child_code,
+                defaults=item
+            )
+            page_map[child_code] = child
+            status = "Create child" if created else "Update child"
+            print(f'   + {status} Page: {page.code}')
+        
+        for item in page_banners:
+            banner, created = Banner.objects.update_or_create(
+                site=site,
+                page=page,
+                defaults=item
+            )
+
         status = "Create new" if created else "Update"
         print(f'   + {status} Page: {page.code}')
     
@@ -146,9 +169,10 @@ def create_default_apps(sender, **kwargs):
         highlight = json.load(file)
 
     for item in highlight.get('features', []):
+        page_code = item.pop('page_code')
         Highlight.objects.update_or_create(
             site=site,
-            page=page_home,
+            page=page_map[page_code],
             type=item.pop('type'),
             label_vi=item.pop('label_vi'),
             title_vi=item.pop('title_vi'),
@@ -156,9 +180,10 @@ def create_default_apps(sender, **kwargs):
             defaults=item
         )
     for item in highlight.get('trusted_infos', []):
+        page_code = item.pop('page_code')
         Highlight.objects.update_or_create(
             site=site,
-            page=page_home,
+            page=page_map[page_code],
             type=item.pop('type'),
             label_vi=item.pop('label_vi'),
             title_vi=item.pop('title_vi'),
@@ -166,9 +191,10 @@ def create_default_apps(sender, **kwargs):
             defaults=item
         )
     for item in highlight.get('partner_brands', []):
+        page_code = item.pop('page_code')
         Highlight.objects.update_or_create(
             site=site,
-            page=page_home,
+            page=page_map[page_code],
             type=item.pop('type'),
             label_vi=item.pop('label_vi'),
             defaults=item
@@ -185,6 +211,16 @@ def create_default_apps(sender, **kwargs):
     with open(field_path, 'r', encoding='utf-8') as file:
         fields = json.load(file)
 
+    for item in fields.get('product', []):
+        ProductField.objects.update_or_create(
+            site=site,
+            type=item.pop('type'),
+            name=item.pop('name'),
+            unit=item.pop('unit'),
+            default_value=item.pop('default_value'),
+            required=item.pop('required') == 1,
+            defaults=item
+        )
     for item in fields.get('project', []):
         ProjectField.objects.update_or_create(
             site=site,
@@ -206,4 +242,22 @@ def create_default_apps(sender, **kwargs):
             defaults=item
         )
 
+    # 10. Load Apps
+    print(' - Loading Apps...')
+    app_path = os.path.join(settings.BASE_DIR, 'apps', 'data', 'apps.json')
+
+    if not os.path.exists(app_path):
+        print(f'[ERROR] File not found: {app_path}')
+        return
+
+    with open(app_path, 'r', encoding='utf-8') as file:
+        app_data = json.load(file)
+
+    for item in app_data.get('categories', []):
+        code = item.pop('code')
+        Category.objects.update_or_create(
+            site=site,
+            code=code,
+            defaults=item
+        )
     print('[SYSTEM] CORE DATA LOAD COMPLETE!\n')

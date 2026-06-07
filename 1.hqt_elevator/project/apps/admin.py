@@ -8,27 +8,21 @@ from shared_engine.admin import AdminBase, AdminTabularInline
 from project.apps.models import (
     Category,
     Product,
+    ProductFaq,
     ProductFeature,
     ProductGallery,
 )
 
 
 class CategoryAdmin(AdminBase):
-    list_display = (__('name'), 'code', 'site', 'is_active', 'sorted_as',)
+    list_display = (__('name'), 'code', 'site', 'is_active', 'is_home', 'sorted_as',)
     list_editable = ('is_active', 'sorted_as',)
     prepopulated_fields = {}
     fieldsets = [
         [_(u'General'), {
             'fields': (
-                'site', 'code', 'image', 'video',
-                ('sorted_as', 'is_active',),
-            )
-        }],
-        [_(u'Icon'), {
-            'fields': (
-                'icon_img',
-                ('icon_code', 'icon_name',),
-                'icon_svg',
+                'site', 'code', 'image',
+                ('sorted_as', 'is_active', 'is_home',),
             )
         }],
     ]
@@ -57,6 +51,13 @@ class ProductFeatureAdmin(AdminTabularInline):
         fields += ProductFeature.append_lang_fields(code)
     fields += ('sorted_as', 'is_active',)
 
+class ProductFaqAdmin(AdminTabularInline):
+    model = ProductFaq
+    fields = []
+    for code, name in settings.LANGUAGES:
+        fields += ProductFaq.append_lang_fields(code)
+    fields += ('sorted_as', 'is_active',)
+
 class ProductGalleryAdmin(AdminTabularInline):
     model = ProductGallery
     fields = ['image',]
@@ -66,25 +67,26 @@ class ProductGalleryAdmin(AdminTabularInline):
 
 @admin.register(Product)
 class ProductAdmin(AdminBase):
-    inlines = [ProductFeatureAdmin, ProductGalleryAdmin]
-    list_display = ('name', 'category', 'code', 'price_display', 'is_active', 'is_home', 'sorted_as', 'visited_as')
+    inlines = [ProductFeatureAdmin, ProductFaqAdmin, ProductGalleryAdmin]
+    list_display = ('code', 'category', __('name'), 'price_display', 'is_active', 'is_home', 'sorted_as', 'visited_as')
     prepopulated_fields = {}
     fieldsets = [
         [_(u'General'), {
             'fields': (
                 'site',
-                'code',
-                'icon',
-                'pdf',
+                'category',
                 'image',
                 'video',
-                ('visited_as', 'is_home',),
-                ('sorted_as', 'is_active',),
+                'pdf',
+                'icon',
+                'visited_as',
+                ('sorted_as', 'is_active', 'is_home',),
             )
         }],
         [_(u'Specification'), {
             'fields': (
                 'door_type', 
+                'code',
                 ('capacity', 'passenger',),
                 ('speed', 'height'),
                 'number_stops',
