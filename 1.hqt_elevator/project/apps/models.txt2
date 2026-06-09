@@ -32,7 +32,7 @@ class Category(models.Model, metaclass=TransMeta):
     code = models.CharField(u'Code', max_length=100, unique=True)
     summary = models.TextField(_(u'Summary'), blank=True)
     content = RichTextField(_(u'Content'), blank=True)
-    image = models.ImageField(_(u'Image'), upload_to=upload_to('uploads/apps/category/images'), blank=True)
+    image = models.ImageField(_(u'Image'), upload_to=upload_to('uploads/category/images'), blank=True)
     
     is_home = models.BooleanField(_(u'Home'), default=False)
     is_active = models.BooleanField(_(u'Active'), default=True)

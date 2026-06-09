@@ -1,0 +1,60 @@
+{
+  "categories": [
+    {
+      "code": "cong-nghe",
+      "name_vi": "Công Nghệ",
+      "slug_vi": "cong-nghe",
+      "icon_code": "bg-red-700 text-white"
+    },
+    {
+      "code": "huong-dan",
+      "name_vi": "Hướng Dẫn",
+      "slug_vi": "huong-dan",
+      "icon_code": "bg-green-700 text-white"
+    },
+    {
+      "code": "xu-huong",
+      "name_vi": "Xu Hướng",
+      "slug_vi": "xu-huong",
+      "icon_code": "bg-blue-700 text-white"
+    },
+    {
+      "code": "kien-thuc",
+      "name_vi": "Kiến Thức",
+      "slug_vi": "kien-thuc",
+      "icon_code": "bg-yellow-700 text-white"
+    },
+    {
+      "code": "cam-nang",
+      "name_vi": "Cẩm Nang",
+      "slug_vi": "cam-nang",
+      "icon_code": "bg-orange-700 text-white"
+    }
+  ],
+  "tags": [
+    {
+      "code": "thang-may",
+      "name_vi": "Thang Máy",
+      "slug_vi": "thang-may",
+      "icon_code": "bg-green-700 text-white"
+    },
+    {
+      "code": "khong-gian",
+      "name_vi": "Không Gian",
+      "slug_vi": "khong-gian",
+      "icon_code": "bg-green-700 text-white"
+    },
+    {
+      "code": "an-toan",
+      "name_vi": "An Toàn",
+      "slug_vi": "an-toan",
+      "icon_code": "bg-green-700 text-white"
+    },
+    {
+      "code": "tiet-kiem-dien",
+      "name_vi": "Tiết Kiệm Điện",
+      "slug_vi": "tiet-kiem-dien",
+      "icon_code": "bg-green-700 text-white"
+    }
+  ]
+}

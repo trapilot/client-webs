@@ -27,7 +27,7 @@
       
       <nav class="hidden lg:flex space-x-7 text-[14px] font-bold text-gray-700 uppercase tracking-tight">
         {% for p in site.navigation_primary %}
-          <a href="{% url_cms p.code %}" class="hover:text-red-700 transition pb-1{% if page.code == p.code %} border-b-2 border-red-700 text-red-700{% endif %}">{{ p.name }}</a>
+          <a href="{% url_cms p.code %}" class="hover:text-red-700 transition pb-1{% if page.code == p.code or page.parent.code == p.code %} border-b-2 border-red-700 text-red-700{% endif %}">{{ p.name }}</a>
         {% endfor %}
       </nav>
 
@@ -52,7 +52,7 @@
   <div id="mobile-menu" class="hidden lg:hidden absolute w-full bg-white border-t border-gray-100 shadow-xl top-[72px] left-0 z-40">
     <nav class="flex flex-col px-4 py-2 space-y-1 text-[14px] font-bold text-gray-700 uppercase tracking-tight">
       {% for p in site.navigation_primary %}
-        <a href="{% url_cms p.code %}" class="block py-3 border-b border-gray-50 hover:text-red-700 transition{% if page.code == p.code %} text-red-700{% endif %}">
+        <a href="{% url_cms p.code %}" class="block py-3 border-b border-gray-50 hover:text-red-700 transition{% if page.code == p.code or page.parent.code == p.code %} text-red-700{% endif %}">
           {{ p.name }}
         </a>
       {% endfor %}

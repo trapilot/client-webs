@@ -14,8 +14,8 @@ from django.utils.text import slugify
 @receiver(post_migrate)
 def create_default_apps(sender, **kwargs):
     from web_engine.models import Site, Page, Branch, Constant, SocialNetwork, OperatingHour, MarketingClaim, Highlight, Banner
-    from site_engine.models import ProductField, ProjectField, SolutionField
-    from project.apps.models import Category
+    from site_engine.models import Category, ProductField, ProjectField, SolutionField
+    from blog_engine.models import Category as BlogCategory, Tag as BlogTag
 
     def is_exists(site):
         return Site.objects.filter(code=site).exists()
@@ -45,6 +45,7 @@ def create_default_apps(sender, **kwargs):
         Site.FeatureFlag.PRODUCT,
         Site.FeatureFlag.PROJECT,
         Site.FeatureFlag.SOLUTION,
+        Site.FeatureFlag.CATEGORY,        
     ]
     site, created = Site.objects.update_or_create(
         code=site_code,
@@ -199,50 +200,8 @@ def create_default_apps(sender, **kwargs):
             label_vi=item.pop('label_vi'),
             defaults=item
         )
-    
-    # 9. Load Fields
-    print(' - Loading Site Fields...')
-    field_path = os.path.join(settings.BASE_DIR, 'apps', 'data', 'fields.json')
 
-    if not os.path.exists(field_path):
-        print(f'[ERROR] File not found: {field_path}')
-        return
-
-    with open(field_path, 'r', encoding='utf-8') as file:
-        fields = json.load(file)
-
-    for item in fields.get('product', []):
-        ProductField.objects.update_or_create(
-            site=site,
-            type=item.pop('type'),
-            name=item.pop('name'),
-            unit=item.pop('unit'),
-            default_value=item.pop('default_value'),
-            required=item.pop('required') == 1,
-            defaults=item
-        )
-    for item in fields.get('project', []):
-        ProjectField.objects.update_or_create(
-            site=site,
-            type=item.pop('type'),
-            name=item.pop('name'),
-            unit=item.pop('unit'),
-            default_value=item.pop('default_value'),
-            required=item.pop('required') == 1,
-            defaults=item
-        )
-    for item in fields.get('solution', []):
-        SolutionField.objects.update_or_create(
-            site=site,
-            type=item.pop('type'),
-            name=item.pop('name'),
-            unit=item.pop('unit'),
-            default_value=item.pop('default_value'),
-            required=item.pop('required') == 1,
-            defaults=item
-        )
-
-    # 10. Load Apps
+    # 9. Load Apps
     print(' - Loading Apps...')
     app_path = os.path.join(settings.BASE_DIR, 'apps', 'data', 'apps.json')
 
@@ -256,6 +215,69 @@ def create_default_apps(sender, **kwargs):
     for item in app_data.get('categories', []):
         code = item.pop('code')
         Category.objects.update_or_create(
+            site=site,
+            code=code,
+            is_home=item.pop('is_home') == 1,
+            defaults=item
+        )
+    
+    field = app_data.get('field', {})
+    for item in field.get('product', []):
+        ProductField.objects.update_or_create(
+            site=site,
+            type=item.pop('type'),
+            name=item.pop('name'),
+            unit=item.pop('unit'),
+            default_value=item.pop('default_value'),
+            value_choices = "\n".join(item.pop("value_choices", [])),
+            required=item.pop('required') == 1,
+            defaults=item
+        )
+    for item in field.get('project', []):
+        ProjectField.objects.update_or_create(
+            site=site,
+            type=item.pop('type'),
+            name=item.pop('name'),
+            unit=item.pop('unit'),
+            default_value=item.pop('default_value'),
+            value_choices = "\n".join(item.pop("value_choices", [])),
+            required=item.pop('required') == 1,
+            defaults=item
+        )
+    for item in field.get('solution', []):
+        SolutionField.objects.update_or_create(
+            site=site,
+            type=item.pop('type'),
+            name=item.pop('name'),
+            unit=item.pop('unit'),
+            default_value=item.pop('default_value'),
+            value_choices = "\n".join(item.pop("value_choices", [])),
+            required=item.pop('required') == 1,
+            defaults=item
+        )
+
+    # 10. Load Blog
+    print(' - Loading Blog...')
+    blog_path = os.path.join(settings.BASE_DIR, 'apps', 'data', 'blog.json')
+
+    if not os.path.exists(blog_path):
+        print(f'[ERROR] File not found: {blog_path}')
+        return
+
+    with open(blog_path, 'r', encoding='utf-8') as file:
+        blog_data = json.load(file)
+
+    for item in blog_data.get('categories', []):
+        code = item.pop('code')
+        BlogCategory.objects.update_or_create(
+            site=site,
+            code=code,
+            defaults=item
+        )
+    
+    for item in blog_data.get('tags', []):
+        code = item.pop('code')
+        BlogTag.objects.update_or_create(
             site=site,
             code=code,
             defaults=item

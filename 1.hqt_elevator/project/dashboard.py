@@ -28,6 +28,11 @@ class CustomIndexDashboard(Dashboard):
                     column=1,
                 ),
                 modules.ModelList(
+                    _(u'Blog Content'),
+                    models=get_sorted_models_of_app('blog_engine'),
+                    column=1,
+                ),
+                modules.ModelList(
                     _(u'Website Content'),
                     models=get_sorted_models_of_app('site_engine'),
                     column=1,

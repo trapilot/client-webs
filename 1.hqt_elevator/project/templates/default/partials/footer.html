@@ -50,7 +50,7 @@
     <div class="md:col-span-2">
       <div class="text-white font-bold mb-4 uppercase text-[12px] tracking-wider">SẢN PHẨM</div>
       <ul class="space-y-2">
-        {% for category in site.category_app.is_home|slice:4 %}
+        {% for category in site.home_categories.products|slice:4 %}
         <li><a href="{% url_cms 'category' category.slug %}" class="hover:text-red-500 transition">{{ category.name }}</a></li>
         {% endfor %}
       </ul>
