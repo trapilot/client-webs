@@ -70,9 +70,9 @@ INSTALLED_APPS = [
 
     # Core Engine
     'shared_engine',
-    'web_engine',
     'site_engine',
-    'blog_engine',
+    'site_content',
+    'site_blog',
     'marketing_engine',
     'recruitment_engine',
     
@@ -90,9 +90,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'web_engine.middleware.RedirectionMiddleware',
-    'web_engine.middleware.ResolverMiddleware',
-    # 'web_engine.middleware.MultipleProxyMiddleware',
+    'site_engine.middleware.RedirectionMiddleware',
+    'site_engine.middleware.ResolverMiddleware',
+    # 'site_engine.middleware.MultipleProxyMiddleware',
 ]
 
 ROOT_URLCONF = 'project.urls'
@@ -110,8 +110,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
 
-                'web_engine.context_processors.session',
-                'web_engine.context_processors.backoffice',
+                'site_engine.context_processors.session',
+                'site_engine.context_processors.backoffice',
             ],
         },
     },

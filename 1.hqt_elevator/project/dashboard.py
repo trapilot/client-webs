@@ -18,7 +18,7 @@ class CustomIndexDashboard(Dashboard):
         #     print(m._meta.label_lower, m._meta.model)
 
         self.children.append(modules.Group(
-            # title=_(u"Application"),
+            title=_(u"Application"),
             column=1,
             collapsible=True,
             children=[
@@ -28,13 +28,13 @@ class CustomIndexDashboard(Dashboard):
                     column=1,
                 ),
                 modules.ModelList(
-                    _(u'Blog'),
-                    models=get_sorted_models_of_app('blog_engine'),
+                    # _(u'Blog'),
+                    models=get_sorted_models_of_app('site_blog'),
                     column=1,
                 ),
                 modules.ModelList(
-                    _(u'Website'),
-                    models=get_sorted_models_of_app('site_engine'),
+                    # _(u'Content'),
+                    models=get_sorted_models_of_app('site_content'),
                     column=1,
                 ),
                 modules.ModelList(
@@ -49,26 +49,10 @@ class CustomIndexDashboard(Dashboard):
                 ),
             ]
         ))
-        # self.children.append(modules.ModelList(
-        #     _(u'Application'),
-        #     models=('project.*',),
-        #     column=1,
-        # ))
-        # self.children.append(modules.ModelList(
-        #     _(u'Website Content'),
-        #     models=get_sorted_models_of_app('site_engine'),
-        #     column=1,
-        # ))
-
-        # self.children.append(modules.ModelList(
-        #     _(u'Maketing'),
-        #     models=get_sorted_models_of_app('marketing_engine'),
-        #     column=1,
-        # ))
 
         self.children.append(modules.ModelList(
             _(u'Configuration'),
-            models=get_sorted_models_of_app('web_engine'),
+            models=get_sorted_models_of_app('site_engine'),
             column=1,
         ))
 

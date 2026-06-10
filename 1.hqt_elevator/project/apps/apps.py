@@ -46,7 +46,7 @@ def create_default_user(sender, **kwargs):
 @receiver(post_migrate)
 def create_access_group(sender, **kwargs):
     from django.contrib.auth import models
-    from web_engine.backoffice.defaults import GROUP_PERMISSIONS
+    from site_engine.backoffice.defaults import GROUP_PERMISSIONS
 
     def is_exists(group):
         return models.Group.objects.filter(name=group).exists()

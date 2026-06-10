@@ -28,9 +28,9 @@ case "$ACTION" in
         if [[ "$app" == cms_* ]]; then
           SRC="../../libs/$app"
         elif [[ "$app" == "shared_engine" ]]; then
-          SRC="../../libs/app_engine/shared_engine"
+          SRC="../../libs/site_content/shared_engine"
         elif [[ "$app" == *_engine ]]; then
-          SRC="../../libs/app_engine/$app"
+          SRC="../../libs/site_content/$app"
         else
           echo "Skip unknown pattern: $app"
           continue

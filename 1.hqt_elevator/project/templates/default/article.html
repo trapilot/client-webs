@@ -17,7 +17,9 @@
       <span class="text-red-700 hover:underline {{ article.category.icon_code }}">{{ article.category.name }}</span>
       {% endif %}
       <span class="text-gray-300">•</span>
-      <span class="text-gray-500">{{ article.created_at|date:"d/m/Y" }}</span>
+      {% if article.published_at %}
+      <span class="text-gray-500">{{ article.published_at|date:"d/m/Y" }}</span>
+      {% endif %}
     </div>
     <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
       {{ article.title }}
@@ -97,7 +99,9 @@
           </div>
           <div class="p-5">
             <h4 class="font-bold text-[16px] text-gray-900 mb-2 group-hover:text-red-700 transition line-clamp-2">{{ article.title }}</h4>
-            <span class="text-[12px] text-gray-500">{{ article.created_at|date:"d/m/Y" }}</span>
+            {% if article.published_at %}
+            <span class="text-[12px] text-gray-500">{{ article.published_at|date:"d/m/Y" }}</span>
+            {% endif %}
           </div>
         </a>
         {% endfor %}

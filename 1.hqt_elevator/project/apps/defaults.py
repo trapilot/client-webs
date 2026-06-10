@@ -13,9 +13,9 @@ from django.utils.text import slugify
 
 @receiver(post_migrate)
 def create_default_apps(sender, **kwargs):
-    from web_engine.models import Site, Page, Branch, Constant, SocialNetwork, OperatingHour, MarketingClaim, Highlight, Banner
-    from site_engine.models import Category, ProductField, ProjectField, SolutionField
-    from blog_engine.models import Category as BlogCategory, Tag as BlogTag
+    from site_engine.models import Site, Page, Branch, Constant, SocialNetwork, OperatingHour, MarketingClaim, Highlight, Banner
+    from site_content.models import Category, ProductField, ProjectField, SolutionField
+    from site_blog.models import Category as BlogCategory, Tag as BlogTag
 
     def is_exists(site):
         return Site.objects.filter(code=site).exists()
@@ -95,9 +95,9 @@ def create_default_apps(sender, **kwargs):
     for item in data.get('marketing_claims', []):
         MarketingClaim.objects.update_or_create(
             site=site,
-            label_vi=item.pop('label_vi'),
-            title_vi=item.pop('title_vi'),
-            icon_svg=item.pop('icon_svg'),
+            label_vi=item.pop('label_vi', None),
+            title_vi=item.pop('title_vi', None),
+            icon_svg=item.pop('icon_svg', None),
             defaults=item
         )
     print(' - Loading complete Marketing Claims')
@@ -176,9 +176,9 @@ def create_default_apps(sender, **kwargs):
             site=site,
             page=page_map[page_code],
             type=item.pop('type'),
-            label_vi=item.pop('label_vi'),
-            title_vi=item.pop('title_vi'),
-            icon_svg=item.pop('icon_svg'),
+            label_vi=item.pop('label_vi', None),
+            title_vi=item.pop('title_vi', None),
+            icon_svg=item.pop('icon_svg', None),
             defaults=item
         )
     for item in highlight.get('trusted_infos', []):
@@ -187,9 +187,9 @@ def create_default_apps(sender, **kwargs):
             site=site,
             page=page_map[page_code],
             type=item.pop('type'),
-            label_vi=item.pop('label_vi'),
-            title_vi=item.pop('title_vi'),
-            icon_svg=item.pop('icon_svg'),
+            label_vi=item.pop('label_vi', None),
+            title_vi=item.pop('title_vi', None),
+            icon_svg=item.pop('icon_svg', None),
             defaults=item
         )
     for item in highlight.get('partner_brands', []):
@@ -198,7 +198,7 @@ def create_default_apps(sender, **kwargs):
             site=site,
             page=page_map[page_code],
             type=item.pop('type'),
-            label_vi=item.pop('label_vi'),
+            label_vi=item.pop('label_vi', None),
             defaults=item
         )
 
@@ -218,7 +218,7 @@ def create_default_apps(sender, **kwargs):
         Category.objects.update_or_create(
             site=site,
             code=code,
-            is_homepage=item.pop('is_homepage') == 1,
+            is_homepage=item.pop('is_homepage', 0) == 1,
             defaults=item
         )
     
@@ -226,9 +226,9 @@ def create_default_apps(sender, **kwargs):
     for item in field.get('product', []):
         ProductField.objects.update_or_create(
             site=site,
-            type=item.pop('type'),
-            name=item.pop('name'),
-            unit=item.pop('unit'),
+            type=item.pop('type', ''),
+            name=item.pop('name', ''),
+            unit=item.pop('unit', ''),
             default_value=item.pop('default_value'),
             value_choices = "\n".join(item.pop("value_choices", [])),
             required=item.pop('required') == 1,
@@ -237,9 +237,9 @@ def create_default_apps(sender, **kwargs):
     for item in field.get('project', []):
         ProjectField.objects.update_or_create(
             site=site,
-            type=item.pop('type'),
-            name=item.pop('name'),
-            unit=item.pop('unit'),
+            type=item.pop('type', ''),
+            name=item.pop('name', ''),
+            unit=item.pop('unit', ''),
             default_value=item.pop('default_value'),
             value_choices = "\n".join(item.pop("value_choices", [])),
             required=item.pop('required') == 1,
@@ -248,9 +248,9 @@ def create_default_apps(sender, **kwargs):
     for item in field.get('solution', []):
         SolutionField.objects.update_or_create(
             site=site,
-            type=item.pop('type'),
-            name=item.pop('name'),
-            unit=item.pop('unit'),
+            type=item.pop('type', ''),
+            name=item.pop('name', ''),
+            unit=item.pop('unit', ''),
             default_value=item.pop('default_value'),
             value_choices = "\n".join(item.pop("value_choices", [])),
             required=item.pop('required') == 1,

@@ -1,8 +1,8 @@
 from django.utils.translation import get_language
 
-from web_engine.sitemap import UrlSitemap, SitemapContext
-from web_engine.utils import build_page_url
-from site_engine.models import Post, Project, Solution
+from site_engine.sitemap import UrlSitemap, SitemapContext
+from site_engine.utils import build_page_url
+from site_content.models import Post, Project, Solution
 from project.apps.models import Product
 
 
