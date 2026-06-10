@@ -99,10 +99,14 @@ function showAllThumbnails(btnElement) {
         <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-3">{{ product.name }}</h1>
         <p class="text-gray-500 text-[14px] mb-6">Mã SP: <span class="font-bold text-gray-700">{{ product.code }}</span></p>
         <div class="mb-6 flex items-end gap-3 flex-wrap">
+          {% if product.sale_price %}
           <span class="text-2xl md:text-3xl font-black text-red-700">{{ product.sale_price|currency:'.,₫' }}</span>
           {% if product.discount_percent > 0 %}
             <span class="text-[16px] text-gray-500 font-medium line-through mb-1">{{ product.base_price|currency:'.,₫' }}</span>
             <span class="bg-red-100 text-red-700 text-[11px] font-bold px-2 py-1 rounded-sm mb-1.5 uppercase tracking-wider">-{{ product.discount_percent }}%</span>
+          {% endif %}
+          {% else %}
+          <span class="text-2xl md:text-3xl font-black text-red-700">Liên Hệ</span>
           {% endif %}
         </div>
         <p class="text-[15px] text-gray-600 leading-relaxed mb-6">
@@ -111,13 +115,13 @@ function showAllThumbnails(btnElement) {
 
         <div class="bg-gray-50 p-5 rounded border border-gray-100 mb-8">
           <ul class="space-y-3">
-            <li class="flex justify-between border-b border-gray-200 pb-2"><span class="text-[14px] text-gray-700">Loại cửa</span><span class="text-[14px] font-bold text-gray-900">{{ product.door_type_text }}</span></li>
-            <li class="flex justify-between border-b border-gray-200 pb-2"><span class="text-[14px] text-gray-700">Tải trọng</span><span class="text-[14px] font-bold text-gray-900">{{ product.capacity }}kg ({{ product.passenger_text }})</span></li>
-            <li class="flex justify-between border-b border-gray-200 pb-2"><span class="text-[14px] text-gray-700">Tốc độ</span><span class="text-[14px] font-bold text-gray-900">{{ product.speed }}m/s</span></li>
-            <li class="flex justify-between border-b border-gray-200 pb-2"><span class="text-[14px] text-gray-700">Chiều cao tối đa</span><span class="text-[14px] font-bold text-gray-900">{{ product.height }}m</span></li>
-            <li class="flex justify-between border-b border-gray-200 pb-2"><span class="text-[14px] text-gray-700">Số Trạm Dừng</span><span class="text-[14px] font-bold text-gray-900">{{ product.number_stops_text }}</span></li>
-            <li class="flex justify-between border-b border-gray-200 pb-2"><span class="text-[14px] text-gray-700">Số Năm Bảo Hành</span><span class="text-[14px] font-bold text-gray-900">{{ product.warranty }}</span></li>
-            <li class="flex justify-between pt-1"><span class="text-[14px] text-gray-700">Chất Liệu</span><span class="text-[14px] font-bold text-gray-900">{{ product.cabin_material }}</span></li>
+            <li class="flex justify-between border-b border-gray-200 pb-2"><span class="text-[14px] text-gray-700">Loại cửa</span><span class="text-[14px] font-bold text-gray-900">{{ product.attributes.door_type_disp_compact }}</span></li>
+            <li class="flex justify-between border-b border-gray-200 pb-2"><span class="text-[14px] text-gray-700">Tải trọng</span><span class="text-[14px] font-bold text-gray-900">{{ product.attributes.capacity_disp_compact }} ({{ product.attributes.passenger_disp }})</span></li>
+            <li class="flex justify-between border-b border-gray-200 pb-2"><span class="text-[14px] text-gray-700">Tốc độ</span><span class="text-[14px] font-bold text-gray-900">{{ product.attributes.speed_disp_compact }}</span></li>
+            <li class="flex justify-between border-b border-gray-200 pb-2"><span class="text-[14px] text-gray-700">Chiều cao tối đa</span><span class="text-[14px] font-bold text-gray-900">{{ product.attributes.height_disp_compact }}</span></li>
+            <li class="flex justify-between border-b border-gray-200 pb-2"><span class="text-[14px] text-gray-700">Số Trạm Dừng</span><span class="text-[14px] font-bold text-gray-900">{{ product.attributes.number_stops_disp_compact }}</span></li>
+            <li class="flex justify-between border-b border-gray-200 pb-2"><span class="text-[14px] text-gray-700">Số Năm Bảo Hành</span><span class="text-[14px] font-bold text-gray-900">{{ product.attributes.warranty_disp_compact }}</span></li>
+            <li class="flex justify-between pt-1"><span class="text-[14px] text-gray-700">Chất Liệu</span><span class="text-[14px] font-bold text-gray-900">{{ product.attributes.cabin_material_disp_compact }}</span></li>
           </ul>
         </div>
 

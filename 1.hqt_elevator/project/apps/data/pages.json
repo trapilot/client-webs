@@ -66,7 +66,7 @@
         "is_external": false,
         "is_internal": true,
         "view": "CmsEngineView.as_view(template_name='default/product.html')",
-        "content_type": "",
+        "content_type": "site_engine.Product",
         "context_name": "product",
         "meta_type": "product",
         "url_vi": "san-pham/(?P<slug>[-\\w]+)",

@@ -23,11 +23,13 @@
       {{ article.title }}
     </h1>
     <div class="flex items-center justify-center gap-3 text-[14px] text-gray-500">
+      {% if article.author|length %}
       <!-- <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="Author" class="w-8 h-8 rounded-full border border-gray-200"> -->
       <div class="w-12 h-12 rounded-full mr-4 border-2 border-gray-100 bg-gray-200 flex items-center justify-center font-semibold text-gray-700">
         {{ article.author|first|upper }}
       </div>
       <span>Đăng bởi <strong>{{ article.author }}</strong></span>
+      {% endif %}
     </div>
   </header>
 

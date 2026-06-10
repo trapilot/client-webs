@@ -50,7 +50,7 @@
 
 
 {% block content %}
-{% paginate site.product_app.is_activated 6 as products %}
+{% paginate site.product_set.is_activated 6 as products %}
 <main class="font-sans text-gray-900 antialiased bg-gray-50">
   <section class="py-10 md:py-16">
     <div class="max-w-[1200px] mx-auto px-4">
@@ -58,7 +58,7 @@
       <div id="category-filters" class="flex overflow-x-auto pb-4 mb-8 md:mb-12 gap-3 snap-x hide-scrollbar justify-start md:justify-center">
         {% if products|length %}
         <button data-filter="all" class="filter-btn snap-start shrink-0 px-6 py-2.5 rounded bg-red-700 text-white text-[14px] font-bold shadow-md transition">Tất cả</button>
-        {% for category in site.category_app.is_activated %}
+        {% for category in site.dynamic_categories.products %}
         <button data-filter="{{ category.code }}" class="filter-btn snap-start shrink-0 px-6 py-2.5 rounded bg-white border border-gray-200 text-gray-600 text-[14px] font-bold hover:border-red-700 hover:text-red-700 transition">{{ category.name }}</button>
         {% endfor %}
         {% endif %}
@@ -90,7 +90,7 @@
                 <h3 class="font-bold text-[18px] text-gray-900 mb-2 group-hover:text-red-700 transition-colors">{{ product.name }}</h3>
                 <p class="text-[14px] text-gray-700 mb-6 flex-grow line-clamp-3">{{ product.description }}</p>
                 <div class="border-t border-gray-100 pt-4 flex items-center justify-between">
-                  <span class="text-[13px] font-bold text-gray-700">Tải trọng: {{ product.capacity }}kg</span>
+                  <span class="text-[13px] font-bold text-gray-700">Tải trọng: {{ product.attributes.capacity_disp_compact }}</span>
                   <p class="text-red-700 font-bold text-[13px] hover:text-red-800 flex items-center">
                     CHI TIẾT <span class="ml-1 text-lg leading-none">→</span>
                   </p>

@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
   </section>
   {% endif %}
 
-  {% if site.product_app.is_activated_home|length %}
+  {% if site.product_set.is_featured|length %}
   <section class="py-16 bg-gray-50">
     <div class="max-w-[1200px] mx-auto px-4">
       <div class="text-center mb-10">
@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
       
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        {% for product in site.product_app.is_home|slice:4 %}
+        {% for product in site.product_set.is_featured|slice:4 %}
         <a href="{% url_cms 'product' product.slug %}">
           <div class="bg-white border border-gray-200 rounded overflow-hidden hover:shadow-xl transition-shadow group">
             <div class="h-56 overflow-hidden">

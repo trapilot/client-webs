@@ -25,7 +25,7 @@
     <div class="max-w-[1200px] mx-auto px-4 py-8 grid grid-cols-2 md:grid-cols-4 gap-8 divide-x divide-red-600/50">
       <div class="pl-4 md:pl-0">
         <div class="text-[11px] text-red-200 uppercase tracking-wider font-bold mb-1">Địa chỉ</div>
-        <div class="text-[16px] md:text-[18px] font-bold">{{ project..address }}</div>
+        <div class="text-[16px] md:text-[18px] font-bold">{{ project.address }}</div>
       </div>
       <div class="pl-6">
         <div class="text-[11px] text-red-200 uppercase tracking-wider font-bold mb-1">Tổng thang máy</div>
@@ -37,17 +37,15 @@
       </div>
       <div class="pl-6">
         <div class="text-[11px] text-red-200 uppercase tracking-wider font-bold mb-1">
-          {% if project.duration_months or project.duration_days %}
-          Hoàn Thành
+          {% if project.is_closed %}
+          Năm Hoàn Thành
           {% else %}
           Tình trạng
           {% endif %}
         </div>
         <div class="text-[16px] md:text-[18px] font-bold">
-          {% if project.duration_months > 2 %}
-            {{ project.duration_months }} tháng
-          {% elif project.duration_days %}
-            {{ project.duration_days }} ngày
+          {% if project.is_closed %}
+            {{ project.closed_year }}
           {% else %}
             Đang Triển Khai
           {% endif %}

@@ -45,7 +45,8 @@ def create_default_apps(sender, **kwargs):
         Site.FeatureFlag.PRODUCT,
         Site.FeatureFlag.PROJECT,
         Site.FeatureFlag.SOLUTION,
-        Site.FeatureFlag.CATEGORY,        
+        Site.FeatureFlag.TARGET_CATEGORY,
+        Site.FeatureFlag.TARGET_FIELD,
     ]
     site, created = Site.objects.update_or_create(
         code=site_code,
@@ -217,7 +218,7 @@ def create_default_apps(sender, **kwargs):
         Category.objects.update_or_create(
             site=site,
             code=code,
-            is_home=item.pop('is_home') == 1,
+            is_homepage=item.pop('is_homepage') == 1,
             defaults=item
         )
     

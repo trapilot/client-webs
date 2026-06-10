@@ -73,8 +73,8 @@ INSTALLED_APPS = [
     'web_engine',
     'site_engine',
     'blog_engine',
-    'recruitment_engine',
     'marketing_engine',
+    'recruitment_engine',
     
     # App Engine
     'project.apps',

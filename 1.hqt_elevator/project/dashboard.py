@@ -18,7 +18,7 @@ class CustomIndexDashboard(Dashboard):
         #     print(m._meta.label_lower, m._meta.model)
 
         self.children.append(modules.Group(
-            title=_(u"Application"),
+            # title=_(u"Application"),
             column=1,
             collapsible=True,
             children=[
@@ -28,12 +28,12 @@ class CustomIndexDashboard(Dashboard):
                     column=1,
                 ),
                 modules.ModelList(
-                    _(u'Blog Content'),
+                    _(u'Blog'),
                     models=get_sorted_models_of_app('blog_engine'),
                     column=1,
                 ),
                 modules.ModelList(
-                    _(u'Website Content'),
+                    _(u'Website'),
                     models=get_sorted_models_of_app('site_engine'),
                     column=1,
                 ),
