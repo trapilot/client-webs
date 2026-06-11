@@ -7,30 +7,29 @@ case "$ACTION" in
     find ../../ \
     -path "*/venv" -prune -o \
     -path "*/webs" -prune -o \
-    \( -path "*/migrations/*.pyc" -o \
-      -path "*/migrations/*.py" ! -name "__init__.py" \) \
+    -path "*/migrations/*.pyc" -exec rm -f {} + -o \
+    -path "*/migrations/*.py" \
+    ! -name "__init__.py" \
+    ! -name "0001_initial.py" \
     -exec rm -f {} +
     
     source venv/bin/activate
     python manage.py makemigrations
     deactivate
 
-    echo "Copying engine/libs apps..."
     (
       grep -oE "'[^']+'" ./project/settings.py \
       | tr -d "'" \
-      | grep -E '^(cms_.*|.*_engine)$'
+      | grep -E '^(site_.*|.*_engine)$'
       echo "shared_engine"
     ) \
     | sort -u \
     | while read -r app; do
         echo "Copying: $app"
-        if [[ "$app" == cms_* ]]; then
-          SRC="../../libs/$app"
-        elif [[ "$app" == "shared_engine" ]]; then
-          SRC="../../libs/site_content/shared_engine"
+        if [[ "$app" == site_* ]]; then
+          SRC="../../apps/$app"
         elif [[ "$app" == *_engine ]]; then
-          SRC="../../libs/site_content/$app"
+          SRC="../../apps/$app"
         else
           echo "Skip unknown pattern: $app"
           continue
