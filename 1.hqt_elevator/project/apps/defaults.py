@@ -45,8 +45,8 @@ def create_default_apps(sender, **kwargs):
         Site.FeatureFlag.PRODUCT,
         Site.FeatureFlag.PROJECT,
         Site.FeatureFlag.SOLUTION,
-        Site.FeatureFlag.TARGET_CATEGORY,
-        Site.FeatureFlag.TARGET_FIELD,
+        # Site.FeatureFlag.TARGET_CATEGORY,
+        # Site.FeatureFlag.TARGET_FIELD,
     ]
     site, created = Site.objects.update_or_create(
         code=site_code,
