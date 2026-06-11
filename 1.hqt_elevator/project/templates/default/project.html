@@ -63,12 +63,14 @@
       {% if project.gallery_set.count %}
       <div class="lg:col-span-2 grid grid-cols-2 gap-4 h-fit">
         {% for gallery in project.gallery_set.all %}
-          {% if forloop.counter < 3 %}
-            {% picture gallery.image preset="card" alt=project.name class_name="w-full h-[300px] md:h-[400px] object-cover rounded shadow-sm hover:shadow-lg transition" %}
-          {% elif forloop.counter >= 3 %}
-            {% picture gallery.image preset="card" alt=project.name class_name="w-full h-[250px] md:h-[300px] object-cover rounded shadow-sm col-span-2 hover:shadow-lg transition" %}
-          {% endif %}
-        {% endfor %}
+      
+        <div class="group relative aspect-[4/3] rounded-xl overflow-hidden bg-gray-100 shadow-sm hover:shadow-xl transition-shadow duration-300">
+          <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors z-10"></div>
+          
+          {% picture gallery.image preset="card" alt=project.name class_name="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" %}
+        </div>
+
+      {% endfor %}
       </div>
       {% endif %}
     </div>
