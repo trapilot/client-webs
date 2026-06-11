@@ -78,8 +78,8 @@
     {% if project.products_used.all %}
     <div class="mt-12 pt-12 border-t border-gray-200">
       <div class="mb-8">
-        <h2 class="text-xs font-bold text-red-700 uppercase tracking-[0.15em] mb-2">THIẾT BỊ LẮP ĐẶT</h2>
-        <h3 class="text-2xl font-bold text-gray-900">Sản phẩm sử dụng trong dự án này</h3>
+        <div class="text-xs font-bold text-red-700 uppercase tracking-[0.15em] mb-2">THIẾT BỊ LẮP ĐẶT TRONG DỰ ÁN NÀY</div>
+        {% comment %}<div class="text-2xl font-bold text-gray-900">Sản phẩm sử dụng trong dự án này</div>{% endcomment %}
       </div>
       
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -93,8 +93,8 @@
             <div class="text-[13px] text-gray-500 mb-4 space-y-1">
               <p><span class="font-bold text-gray-700">{{ product.category.name|upper }}</span></p>
               <p>Mã SP: <span class="font-bold text-gray-700">{{ product.code }}</span></p>
-              <p>Tải trọng: <span class="font-bold text-gray-700">{{ product.capacity }}kg</span></p>
-              <p>Tốc độ: <span class="font-bold text-gray-700">{{ product.speed }}m/s</span></p>
+              <p>Tải trọng: <span class="font-bold text-gray-700">{{ product.attributes.capacity_disp_compact }}</span></p>
+              <p>Tốc độ: <span class="font-bold text-gray-700">{{ product.attributes.speed_disp_compact }}</span></p>
             </div>
             <div class="border-t border-gray-100 pt-4 mt-auto">
               <span class="text-red-700 font-bold text-[13px] flex items-center">XEM CHI TIẾT <span class="ml-1 text-lg leading-none">→</span></span>
