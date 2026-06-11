@@ -58,7 +58,6 @@ INSTALLED_APPS = [
     'ckeditor',
     'smart_selects',
     'captcha',
-    'debug_toolbar',
 
     # Core Library
     'django.contrib.admin',
@@ -81,7 +80,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -166,7 +164,9 @@ USE_TZ = True
 USE_TM = True
 
 TIME_ZONE = 'UTC'
-LOCALE_PATHS = []
+LOCALE_PATHS = [
+    BASE_DIR / "locale"
+]
 
 # Static files
 STATIC_URL = '/static/'
@@ -282,5 +282,12 @@ DEFAULT_NOTIFY_EMAIL = os.getenv('DEFAULT_NOTIFY_EMAIL', '')  # Custom notify em
 DEFAULT_MARKETING_EMAIL = os.getenv('DEFAULT_MARKETING_EMAIL', '')  # Custom newsletter email address
 
 
-if not DEBUG:
-    LOCALE_PATHS.append(BASE_DIR / "locale")
+if DEBUG:
+    INSTALLED_APPS += [
+        "debug_toolbar",
+    ]
+
+    MIDDLEWARE = [
+        "debug_toolbar.middleware.DebugToolbarMiddleware",
+        *MIDDLEWARE,
+    ]
