@@ -4,9 +4,9 @@
     "name": "HQT Elevator",
     "type": "ECOMMERCE",
     "mode": 0,
-    "is_ssl": false,
+    "is_ssl": true,
     "sitemap_extension": "project.apps.sitemap.extension",
-    "domain_vi": "localhost",
+    "domain_vi": "thangmayhqt.com",
     "slogan_vi": "HQT Elevator - Thương hiệu thang máy gia đình chuẩn Nhật Bản, nâng tầm an toàn, tiện nghi và đẳng cấp cho mọi không gian."
   },
   "branches": [

@@ -50,6 +50,8 @@ def create_default_apps(sender, **kwargs):
     ]
     site, created = Site.objects.update_or_create(
         code=site_code,
+        is_ssl=False if settings.SITE_DEBUG else item.pop('is_ssl', True) ,
+        domain_vi="localhost" if settings.SITE_DEBUG else item.pop('domain_vi'),
         defaults=site_data
     )
     action = "Create new" if created else "Update"
@@ -130,6 +132,7 @@ def create_default_apps(sender, **kwargs):
         page, created = Page.objects.update_or_create(
             site=site,
             code=page_code,
+            is_ssl=False if settings.SITE_DEBUG else item.pop('is_ssl', True),
             defaults=item
         )
         page_map[page_code] = page
