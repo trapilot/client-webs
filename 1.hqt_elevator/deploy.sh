@@ -11,7 +11,7 @@ echo "Pull latest code..."
 git pull origin hqt_elevator
 
 echo "Unzip libs..."
-./script.sh unzip
+./build.sh unzip
 
 
 echo "Ensure SQL history table..."
