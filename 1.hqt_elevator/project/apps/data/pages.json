@@ -73,8 +73,9 @@
         "meta_type": "product",
         "url_vi": "san-pham/(?P<slug>[-\\w]+)",
         "name_vi": "Sản Phẩm Chi Tiết",
-        "meta_title_vi": "{{product.name}}",
-        "meta_description_vi": "{{product.summary}}"
+        "meta_title_vi": "{{product.meta_title}}",
+        "meta_description_vi": "{{product.meta_description}}",
+        "meta_keywords_vi": "{{product.meta_keywords}}"
       }
     ]
   },
@@ -121,8 +122,9 @@
         "meta_type": "solution",
         "url_vi": "giai-phap/(?P<slug>[-\\w]+)",
         "name_vi": "Giải Pháp Chi Tiết",
-        "meta_title_vi": "{{solution.name}}",
-        "meta_description_vi": "{{solution.summary}}"
+        "meta_title_vi": "{{solution.meta_title}}",
+        "meta_description_vi": "{{solution.meta_description}}",
+        "meta_keywords_vi": "{{solution.meta_keywords}}"
       }
     ]
   },
@@ -170,8 +172,9 @@
         "meta_type": "project",
         "url_vi": "du-an/(?P<slug>[-\\w]+)",
         "name_vi": "Dự Án Chi Tiết",
-        "meta_title_vi": "{{project.name}}",
-        "meta_description_vi": "{{project.summary}}"
+        "meta_title_vi": "{{project.meta_title}}",
+        "meta_description_vi": "{{project.meta_description}}",
+        "meta_keywords_vi": "{{project.meta_keywords}}"
       }
     ]
   },
@@ -218,8 +221,9 @@
         "meta_type": "website",
         "url_vi": "tin-tuc/(?P<slug>[-\\w]+)",
         "name_vi": "Tin Tức Chi Tiết",
-        "meta_title_vi": "{{article.title}}",
-        "meta_description_vi": "{{article.description}}"
+        "meta_title_vi": "{{article.meta_title}}",
+        "meta_description_vi": "{{article.meta_description}}",
+        "meta_keywords_vi": "{{article.meta_keywords}}"
       }
     ]
   },

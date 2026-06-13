@@ -1,4 +1,4 @@
-{% load url_cms seo_meta %}
+{% load url_cms %}
 
 {% if not page.is_home %}
 <div class="bg-gray-100 py-3 border-b border-gray-200">
@@ -10,8 +10,10 @@
         {% endif %}
         {% if landing %}
         <span class="text-gray-900 font-bold">{{ landing.title }}</span>
+        {% elif object %}
+        <span class="text-gray-900 font-bold">{{ object.name }}</span>
         {% else %}
-        <span class="text-gray-900 font-bold">{% seo_meta title %}</span>
+        <span class="text-gray-900 font-bold">{{ page.name }}</span>
         {% endif %}
     </div>
 </div>

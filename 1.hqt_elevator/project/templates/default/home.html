@@ -1,5 +1,5 @@
 {% extends "default/layouts/base.html" %}
-{% load i18n url_cms trans picture cache seo_meta repeat rating_star imagepath %}
+{% load i18n url_cms trans picture cache seo_meta form_page repeat rating_star imagepath %}
 
 {% block extracss %}
 {{ block.super }}
@@ -409,11 +409,12 @@ document.addEventListener('DOMContentLoaded', () => {
   </section>
   {% endif %}
 
+  {% if page.form_cta %}
   <section class="bg-[#b3191f] text-white relative flex items-center overflow-hidden h-[300px]">
     <div class="max-w-[1200px] mx-auto px-4 w-full relative z-10 grid grid-cols-1 md:grid-cols-2">
       <div class="py-12">
-        <h2 class="text-[28px] font-bold mb-2 leading-tight">SẴN SÀNG NÂNG TẦM <br /> KHÔNG GIAN SỐNG CỦA BẠN?</h2>
-        <p class="text-[14px] text-red-100 mb-6">Liên hệ ngay để nhận tư vấn miễn phí và giải pháp thang máy phù hợp nhất.</p>
+        <p class="text-[28px] font-bold mb-2 leading-tight">{% form_cta heading %}</p>
+        <p class="text-[14px] text-red-100 mb-6">{% form_cta description %}</p>
         <div class="flex gap-4">
           <a href="{% url_cms 'contact' %}" class="h-full h-full">
             <button class="bg-white text-red-700 px-6 py-2.5 rounded font-bold text-sm hover:bg-gray-100 transition shadow-md">NHẬN TƯ VẤN NGAY</button>
@@ -427,10 +428,12 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       </div>
     </div>
-    
+    {% if page.form_cta.image %}
     <div class="hidden md:block absolute bottom-0 right-0 h-full w-[45%]">
-      <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80" alt="Consultant" class="absolute bottom-0 right-10 h-[120%] object-cover object-top mix-blend-luminosity opacity-80" style="-webkit-mask-image: linear-gradient(to top, black 50%, transparent 100%); mask-image: linear-gradient(to top, black 70%, transparent 100%);">
+      {% picture page.form_cta.image preset="hero" alt=page.title class_name="absolute bottom-0 right-10 h-[120%] object-cover object-top mix-blend-luminosity opacity-80" style="-webkit-mask-image: linear-gradient(to top, black 50%, transparent 100%); mask-image: linear-gradient(to top, black 70%, transparent 100%);" %}
     </div>
+    {% endif %}
   </section>
+  {% endif %}
 </main>
 {% endblock content %}
