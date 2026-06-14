@@ -1,5 +1,5 @@
 {% extends "default/layouts/base.html" %}
-{% load i18n url_cms trans picture seo_meta repeat currency form_page %}
+{% load i18n url_cms trans picture seo_meta repeat currency cta %}
 
 {% block extracss %}
 {% endblock %}
@@ -129,7 +129,7 @@ function showAllThumbnails(btnElement) {
           {% if product.pdf %}
             <a href="{{ product.pdf.url }}" download class="bg-red-700 text-white text-center px-8 py-3.5 rounded text-[14px] font-bold hover:bg-red-800 transition shadow-md flex-1">NHẬN BÁO GIÁ CHI TIẾT</a>
           {% else %}
-            <button type="button" onclick="alert('Hiện chưa có báo giá cho sản phẩm này. Vui lòng liên hệ hotline để được hỗ trợ.')" class="bg-gray-500 text-white text-center px-8 py-3.5 rounded text-[14px] font-bold hover:bg-gray-600 transition shadow-md flex-1">CHƯA CÓ BÁO GIÁ</button>
+            <button type="button" onclick="alert('Hiện chưa có báo giá cho sản phẩm này. Vui lòng liên hệ hotline để được hỗ trợ.')" class="bg-red-700 text-white text-center px-8 py-3.5 rounded text-[14px] font-bold hover:bg-red-800 transition shadow-md flex-1">NHẬN BÁO GIÁ CHI TIẾT</button>
           {% endif %}
           <a href="tel:{{ site.hotline|cut:' ' }}" class="border-2 border-gray-900 text-gray-900 text-center px-8 py-3.5 rounded text-[14px] font-bold hover:bg-gray-900 hover:text-white transition flex-1 flex items-center justify-center">
              <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
@@ -179,12 +179,12 @@ function showAllThumbnails(btnElement) {
     </div>
     {% endif %}
 
-    {% if page.form_cta %}
+    {% if page.cta_enable %}
     <div class="bg-red-700" id="tu-van">
       <div class="gap-8 grid grid-cols-1 items-center max-w-7xl md:grid-cols-2 md:px-8 mx-auto px-5 py-14">
         <div>
-          <p>{% form_cta heading %}</p>
-          <p>{% form_cta description %}</p>
+          <p>{% cta title %}</p>
+          <p>{% cta description %}</p>
         </div>
         <div class="flex flex-col gap-4 md:justify-end sm:flex-row">
           <a class="rounded-xl bg-white px-6 py-4 text-center font-semibold text-red-700 transition hover:bg-slate-100" href="tel:{{ site.hotline|cut:' ' }}">Gọi tư vấn ngay </a>

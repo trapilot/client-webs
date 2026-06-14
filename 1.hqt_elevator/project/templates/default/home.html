@@ -1,5 +1,5 @@
 {% extends "default/layouts/base.html" %}
-{% load i18n url_cms trans picture cache seo_meta form_page repeat rating_star imagepath %}
+{% load i18n url_cms trans picture cache seo_meta cta repeat rating_star imagepath %}
 
 {% block extracss %}
 {{ block.super }}
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 {% block content %}
 <main class="font-sans text-gray-900 antialiased">
-  <section class="relative bg-gray-900 min-h-[600px] flex flex-col justify-center">
+  <section id="consultation" class="relative bg-gray-900 min-h-[600px] flex flex-col justify-center">
     <div class="absolute inset-0 z-0">
       {% picture page.background.image preset="hero" alt=page.background.title class_name="w-full h-full object-cover" %}
       <div class="absolute inset-0 bg-gradient-to-r from-gray-900/90 via-gray-900/60 to-transparent"></div>
@@ -120,8 +120,11 @@ document.addEventListener('DOMContentLoaded', () => {
           {{ page.background.description|safe }} 
         </p>
         <div class="flex flex-wrap gap-4">
+          {% comment %}
           <a href="{% url_cms 'contact' %}" class="bg-red-700 text-white px-6 py-3 text-sm rounded font-bold hover:bg-red-800 transition shadow-lg">NHẬN TƯ VẤN MIỄN PHÍ <span class="ml-1">→</span></a>
           <a href="{% url_cms 'products' %}" class="border border-white text-white px-6 py-3 text-sm rounded font-bold hover:bg-white hover:text-gray-900 transition">KHÁM PHÁ SẢN PHẨM <span class="ml-1">→</span></a>
+          {% endcomment %}
+          <a href="{% url_cms 'products' %}" class="bg-red-700 text-white px-6 py-3 text-sm rounded font-bold hover:bg-red-800 transition shadow-lg">KHÁM PHÁ SẢN PHẨM <span class="ml-1">→</span></a>
         </div>
       </div>
 
@@ -130,13 +133,13 @@ document.addEventListener('DOMContentLoaded', () => {
           <h3 class="text-white text-lg font-bold">NHẬN TƯ VẤN MIỄN PHÍ</h3>
           <p class="text-red-100 text-[13px] mt-1">Để lại thông tin, chuyên viên của chúng tôi sẽ liên hệ tư vấn cho bạn.</p>
         </div>
-        <form method="post" action="{% url_cms 'cms_contact' %}" class="js-ajax-form p-6 flex flex-col gap-4">
+        <form method="post" action="{% url_cms 'form_consultation' %}" class="js-ajax-form p-6 flex flex-col gap-4">
           {% csrf_token %}
-          <input type="text" value="{{ form.name }}" name="name" placeholder="Họ và tên" class="w-full px-4 py-2.5 text-[14px] bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-red-700 focus:bg-white transition" required>
-          <input type="tel" value="{{ form.phone }}" name="phone" placeholder="Số điện thoại" class="w-full px-4 py-2.5 text-[14px] bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-red-700 focus:bg-white transition" required>
-          <input type="email" value="{{ form.email }}" name="email" placeholder="Email" class="w-full px-4 py-2.5 text-[14px] bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-red-700 focus:bg-white transition" required>
+          <input type="text" name="name" placeholder="Họ và tên" class="w-full px-4 py-2.5 text-[14px] bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-red-700 focus:bg-white transition" required>
+          <input type="tel" name="phone" placeholder="Số điện thoại" class="w-full px-4 py-2.5 text-[14px] bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-red-700 focus:bg-white transition" required>
+          <input type="email" name="email" placeholder="Email" class="w-full px-4 py-2.5 text-[14px] bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-red-700 focus:bg-white transition" required>
           <input type="text" name="subject" placeholder="Subject" value="Lắp đặt thang máy mới" class="hidden w-full px-4 py-2.5 text-[14px] bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-red-700 focus:bg-white transition" required>
-          <input type="text" value="{{ form.comment }}" name="comment" placeholder="Địa chỉ công trình" class="w-full px-4 py-2.5 text-[14px] bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-red-700 focus:bg-white transition" required>
+          <input type="text" name="comment" placeholder="Địa chỉ công trình" class="w-full px-4 py-2.5 text-[14px] bg-gray-50 border border-gray-200 rounded focus:outline-none focus:border-red-700 focus:bg-white transition" required>
           <button type="submit" class="w-full bg-red-700 text-white font-bold text-[14px] py-3 rounded mt-2 hover:bg-red-800 transition">GỬI YÊU CẦU</button>
         </form>
       </div>
@@ -409,14 +412,17 @@ document.addEventListener('DOMContentLoaded', () => {
   </section>
   {% endif %}
 
-  {% if page.form_cta %}
+  {% if page.cta_enable %}
   <section class="bg-[#b3191f] text-white relative flex items-center overflow-hidden h-[300px]">
     <div class="max-w-[1200px] mx-auto px-4 w-full relative z-10 grid grid-cols-1 md:grid-cols-2">
       <div class="py-12">
-        <p class="text-[28px] font-bold mb-2 leading-tight">{% form_cta heading %}</p>
-        <p class="text-[14px] text-red-100 mb-6">{% form_cta description %}</p>
+        <p class="text-[28px] font-bold mb-2 leading-tight">{% cta title %}</p>
+        <p class="text-[14px] text-red-100 mb-6">{% cta description %}</p>
         <div class="flex gap-4">
-          <a href="{% url_cms 'contact' %}" class="h-full h-full">
+          <a href="#consultation" class="hidden lg:block h-full h-full">
+            <button class="bg-white text-red-700 px-6 py-2.5 rounded font-bold text-sm hover:bg-gray-100 transition shadow-md">NHẬN TƯ VẤN NGAY</button>
+          </a>
+          <a href="{% url_cms 'contact' %}" class="sm:block md:hidden h-full h-full">
             <button class="bg-white text-red-700 px-6 py-2.5 rounded font-bold text-sm hover:bg-gray-100 transition shadow-md">NHẬN TƯ VẤN NGAY</button>
           </a>
           <a href="tel:{{ site.hotline|cut:' ' }}" class="h-full h-full">
@@ -428,9 +434,9 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       </div>
     </div>
-    {% if page.form_cta.image %}
+    {% if page.cta_image %}
     <div class="hidden md:block absolute bottom-0 right-0 h-full w-[45%]">
-      {% picture page.form_cta.image preset="hero" alt=page.title class_name="absolute bottom-0 right-10 h-[120%] object-cover object-top mix-blend-luminosity opacity-80" style="-webkit-mask-image: linear-gradient(to top, black 50%, transparent 100%); mask-image: linear-gradient(to top, black 70%, transparent 100%);" %}
+      {% picture page.cta_image preset="hero" alt=page.title class_name="absolute bottom-0 right-10 h-[120%] object-cover object-top mix-blend-luminosity opacity-80" style="-webkit-mask-image: linear-gradient(to top, black 50%, transparent 100%); mask-image: linear-gradient(to top, black 70%, transparent 100%);" %}
     </div>
     {% endif %}
   </section>
