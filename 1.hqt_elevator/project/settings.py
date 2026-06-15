@@ -50,7 +50,15 @@ SECURE_SSL_REDIRECT = not SITE_DEBUG
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 CSRF_TRUSTED_ORIGINS = [f"http://{SITE_DOMAIN}", f"https://{SITE_DOMAIN}"]
-ALLOWED_HOSTS = [SITE_HOST, SITE_DOMAIN, f"www.{SITE_DOMAIN}", "localhost", "127.0.0.1", "0.0.0.0"]
+ALLOWED_HOSTS = [
+    SITE_HOST,
+    SITE_DOMAIN,
+    f"www.{SITE_DOMAIN}",
+    "localhost",
+    "127.0.0.1",
+    "0.0.0.0",
+    "mx1566.superdata.vn",
+]
 
 INSTALLED_APPS = [
     'grappelli.dashboard',
