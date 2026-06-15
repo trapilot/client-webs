@@ -1,5 +1,5 @@
 {% extends "default/layouts/base.html" %}
-{% load url_cms trans picture cache seo_meta repeat static queryset %}
+{% load url_cms picture cache seo_meta repeat static queryset %}
 
 {% block content %}
 {% paginate site.post_set.is_activated 6 as articles %}

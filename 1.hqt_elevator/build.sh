@@ -56,6 +56,7 @@ case "$ACTION" in
     echo "Zipped project/libs → libs.zip"
     ;;
   unzip)
+    rm -rf project/libs
     unzip -o libs.zip -d project
     echo "Unzipped libs.zip → project/"
     ;;

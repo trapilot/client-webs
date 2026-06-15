@@ -1,5 +1,5 @@
 {% extends "default/layouts/base.html" %}
-{% load i18n url_cms trans picture cache seo_meta repeat %}
+{% load i18n url_cms picture cache seo_meta repeat %}
 
 {% block extracss %}
 {% endblock %}
@@ -115,7 +115,7 @@
 
   <section class="h-[400px] w-full bg-gray-200">
     <iframe 
-      src="https://www.google.com/maps?q={{ site.location.lat }},{{ site.location.lng }}&hl=vi&z={{site.location.zoom}}&output=embed" 
+      src="https://www.google.com/maps?q={{ site.coordinate.latitud }},{{ site.coordinate.longitud }}&hl=vi&z={{site.coordinate.zoom}}&output=embed" 
       width="100%" 
       height="100%" 
       style="border:0;" 

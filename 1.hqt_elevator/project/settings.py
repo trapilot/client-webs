@@ -36,6 +36,7 @@ SITE_ID = int(os.getenv('SITE_ID', '1'))
 SITE_CODE = os.getenv('SITE_CODE', 'HQT_ELEVATOR')
 SITE_HOST = os.getenv('SITE_HOST', '127.0.0.1')
 SITE_DOMAIN = os.getenv('SITE_DOMAIN', 'localhost')
+SITE_PORT = "8000" if SITE_DOMAIN == 'localhost' else None
 SITE_DEBUG = DEBUG or SITE_DOMAIN == 'localhost'
 
 
@@ -56,8 +57,9 @@ INSTALLED_APPS = [
     'grappelli',
     'filebrowser',
     'ckeditor',
-    'smart_selects',
     'captcha',
+    'smart_selects',
+    'django_apscheduler',
 
     # Core Library
     'django.contrib.admin',
@@ -270,14 +272,14 @@ LOGGING = {
 # SESSION_COOKIE_AGE = os.getenv('REDIS_SESSION_COOKIE_AGE', 3600)
 
 # We added email
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = os.getenv('EMAIL_BACKEND', 'django.core.mail.backends.smtp.EmailBackend')
 EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp-server')  # SMTP server host
 EMAIL_PORT = os.getenv('EMAIL_PORT', 587)  # SMTP server port (587 for TLS, 465 for SSL)
-EMAIL_USE_TLS = True  # True for TLS, False for SSL
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True') == 'True'  # True for TLS, False for SSL
+EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL', 'False') == 'True'  # Set to True if using SSL
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')  # SMTP server username
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')  # SMTP server password
-EMAIL_USE_SSL = False  # Set to True if using SSL
-DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL')  # Default sender email address
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', f"noreply@{SITE_DOMAIN}")  # Default sender email address
 DEFAULT_NOTIFY_EMAIL = os.getenv('DEFAULT_NOTIFY_EMAIL', '')  # Custom notify email address
 DEFAULT_MARKETING_EMAIL = os.getenv('DEFAULT_MARKETING_EMAIL', '')  # Custom newsletter email address
 
